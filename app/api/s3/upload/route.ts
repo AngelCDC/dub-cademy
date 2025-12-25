@@ -50,7 +50,7 @@ export async function POST(request: Request) {
     const uniqueKey = `${uuidv4()}-${fileName}`;
 
     const command = new PutObjectCommand({
-      Bucket: env.NEXT_PUBLIC_S3_BUCKET_NAME_IMAGES,
+      Bucket: env.NEXT_PUBLIC_S3_BUCKET_NAME_IMAGES || "losky-lms",
       ContentType: contentType,
       ContentLength: size,
       Key: uniqueKey,
