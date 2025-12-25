@@ -14,10 +14,7 @@ export const requireAdmin = cache(async () => {
     return redirect("/login");
   }
 
-  // Aserción de tipo
-  const userWithRole = session.user as typeof session.user & { role: string };
-
-  if (userWithRole.role !== "admin") {
+  if (session.user.role !== "admin") {
     return redirect("/not-admin");
   }
 

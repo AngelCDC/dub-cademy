@@ -18,13 +18,13 @@ export const auth = betterAuth({
   },
 
   plugins: [
-        emailOTP({
-            async sendVerificationOTP({ email, otp}) {
-                await resend.emails.send({
-                    from: 'Academy - GRUPO DUBOIS <onboarding@grupodubois.com>',
-                    to: [email],
-                    subject: "VERIFICACIÓN DE CORREO ELECTRÓNICO - GRUPO DUBOIS",
-                    html: `
+    emailOTP({
+      async sendVerificationOTP({ email, otp }) {
+        await resend.emails.send({
+          from: "Academy - GRUPO DUBOIS <onboarding@grupodubois.com>",
+          to: [email],
+          subject: "VERIFICACIÓN DE CORREO ELECTRÓNICO - GRUPO DUBOIS",
+          html: `
                     <div style="max-width: 600px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif; background-color: #f9f9f9; color: #333; border: 1px solid #e0e0e0; border-radius: 8px;">
                         
                         <div style="text-align: center; margin-bottom: 20px;">
@@ -51,8 +51,9 @@ export const auth = betterAuth({
                         </p>
                     </div>
                 `,
-                });
-            },
-        }),
-    ],
+        });
+      },
+    }),
+    admin(),
+  ],
 });
