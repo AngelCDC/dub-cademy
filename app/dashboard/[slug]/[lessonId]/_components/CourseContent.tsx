@@ -5,11 +5,12 @@ import { RenderDescription } from "@/components/rich-text-editor/RenderDescripti
 import { Button } from "@/components/ui/button";
 import { tryCatch } from "@/hooks/try-catch";
 import { useConstructUrl } from "@/hooks/use-construct-url";
-import { BookIcon, CheckCircle } from "lucide-react";
+import { BookIcon, CheckCircle, Menu } from "lucide-react";
 import { useTransition } from "react";
 import { markLessonComplete } from "../actions";
 import { toast } from "sonner";
 import { useConfetti } from "@/hooks/use-confetti";
+import { useSidebar } from "@/app/dashboard/_components/MobileSidebarWrapper";
 
 interface iAppProps {
   data: LessonContentType;
@@ -18,6 +19,7 @@ interface iAppProps {
 export function CourseContent({ data }: iAppProps) {
   const [pending, startTransition] = useTransition();
   const { triggerConfetti } = useConfetti();
+  const { toggleSidebar } = useSidebar();
 
   function VideoPlayer({
     thumbnailKey,
@@ -75,6 +77,7 @@ export function CourseContent({ data }: iAppProps) {
       }
     });
   }
+
   return (
     <div className="flex flex-col h-full bg-background pl-6">
       <VideoPlayer
@@ -82,7 +85,17 @@ export function CourseContent({ data }: iAppProps) {
         videoKey={data.videoKey ?? ""}
       />
 
-      <div className="py-4 border-b">
+      <div className="py-4 border-b flex items-center gap-2">
+        {/* Botón para abrir sidebar en móviles */}
+        <Button
+          variant="outline"
+          size="icon"
+          className="lg:hidden"
+          onClick={toggleSidebar}
+        >
+          <Menu className="size-4" />
+        </Button>
+
         {data.lessonProgress.length > 0 ? (
           <Button
             variant="outline"
