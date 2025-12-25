@@ -20,7 +20,7 @@ export {
 };
 
 export default arcjet({
-  key: "ajkey_01k07jqweaeg9brza2469pmpr6",
+  key: env.ARCJET_KEY || "ajkey_01k07jqweaeg9brza2469pmpr6",
 
   characteristics: ["fingerprint"],
 
