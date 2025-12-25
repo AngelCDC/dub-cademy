@@ -11,58 +11,58 @@ export const env = createEnv({
     // Optional external integrations 
     AUTH_GITHUB_CLIENT_ID: z.preprocess(
       (v) => (v === "" ? undefined : v),
-      z.string().min(1).default("")
+      z.string().min(1).optional() 
     ),
     AUTH_GITHUB_SECRET: z.preprocess(
       (v) => (v === "" ? undefined : v),
-      z.string().min(1).default("")
+      z.string().min(1).optional()
     ),
     RESEND_API_SECRET_KEY: z.preprocess(
       (v) => (v === "" ? undefined : v),
-      z.string().min(1).default("")
+      z.string().min(1).optional()
     ),
     ARCJET_KEY: z.preprocess(
       (v) => (v === "" ? undefined : v),
-      z.string().min(1).default("")  // ← Agregado .optional()
+      z.string().min(1).optional()  // ← Agregado .optional()
     ),
 
     // AWS / S3 optional
     AWS_ACCESS_KEY_ID: z.preprocess(
       (v) => (v === "" ? undefined : v),
-      z.string().min(1).default("")
+      z.string().min(1).optional()
     ),
     AWS_SECRET_ACCESS_KEY: z.preprocess(
       (v) => (v === "" ? undefined : v),
-      z.string().min(1).default("")
+      z.string().min(1).optional()
     ),
     AWS_ENDPOINT_URL_S3: z.preprocess(
       (v) => (v === "" ? undefined : v),
-      z.string().min(1).default("")
+      z.string().min(1).optional()
     ),
     AWS_ENDPOINT_URL_IAM: z.preprocess(
       (v) => (v === "" ? undefined : v),
-      z.string().min(1).default("")
+      z.string().min(1).optional()
     ),
     AWS_REGION: z.preprocess(
       (v) => (v === "" ? undefined : v),
-      z.string().min(1).default("")
+      z.string().min(1).optional()
     ),
 
     // Stripe optional
     STRIPE_SECRET_KEY: z.preprocess(
       (v) => (v === "" ? undefined : v),
-      z.string().min(1).default("")
+      z.string().min(1).optional()
     ),
     STRIPE_WEBHOOK_SECRET: z.preprocess(
       (v) => (v === "" ? undefined : v),
-      z.string().min(1).default("")
+      z.string().min(1).optional()
     ),
   },
 
   client: {
     NEXT_PUBLIC_S3_BUCKET_NAME_IMAGES: z.preprocess(
       (v) => (v === "" ? undefined : v),
-      z.string().min(1).default("")
+      z.string().min(1).optional()
     ),
   },
 
