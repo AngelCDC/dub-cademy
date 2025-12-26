@@ -17,6 +17,14 @@ export const env = createEnv({
       (v) => (v === "" ? undefined : v),
       z.string().min(1).default("")
     ),
+    AUTH_GOOGLE_CLIENT_id: z.preprocess(
+      (v) => (v === "" ? undefined : v),
+      z.string().min(1).default("")
+    ),
+    AUTH_GOOGLE_SECRET_id: z.preprocess(
+      (v) => (v === "" ? undefined : v),
+      z.string().min(1).default("")
+    ),
     RESEND_API_SECRET_KEY: z.preprocess(
       (v) => (v === "" ? undefined : v),
       z.string().min(1).default("")
