@@ -10,7 +10,7 @@ import {
   IconSearch,
   IconSettings,
 } from "@tabler/icons-react";
-import Logo from "@/public/logo.png";
+import Logo from "@/public/LogoDubois.svg";
 
 import { NavMain } from "@/components/sidebar/nav-main";
 import { NavSecondary } from "@/components/sidebar/nav-secondary";
@@ -112,9 +112,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <Link href="/">
-                <Image src={Logo} alt="Logo" className="size-5" />
-                <span className="text-base font-semibold">MarshalLMS.</span>
+              <Link
+                href="/"
+                className="flex items-center justify-center font-medium"
+              >
+                <Image src={Logo} alt="Logo" className="logo-theme" fill />
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

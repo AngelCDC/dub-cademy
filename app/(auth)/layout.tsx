@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import Link from "next/link";
 import { ReactNode } from "react";
-import Logo from "@/public/logo.png";
+import Logo from "@/public/LogoDubois.svg";
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
@@ -22,11 +22,10 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
 
       <div className="flex w-full max-w-sm flex-col gap-6">
         <Link
-          className="flex items-center gap-2 self-center font-medium"
+          className="flex items-center justify-center font-medium"
           href="/"
         >
-          <Image src={Logo} alt="Logo" width={32} height={32} />
-          MarshalLMS.
+          <Image src={Logo} alt="Logo" className="h-2/4 w-3/4 logo-theme" />
         </Link>
         {children}
 
