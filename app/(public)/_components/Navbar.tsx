@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/ui/themeToggle";
 import { authClient } from "@/lib/auth-client";
 import { UserDropdown } from "./UserDropdown";
+import { useSignOut } from "@/hooks/use-singout";
 
 const navigationItems = [
   { name: "Inicio", href: "/" },
@@ -18,6 +19,7 @@ export function Navbar() {
   const { data: session, isPending } = authClient.useSession();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const handleSignOut = useSignOut();
 
   return (
     <>
@@ -155,11 +157,12 @@ export function Navbar() {
                 />
                 <Link
                   href="/dashboard"
-                  className={`block text-lg font-medium tracking-wider uppercase transition-colors`}
+                  className={`block text-lg font-medium tracking-wider uppercase transition-colors text-primary-black hover:text-accent-red`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Dashboard
                 </Link>
+                <div className="login-button cta-primary" onClick={useSignOut}>Logout</div>
               </>
             ) : (
               <Link
