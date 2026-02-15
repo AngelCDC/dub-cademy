@@ -410,6 +410,20 @@ body {
   z-index: 1;
 }
 
+.login-button {
+  display: inline-block;
+  padding: 0.7rem 1.8rem;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
 .cta-button::before {
   content: '';
   position: absolute;
@@ -526,3 +540,4 @@ body {
 .landing-page * {
   box-sizing: border-box;
 }
+

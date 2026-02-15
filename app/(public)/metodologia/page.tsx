@@ -1,5 +1,9 @@
 "use client"
 
+import Link from 'next/link'
+
+import styles from './page.module.css'
+
 export default function MetodologiaPage() {
   const innovations = [
     {
@@ -52,60 +56,28 @@ export default function MetodologiaPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative min-h-screen bg-primary-black overflow-hidden flex items-center justify-center">
-        {/* Grid Background */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
-        </div>
-        
-        {/* Hero Content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-          <h1 className="font-bebas text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white mb-8 tracking-wider animate-fade-in-up">
-            APRENDE DIFERENTE
-          </h1>
-          <p className="text-light-gray/80 text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed animate-fade-in-up animation-delay-200">
-            No más teoría sin aplicación. Nuestra metodología combina proyectos reales, mentoría personalizada y comunidad activa para acelerar tu aprendizaje.
-          </p>
+      <section className={styles.techHero}>
+        <div className={styles.heroGrid}></div>
+        <div className={styles.heroContent}>
+          <h1>APRENDE DIFERENTE</h1>
+          <p>No más teoría sin aplicación. Nuestra metodología combina proyectos reales, mentoría personalizada y comunidad activa para acelerar tu aprendizaje.</p>
         </div>
       </section>
 
       {/* Innovation Cards */}
-      <section className="bg-secondary-black py-24 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-          {innovations.map((innovation, index) => (
-            <div 
-              key={innovation.num} 
-              className="relative bg-primary-black border border-light-gray/10 p-8 transition-all duration-500 hover:border-accent-red hover:transform hover:scale-[1.02] group animate-fade-in-up"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              {/* Number */}
-              <div className="absolute top-4 right-4 font-bebas text-6xl text-accent-red/20 group-hover:text-accent-red/40 transition-colors">
-                {innovation.num}
-              </div>
-              
-              {/* Icon Placeholder */}
-              <div className="w-16 h-16 bg-accent-red/10 mb-6 flex items-center justify-center group-hover:bg-accent-red/20 transition-colors">
-                <div className="w-8 h-8 bg-accent-red group-hover:scale-110 transition-transform"></div>
-              </div>
-              
-              {/* Content */}
-              <h3 className="font-antonio text-2xl text-white mb-4 tracking-wider uppercase">
-                {innovation.title}
-              </h3>
-              <p className="text-light-gray/70 mb-8 leading-relaxed">
-                {innovation.desc}
-              </p>
-              
-              {/* Specs */}
-              <div className="flex gap-6 pt-6 border-t border-light-gray/10">
+      <section className={styles.innovations}>
+        <div className={styles.innovationsGrid}>
+          {innovations.map((innovation) => (
+            <div key={innovation.num} className={styles.innovationCard}>
+              <div className={styles.innovationNumber}>{innovation.num}</div>
+              <div className={styles.innovationIcon}></div>
+              <h3>{innovation.title}</h3>
+              <p>{innovation.desc}</p>
+              <div className={styles.innovationSpecs}>
                 {innovation.specs.map((spec, i) => (
-                  <div key={i} className="flex-1">
-                    <div className="font-bebas text-3xl text-accent-red mb-1">
-                      {spec.value}
-                    </div>
-                    <div className="text-light-gray/60 text-xs uppercase tracking-wider">
-                      {spec.label}
-                    </div>
+                  <div key={i} className={styles.spec}>
+                    <div className={styles.specValue}>{spec.value}</div>
+                    <div className={styles.specLabel}>{spec.label}</div>
                   </div>
                 ))}
               </div>
@@ -115,37 +87,18 @@ export default function MetodologiaPage() {
       </section>
 
       {/* Materials */}
-      <section className="relative bg-light-gray py-24 px-6 md:px-12 overflow-hidden">
-        {/* Pattern Background */}
-        <div className="absolute inset-0 pattern-diagonal-lines opacity-50"></div>
-        
-        <div className="relative z-10 max-w-7xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <h2 className="font-bebas text-5xl md:text-6xl lg:text-7xl text-primary-black mb-4 tracking-wider">
-              TODO LO QUE INCLUYE
-            </h2>
+      <section className={styles.materialsSection}>
+        <div className={styles.materialsPattern}></div>
+        <div className={styles.materialsContainer}>
+          <div className={styles.materialsHeader}>
+            <h2>TODO LO QUE INCLUYE</h2>
           </div>
-          
-          {/* Materials Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className={styles.materialsGrid}>
             {materials.map((material, i) => (
-              <div 
-                key={i} 
-                className="bg-white p-8 border-l-4 border-accent-red transition-all duration-300 hover:shadow-2xl hover:transform hover:-translate-y-2 animate-fade-in-up"
-                style={{ animationDelay: `${i * 100}ms` }}
-              >
-                {/* Visual Placeholder */}
-                <div className="w-full aspect-square bg-gradient-to-br from-accent-red/10 to-accent-orange/10 mb-6 flex items-center justify-center">
-                  <div className="w-16 h-16 bg-accent-red/20"></div>
-                </div>
-                
-                <h4 className="font-antonio text-xl text-primary-black mb-3 tracking-wide uppercase">
-                  {material.name}
-                </h4>
-                <p className="text-text-gray text-sm leading-relaxed">
-                  {material.desc}
-                </p>
+              <div key={i} className={styles.materialCard}>
+                <div className={styles.materialVisual}></div>
+                <h4>{material.name}</h4>
+                <p>{material.desc}</p>
               </div>
             ))}
           </div>
@@ -153,36 +106,27 @@ export default function MetodologiaPage() {
       </section>
 
       {/* Metrics */}
-      <section className="bg-primary-black py-24 px-6 md:px-12">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="font-bebas text-5xl md:text-6xl lg:text-7xl text-white mb-6 tracking-wider animate-fade-in-up">
-            RESULTADOS QUE HABLAN
-          </h2>
-          <p className="text-light-gray/70 text-lg md:text-xl mb-16 max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
-            Datos reales de estudiantes que transformaron su carrera con VELOCITY
-          </p>
-          
-          {/* Metrics Grid */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-            {[
-              { value: '96%', label: 'Consigue empleo' },
-              { value: '3.2x', label: 'Aumento salarial' },
-              { value: '6 meses', label: 'Tiempo promedio' },
-              { value: '4.9/5', label: 'Satisfacción' }
-            ].map((metric, index) => (
-              <div 
-                key={index} 
-                className="text-center animate-fade-in-up"
-                style={{ animationDelay: `${(index + 2) * 100}ms` }}
-              >
-                <div className="font-bebas text-6xl md:text-7xl lg:text-8xl text-accent-red mb-2">
-                  {metric.value}
-                </div>
-                <div className="text-light-gray/60 text-sm md:text-base uppercase tracking-widest">
-                  {metric.label}
-                </div>
-              </div>
-            ))}
+      <section className={styles.metricsSection}>
+        <div className={styles.metricsContainer}>
+          <h2>RESULTADOS QUE HABLAN</h2>
+          <p className={styles.metricsSubtitle}>Datos reales de estudiantes que transformaron su carrera con VELOCITY</p>
+          <div className={styles.metricsGrid}>
+            <div className={styles.metric}>
+              <div className={styles.metricValue}>96%</div>
+              <div className={styles.metricLabel}>Consigue empleo</div>
+            </div>
+            <div className={styles.metric}>
+              <div className={styles.metricValue}>3.2x</div>
+              <div className={styles.metricLabel}>Aumento salarial</div>
+            </div>
+            <div className={styles.metric}>
+              <div className={styles.metricValue}>6 meses</div>
+              <div className={styles.metricLabel}>Tiempo promedio</div>
+            </div>
+            <div className={styles.metric}>
+              <div className={styles.metricValue}>4.9/5</div>
+              <div className={styles.metricLabel}>Satisfacción</div>
+            </div>
           </div>
         </div>
       </section>

@@ -1,0 +1,378 @@
+/* Hero */
+.contactHero {
+  padding: 12rem 4rem 4rem;
+  background: var(--primary-black);
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.contactHero::before {
+  content: 'CONTACTO';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-bebas-neue);
+  font-size: 16rem;
+  font-weight: 700;
+  opacity: 0.03;
+  white-space: nowrap;
+}
+
+.contactHero h1 {
+  font-family: var(--font-bebas-neue);
+  font-size: clamp(4rem, 8vw, 7rem);
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.contactHero p {
+  font-size: 1.3rem;
+  opacity: 0.8;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Main Contact */
+.contactMain {
+  padding: 6rem 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 6rem;
+}
+
+/* Contact Info */
+.contactInfo h2 {
+  font-family: var(--font-bebas-neue);
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+.contactInfo p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-gray);
+  margin-bottom: 3rem;
+}
+
+.infoBlock {
+  margin-bottom: 2.5rem;
+  padding-left: 2rem;
+  border-left: 3px solid var(--accent-red);
+}
+
+.infoBlock h3 {
+  font-family: var(--font-antonio);
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.8rem;
+}
+
+.infoBlock p,
+.infoBlock a {
+  color: var(--text-gray);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.infoBlock a:hover {
+  color: var(--accent-red);
+}
+
+.socialIcons {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.socialIcon {
+  width: 50px;
+  height: 50px;
+  border: 2px solid var(--mid-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--primary-black);
+  font-size: 1.2rem;
+  transition: all 0.3s;
+}
+
+.socialIcon:hover {
+  background: var(--primary-black);
+  color: white;
+  border-color: var(--primary-black);
+  transform: translateY(-5px);
+}
+
+/* Contact Form */
+.contactForm {
+  background: var(--light-gray);
+  padding: 4rem;
+}
+
+.formGroup {
+  margin-bottom: 2rem;
+}
+
+.formGroup label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  color: var(--primary-black);
+}
+
+.formGroup input,
+.formGroup textarea,
+.formGroup select {
+  width: 100%;
+  padding: 1.2rem;
+  border: 2px solid var(--mid-gray);
+  background: white;
+  font-family: var(--font-work-sans);
+  font-size: 1rem;
+  transition: all 0.3s;
+  outline: none;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus {
+  border-color: var(--accent-red);
+  box-shadow: 0 0 0 3px rgba(255, 51, 51, 0.1);
+}
+
+.formGroup textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 1.5rem;
+  background: var(--primary-black);
+  color: white;
+  border: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.submitBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--accent-red);
+  transition: left 0.4s;
+}
+
+.submitBtn:hover::before {
+  left: 0;
+}
+
+.submitBtn span {
+  position: relative;
+  z-index: 2;
+}
+
+.submitBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(255, 51, 51, 0.3);
+}
+
+/* FAQ */
+.faqSection {
+  background: var(--primary-black);
+  color: white;
+  padding: 8rem 4rem;
+}
+
+.faqContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.faqContainer h2 {
+  font-family: var(--font-bebas-neue);
+  font-size: clamp(3rem, 6vw, 5rem);
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.faqItem {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem 0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.faqItem:hover {
+  padding-left: 1rem;
+}
+
+.faqQuestion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+}
+
+.faqToggle {
+  font-size: 2rem;
+  color: var(--accent-red);
+  transition: transform 0.3s;
+}
+
+.faqItem.active .faqToggle {
+  transform: rotate(45deg);
+}
+
+.faqAnswer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s, padding 0.3s;
+  padding-top: 0;
+  opacity: 0.8;
+  line-height: 1.8;
+}
+
+.faqItem.active .faqAnswer {
+  max-height: 500px;
+  padding-top: 1.5rem;
+}
+
+/* Map */
+.mapSection {
+  padding: 0;
+  height: 500px;
+  background: var(--mid-gray);
+  position: relative;
+  overflow: hidden;
+}
+
+.mapPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: 
+    repeating-linear-gradient(
+      45deg,
+      var(--light-gray),
+      var(--light-gray) 20px,
+      var(--mid-gray) 20px,
+      var(--mid-gray) 40px
+    );
+}
+
+.mapOverlay {
+  position: absolute;
+  bottom: 3rem;
+  left: 3rem;
+  background: white;
+  padding: 2rem 3rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.mapOverlay h3 {
+  font-family: var(--font-antonio);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.mapOverlay p {
+  color: var(--text-gray);
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contactHero {
+    padding: 10rem 2rem 3rem;
+  }
+
+  .contactMain {
+    padding: 4rem 2rem;
+  }
+
+  .contactGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .contactForm {
+    padding: 2rem;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+
+  .faqSection {
+    padding: 4rem 2rem;
+  }
+
+  .mapOverlay {
+    position: static;
+    margin: 2rem;
+  }
+}
+
+
+/* ============================================
+   VARIABLES PARA LANDING (Metodología)
+   ============================================ */
+
+:root {
+  /* Landing Colors */
+  --primary-black: #0a0a0a;
+  --secondary-black: #1a1a1a;
+  --accent-red: #ff3333;
+  --accent-orange: #ff6b35;
+  --light-gray: #f8f8f8;
+  --mid-gray: #e0e0e0;
+  --dark-gray: #2a2a2a;
+  --text-gray: #666;
+  
+  /* Landing Fonts */
+  --font-bebas-neue: var(--font-bebas);
+  --font-antonio: var(--font-antonio);
+  --font-work-sans: var(--font-sans);
+}
+
+.dark {
+  /* Landing Colors en Dark Mode */
+  --primary-black: #0a0a0a;
+  --secondary-black: #1a1a1a;
+  --light-gray: #2a2a2a;
+  --mid-gray: #3a3a3a;}

@@ -13,6 +13,7 @@ const navigationItems = [
   { name: "Inicio", href: "/" },
   { name: "Cursos", href: "/courses" },
   { name: "Metodología", href: "/metodologia" },
+  { name: "Contacto", href: "/contacto" },
 ];
 
 export function Navbar() {
@@ -41,9 +42,10 @@ export function Navbar() {
           </li>
         ))}
         
+        {/* Theme Toggle 
         <li>
           <ThemeToggle />
-        </li>
+        </li>*/}
 
         <li>
           {isPending ? null : session ? (
@@ -63,20 +65,18 @@ export function Navbar() {
             <div className="flex items-center gap-3">
               <Link
                 href="/login"
-                className={buttonVariants({ variant: "secondary" })}
+                className='login-button cta-primary'
               >
                 Login
               </Link>
-              <Link href="/login" className={buttonVariants()}>
-                Get Started
-              </Link>
+              
             </div>
           )}
         </li>
       </ul>
 
       {/* Mobile menu button */}
-      <button className="lg:hidden w-10 h-10 border-2 border-primary-black rounded-full flex items-center justify-center text-lg">
+      <button className="md:hidden w-10 h-10 border-2 border-primary-black rounded-full flex items-center justify-center text-lg">
         ☰
       </button>
     </nav>
