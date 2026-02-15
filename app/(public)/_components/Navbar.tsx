@@ -162,7 +162,7 @@ export function Navbar() {
                 >
                   Dashboard
                 </Link>
-                <div className="login-button cta-primary" onClick={useSignOut}>Logout</div>
+                <div className="login-button cta-primary" onClick={handleSignOut}>Logout</div>
               </>
             ) : (
               <Link
