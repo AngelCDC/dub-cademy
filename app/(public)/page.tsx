@@ -32,16 +32,16 @@ export default function LandingPage() {
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <a
-                  href="#cursos"
+                  href="/courses"
                   className="cta-button cta-primary text-center"
                 >
                   Explorar Programas
                 </a>
                 <a
-                  href="#contacto"
-                  className="cta-button cta-secondary text-center"
+                  href="/login"
+                  className="cta-button cta-secondary text-center bg-white text-accent-red "
                 >
-                  Solicitar Info
+                  Iniciar Sesión
                 </a>
               </div>
 
@@ -171,7 +171,7 @@ export default function LandingPage() {
                     href="#signup"
                     className="block w-full bg-accent-red hover:bg-accent-red/90 text-white text-center py-4 font-bold text-sm tracking-widest uppercase transition-smooth"
                   >
-                    Comenzar Ahora
+                    Contacta con un Agente
                   </a>
                 </div>
               </div>

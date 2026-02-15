@@ -443,18 +443,18 @@ body {
 }
 
 .cta-secondary {
-  background: transparent;
-  color: var(--color-primary-black);
+  background: white;
+  color: var(--color-accent-red);
   border: 2px solid var(--color-primary-black);
 }
 
 .cta-secondary::before {
-  background: var(--color-primary-black);
+  background: white;
 }
 
 .cta-secondary:hover {
-  color: white;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  color: var(--color-accent-red);
+  box-shadow: 0 20px 40px rgba(190, 161, 161, 0.2);
 }
 
 /* Program Cards */
