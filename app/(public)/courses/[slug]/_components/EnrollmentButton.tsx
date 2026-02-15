@@ -6,6 +6,7 @@ import { useTransition } from "react";
 import { enrollInCourseAction } from "../actions";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
+import { enrollInCourseAction2 } from "../actions2";
 
 export function EnrollmentButton({ courseId }: { courseId: string }) {
   const [pending, startTransition] = useTransition();
@@ -13,7 +14,7 @@ export function EnrollmentButton({ courseId }: { courseId: string }) {
   function onSubmit() {
     startTransition(async () => {
       const { data: result, error } = await tryCatch(
-        enrollInCourseAction(courseId)
+        enrollInCourseAction2(courseId)
       );
 
       if (error) {

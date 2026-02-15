@@ -90,7 +90,7 @@ export default async function SlugPage({ params }: { params: Params }) {
               {course.chapter.length} chapters |{" "}
               {course.chapter.reduce(
                 (total, chapter) => total + chapter.lessons.length,
-                0
+                0,
               ) || 0}{" "}
               Lessons
             </div>
@@ -226,7 +226,7 @@ export default async function SlugPage({ params }: { params: Params }) {
                       <p className="text-sm text-muted-foreground">
                         {course.chapter.reduce(
                           (total, chapter) => total + chapter.lessons.length,
-                          0
+                          0,
                         ) || 0}{" "}
                         Lessons
                       </p>
