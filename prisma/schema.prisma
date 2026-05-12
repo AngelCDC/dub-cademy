@@ -21,6 +21,7 @@ model User {
   courses        Course[]
   enrollment     Enrollment[]
   lessonProgress LessonProgress[]
+  quizAttempts   QuizAttempt[]
 
   role       String?
   banned     Boolean?
@@ -144,6 +145,7 @@ model Lesson {
   chapterId String
 
   lessonProgress LessonProgress[]
+  quiz           Quiz?
 }
 
 model Enrollment {
@@ -182,4 +184,79 @@ model LessonProgress {
   lessonId String
 
   @@unique([userId, lessonId])
+}
+
+model Quiz {
+  id           String        @id @default(uuid())
+  title        String
+  passingScore Int           @default(70)
+  maxAttempts  Int           @default(3)
+
+  lessonId  String        @unique
+  lesson    Lesson        @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  questions Question[]
+  attempts  QuizAttempt[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Question {
+  id       String       @id @default(uuid())
+  text     String
+  type     QuestionType @default(MultipleChoice)
+  position Int
+
+  quizId  String
+  quiz    Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  options Option[]
+  answers AttemptAnswer[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum QuestionType {
+  MultipleChoice
+  TrueFalse
+}
+
+model Option {
+  id        String  @id @default(uuid())
+  text      String
+  isCorrect Boolean @default(false)
+  position  Int     @default(0)
+
+  questionId String
+  question   Question        @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  answers    AttemptAnswer[]
+}
+
+model QuizAttempt {
+  id     String  @id @default(uuid())
+  score  Int
+  passed Boolean
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quizId String
+  quiz   Quiz   @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  answers   AttemptAnswer[]
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+model AttemptAnswer {
+  id        String  @id @default(uuid())
+  isCorrect Boolean
+
+  attemptId String
+  attempt   QuizAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id])
+
+  selectedOptionId String?
+  selectedOption   Option? @relation(fields: [selectedOptionId], references: [id])
 }

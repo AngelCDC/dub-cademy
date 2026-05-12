@@ -7,9 +7,7 @@ export async function getLessonContent(lessonId: string) {
   const session = await requireUser();
 
   const lesson = await prisma.lesson.findUnique({
-    where: {
-      id: lessonId,
-    },
+    where: { id: lessonId },
     select: {
       id: true,
       title: true,
@@ -18,20 +16,49 @@ export async function getLessonContent(lessonId: string) {
       videoKey: true,
       position: true,
       lessonProgress: {
-        where: {
-          userId: session.id,
-        },
-        select: {
-          completed: true,
-          lessonId: true,
-        },
+        where: { userId: session.id },
+        select: { completed: true, lessonId: true },
       },
       Chapter: {
         select: {
           courseId: true,
-          Course: {
+          Course: { select: { slug: true } },
+        },
+      },
+      quiz: {
+        select: {
+          id: true,
+          title: true,
+          passingScore: true,
+          maxAttempts: true,
+          questions: {
+            orderBy: { position: "asc" },
             select: {
-              slug: true,
+              id: true,
+              text: true,
+              type: true,
+              position: true,
+              options: {
+                orderBy: { position: "asc" },
+                select: { id: true, text: true },
+              },
+            },
+          },
+          attempts: {
+            where: { userId: session.id },
+            orderBy: { createdAt: "desc" },
+            select: {
+              id: true,
+              score: true,
+              passed: true,
+              createdAt: true,
+              answers: {
+                select: {
+                  questionId: true,
+                  selectedOptionId: true,
+                  isCorrect: true,
+                },
+              },
             },
           },
         },
@@ -39,25 +66,15 @@ export async function getLessonContent(lessonId: string) {
     },
   });
 
-  if (!lesson) {
-    return notFound();
-  }
+  if (!lesson) return notFound();
 
   const enrollment = await prisma.enrollment.findUnique({
-    where: {
-      userId_courseId: {
-        userId: session.id,
-        courseId: lesson.Chapter.courseId,
-      },
-    },
-    select: {
-      status: true,
-    },
+    where: { userId_courseId: { userId: session.id, courseId: lesson.Chapter.courseId } },
+    select: { status: true },
   });
 
-  if (!enrollment || enrollment.status !== "Active") {
-    return notFound();
-  }
+  if (!enrollment || enrollment.status !== "Active") return notFound();
+
   return lesson;
 }
 

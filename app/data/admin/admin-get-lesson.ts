@@ -7,9 +7,7 @@ export async function adminGetLesson(id: string) {
   await requireAdmin();
 
   const data = await prisma.lesson.findUnique({
-    where: {
-      id: id,
-    },
+    where: { id },
     select: {
       title: true,
       videoKey: true,
@@ -17,12 +15,31 @@ export async function adminGetLesson(id: string) {
       description: true,
       id: true,
       position: true,
+      quiz: {
+        select: {
+          id: true,
+          title: true,
+          passingScore: true,
+          maxAttempts: true,
+          questions: {
+            orderBy: { position: "asc" },
+            select: {
+              id: true,
+              text: true,
+              type: true,
+              position: true,
+              options: {
+                orderBy: { position: "asc" },
+                select: { id: true, text: true, isCorrect: true, position: true },
+              },
+            },
+          },
+        },
+      },
     },
   });
 
-  if (!data) {
-    return notFound();
-  }
+  if (!data) return notFound();
 
   return data;
 }
