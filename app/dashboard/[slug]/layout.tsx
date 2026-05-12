@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { getCourseSidebarData } from "@/app/data/course/get-course-sidebar-data";
 import { MobileSidebarWrapper } from "@/app/dashboard/_components/MobileSidebarWrapper";
+import { SiteHeader } from "@/components/sidebar/site-header";
 
 interface iAppProps {
   params: Promise<{ slug: string }>;

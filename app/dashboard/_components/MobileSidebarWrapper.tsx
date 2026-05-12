@@ -1,66 +1,81 @@
-'use client';
+"use client";
 
-import { useState, createContext, useContext } from 'react';
-import { Menu, X } from 'lucide-react';
-import { CourseSidebar } from './CourseSidebar';
+import { useState, createContext, useContext } from "react";
+import { Menu } from "lucide-react";
+import { CourseSidebar } from "./CourseSidebar";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 
+// ── Context ────────────────────────────────────────────────────────────────
+interface SidebarContextValue {
+  open: boolean;
+  toggleSidebar: () => void;
+}
+
+const CourseSidebarContext = createContext<SidebarContextValue | null>(null);
+
+export function useSidebar(): SidebarContextValue {
+  const ctx = useContext(CourseSidebarContext);
+  if (!ctx) throw new Error("useSidebar must be used within MobileSidebarWrapper");
+  return ctx;
+}
+
+// ── Component ──────────────────────────────────────────────────────────────
 interface MobileSidebarWrapperProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   course: any;
   children: React.ReactNode;
 }
 
-// Contexto para controlar el sidebar desde cualquier componente hijo
-const SidebarContext = createContext<{
-  toggleSidebar: () => void;
-  sidebarOpen: boolean;
-} | null>(null);
-
-export const useSidebar = () => {
-  const context = useContext(SidebarContext);
-  if (!context) {
-    throw new Error('useSidebar must be used within MobileSidebarWrapper');
-  }
-  return context;
-};
-
-export function MobileSidebarWrapper({ course, children }: MobileSidebarWrapperProps) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+export function MobileSidebarWrapper({
+  course,
+  children,
+}: MobileSidebarWrapperProps) {
+  const [open, setOpen] = useState(false);
+  const toggleSidebar = () => setOpen((prev) => !prev);
 
   return (
-    <SidebarContext.Provider value={{ toggleSidebar, sidebarOpen }}>
-      {/* Botón hamburguesa - solo visible en móviles */}
-      <button
-        onClick={toggleSidebar}
-        className="hidden fixed top-4 left-4 z-50 p-2 bg-background border border-border rounded-md shadow-lg"
-        aria-label="Toggle menu"
-      >
-        {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
-
-      {/* Overlay oscuro cuando el menú está abierto */}
-      {sidebarOpen && (
-        <div
-          className="lg:hidden fixed inset-0 bg-black/50 z-30"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
-      {/* Sidebar */}
-      <div
-        className={`
-          fixed lg:static inset-y-0 left-0 z-40
-          w-80 border-r border-border bg-background shrink-0
-          transform transition-transform duration-300 ease-in-out
-          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-          lg:translate-x-0
-        `}
-      >
+    <CourseSidebarContext.Provider value={{ open, toggleSidebar }}>
+      {/* ── Desktop: sidebar estático en el flujo flex ── */}
+      <aside className="hidden lg:flex w-72 xl:w-80 shrink-0 border-r border-border/60 bg-background h-full overflow-hidden">
         <CourseSidebar course={course} />
-      </div>
+      </aside>
 
-      {children}
-    </SidebarContext.Provider>
+      {/* ── Mobile: Sheet de shadcn ── */}
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetContent side="left" className="w-72 p-0 [&>button]:hidden">
+          <SheetHeader className="sr-only">
+            <SheetTitle>Menú del curso</SheetTitle>
+          </SheetHeader>
+          <CourseSidebar course={course} />
+        </SheetContent>
+      </Sheet>
+
+      {/* ── Área de contenido ── */}
+      <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
+        {/* Topbar móvil */}
+        <div className="lg:hidden flex items-center gap-3 px-4 h-12 border-b border-border/60 bg-background shrink-0">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="size-8 shrink-0 text-muted-foreground hover:text-foreground"
+            onClick={toggleSidebar}
+            aria-label="Abrir menú del curso"
+          >
+            <Menu className="size-4" />
+          </Button>
+          <p className="text-sm font-bold truncate font-antonio uppercase tracking-wide">
+            {course.title}
+          </p>
+        </div>
+
+        <div className="flex-1 overflow-auto">{children}</div>
+      </div>
+    </CourseSidebarContext.Provider>
   );
 }

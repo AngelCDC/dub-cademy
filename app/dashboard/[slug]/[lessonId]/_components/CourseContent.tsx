@@ -5,12 +5,11 @@ import { RenderDescription } from "@/components/rich-text-editor/RenderDescripti
 import { Button } from "@/components/ui/button";
 import { tryCatch } from "@/hooks/try-catch";
 import { useConstructUrl } from "@/hooks/use-construct-url";
-import { BookIcon, CheckCircle, Menu } from "lucide-react";
+import { BookOpen, CheckCircle2, Loader2 } from "lucide-react";
 import { useTransition } from "react";
 import { markLessonComplete } from "../actions";
 import { toast } from "sonner";
 import { useConfetti } from "@/hooks/use-confetti";
-import { useSidebar } from "@/app/dashboard/_components/MobileSidebarWrapper";
 
 interface iAppProps {
   data: LessonContentType;
@@ -19,7 +18,8 @@ interface iAppProps {
 export function CourseContent({ data }: iAppProps) {
   const [pending, startTransition] = useTransition();
   const { triggerConfetti } = useConfetti();
-  const { toggleSidebar } = useSidebar();
+
+  const isCompleted = data.lessonProgress.length > 0;
 
   function VideoPlayer({
     thumbnailKey,
@@ -33,17 +33,19 @@ export function CourseContent({ data }: iAppProps) {
 
     if (!videoKey) {
       return (
-        <div className="aspect-video bg-muted rounded-lg flex flex-col items-center justify-center">
-          <BookIcon className="size-16 text-primary mx-auto mb-4" />
-          <p className="text-muted-foreground">
-            This lesson does not have a video yet
+        <div className="aspect-video bg-muted flex flex-col items-center justify-center gap-3">
+          <div className="p-4 rounded-full bg-accent-red/10">
+            <BookOpen className="size-8 text-accent-red" />
+          </div>
+          <p className="text-sm text-muted-foreground">
+            Esta lección no tiene video aún
           </p>
         </div>
       );
     }
 
     return (
-      <div className="aspect-video bg-black rounded-lg relative overflow-hidden">
+      <div className="aspect-video bg-black overflow-hidden">
         <video
           className="w-full h-full object-cover"
           controls
@@ -52,7 +54,6 @@ export function CourseContent({ data }: iAppProps) {
           <source src={videoUrl} type="video/mp4" />
           <source src={videoUrl} type="video/webm" />
           <source src={videoUrl} type="video/ogg" />
-          Your browser does not support the video tag.
         </video>
       </div>
     );
@@ -65,7 +66,7 @@ export function CourseContent({ data }: iAppProps) {
       );
 
       if (error) {
-        toast.error("An unexpected error occurred. Please try again.");
+        toast.error("Error inesperado. Intenta de nuevo.");
         return;
       }
 
@@ -79,46 +80,47 @@ export function CourseContent({ data }: iAppProps) {
   }
 
   return (
-    <div className="flex flex-col h-full bg-background pl-6">
+    <div className="flex flex-col h-full bg-background">
+      {/* Video */}
       <VideoPlayer
         thumbnailKey={data.thumbnailKey ?? ""}
         videoKey={data.videoKey ?? ""}
       />
 
-      <div className="py-4 border-b flex items-center gap-2">
-        {/* Botón para abrir sidebar en móviles */}
-        <Button
-          variant="outline"
-          size="icon"
-          className="lg:hidden"
-          onClick={toggleSidebar}
-        >
-          <Menu className="size-4" />
-        </Button>
-
-        {data.lessonProgress.length > 0 ? (
-          <Button
-            variant="outline"
-            className="bg-green-500/10 text-green-500 hover:text-green-600"
-          >
-            <CheckCircle className="size-4 mr-2 text-green-500" />
-            Completed
-          </Button>
+      {/* Actions bar */}
+      <div className="px-5 py-3 border-b border-border/60 flex items-center justify-end">
+        {isCompleted ? (
+          <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-green-500/10 border border-green-500/20">
+            <CheckCircle2 className="size-4 text-green-500 shrink-0" />
+            <span className="text-sm font-semibold text-green-600 dark:text-green-400 uppercase tracking-wider">
+              Completada
+            </span>
+          </div>
         ) : (
-          <Button variant="outline" onClick={onSubmit} disabled={pending}>
-            <CheckCircle className="size-4 mr-2 text-green-500" />
-            Mark as Complete
+          <Button
+            onClick={onSubmit}
+            disabled={pending}
+            className="bg-accent-red hover:bg-accent-red/90 text-white font-bold uppercase tracking-wider text-xs px-5 shadow-sm"
+          >
+            {pending ? (
+              <Loader2 className="size-4 animate-spin mr-2" />
+            ) : (
+              <CheckCircle2 className="size-4 mr-2" />
+            )}
+            Marcar como completada
           </Button>
         )}
       </div>
 
-      <div className="space-y-3 pt-3">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+      {/* Lesson content */}
+      <div className="flex flex-col gap-4 px-5 pt-5 pb-10 max-w-3xl">
+        <h1 className="font-antonio text-2xl md:text-3xl font-bold uppercase tracking-wide leading-tight">
           {data.title}
         </h1>
-
         {data.description && (
-          <RenderDescription json={JSON.parse(data.description)} />
+          <div className="text-sm text-muted-foreground leading-relaxed">
+            <RenderDescription json={JSON.parse(data.description)} />
+          </div>
         )}
       </div>
     </div>
