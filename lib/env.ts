@@ -56,15 +56,6 @@ export const env = createEnv({
       z.string().min(1).default("")
     ),
 
-    // Stripe optional
-    STRIPE_SECRET_KEY: z.preprocess(
-      (v) => (v === "" ? undefined : v),
-      z.string().min(1).default("")
-    ),
-    STRIPE_WEBHOOK_SECRET: z.preprocess(
-      (v) => (v === "" ? undefined : v),
-      z.string().min(1).default("")
-    ),
   },
 
   client: {

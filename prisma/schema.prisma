@@ -22,8 +22,6 @@ model User {
   enrollment     Enrollment[]
   lessonProgress LessonProgress[]
 
-  stripeCustomerId String? @unique
-
   role       String?
   banned     Boolean?
   banReason  String?
@@ -89,8 +87,6 @@ model Course {
   price       Int
   duration    Int
   level       CourseLevel @default(Beginner)
-
-  stripePriceId String @unique
 
   category         String
   smallDescription String
