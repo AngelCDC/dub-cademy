@@ -80,7 +80,7 @@ export function CourseContent({ data }: iAppProps) {
         {/* Lesson counter */}
         <span className="text-xs text-muted-foreground font-medium tabular-nums">
           {currentIndex >= 0
-            ? `${currentIndex + 1} / ${flatLessons.length}`
+            ? `${currentIndex + 1} / ${flatItems.length}`
             : ""}
         </span>
 
