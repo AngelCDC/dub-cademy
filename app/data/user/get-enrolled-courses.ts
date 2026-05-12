@@ -6,10 +6,7 @@ export async function getEnrolledCourses() {
   const user = await requireUser();
 
   const data = await prisma.enrollment.findMany({
-    where: {
-      userId: user.id,
-      status: "Active",
-    },
+    where: { userId: user.id, status: "Active" },
     select: {
       Course: {
         select: {
@@ -27,18 +24,19 @@ export async function getEnrolledCourses() {
                 select: {
                   id: true,
                   lessonProgress: {
-                    where: {
-                      userId: user.id,
-                    },
-                    select: {
-                      id: true,
-                      completed: true,
-                      lessonId: true,
-                    },
+                    where: { userId: user.id },
+                    select: { id: true, completed: true, lessonId: true },
                   },
                 },
               },
             },
+          },
+          reviews: {
+            select: { rating: true },
+          },
+          userReview: {
+            where: { userId: user.id },
+            select: { id: true, rating: true, comment: true },
           },
         },
       },
@@ -48,6 +46,4 @@ export async function getEnrolledCourses() {
   return data;
 }
 
-export type EnrolledCourseType = Awaited<
-  ReturnType<typeof getEnrolledCourses>
->[0];
+export type EnrolledCourseType = Awaited<ReturnType<typeof getEnrolledCourses>>[0];

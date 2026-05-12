@@ -22,6 +22,7 @@ model User {
   enrollment     Enrollment[]
   lessonProgress LessonProgress[]
   quizAttempts   QuizAttempt[]
+  reviews        Review[]
 
   role       String?
   banned     Boolean?
@@ -102,6 +103,7 @@ model Course {
 
   chapter    Chapter[]
   enrollment Enrollment[]
+  reviews    Review[]
 }
 
 enum CourseLevel {
@@ -259,4 +261,20 @@ model AttemptAnswer {
 
   selectedOptionId String?
   selectedOption   Option? @relation(fields: [selectedOptionId], references: [id])
+}
+
+model Review {
+  id      String  @id @default(uuid())
+  rating  Int
+  comment String?
+
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, courseId])
 }
