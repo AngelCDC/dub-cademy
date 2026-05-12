@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Check, Play } from "lucide-react";
+import { CheckCircle2, Circle, PlayCircle } from "lucide-react";
 import Link from "next/link";
 
 interface iAppProps {
@@ -19,71 +19,34 @@ export function LessonItem({ lesson, slug, isActive, completed }: iAppProps) {
     <Link
       href={`/dashboard/${slug}/${lesson.id}`}
       className={cn(
-        "group flex items-center gap-3 w-full px-3 py-2.5 rounded-lg transition-all duration-200 border",
-        completed &&
-          "bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 hover:bg-green-100 dark:hover:bg-green-900/30",
-        isActive &&
-          !completed &&
-          "bg-accent-red/8 border-accent-red/30 hover:bg-accent-red/12",
-        !isActive &&
-          !completed &&
-          "bg-transparent border-transparent hover:bg-muted/60 hover:border-border"
+        "flex items-center gap-2.5 rounded-md px-2 py-2 text-sm transition-colors group",
+        isActive
+          ? "bg-primary/10 text-primary"
+          : completed
+            ? "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+            : "text-foreground/80 hover:text-foreground hover:bg-accent/50"
       )}
     >
-      {/* Icon */}
-      <div className="shrink-0">
+      {/* Status icon */}
+      <span className="shrink-0">
         {completed ? (
-          <div className="size-6 rounded-full bg-green-500 flex items-center justify-center shadow-sm">
-            <Check className="size-3.5 text-white stroke-[2.5]" />
-          </div>
+          <CheckCircle2 className="size-4 text-emerald-500" />
+        ) : isActive ? (
+          <PlayCircle className="size-4 text-primary fill-primary/20" />
         ) : (
-          <div
-            className={cn(
-              "size-6 rounded-full border-2 flex items-center justify-center transition-colors",
-              isActive
-                ? "border-accent-red bg-accent-red/10"
-                : "border-muted-foreground/30 group-hover:border-muted-foreground/60"
-            )}
-          >
-            <Play
-              className={cn(
-                "size-2.5 fill-current ml-0.5",
-                isActive
-                  ? "text-accent-red"
-                  : "text-muted-foreground/50 group-hover:text-muted-foreground"
-              )}
-            />
-          </div>
+          <Circle className="size-4 text-muted-foreground/50" />
         )}
-      </div>
+      </span>
 
-      {/* Text */}
-      <div className="flex-1 min-w-0">
-        <p
-          className={cn(
-            "text-xs font-medium truncate leading-snug",
-            completed
-              ? "text-green-700 dark:text-green-300"
-              : isActive
-                ? "text-accent-red font-semibold"
-                : "text-foreground group-hover:text-foreground"
-          )}
-        >
-          {lesson.position}. {lesson.title}
-        </p>
-        <p
-          className={cn(
-            "text-[10px] font-medium mt-0.5 uppercase tracking-wider",
-            completed
-              ? "text-green-600 dark:text-green-400"
-              : isActive
-                ? "text-accent-red/70"
-                : "text-transparent"
-          )}
-        >
-          {completed ? "Completada" : isActive ? "Viendo ahora" : "·"}
-        </p>
-      </div>
+      {/* Title */}
+      <span
+        className={cn(
+          "flex-1 min-w-0 text-xs leading-snug truncate",
+          isActive ? "font-semibold" : completed ? "line-through decoration-muted-foreground/40" : "font-medium"
+        )}
+      >
+        {lesson.position}. {lesson.title}
+      </span>
     </Link>
   );
 }

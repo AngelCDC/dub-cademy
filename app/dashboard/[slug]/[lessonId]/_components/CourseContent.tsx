@@ -5,8 +5,16 @@ import { RenderDescription } from "@/components/rich-text-editor/RenderDescripti
 import { Button } from "@/components/ui/button";
 import { tryCatch } from "@/hooks/try-catch";
 import { useConstructUrl } from "@/hooks/use-construct-url";
-import { BookOpen, CheckCircle2, Loader2 } from "lucide-react";
+import { useCourseSidebar } from "@/app/dashboard/_components/MobileSidebarWrapper";
+import {
+  BookOpen,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  LayoutList,
+} from "lucide-react";
 import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { markLessonComplete } from "../actions";
 import { toast } from "sonner";
 import { useConfetti } from "@/hooks/use-confetti";
@@ -18,111 +26,224 @@ interface iAppProps {
 export function CourseContent({ data }: iAppProps) {
   const [pending, startTransition] = useTransition();
   const { triggerConfetti } = useConfetti();
+  const { openSheet, flatLessons } = useCourseSidebar();
+  const router = useRouter();
 
+  const slug = data.Chapter.Course.slug;
   const isCompleted = data.lessonProgress.length > 0;
 
-  function VideoPlayer({
-    thumbnailKey,
-    videoKey,
-  }: {
-    thumbnailKey: string;
-    videoKey: string;
-  }) {
-    const videoUrl = useConstructUrl(videoKey);
-    const thumbnailUrl = useConstructUrl(thumbnailKey);
+  const currentIndex = flatLessons.findIndex((l) => l.id === data.id);
+  const prevLesson = currentIndex > 0 ? flatLessons[currentIndex - 1] : null;
+  const nextLesson =
+    currentIndex < flatLessons.length - 1
+      ? flatLessons[currentIndex + 1]
+      : null;
 
-    if (!videoKey) {
-      return (
-        <div className="aspect-video bg-muted flex flex-col items-center justify-center gap-3">
-          <div className="p-4 rounded-full bg-accent-red/10">
-            <BookOpen className="size-8 text-accent-red" />
-          </div>
-          <p className="text-sm text-muted-foreground">
-            Esta lección no tiene video aún
-          </p>
-        </div>
-      );
-    }
-
-    return (
-      <div className="aspect-video bg-black overflow-hidden">
-        <video
-          className="w-full h-full object-cover"
-          controls
-          poster={thumbnailUrl}
-        >
-          <source src={videoUrl} type="video/mp4" />
-          <source src={videoUrl} type="video/webm" />
-          <source src={videoUrl} type="video/ogg" />
-        </video>
-      </div>
-    );
-  }
-
-  function onSubmit() {
+  function onMarkComplete() {
     startTransition(async () => {
       const { data: result, error } = await tryCatch(
-        markLessonComplete(data.id, data.Chapter.Course.slug)
+        markLessonComplete(data.id, slug)
       );
 
       if (error) {
-        toast.error("Error inesperado. Intenta de nuevo.");
+        toast.error("Ocurrió un error. Intenta de nuevo.");
         return;
       }
 
       if (result.status === "success") {
         toast.success(result.message);
         triggerConfetti();
-      } else if (result.status === "error") {
+        if (nextLesson) {
+          router.push(`/dashboard/${slug}/${nextLesson.id}`);
+        }
+      } else {
         toast.error(result.message);
       }
     });
   }
 
   return (
-    <div className="flex flex-col h-full bg-background">
-      {/* Video */}
-      <VideoPlayer
-        thumbnailKey={data.thumbnailKey ?? ""}
-        videoKey={data.videoKey ?? ""}
-      />
+    <div className="flex flex-col h-full">
+      {/* Top bar */}
+      <div className="flex items-center gap-3 px-4 py-2.5 border-b bg-background/95 backdrop-blur shrink-0">
+        {/* Mobile: open sidebar sheet */}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="lg:hidden h-8 w-8 shrink-0"
+          onClick={openSheet}
+          aria-label="Ver contenido del curso"
+        >
+          <LayoutList className="size-4" />
+        </Button>
 
-      {/* Actions bar */}
-      <div className="px-5 py-3 border-b border-border/60 flex items-center justify-end">
-        {isCompleted ? (
-          <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-green-500/10 border border-green-500/20">
-            <CheckCircle2 className="size-4 text-green-500 shrink-0" />
-            <span className="text-sm font-semibold text-green-600 dark:text-green-400 uppercase tracking-wider">
-              Completada
-            </span>
-          </div>
-        ) : (
-          <Button
-            onClick={onSubmit}
-            disabled={pending}
-            className="bg-accent-red hover:bg-accent-red/90 text-white font-bold uppercase tracking-wider text-xs px-5 shadow-sm"
-          >
-            {pending ? (
-              <Loader2 className="size-4 animate-spin mr-2" />
-            ) : (
-              <CheckCircle2 className="size-4 mr-2" />
-            )}
-            Marcar como completada
-          </Button>
-        )}
-      </div>
+        {/* Lesson counter */}
+        <span className="text-xs text-muted-foreground font-medium tabular-nums">
+          {currentIndex >= 0
+            ? `${currentIndex + 1} / ${flatLessons.length}`
+            : ""}
+        </span>
 
-      {/* Lesson content */}
-      <div className="flex flex-col gap-4 px-5 pt-5 pb-10 max-w-3xl">
-        <h1 className="font-antonio text-2xl md:text-3xl font-bold uppercase tracking-wide leading-tight">
+        <div className="h-3.5 w-px bg-border mx-0.5 hidden sm:block" />
+
+        {/* Lesson title breadcrumb */}
+        <p className="text-xs font-medium text-muted-foreground truncate flex-1 hidden sm:block">
           {data.title}
-        </h1>
-        {data.description && (
-          <div className="text-sm text-muted-foreground leading-relaxed">
-            <RenderDescription json={JSON.parse(data.description)} />
-          </div>
-        )}
+        </p>
+
+        {/* Prev / Next arrows */}
+        <div className="flex items-center gap-1 ml-auto">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8"
+            disabled={!prevLesson}
+            onClick={() =>
+              prevLesson &&
+              router.push(`/dashboard/${slug}/${prevLesson.id}`)
+            }
+            aria-label="Lección anterior"
+          >
+            <ChevronLeft className="size-4" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8"
+            disabled={!nextLesson}
+            onClick={() =>
+              nextLesson &&
+              router.push(`/dashboard/${slug}/${nextLesson.id}`)
+            }
+            aria-label="Siguiente lección"
+          >
+            <ChevronRight className="size-4" />
+          </Button>
+        </div>
       </div>
+
+      {/* Scrollable content */}
+      <div className="flex-1 overflow-y-auto">
+        {/* Video player */}
+        <VideoPlayer
+          thumbnailKey={data.thumbnailKey ?? ""}
+          videoKey={data.videoKey ?? ""}
+        />
+
+        {/* Content area */}
+        <div className="max-w-3xl px-4 md:px-8 py-6 space-y-6">
+          {/* Actions bar */}
+          <div className="flex items-center justify-between gap-3 flex-wrap">
+            <div className="flex items-center gap-2">
+              {isCompleted ? (
+                <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-3 py-1.5 text-sm font-medium text-emerald-700 dark:text-emerald-400 ring-1 ring-emerald-500/30">
+                  <CheckCircle2 className="size-4" />
+                  Completada
+                </div>
+              ) : (
+                <Button
+                  onClick={onMarkComplete}
+                  disabled={pending}
+                  size="sm"
+                  className="gap-2 rounded-full"
+                >
+                  <CheckCircle2 className="size-4" />
+                  {pending ? "Guardando..." : "Marcar como completada"}
+                </Button>
+              )}
+            </div>
+
+            {/* Inline prev/next */}
+            <div className="flex items-center gap-2">
+              {prevLesson && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="gap-1.5 rounded-full text-xs"
+                  onClick={() =>
+                    router.push(`/dashboard/${slug}/${prevLesson.id}`)
+                  }
+                >
+                  <ChevronLeft className="size-3.5" />
+                  Anterior
+                </Button>
+              )}
+              {nextLesson && (
+                <Button
+                  size="sm"
+                  className="gap-1.5 rounded-full text-xs"
+                  onClick={() =>
+                    router.push(`/dashboard/${slug}/${nextLesson.id}`)
+                  }
+                >
+                  Siguiente
+                  <ChevronRight className="size-3.5" />
+                </Button>
+              )}
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="h-px bg-border" />
+
+          {/* Lesson title */}
+          <div>
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight leading-tight">
+              {data.title}
+            </h1>
+          </div>
+
+          {/* Description */}
+          {data.description ? (
+            <div className="prose prose-sm dark:prose-invert max-w-none">
+              <RenderDescription json={JSON.parse(data.description)} />
+            </div>
+          ) : (
+            <p className="text-muted-foreground text-sm">
+              Esta lección no tiene descripción.
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function VideoPlayer({
+  thumbnailKey,
+  videoKey,
+}: {
+  thumbnailKey: string;
+  videoKey: string;
+}) {
+  const videoUrl = useConstructUrl(videoKey);
+  const thumbnailUrl = useConstructUrl(thumbnailKey);
+
+  if (!videoKey) {
+    return (
+      <div className="w-full aspect-video bg-muted flex flex-col items-center justify-center gap-3">
+        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-muted-foreground/10">
+          <BookOpen className="size-8 text-muted-foreground" />
+        </div>
+        <p className="text-sm text-muted-foreground">
+          Esta lección no tiene video aún
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full aspect-video bg-black">
+      <video
+        className="w-full h-full"
+        controls
+        poster={thumbnailUrl}
+        key={videoKey}
+      >
+        <source src={videoUrl} type="video/mp4" />
+        <source src={videoUrl} type="video/webm" />
+        <source src={videoUrl} type="video/ogg" />
+      </video>
     </div>
   );
 }

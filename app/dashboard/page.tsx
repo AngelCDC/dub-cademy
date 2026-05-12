@@ -21,7 +21,7 @@ export default async function DashboardPage() {
   const firstName = user.name?.split(" ")[0] ?? "Estudiante";
 
   return (
-    <div className="space-y-10">
+    <div className="flex flex-col gap-8 py-6 px-4 lg:px-6">
       {/* Welcome banner */}
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-primary/90 to-primary/70 p-6 md:p-8 text-white shadow-lg">
         <div className="absolute -top-8 -right-8 h-40 w-40 rounded-full bg-white/10 blur-3xl" />
@@ -45,7 +45,6 @@ export default async function DashboardPage() {
             </p>
           </div>
 
-          {/* Quick stats */}
           <div className="flex gap-4">
             <div className="flex flex-col items-center rounded-xl bg-white/15 px-4 py-3 backdrop-blur-sm ring-1 ring-white/20">
               <BookOpen className="size-5 mb-1 text-white/80" />
