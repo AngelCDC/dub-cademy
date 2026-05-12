@@ -21,9 +21,7 @@ interface iAppProps {
 
 function getProgressColor(percentage: number) {
   if (percentage >= 100) return "bg-emerald-500";
-  if (percentage >= 60) return "bg-blue-500";
-  if (percentage >= 30) return "bg-amber-500";
-  return "bg-rose-500";
+  return "bg-primary";
 }
 
 function getLevelColor(level: string) {
@@ -31,9 +29,9 @@ function getLevelColor(level: string) {
     case "beginner":
       return "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 ring-emerald-500/30";
     case "intermediate":
-      return "bg-blue-500/15 text-blue-700 dark:text-blue-400 ring-blue-500/30";
+      return "bg-primary/15 text-primary ring-primary/30";
     case "advanced":
-      return "bg-rose-500/15 text-rose-700 dark:text-rose-400 ring-rose-500/30";
+      return "bg-cyan-500/15 text-cyan-700 dark:text-cyan-400 ring-cyan-500/30";
     default:
       return "bg-muted text-muted-foreground";
   }
