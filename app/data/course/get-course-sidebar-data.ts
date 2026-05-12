@@ -36,13 +36,17 @@ export async function getCourseSidebarData(slug: string) {
               position: true,
               description: true,
               lessonProgress: {
-                where: {
-                  userId: session.id,
-                },
+                where: { userId: session.id },
+                select: { completed: true, lessonId: true, id: true },
+              },
+              quiz: {
                 select: {
-                  completed: true,
-                  lessonId: true,
                   id: true,
+                  attempts: {
+                    where: { userId: session.id, passed: true },
+                    select: { id: true },
+                    take: 1,
+                  },
                 },
               },
             },

@@ -18,7 +18,6 @@ import { useRouter } from "next/navigation";
 import { markLessonComplete } from "../actions";
 import { toast } from "sonner";
 import { useConfetti } from "@/hooks/use-confetti";
-import { QuizPlayer } from "./QuizPlayer";
 
 interface iAppProps {
   data: LessonContentType;
@@ -205,17 +204,6 @@ export function CourseContent({ data }: iAppProps) {
             </p>
           )}
 
-          {/* Quiz */}
-          {data.quiz && (
-            <>
-              <div className="h-px bg-border" />
-              <QuizPlayer
-                quiz={data.quiz}
-                lessonId={data.id}
-                slug={slug}
-              />
-            </>
-          )}
         </div>
       </div>
     </div>

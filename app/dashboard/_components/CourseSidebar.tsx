@@ -9,6 +9,9 @@ import {
   ChevronRight,
   ArrowLeft,
   BookOpen,
+  ClipboardList,
+  CheckCircle2,
+  Circle,
 } from "lucide-react";
 import { LessonItem } from "./LessonItem";
 import { usePathname } from "next/navigation";
@@ -21,7 +24,11 @@ interface iAppProps {
 
 export function CourseSidebar({ course }: iAppProps) {
   const pathname = usePathname();
-  const currentLessonId = pathname.split("/").pop();
+  const segments = pathname.split("/");
+  const isQuizPage = segments[segments.length - 1] === "quiz";
+  const currentLessonId = isQuizPage
+    ? segments[segments.length - 2]
+    : segments[segments.length - 1];
 
   const { completedLessons, totalLessons, progressPercentage } =
     useCourseProgress({ courseData: course });
@@ -113,20 +120,61 @@ export function CourseSidebar({ course }: iAppProps) {
                 )}
               </button>
 
-              {/* Lessons */}
+              {/* Lessons + Quiz items */}
               {isOpen && (
                 <div className="mt-1 ml-3 pl-3 border-l border-border/60 space-y-0.5 pb-2">
-                  {chapter.lessons.map((lesson) => (
-                    <LessonItem
-                      key={lesson.id}
-                      lesson={lesson}
-                      slug={course.slug}
-                      isActive={currentLessonId === lesson.id}
-                      completed={
-                        lesson.lessonProgress.some((p) => p.completed) ?? false
-                      }
-                    />
-                  ))}
+                  {chapter.lessons.map((lesson) => {
+                    const lessonActive = currentLessonId === lesson.id && !isQuizPage;
+                    const quizActive = currentLessonId === lesson.id && isQuizPage;
+                    const quizPassed = lesson.quiz?.attempts && lesson.quiz.attempts.length > 0;
+
+                    return (
+                      <div key={lesson.id}>
+                        <LessonItem
+                          lesson={lesson}
+                          slug={course.slug}
+                          isActive={lessonActive}
+                          completed={lesson.lessonProgress.some((p) => p.completed)}
+                        />
+
+                        {/* Quiz item — only if lesson has a quiz */}
+                        {lesson.quiz && (
+                          <Link
+                            href={`/dashboard/${course.slug}/${lesson.id}/quiz`}
+                            className={cn(
+                              "flex items-center gap-2.5 rounded-md px-2 py-1.5 text-sm transition-colors",
+                              quizActive
+                                ? "bg-primary/10 text-primary"
+                                : quizPassed
+                                  ? "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                                  : "text-foreground/80 hover:text-foreground hover:bg-accent/50"
+                            )}
+                          >
+                            <span className="shrink-0">
+                              {quizPassed ? (
+                                <CheckCircle2 className="size-4 text-emerald-500" />
+                              ) : (
+                                <Circle className="size-4 text-muted-foreground/50" />
+                              )}
+                            </span>
+                            <span
+                              className={cn(
+                                "flex-1 min-w-0 text-xs leading-snug truncate",
+                                quizActive
+                                  ? "font-semibold"
+                                  : quizPassed
+                                    ? "line-through decoration-muted-foreground/40"
+                                    : "font-medium"
+                              )}
+                            >
+                              Quiz
+                            </span>
+                            <ClipboardList className="size-3.5 shrink-0 text-muted-foreground/60" />
+                          </Link>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               )}
             </div>
