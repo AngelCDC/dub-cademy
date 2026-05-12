@@ -11,11 +11,22 @@ import {
 import type { CourseSidebarDataType } from "@/app/data/course/get-course-sidebar-data";
 
 type Course = CourseSidebarDataType["course"];
-type FlatLesson = { id: string; title: string };
+
+export type FlatItem = {
+  type: "lesson" | "quiz";
+  id: string; // always the lessonId (quizzes use their parent lessonId)
+  title: string;
+};
+
+export function getItemUrl(slug: string, item: FlatItem) {
+  return item.type === "quiz"
+    ? `/dashboard/${slug}/${item.id}/quiz`
+    : `/dashboard/${slug}/${item.id}`;
+}
 
 interface CourseSheetContextValue {
   openSheet: () => void;
-  flatLessons: FlatLesson[];
+  flatItems: FlatItem[];
 }
 
 const CourseSheetContext = createContext<CourseSheetContextValue | null>(null);
@@ -36,16 +47,21 @@ export function MobileSidebarWrapper({
 }) {
   const [open, setOpen] = useState(false);
 
-  const flatLessons: FlatLesson[] = course.chapter.flatMap((chapter) =>
-    chapter.lessons.map((lesson) => ({
-      id: lesson.id,
-      title: lesson.title,
-    }))
+  const flatItems: FlatItem[] = course.chapter.flatMap((chapter) =>
+    chapter.lessons.flatMap((lesson) => {
+      const items: FlatItem[] = [
+        { type: "lesson", id: lesson.id, title: lesson.title },
+      ];
+      if (lesson.quiz) {
+        items.push({ type: "quiz", id: lesson.id, title: "Quiz" });
+      }
+      return items;
+    })
   );
 
   return (
     <CourseSheetContext.Provider
-      value={{ openSheet: () => setOpen(true), flatLessons }}
+      value={{ openSheet: () => setOpen(true), flatItems }}
     >
       <div className="flex flex-1 overflow-hidden">
         {/* Content area — scrollable */}

@@ -15,6 +15,9 @@ import { useState, useTransition } from "react";
 import { toast } from "sonner";
 import { submitQuizAttempt, QuizResult, AnswerInput } from "../actions";
 import { useConfetti } from "@/hooks/use-confetti";
+import { useCourseSidebar, getItemUrl } from "@/app/dashboard/_components/MobileSidebarWrapper";
+import { useRouter } from "next/navigation";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type Quiz = NonNullable<LessonContentType["quiz"]>;
 
@@ -34,6 +37,15 @@ export function QuizPlayer({ quiz, lessonId, slug }: iAppProps) {
   const [selected, setSelected] = useState<Record<string, string>>({});
   const [pending, startTransition] = useTransition();
   const { triggerConfetti } = useConfetti();
+  const { flatItems } = useCourseSidebar();
+  const router = useRouter();
+
+  const currentIndex = flatItems.findIndex(
+    (item) => item.type === "quiz" && item.id === lessonId
+  );
+  const prevItem = currentIndex > 0 ? flatItems[currentIndex - 1] : null;
+  const nextItem =
+    currentIndex < flatItems.length - 1 ? flatItems[currentIndex + 1] : null;
 
   function startQuiz() {
     setSelected({});
@@ -67,6 +79,9 @@ export function QuizPlayer({ quiz, lessonId, slug }: iAppProps) {
       if (data.result.passed) {
         triggerConfetti();
         toast.success(`¡Aprobaste con ${data.result.score}%!`);
+        if (nextItem) {
+          setTimeout(() => router.push(getItemUrl(slug, nextItem)), 1500);
+        }
       } else {
         toast.error(`No aprobaste. Obtuviste ${data.result.score}% (mínimo ${quiz.passingScore}%)`);
       }
@@ -130,6 +145,31 @@ export function QuizPlayer({ quiz, lessonId, slug }: iAppProps) {
             Has agotado todos los intentos disponibles.
           </p>
         )}
+
+        {/* Prev / Next navigation */}
+        <div className="flex items-center justify-between pt-2">
+          {prevItem ? (
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-1.5 rounded-full text-xs"
+              onClick={() => router.push(getItemUrl(slug, prevItem))}
+            >
+              <ChevronLeft className="size-3.5" />
+              Anterior
+            </Button>
+          ) : <div />}
+          {nextItem && (
+            <Button
+              size="sm"
+              className="gap-1.5 rounded-full text-xs"
+              onClick={() => router.push(getItemUrl(slug, nextItem))}
+            >
+              Siguiente
+              <ChevronRight className="size-3.5" />
+            </Button>
+          )}
+        </div>
       </div>
     );
   }

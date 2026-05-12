@@ -5,7 +5,7 @@ import { RenderDescription } from "@/components/rich-text-editor/RenderDescripti
 import { Button } from "@/components/ui/button";
 import { tryCatch } from "@/hooks/try-catch";
 import { useConstructUrl } from "@/hooks/use-construct-url";
-import { useCourseSidebar } from "@/app/dashboard/_components/MobileSidebarWrapper";
+import { useCourseSidebar, getItemUrl } from "@/app/dashboard/_components/MobileSidebarWrapper";
 import {
   BookOpen,
   CheckCircle2,
@@ -26,18 +26,18 @@ interface iAppProps {
 export function CourseContent({ data }: iAppProps) {
   const [pending, startTransition] = useTransition();
   const { triggerConfetti } = useConfetti();
-  const { openSheet, flatLessons } = useCourseSidebar();
+  const { openSheet, flatItems } = useCourseSidebar();
   const router = useRouter();
 
   const slug = data.Chapter.Course.slug;
   const isCompleted = data.lessonProgress.length > 0;
 
-  const currentIndex = flatLessons.findIndex((l) => l.id === data.id);
-  const prevLesson = currentIndex > 0 ? flatLessons[currentIndex - 1] : null;
-  const nextLesson =
-    currentIndex < flatLessons.length - 1
-      ? flatLessons[currentIndex + 1]
-      : null;
+  const currentIndex = flatItems.findIndex(
+    (item) => item.type === "lesson" && item.id === data.id
+  );
+  const prevItem = currentIndex > 0 ? flatItems[currentIndex - 1] : null;
+  const nextItem =
+    currentIndex < flatItems.length - 1 ? flatItems[currentIndex + 1] : null;
 
   function onMarkComplete() {
     startTransition(async () => {
@@ -53,8 +53,8 @@ export function CourseContent({ data }: iAppProps) {
       if (result.status === "success") {
         toast.success(result.message);
         triggerConfetti();
-        if (nextLesson) {
-          router.push(`/dashboard/${slug}/${nextLesson.id}`);
+        if (nextItem) {
+          router.push(getItemUrl(slug, nextItem));
         }
       } else {
         toast.error(result.message);
@@ -97,12 +97,9 @@ export function CourseContent({ data }: iAppProps) {
             variant="ghost"
             size="icon"
             className="h-8 w-8"
-            disabled={!prevLesson}
-            onClick={() =>
-              prevLesson &&
-              router.push(`/dashboard/${slug}/${prevLesson.id}`)
-            }
-            aria-label="Lección anterior"
+            disabled={!prevItem}
+            onClick={() => prevItem && router.push(getItemUrl(slug, prevItem))}
+            aria-label="Anterior"
           >
             <ChevronLeft className="size-4" />
           </Button>
@@ -110,12 +107,9 @@ export function CourseContent({ data }: iAppProps) {
             variant="ghost"
             size="icon"
             className="h-8 w-8"
-            disabled={!nextLesson}
-            onClick={() =>
-              nextLesson &&
-              router.push(`/dashboard/${slug}/${nextLesson.id}`)
-            }
-            aria-label="Siguiente lección"
+            disabled={!nextItem}
+            onClick={() => nextItem && router.push(getItemUrl(slug, nextItem))}
+            aria-label="Siguiente"
           >
             <ChevronRight className="size-4" />
           </Button>
@@ -155,26 +149,22 @@ export function CourseContent({ data }: iAppProps) {
 
             {/* Inline prev/next */}
             <div className="flex items-center gap-2">
-              {prevLesson && (
+              {prevItem && (
                 <Button
                   variant="outline"
                   size="sm"
                   className="gap-1.5 rounded-full text-xs"
-                  onClick={() =>
-                    router.push(`/dashboard/${slug}/${prevLesson.id}`)
-                  }
+                  onClick={() => router.push(getItemUrl(slug, prevItem))}
                 >
                   <ChevronLeft className="size-3.5" />
                   Anterior
                 </Button>
               )}
-              {nextLesson && (
+              {nextItem && (
                 <Button
                   size="sm"
                   className="gap-1.5 rounded-full text-xs"
-                  onClick={() =>
-                    router.push(`/dashboard/${slug}/${nextLesson.id}`)
-                  }
+                  onClick={() => router.push(getItemUrl(slug, nextItem))}
                 >
                   Siguiente
                   <ChevronRight className="size-3.5" />
