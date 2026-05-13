@@ -4,6 +4,7 @@ import { requireAdmin } from "@/app/data/admin/require-admin";
 import { prisma } from "@/lib/db";
 import { ApiResponse } from "@/lib/types";
 import { PathFormData } from "../_components/LearningPathForm";
+import { revalidatePath } from "next/cache";
 
 export async function createLearningPathAction(data: PathFormData): Promise<ApiResponse> {
   await requireAdmin();
@@ -25,6 +26,7 @@ export async function createLearningPathAction(data: PathFormData): Promise<ApiR
       },
     });
 
+    revalidatePath("/rutas");
     return { status: "success", message: "Ruta creada correctamente" };
   } catch {
     return { status: "error", message: "Error al crear la ruta" };

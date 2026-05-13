@@ -5,6 +5,8 @@ import { BookOpen, Clock, ArrowRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+export const dynamic = "force-dynamic";
+
 export default async function RutasPage() {
   const paths = await getLearningPaths();
 

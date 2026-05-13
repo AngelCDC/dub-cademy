@@ -5,6 +5,7 @@ import { prisma } from "@/lib/db";
 import { ApiResponse } from "@/lib/types";
 import { PathFormData } from "../../_components/LearningPathForm";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export async function updateLearningPathAction(
   id: string,
@@ -36,6 +37,8 @@ export async function updateLearningPathAction(
       }),
     ]);
 
+    revalidatePath("/rutas");
+    revalidatePath(`/rutas/${data.slug}`);
     return { status: "success", message: "Ruta actualizada correctamente" };
   } catch {
     return { status: "error", message: "Error al actualizar la ruta" };
