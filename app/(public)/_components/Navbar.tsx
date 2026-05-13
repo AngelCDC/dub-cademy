@@ -10,6 +10,7 @@ import { useSignOut } from "@/hooks/use-singout";
 const navigationItems = [
   { name: "Inicio", href: "/" },
   { name: "Cursos", href: "/courses" },
+  { name: "Rutas", href: "/rutas" },
   { name: "Metodología", href: "/metodologia" },
   { name: "Contacto", href: "/contacto" },
 ];

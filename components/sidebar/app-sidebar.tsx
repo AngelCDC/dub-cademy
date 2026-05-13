@@ -49,8 +49,8 @@ const data = {
       icon: IconChartBar,
     },
     {
-      title: "Projects",
-      url: "#",
+      title: "Rutas de Aprendizaje",
+      url: "/admin/learning-paths",
       icon: IconFolder,
     },
     {

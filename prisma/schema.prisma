@@ -103,9 +103,10 @@ model Course {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
 
-  chapter    Chapter[]
-  enrollment Enrollment[]
-  reviews    Review[]
+  chapter       Chapter[]
+  enrollment    Enrollment[]
+  reviews       Review[]
+  learningPaths LearningPathCourse[]
 }
 
 enum CourseLevel {
@@ -285,6 +286,35 @@ model UserAchievement {
   earnedAt       DateTime @default(now())
 
   @@unique([userId, achievementKey])
+}
+
+model LearningPath {
+  id          String             @id @default(uuid())
+  title       String
+  description String
+  slug        String             @unique
+  price       Int                @default(0)
+  status      LearningPathStatus @default(Draft)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  courses LearningPathCourse[]
+}
+
+enum LearningPathStatus {
+  Draft
+  Published
+}
+
+model LearningPathCourse {
+  id             String       @id @default(uuid())
+  position       Int
+  learningPathId String
+  learningPath   LearningPath @relation(fields: [learningPathId], references: [id], onDelete: Cascade)
+  courseId       String
+  course         Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([learningPathId, courseId])
 }
 
 model Review {
