@@ -17,12 +17,14 @@ import {
   IconClock,
   IconPlayerPlay,
 } from "@tabler/icons-react";
-import { CheckIcon } from "lucide-react";
+import { CheckIcon, Star } from "lucide-react";
 import Image from "next/image";
 import { checkIfCourseBought } from "@/app/data/user/user-is-enrolled";
 import Link from "next/link";
 import { EnrollmentButton } from "./_components/EnrollmentButton";
 import { buttonVariants } from "@/components/ui/button";
+import { computeRating } from "@/lib/rating";
+import { StarDisplay } from "@/components/general/StarRating";
 
 type Params = Promise<{ slug: string }>;
 
@@ -30,6 +32,7 @@ export default async function SlugPage({ params }: { params: Params }) {
   const { slug } = await params;
   const course = await getIndividualCourse(slug);
   const isEnrolled = await checkIfCourseBought(course.id);
+  const { average, count } = computeRating(course.reviews);
 
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 mt-5">
@@ -161,6 +164,68 @@ export default async function SlugPage({ params }: { params: Params }) {
             ))}
           </div>
         </div>
+
+        {/* Reviews section */}
+        {course.reviews.length > 0 && (
+          <div className="mt-12 space-y-6">
+            <div className="flex items-center gap-4">
+              <h2 className="text-3xl font-semibold tracking-tight">Reseñas</h2>
+              <StarDisplay rating={average} count={count} size="md" />
+            </div>
+            <div className="space-y-4">
+              {course.reviews.map((review) => (
+                <Card key={review.id} className="border-0 shadow-sm ring-1 ring-border/50">
+                  <CardContent className="p-5 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        {review.user.image ? (
+                          <Image
+                            src={review.user.image}
+                            alt={review.user.name}
+                            width={36}
+                            height={36}
+                            className="rounded-full object-cover size-9"
+                          />
+                        ) : (
+                          <div className="size-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold text-sm">
+                            {review.user.name.charAt(0).toUpperCase()}
+                          </div>
+                        )}
+                        <div>
+                          <p className="text-sm font-semibold">{review.user.name}</p>
+                          <p className="text-xs text-muted-foreground">
+                            {new Date(review.createdAt).toLocaleDateString("es-ES", {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            })}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-0.5">
+                        {[1, 2, 3, 4, 5].map((s) => (
+                          <Star
+                            key={s}
+                            className={`size-4 ${
+                              s <= review.rating
+                                ? "fill-amber-400 text-amber-400"
+                                : "fill-muted text-muted-foreground/30"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    {review.comment && (
+                      <p className="text-sm text-muted-foreground leading-relaxed pt-1">
+                        {review.comment}
+                      </p>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Enrollment Card */}
@@ -177,6 +242,13 @@ export default async function SlugPage({ params }: { params: Params }) {
                   }).format(course.price)}
                 </span>
               </div>
+
+              {average > 0 && (
+                <div className="flex items-center justify-between mb-4 pb-4 border-b">
+                  <span className="text-sm text-muted-foreground">Valoración</span>
+                  <StarDisplay rating={average} count={count} size="sm" />
+                </div>
+              )}
 
               <div className="mb-6 space-y-3 rounded-lg bg-muted p-4">
                 <h4 className="font-medium">What you will get:</h4>

@@ -36,6 +36,16 @@ export async function getIndividualCourse(slug: string) {
           position: "asc",
         },
       },
+      reviews: {
+        select: {
+          id: true,
+          rating: true,
+          comment: true,
+          createdAt: true,
+          user: { select: { name: true, image: true } },
+        },
+        orderBy: { createdAt: "desc" },
+      },
     },
   });
 

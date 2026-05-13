@@ -21,6 +21,9 @@ export async function getAllCourses() {
       level: true,
       duration: true,
       category: true,
+      reviews: {
+        select: { rating: true },
+      },
     },
   });
 

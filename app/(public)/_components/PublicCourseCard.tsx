@@ -6,6 +6,7 @@ import { useConstructUrl } from "@/hooks/use-construct-url";
 import { School, TimerIcon, ArrowRight, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { computeRating } from "@/lib/rating";
 
 interface iAppProps {
   data: PublicCourseType;
@@ -13,6 +14,7 @@ interface iAppProps {
 
 export function PublicCourseCard({ data }: iAppProps) {
   const thumbnailUrl = useConstructUrl(data.fileKey);
+  const { average, count } = computeRating(data.reviews ?? []);
 
   return (
     <Card className="group relative overflow-hidden border-0 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
@@ -36,13 +38,17 @@ export function PublicCourseCard({ data }: iAppProps) {
         />
 
         {/* Quick Preview on Hover */}
-        <div className="absolute bottom-4 left-4 right-4 z-20 transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-          <div className="flex items-center gap-2 text-white">
-            <Star className="size-4 fill-primary text-primary" />
-            <span className="text-sm font-semibold">4.8</span>
-            <span className="text-xs text-white/80">(120 estudiantes)</span>
+        {average > 0 && (
+          <div className="absolute bottom-4 left-4 right-4 z-20 transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+            <div className="flex items-center gap-2 text-white">
+              <Star className="size-4 fill-amber-400 text-amber-400" />
+              <span className="text-sm font-semibold">{average.toFixed(1)}</span>
+              <span className="text-xs text-white/80">
+                ({count} {count === 1 ? "reseña" : "reseñas"})
+              </span>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <CardContent className="p-6 space-y-4">

@@ -90,7 +90,7 @@ export default async function DashboardPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {enrolledCourses.map((course) => (
-              <CourseProgressCard key={course.Course.id} data={course} />
+              <CourseProgressCard key={course.Course.id} data={course} userId={user.id} />
             ))}
           </div>
         )}

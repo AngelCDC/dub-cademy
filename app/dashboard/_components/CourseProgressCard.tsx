@@ -10,13 +10,16 @@ import { Progress } from "@/components/ui/progress";
 import { useConstructUrl } from "@/hooks/use-construct-url";
 import { useCourseProgress } from "@/hooks/use-course-progress";
 
-import { BookOpen, CheckCircle2, PlayCircle } from "lucide-react";
+import { BookOpen, CheckCircle2, MessageSquarePlus, PlayCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { Separator } from "@/components/ui/separator";
+import { ReviewForm } from "./ReviewForm";
 
 interface iAppProps {
   data: EnrolledCourseType;
+  userId: string;
 }
 
 function getProgressColor(percentage: number) {
@@ -37,12 +40,13 @@ function getLevelColor(level: string) {
   }
 }
 
-export function CourseProgressCard({ data }: iAppProps) {
+export function CourseProgressCard({ data, userId }: iAppProps) {
   const thumbnailUrl = useConstructUrl(data.Course.fileKey);
   const { totalLessons, completedLessons, progressPercentage } =
     useCourseProgress({ courseData: data.Course as any });
 
   const isCompleted = progressPercentage >= 100;
+  const userReview = data.Course.reviews.find((r) => r.userId === userId) ?? null;
 
   return (
     <Card className="group relative overflow-hidden border-0 py-0 gap-0 shadow-md ring-1 ring-border/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
@@ -145,6 +149,16 @@ export function CourseProgressCard({ data }: iAppProps) {
           <PlayCircle className="size-4" />
           {isCompleted ? "Revisar curso" : "Continuar aprendiendo"}
         </Link>
+
+        <Separator />
+
+        <div className="space-y-2">
+          <div className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground">
+            <MessageSquarePlus className="size-3.5" />
+            {userReview ? "Tu reseña" : "Califica este curso"}
+          </div>
+          <ReviewForm courseId={data.Course.id} existing={userReview} />
+        </div>
       </CardContent>
     </Card>
   );

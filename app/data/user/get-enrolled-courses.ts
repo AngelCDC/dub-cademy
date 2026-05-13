@@ -32,11 +32,7 @@ export async function getEnrolledCourses() {
             },
           },
           reviews: {
-            select: { rating: true },
-          },
-          userReview: {
-            where: { userId: user.id },
-            select: { id: true, rating: true, comment: true },
+            select: { id: true, rating: true, comment: true, userId: true },
           },
         },
       },
