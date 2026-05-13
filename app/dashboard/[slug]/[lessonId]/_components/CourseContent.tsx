@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import { markLessonComplete } from "../actions";
 import { toast } from "sonner";
 import { useConfetti } from "@/hooks/use-confetti";
+import { showAchievementToasts } from "@/lib/show-achievement-toasts";
 
 interface iAppProps {
   data: LessonContentType;
@@ -53,6 +54,7 @@ export function CourseContent({ data }: iAppProps) {
       if (result.status === "success") {
         toast.success(result.message);
         triggerConfetti();
+        showAchievementToasts(result.newAchievements);
         if (nextItem) {
           router.push(getItemUrl(slug, nextItem));
         }

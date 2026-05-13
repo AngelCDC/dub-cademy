@@ -3,13 +3,18 @@
 import { requireUser } from "@/app/data/user/require-user";
 import { prisma } from "@/lib/db";
 import { ApiResponse } from "@/lib/types";
-import { triggerGamification, checkPerfectQuizAchievement } from "@/lib/gamification";
+import { AchievementKey } from "@/lib/achievements";
+import { triggerOnLessonComplete, triggerOnQuizComplete } from "@/lib/gamification";
 import { revalidatePath } from "next/cache";
+
+export type LessonCompleteResponse =
+  | { status: "success"; message: string; newAchievements: AchievementKey[] }
+  | { status: "error"; message: string };
 
 export async function markLessonComplete(
   lessonId: string,
   slug: string
-): Promise<ApiResponse> {
+): Promise<LessonCompleteResponse> {
   const session = await requireUser();
 
   try {
@@ -19,12 +24,12 @@ export async function markLessonComplete(
       create: { lessonId, userId: session.id, completed: true },
     });
 
-    // Fire-and-forget gamification (non-blocking)
-    triggerGamification(session.id).catch(() => {});
+    // Await synchronously so we can return newly-earned achievements to the client
+    const newAchievements = await triggerOnLessonComplete(session.id).catch(() => [] as AchievementKey[]);
 
     revalidatePath(`/dashboard/${slug}`);
 
-    return { status: "success", message: "Progress updated" };
+    return { status: "success", message: "¡Lección completada!", newAchievements };
   } catch {
     return { status: "error", message: "Failed to mark lesson as complete" };
   }
@@ -45,7 +50,7 @@ export async function submitQuizAttempt(
   lessonId: string,
   slug: string,
   answers: AnswerInput[]
-): Promise<{ status: "success"; result: QuizResult } | { status: "error"; message: string }> {
+): Promise<{ status: "success"; result: QuizResult; newAchievements: AchievementKey[] } | { status: "error"; message: string }> {
   const session = await requireUser();
 
   const quiz = await prisma.quiz.findUnique({
@@ -118,16 +123,14 @@ export async function submitQuizAttempt(
     return attempt;
   });
 
-  // Fire-and-forget gamification
-  triggerGamification(session.id).catch(() => {});
-  if (passed && score === 100) {
-    checkPerfectQuizAchievement(session.id).catch(() => {});
-  }
+  // Await synchronously so we can return newly-earned achievements to the client
+  const newAchievements = await triggerOnQuizComplete(session.id, { quizId, score, passed }).catch(() => [] as AchievementKey[]);
 
   revalidatePath(`/dashboard/${slug}`);
 
   return {
     status: "success",
     result: { score, passed, total, correct, answers: gradedAnswers },
+    newAchievements,
   };
 }

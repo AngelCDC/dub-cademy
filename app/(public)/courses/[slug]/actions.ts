@@ -6,6 +6,7 @@ import { prisma } from "@/lib/db";
 import { ApiResponse } from "@/lib/types";
 import { request } from "@arcjet/next";
 import { redirect } from "next/navigation";
+import { triggerOnEnrollment } from "@/lib/gamification";
 
 const aj = arcjet.withRule(
   fixedWindow({
@@ -59,6 +60,8 @@ export async function enrollInCourseAction(
         status: "Active",
       },
     });
+    // Fire-and-forget — grants FIRST_STEP + exploration achievements
+    triggerOnEnrollment(user.id).catch(() => {});
   }
 
   redirect(`/dashboard/${course.slug}`);

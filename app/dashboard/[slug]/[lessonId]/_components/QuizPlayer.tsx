@@ -15,6 +15,7 @@ import { useState, useTransition } from "react";
 import { toast } from "sonner";
 import { submitQuizAttempt, QuizResult, AnswerInput } from "../actions";
 import { useConfetti } from "@/hooks/use-confetti";
+import { showAchievementToasts } from "@/lib/show-achievement-toasts";
 import { useCourseSidebar, getItemUrl } from "@/app/dashboard/_components/MobileSidebarWrapper";
 import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -79,6 +80,7 @@ export function QuizPlayer({ quiz, lessonId, slug }: iAppProps) {
       if (data.result.passed) {
         triggerConfetti();
         toast.success(`¡Aprobaste con ${data.result.score}%!`);
+        showAchievementToasts(data.newAchievements);
         if (nextItem) {
           setTimeout(() => router.push(getItemUrl(slug, nextItem)), 1500);
         }
