@@ -3,6 +3,7 @@
 import { requireUser } from "@/app/data/user/require-user";
 import { prisma } from "@/lib/db";
 import { ApiResponse } from "@/lib/types";
+import { triggerGamification, checkPerfectQuizAchievement } from "@/lib/gamification";
 import { revalidatePath } from "next/cache";
 
 export async function markLessonComplete(
@@ -17,6 +18,9 @@ export async function markLessonComplete(
       update: { completed: true },
       create: { lessonId, userId: session.id, completed: true },
     });
+
+    // Fire-and-forget gamification (non-blocking)
+    triggerGamification(session.id).catch(() => {});
 
     revalidatePath(`/dashboard/${slug}`);
 
@@ -113,6 +117,12 @@ export async function submitQuizAttempt(
 
     return attempt;
   });
+
+  // Fire-and-forget gamification
+  triggerGamification(session.id).catch(() => {});
+  if (passed && score === 100) {
+    checkPerfectQuizAchievement(session.id).catch(() => {});
+  }
 
   revalidatePath(`/dashboard/${slug}`);
 

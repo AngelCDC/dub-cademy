@@ -9,6 +9,7 @@ import {
   IconHelp,
   IconSearch,
   IconSettings,
+  IconTrophy,
 } from "@tabler/icons-react";
 import Logo from "@/public/LogoDubois.svg";
 
@@ -33,6 +34,11 @@ const data = {
       title: "Dashboard",
       url: "/dashboard",
       icon: IconDashboard,
+    },
+    {
+      title: "Mis Logros",
+      url: "/dashboard/achievements",
+      icon: IconTrophy,
     },
   ],
   navClouds: [

@@ -23,6 +23,8 @@ model User {
   lessonProgress LessonProgress[]
   quizAttempts   QuizAttempt[]
   reviews        Review[]
+  streak         UserStreak?
+  achievements   UserAchievement[]
 
   role       String?
   banned     Boolean?
@@ -261,6 +263,28 @@ model AttemptAnswer {
 
   selectedOptionId String?
   selectedOption   Option? @relation(fields: [selectedOptionId], references: [id])
+}
+
+model UserStreak {
+  id              String    @id @default(uuid())
+  userId          String    @unique
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  currentStreak   Int       @default(0)
+  longestStreak   Int       @default(0)
+  lastActiveDate  DateTime?
+  totalDaysActive Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model UserAchievement {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievementKey String
+  earnedAt       DateTime @default(now())
+
+  @@unique([userId, achievementKey])
 }
 
 model Review {

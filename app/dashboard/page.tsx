@@ -2,15 +2,18 @@ import { EmptyState } from "@/components/general/EmptyState";
 import { getAllCourses } from "../data/course/get-all-courses";
 import { getEnrolledCourses } from "../data/user/get-enrolled-courses";
 import { requireUser } from "../data/user/require-user";
+import { getUserGamification } from "../data/user/get-user-gamification";
 import { PublicCourseCard } from "../(public)/_components/PublicCourseCard";
 import { CourseProgressCard } from "./_components/CourseProgressCard";
-import { BookOpen, GraduationCap, Sparkles } from "lucide-react";
+import { StreakWidget } from "./_components/StreakWidget";
+import { Sparkles } from "lucide-react";
 
 export default async function DashboardPage() {
-  const [courses, enrolledCourses, user] = await Promise.all([
+  const [courses, enrolledCourses, user, gamification] = await Promise.all([
     getAllCourses(),
     getEnrolledCourses(),
     requireUser(),
+    getUserGamification(),
   ]);
 
   const availableCourses = courses.filter(
@@ -45,22 +48,13 @@ export default async function DashboardPage() {
             </p>
           </div>
 
-          <div className="flex gap-4">
-            <div className="flex flex-col items-center rounded-xl bg-white/15 px-4 py-3 backdrop-blur-sm ring-1 ring-white/20">
-              <BookOpen className="size-5 mb-1 text-white/80" />
-              <span className="text-2xl font-bold tabular-nums">
-                {enrolledCourses.length}
-              </span>
-              <span className="text-xs text-white/70 mt-0.5">Inscritos</span>
-            </div>
-            <div className="flex flex-col items-center rounded-xl bg-white/15 px-4 py-3 backdrop-blur-sm ring-1 ring-white/20">
-              <GraduationCap className="size-5 mb-1 text-white/80" />
-              <span className="text-2xl font-bold tabular-nums">
-                {availableCourses.length}
-              </span>
-              <span className="text-xs text-white/70 mt-0.5">Disponibles</span>
-            </div>
-          </div>
+          <StreakWidget
+            current={gamification.streak.current}
+            longest={gamification.streak.longest}
+            totalDays={gamification.streak.totalDays}
+            earnedCount={gamification.earnedCount}
+            totalCount={gamification.totalCount}
+          />
         </div>
       </div>
 
