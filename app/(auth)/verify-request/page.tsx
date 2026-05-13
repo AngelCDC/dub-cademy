@@ -42,8 +42,8 @@ function VerifyRequest() {
         otp: otp,
         fetchOptions: {
           onSuccess: () => {
-            toast.success("Email verified");
-            router.push("/dashboard");
+            toast.success("Email verificado");
+            router.push("/auth-redirect");
           },
           onError: () => {
             toast.error("Error verifying Email/OTP");
