@@ -1,6 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import { Card, CardContent } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Label } from '@/components/ui/label'
 import { Send, Mail, Phone, MapPin, Linkedin, Twitter, Youtube, MessageCircle, ChevronDown, ChevronUp } from 'lucide-react'
 
 export default function ContactoPage() {
@@ -35,252 +40,187 @@ export default function ContactoPage() {
   }
 
   return (
-    <div className="bg-primary-black min-h-screen">
-
+    <div className="min-h-screen">
       {/* Hero */}
-      <section className="relative py-32 px-6 lg:px-20 overflow-hidden border-b border-light-gray/10">
-        <div className="absolute inset-0 pattern-diagonal-lines opacity-20" />
-        <div className="absolute top-0 right-0 w-[50%] h-full [background:repeating-linear-gradient(45deg,transparent,transparent_20px,rgba(255,51,51,0.03)_20px,rgba(255,51,51,0.03)_40px)]" />
-
-        <div className="relative max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 border border-accent-red/30 bg-accent-red/10 px-4 py-2 mb-8">
-            <Mail className="size-4 text-accent-red" />
-            <span className="text-xs font-bold text-accent-red uppercase tracking-widest">
-              Estamos aquí para ayudarte
-            </span>
+      <section className="border-b bg-muted/30 py-16 px-6 lg:px-20">
+        <div className="max-w-3xl mx-auto text-center space-y-4">
+          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-semibold px-3 py-1.5 rounded-full">
+            <Mail className="size-3.5" />
+            Estamos aquí para ayudarte
           </div>
-
-          <h1 className="font-bebas text-7xl md:text-9xl text-light-gray leading-none mb-6">
-            HABLEMOS
-          </h1>
-          <p className="text-light-gray/60 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Hablemos</h1>
+          <p className="text-muted-foreground text-lg leading-relaxed">
             ¿Dudas sobre nuestros programas? ¿Quieres saber si un curso es para ti?
             Nuestro equipo está aquí para ayudarte a tomar la mejor decisión.
           </p>
         </div>
       </section>
 
-      {/* Main contact section */}
-      <section className="px-6 lg:px-20 py-24">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12">
+      {/* Main */}
+      <section className="max-w-6xl mx-auto px-6 lg:px-20 py-16 grid grid-cols-1 lg:grid-cols-5 gap-12">
+        {/* Info */}
+        <div className="lg:col-span-2 space-y-8">
+          <div>
+            <h2 className="text-2xl font-bold tracking-tight mb-2">Conecta con nosotros</h2>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Nuestro equipo de asesores académicos está listo para responder todas
+              tus preguntas sobre programas, metodología y financiamiento.
+            </p>
+          </div>
 
-          {/* Left: info */}
-          <div className="lg:col-span-2 space-y-10">
-            <div>
-              <div className="font-antonio text-[0.75rem] tracking-[0.3em] text-accent-red mb-3 uppercase">
-                Contacto directo
-              </div>
-              <h2 className="font-bebas text-4xl text-light-gray leading-tight">
-                CONECTA CON NOSOTROS
-              </h2>
-              <p className="text-light-gray/50 mt-4 leading-relaxed text-sm">
-                Nuestro equipo de asesores académicos está listo para responder todas
-                tus preguntas sobre programas, metodología y financiamiento.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              {[
-                {
-                  icon: Mail,
-                  label: 'Email',
-                  lines: ['info@velocityacademy.com', 'admisiones@velocityacademy.com'],
-                  href: true,
-                },
-                {
-                  icon: Phone,
-                  label: 'WhatsApp',
-                  lines: ['+34 (612) 345-678', 'Lun - Vie: 9:00 - 20:00'],
-                  href: false,
-                },
-                {
-                  icon: MapPin,
-                  label: 'Oficina',
-                  lines: ['Calle Innovación 45, 3º', '28001 Madrid, España'],
-                  href: false,
-                },
-              ].map(({ icon: Icon, label, lines, href }) => (
-                <div key={label} className="flex gap-4">
-                  <div className="size-10 bg-accent-red/10 border border-accent-red/20 flex items-center justify-center shrink-0 mt-0.5">
-                    <Icon className="size-4 text-accent-red" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold uppercase tracking-widest text-light-gray/40 mb-1">
-                      {label}
-                    </div>
-                    {lines.map((line) =>
-                      href ? (
-                        <a
-                          key={line}
-                          href={`mailto:${line}`}
-                          className="block text-sm text-light-gray/70 hover:text-accent-red transition-colors"
-                        >
-                          {line}
-                        </a>
-                      ) : (
-                        <p key={line} className="text-sm text-light-gray/70">
-                          {line}
-                        </p>
-                      )
-                    )}
-                  </div>
+          <div className="space-y-5">
+            {[
+              {
+                icon: Mail,
+                label: 'Email',
+                lines: ['info@velocityacademy.com', 'admisiones@velocityacademy.com'],
+                isEmail: true,
+              },
+              {
+                icon: Phone,
+                label: 'WhatsApp',
+                lines: ['+34 (612) 345-678', 'Lun - Vie: 9:00 - 20:00'],
+                isEmail: false,
+              },
+              {
+                icon: MapPin,
+                label: 'Oficina',
+                lines: ['Calle Innovación 45, 3º', '28001 Madrid, España'],
+                isEmail: false,
+              },
+            ].map(({ icon: Icon, label, lines, isEmail }) => (
+              <div key={label} className="flex gap-4">
+                <div className="size-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                  <Icon className="size-4 text-primary" />
                 </div>
+                <div>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">{label}</p>
+                  {lines.map((line) =>
+                    isEmail ? (
+                      <a key={line} href={`mailto:${line}`} className="block text-sm hover:text-primary transition-colors">
+                        {line}
+                      </a>
+                    ) : (
+                      <p key={line} className="text-sm">{line}</p>
+                    )
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div>
+            <p className="text-xs text-muted-foreground uppercase tracking-wider mb-3">Síguenos</p>
+            <div className="flex gap-2">
+              {[
+                { icon: Linkedin, label: 'LinkedIn' },
+                { icon: Twitter, label: 'Twitter' },
+                { icon: Youtube, label: 'YouTube' },
+                { icon: MessageCircle, label: 'Discord' },
+              ].map(({ icon: Icon, label }) => (
+                <a
+                  key={label}
+                  href="#"
+                  aria-label={label}
+                  className="size-9 rounded-lg border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors"
+                >
+                  <Icon className="size-4" />
+                </a>
               ))}
             </div>
+          </div>
+        </div>
 
-            {/* Social */}
-            <div>
-              <div className="text-xs font-bold uppercase tracking-widest text-light-gray/40 mb-4">
-                Síguenos
-              </div>
-              <div className="flex gap-3">
-                {[
-                  { icon: Linkedin, label: 'LinkedIn' },
-                  { icon: Twitter, label: 'Twitter' },
-                  { icon: Youtube, label: 'YouTube' },
-                  { icon: MessageCircle, label: 'Discord' },
-                ].map(({ icon: Icon, label }) => (
-                  <a
-                    key={label}
-                    href="#"
-                    aria-label={label}
-                    className="size-10 border border-light-gray/10 flex items-center justify-center text-light-gray/40 hover:text-accent-red hover:border-accent-red/30 transition-all duration-200"
+        {/* Form */}
+        <div className="lg:col-span-3">
+          <Card>
+            <CardContent className="p-6 space-y-5">
+              <h3 className="font-semibold text-lg">Envíanos un mensaje</h3>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="nombre">Nombre</Label>
+                    <Input id="nombre" placeholder="Juan" required />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="apellido">Apellido</Label>
+                    <Input id="apellido" placeholder="García" required />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input id="email" type="email" placeholder="juan@email.com" required />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="asunto">Asunto</Label>
+                  <select
+                    id="asunto"
+                    required
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   >
-                    <Icon className="size-4" />
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
+                    <option value="">Selecciona un asunto</option>
+                    <option value="informacion">Información de Cursos</option>
+                    <option value="admisiones">Proceso de Admisión</option>
+                    <option value="financiamiento">Opciones de Pago / Becas</option>
+                    <option value="empresas">Programas para Empresas</option>
+                    <option value="soporte">Soporte Técnico</option>
+                    <option value="otro">Otro</option>
+                  </select>
+                </div>
 
-          {/* Right: form */}
-          <div className="lg:col-span-3">
-            <form onSubmit={handleSubmit} className="bg-secondary-black border border-light-gray/10 p-8 space-y-6">
-              <div className="text-xs font-bold uppercase tracking-widest text-light-gray/40 mb-2">
-                Envíanos un mensaje
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="nombre" className="text-xs font-bold uppercase tracking-widest text-light-gray/50">
-                    Nombre
-                  </label>
-                  <input
-                    type="text"
-                    id="nombre"
+                  <Label htmlFor="mensaje">Mensaje</Label>
+                  <Textarea
+                    id="mensaje"
+                    placeholder="Cuéntanos en qué podemos ayudarte…"
+                    rows={5}
                     required
-                    placeholder="Juan"
-                    className="w-full bg-primary-black border border-light-gray/10 text-light-gray text-sm px-4 py-3 outline-none focus:border-accent-red/50 transition-colors placeholder:text-light-gray/20"
+                    className="resize-none"
                   />
                 </div>
-                <div className="space-y-2">
-                  <label htmlFor="apellido" className="text-xs font-bold uppercase tracking-widest text-light-gray/50">
-                    Apellido
-                  </label>
-                  <input
-                    type="text"
-                    id="apellido"
-                    required
-                    placeholder="García"
-                    className="w-full bg-primary-black border border-light-gray/10 text-light-gray text-sm px-4 py-3 outline-none focus:border-accent-red/50 transition-colors placeholder:text-light-gray/20"
-                  />
-                </div>
-              </div>
 
-              <div className="space-y-2">
-                <label htmlFor="email" className="text-xs font-bold uppercase tracking-widest text-light-gray/50">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  required
-                  placeholder="juan@email.com"
-                  className="w-full bg-primary-black border border-light-gray/10 text-light-gray text-sm px-4 py-3 outline-none focus:border-accent-red/50 transition-colors placeholder:text-light-gray/20"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="asunto" className="text-xs font-bold uppercase tracking-widest text-light-gray/50">
-                  Asunto
-                </label>
-                <select
-                  id="asunto"
-                  required
-                  className="w-full bg-primary-black border border-light-gray/10 text-light-gray/70 text-sm px-4 py-3 outline-none focus:border-accent-red/50 transition-colors"
-                >
-                  <option value="">Selecciona un asunto</option>
-                  <option value="informacion">Información de Cursos</option>
-                  <option value="admisiones">Proceso de Admisión</option>
-                  <option value="financiamiento">Opciones de Pago / Becas</option>
-                  <option value="empresas">Programas para Empresas</option>
-                  <option value="soporte">Soporte Técnico</option>
-                  <option value="otro">Otro</option>
-                </select>
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="mensaje" className="text-xs font-bold uppercase tracking-widest text-light-gray/50">
-                  Mensaje
-                </label>
-                <textarea
-                  id="mensaje"
-                  required
-                  rows={5}
-                  placeholder="Cuéntanos en qué podemos ayudarte…"
-                  className="w-full bg-primary-black border border-light-gray/10 text-light-gray text-sm px-4 py-3 outline-none focus:border-accent-red/50 transition-colors resize-none placeholder:text-light-gray/20"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="flex items-center justify-center gap-2 w-full bg-accent-red hover:bg-accent-red/90 text-white py-4 font-bold text-sm tracking-widest uppercase transition-colors"
-              >
-                <Send className="size-4" />
-                Enviar Mensaje
-              </button>
-            </form>
-          </div>
+                <Button type="submit" size="lg" className="w-full gap-2">
+                  <Send className="size-4" />
+                  Enviar Mensaje
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="px-6 lg:px-20 py-24 border-t border-light-gray/10">
+      <section className="border-t bg-muted/30 px-6 lg:px-20 py-16">
         <div className="max-w-3xl mx-auto">
-          <div className="mb-12 text-center">
-            <div className="font-antonio text-[0.75rem] tracking-[0.3em] text-accent-red mb-3 uppercase">
-              Respuestas rápidas
-            </div>
-            <h2 className="font-bebas text-5xl text-light-gray">
-              PREGUNTAS FRECUENTES
-            </h2>
+          <div className="text-center mb-10 space-y-2">
+            <h2 className="text-3xl font-bold tracking-tight">Preguntas frecuentes</h2>
+            <p className="text-muted-foreground">Respuestas rápidas a las dudas más comunes</p>
           </div>
 
-          <div className="space-y-px">
+          <div className="space-y-2">
             {faqs.map((faq, index) => (
-              <div
+              <Card
                 key={index}
-                className="bg-secondary-black border border-light-gray/10 cursor-pointer group"
+                className="cursor-pointer transition-colors hover:bg-muted/50"
                 onClick={() => setActiveFaq(activeFaq === index ? null : index)}
               >
-                <div className="flex items-center justify-between gap-4 p-6">
-                  <span className={`text-sm font-bold uppercase tracking-wider transition-colors duration-200 ${activeFaq === index ? 'text-accent-red' : 'text-light-gray group-hover:text-accent-red'}`}>
-                    {faq.question}
-                  </span>
-                  {activeFaq === index ? (
-                    <ChevronUp className="size-4 text-accent-red shrink-0" />
-                  ) : (
-                    <ChevronDown className="size-4 text-light-gray/40 shrink-0" />
-                  )}
-                </div>
-                {activeFaq === index && (
-                  <div className="px-6 pb-6 border-t border-light-gray/10 pt-4">
-                    <p className="text-sm text-light-gray/60 leading-relaxed">
+                <CardContent className="p-5">
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="font-medium text-sm">{faq.question}</span>
+                    {activeFaq === index
+                      ? <ChevronUp className="size-4 text-primary shrink-0" />
+                      : <ChevronDown className="size-4 text-muted-foreground shrink-0" />
+                    }
+                  </div>
+                  {activeFaq === index && (
+                    <p className="mt-3 text-sm text-muted-foreground leading-relaxed border-t pt-3">
                       {faq.answer}
                     </p>
-                  </div>
-                )}
-              </div>
+                  )}
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>

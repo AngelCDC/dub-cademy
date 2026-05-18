@@ -1,6 +1,9 @@
 "use client"
 
 import Link from 'next/link'
+import { Card, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 
 export default function MetodologiaPage() {
   const innovations = [
@@ -59,149 +62,102 @@ export default function MetodologiaPage() {
   ]
 
   return (
-    <div className="bg-primary-black min-h-screen">
-
+    <div className="min-h-screen">
       {/* Hero */}
-      <section className="relative py-40 px-6 lg:px-20 overflow-hidden border-b border-light-gray/10">
-        <div className="absolute inset-0 pattern-diagonal-lines opacity-20" />
-        <div className="absolute top-0 right-0 w-[50%] h-full [background:repeating-linear-gradient(45deg,transparent,transparent_20px,rgba(255,51,51,0.03)_20px,rgba(255,51,51,0.03)_40px)]" />
-
-        {/* Grid overlay */}
-        <div className="absolute inset-0 opacity-5 [background-image:linear-gradient(rgba(248,248,248,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(248,248,248,0.1)_1px,transparent_1px)] [background-size:60px_60px]" />
-
-        <div className="relative max-w-5xl mx-auto">
-          <div className="inline-flex items-center gap-2 border border-accent-red/30 bg-accent-red/10 px-4 py-2 mb-8">
-            <span className="text-xs font-bold text-accent-red uppercase tracking-widest">
-              Innovación Educativa
-            </span>
-          </div>
-          <h1 className="font-bebas text-7xl md:text-[8rem] text-light-gray leading-none mb-6">
-            APRENDE
-            <span className="block text-accent-red italic">DIFERENTE</span>
+      <section className="border-b bg-muted/30 py-20 md:py-28 px-6 lg:px-20">
+        <div className="max-w-4xl mx-auto space-y-6">
+          <Badge variant="secondary" className="text-xs">Innovación Educativa</Badge>
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-tight">
+            Aprende <span className="text-primary">diferente</span>
           </h1>
-          <p className="text-light-gray/60 text-lg md:text-xl max-w-2xl leading-relaxed">
+          <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
             No más teoría sin aplicación. Nuestra metodología combina proyectos reales,
             mentoría personalizada y comunidad activa para acelerar tu aprendizaje.
           </p>
         </div>
       </section>
 
-      {/* Innovation cards */}
-      <section className="px-6 lg:px-20 py-24 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[60%] h-full [background:repeating-linear-gradient(45deg,transparent,transparent_20px,rgba(255,51,51,0.02)_20px,rgba(255,51,51,0.02)_40px)]" />
+      {/* Methodology cards */}
+      <section className="max-w-6xl mx-auto px-6 lg:px-20 py-16 space-y-8">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight">Metodología comprobada</h2>
+          <p className="text-muted-foreground mt-1 text-sm">Cuatro pilares que definen cómo aprendemos</p>
+        </div>
 
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="mb-16">
-            <div className="font-antonio text-[0.75rem] tracking-[0.3em] text-accent-red mb-3 uppercase">
-              Cómo aprendemos
-            </div>
-            <h2 className="font-bebas text-5xl text-light-gray">
-              METODOLOGÍA COMPROBADA
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-light-gray/5">
-            {innovations.map((item) => (
-              <div
-                key={item.num}
-                className="group bg-secondary-black border-l-[3px] border-accent-red/20 pl-8 p-8 transition-all duration-300 hover:border-accent-red hover:translate-x-2 hover:bg-accent-red/5"
-              >
-                <div className="font-bebas text-[5rem] text-accent-red/15 leading-none mb-4 group-hover:text-accent-red/30 transition-colors duration-300">
-                  {item.num}
-                </div>
-                <h3 className="font-antonio text-xl mb-3 tracking-[0.05em] uppercase text-light-gray">
-                  {item.title}
-                </h3>
-                <p className="text-light-gray/50 leading-relaxed text-sm mb-6">
-                  {item.desc}
-                </p>
-                <div className="flex gap-6">
-                  {item.specs.map((spec) => (
-                    <div key={spec.label}>
-                      <div className="font-bebas text-2xl text-accent-red">{spec.value}</div>
-                      <div className="text-[10px] uppercase tracking-widest text-light-gray/40">
-                        {spec.label}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {innovations.map((item) => (
+            <Card key={item.num} className="border transition-all duration-200 hover:shadow-md hover:-translate-y-0.5">
+              <CardContent className="p-6 space-y-4">
+                <div className="flex items-start justify-between">
+                  <span className="text-4xl font-bold text-primary/20 leading-none">{item.num}</span>
+                  <div className="flex gap-3">
+                    {item.specs.map((spec) => (
+                      <div key={spec.label} className="text-right">
+                        <div className="text-xl font-bold text-primary">{spec.value}</div>
+                        <div className="text-[10px] text-muted-foreground uppercase tracking-wide">{spec.label}</div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+                <div>
+                  <h3 className="font-semibold text-base mb-2">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </section>
 
       {/* Materials */}
-      <section className="px-6 lg:px-20 py-24 bg-secondary-black border-t border-b border-light-gray/10 relative overflow-hidden">
-        <div className="absolute inset-0 [background:repeating-linear-gradient(0deg,transparent,transparent_50px,rgba(255,255,255,0.015)_50px,rgba(255,255,255,0.015)_100px)]" />
-
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="mb-16 text-center">
-            <div className="font-antonio text-[0.75rem] tracking-[0.3em] text-accent-red mb-3 uppercase">
-              Herramientas de aprendizaje
-            </div>
-            <h2 className="font-bebas text-5xl text-light-gray">
-              TODO LO QUE INCLUYE
-            </h2>
+      <section className="border-t bg-muted/30 px-6 lg:px-20 py-16">
+        <div className="max-w-6xl mx-auto space-y-8">
+          <div className="text-center space-y-2">
+            <h2 className="text-2xl font-bold tracking-tight">Todo lo que incluye</h2>
+            <p className="text-muted-foreground text-sm">Herramientas y recursos para tu aprendizaje</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-light-gray/5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {materials.map((material, i) => (
-              <div
-                key={i}
-                className="group bg-primary-black p-8 hover:bg-accent-red/5 transition-colors duration-300 border border-transparent hover:border-accent-red/20"
-              >
-                <div className="size-10 bg-accent-red/10 border border-accent-red/20 flex items-center justify-center mb-5 group-hover:bg-accent-red group-hover:border-accent-red transition-colors duration-300">
-                  <div className="size-2 bg-accent-red group-hover:bg-white transition-colors duration-300" />
-                </div>
-                <h4 className="font-antonio text-base uppercase tracking-wider text-light-gray mb-3">
-                  {material.name}
-                </h4>
-                <p className="text-sm text-light-gray/50 leading-relaxed">
-                  {material.desc}
-                </p>
-              </div>
+              <Card key={i} className="border transition-all duration-200 hover:shadow-md hover:border-primary/30">
+                <CardContent className="p-5 space-y-2">
+                  <div className="size-8 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
+                    <div className="size-2 rounded-full bg-primary" />
+                  </div>
+                  <h4 className="font-semibold text-sm">{material.name}</h4>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{material.desc}</p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
       </section>
 
       {/* Metrics */}
-      <section className="px-6 lg:px-20 py-24">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-16 text-center">
-            <div className="font-antonio text-[0.75rem] tracking-[0.3em] text-accent-red mb-3 uppercase">
-              Datos reales
-            </div>
-            <h2 className="font-bebas text-5xl text-light-gray">
-              RESULTADOS QUE HABLAN
-            </h2>
-            <p className="text-light-gray/50 mt-4 max-w-xl mx-auto text-sm">
-              Datos reales de estudiantes que transformaron su carrera con VELOCITY
+      <section className="px-6 lg:px-20 py-16">
+        <div className="max-w-4xl mx-auto space-y-10">
+          <div className="text-center space-y-2">
+            <h2 className="text-2xl font-bold tracking-tight">Resultados que hablan</h2>
+            <p className="text-muted-foreground text-sm">
+              Datos reales de estudiantes que transformaron su carrera
             </p>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-light-gray/5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {metrics.map((m) => (
-              <div key={m.label} className="bg-secondary-black p-10 text-center">
-                <div className="font-bebas text-5xl text-accent-red mb-2">
-                  {m.value}
-                </div>
-                <div className="text-xs font-bold uppercase tracking-widest text-light-gray/40">
-                  {m.label}
-                </div>
-              </div>
+              <Card key={m.label} className="border text-center">
+                <CardContent className="p-6">
+                  <div className="text-3xl font-bold text-primary mb-1">{m.value}</div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wide">{m.label}</div>
+                </CardContent>
+              </Card>
             ))}
           </div>
 
-          {/* CTA */}
-          <div className="text-center mt-16">
-            <Link
-              href="/courses"
-              className="inline-flex items-center gap-3 bg-accent-red hover:bg-accent-red/90 text-white px-12 py-4 font-bold text-sm tracking-widest uppercase transition-colors"
-            >
-              Explorar Programas
-            </Link>
+          <div className="text-center">
+            <Button size="lg" asChild>
+              <Link href="/courses">Explorar Programas</Link>
+            </Button>
           </div>
         </div>
       </section>

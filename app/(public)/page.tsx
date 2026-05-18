@@ -1,219 +1,126 @@
 import Link from "next/link";
+import { TrendingUp, Award, BookOpen, Clock, Users } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export default function LandingPage() {
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative md:min-h-screen bg-primary-black overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 pattern-diagonal-lines opacity-30"></div>
-
-        {/* Hero Content */}
-        <div className="relative mx-auto px-6 lg:px-20 pt-32 pb-20 lg:pt-40">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left Content */}
-            <div className="animate-fade-in-up space-y-8">
-              <h1 className="font-bebas text-5xl md:text-7xl 2lg:text-8xl leading-none">
-                <span className="text-light-gray ">TRANSFORMA</span>
-                <span className="text-accent-red block italic font-semibold">
-                  TU CARRERA
-                </span>
-                <span className="text-light-gray block">HOY MISMO</span>
-              </h1>
-
-              <p className="text-light-gray/80 text-base md:text-lg max-w-xl leading-relaxed text-justify">
-                Accede a programas diseñados por expertos de la industria.
-                Aprende las habilidades que realmente importan en el mercado
-                actual.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <a
-                  href="/courses"
-                  className="cta-button cta-primary text-center"
-                >
-                  Explorar Programas
-                </a>
-                <a
-                  href="/login"
-                  className="cta-button cta-secondary text-center bg-white text-accent-red "
-                >
-                  Iniciar Sesión
-                </a>
-              </div>
-
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-6 pt-8 border-t border-light-gray/20">
-                <div>
-                  <div className="font-bebas text-3xl md:text-4xl text-accent-red">
-                    500+
-                  </div>
-                  <div className="text-light-gray/60 text-xs md:text-sm uppercase tracking-wider">
-                    Estudiantes
-                  </div>
-                </div>
-                <div>
-                  <div className="font-bebas text-3xl md:text-4xl text-accent-red">
-                    15+
-                  </div>
-                  <div className="text-light-gray/60 text-xs md:text-sm uppercase tracking-wider">
-                    Programas
-                  </div>
-                </div>
-                <div>
-                  <div className="font-bebas text-3xl md:text-4xl text-accent-red">
-                    95%
-                  </div>
-                  <div className="text-light-gray/60 text-xs md:text-sm uppercase tracking-wider">
-                    Satisfacción
-                  </div>
-                </div>
-              </div>
+      {/* Hero */}
+      <section className="border-b bg-muted/30 py-24 md:py-36 px-6 lg:px-20 overflow-hidden relative">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-7xl mx-auto">
+          {/* Left */}
+          <div className="space-y-8">
+            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-semibold px-3 py-1.5 rounded-full">
+              <TrendingUp className="size-3.5" />
+              La academia que transforma carreras
             </div>
 
-            {/* Right Content - Pricing Card */}
-            <div className="animate-fade-in-up animation-delay-400 lg:justify-self-end w-full max-w-md">
-              <div className="relative bg-secondary-black border border-light-gray/10 rounded-sm overflow-hidden">
-                {/* Nuevo Badge */}
-                <div className="absolute top-6 right-6 z-10">
-                  <span className="bg-accent-red text-white px-4 py-2 text-xs font-bold tracking-widest uppercase">
-                    NUEVO
-                  </span>
-                </div>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
+              Transforma
+              <span className="text-primary block">tu carrera</span>
+              hoy mismo
+            </h1>
 
-                {/* Card Content */}
-                <div className="p-8 md:p-10">
-                  <div className="text-light-gray/50 text-sm uppercase tracking-widest mb-4">
-                    Plan Premium
+            <p className="text-muted-foreground text-lg max-w-xl leading-relaxed">
+              Accede a programas diseñados por expertos de la industria. Aprende
+              las habilidades que realmente importan en el mercado actual.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button size="lg" asChild>
+                <a href="/courses">Explorar Programas</a>
+              </Button>
+              <Button size="lg" variant="outline" asChild>
+                <a href="/login">Iniciar Sesión</a>
+              </Button>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-6 pt-6 border-t">
+              {[
+                { value: "500+", label: "Estudiantes" },
+                { value: "15+", label: "Programas" },
+                { value: "95%", label: "Satisfacción" },
+              ].map((s) => (
+                <div key={s.label}>
+                  <div className="text-2xl md:text-3xl font-bold text-primary">{s.value}</div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider mt-0.5">
+                    {s.label}
                   </div>
-                  <h3 className="font-bebas text-5xl md:text-6xl text-light-gray mb-6">
-                    PRO
-                  </h3>
-
-                  <div className="mb-8">
-                    <span className="text-4xl md:text-5xl font-bold text-white">
-                      $299
-                    </span>
-                    <span className="text-light-gray/60 text-lg">/mes</span>
-                  </div>
-
-                  <ul className="space-y-4 mb-8">
-                    <li className="flex items-start gap-3 text-light-gray/80">
-                      <svg
-                        className="w-5 h-5 text-accent-red mt-0.5 flex-shrink-0"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      <span className="text-sm md:text-base">
-                        Acceso ilimitado a todos los cursos
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3 text-light-gray/80">
-                      <svg
-                        className="w-5 h-5 text-accent-red mt-0.5 flex-shrink-0"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      <span className="text-sm md:text-base">
-                        Certificados verificados
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3 text-light-gray/80">
-                      <svg
-                        className="w-5 h-5 text-accent-red mt-0.5 flex-shrink-0"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      <span className="text-sm md:text-base">
-                        Mentoría personalizada 1-on-1
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3 text-light-gray/80">
-                      <svg
-                        className="w-5 h-5 text-accent-red mt-0.5 flex-shrink-0"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      <span className="text-sm md:text-base">
-                        Proyectos reales de empresas
-                      </span>
-                    </li>
-                  </ul>
-
-                  <a
-                    href="#signup"
-                    className="block w-full bg-accent-red hover:bg-accent-red/90 text-white text-center py-4 font-bold text-sm tracking-widest uppercase transition-smooth"
-                  >
-                    Contacta con un Agente
-                  </a>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
-        </div>
 
-        
+          {/* Right — Pricing card */}
+          <div className="lg:justify-self-end w-full max-w-md">
+            <Card className="shadow-lg">
+              <CardContent className="p-8 space-y-6">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">
+                      Plan Premium
+                    </p>
+                    <h3 className="text-4xl font-bold tracking-tight">PRO</h3>
+                  </div>
+                  <Badge className="text-xs">NUEVO</Badge>
+                </div>
+
+                <div>
+                  <span className="text-4xl font-bold">$299</span>
+                  <span className="text-muted-foreground">/mes</span>
+                </div>
+
+                <ul className="space-y-3">
+                  {[
+                    "Acceso ilimitado a todos los cursos",
+                    "Certificados verificados",
+                    "Mentoría personalizada 1-on-1",
+                    "Proyectos reales de empresas",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-sm">
+                      <div className="size-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                        <div className="size-1.5 rounded-full bg-primary" />
+                      </div>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                <Button className="w-full" size="lg" asChild>
+                  <a href="#signup">Contacta con un Agente</a>
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </section>
 
-      {/* Marquee Stats */}
-      <section className="bg-primary-black text-white py-8 overflow-hidden border-t-[3px] border-b-[3px] border-accent-red">
+      {/* Stats marquee */}
+      <section className="border-b py-5 overflow-hidden bg-primary text-primary-foreground">
         <div className="flex animate-marquee whitespace-nowrap">
-          <div className="font-bebas text-5xl px-16 flex items-center gap-16">
-            <span className="text-accent-red">★</span> 15,000+ ESTUDIANTES
-            <span className="text-accent-red">★</span> 96% TASA DE EMPLEO
-            <span className="text-accent-red">★</span> 500+ EMPRESAS ALIADAS
-            <span className="text-accent-red">★</span> CERTIFICACIÓN
-            INTERNACIONAL
-          </div>
-          <div className="font-bebas text-5xl px-16 flex items-center gap-16">
-            <span className="text-accent-red">★</span> 15,000+ ESTUDIANTES
-            <span className="text-accent-red">★</span> 96% TASA DE EMPLEO
-            <span className="text-accent-red">★</span> 500+ EMPRESAS ALIADAS
-            <span className="text-accent-red">★</span> CERTIFICACIÓN
-            INTERNACIONAL
-          </div>
+          {[1, 2].map((n) => (
+            <div key={n} className="flex items-center gap-12 px-12 text-sm font-semibold uppercase tracking-widest">
+              <span>★ 15,000+ Estudiantes</span>
+              <span>★ 96% Tasa de Empleo</span>
+              <span>★ 500+ Empresas Aliadas</span>
+              <span>★ Certificación Internacional</span>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Methodology Section */}
-      <section className="bg-primary-black text-white py-40 px-16 relative overflow-hidden max-md:py-24 max-md:px-8">
-        <div className="absolute top-0 right-0 w-[60%] h-full [background:repeating-linear-gradient(45deg,transparent,transparent_20px,rgba(255,51,51,0.03)_20px,rgba(255,51,51,0.03)_40px)]" />
-
-        <div className="max-w-[1600px] mx-auto relative z-[2]">
-          <div className="mb-20">
-            <div className="font-antonio text-[0.9rem] tracking-[0.3em] text-accent-red mb-4 font-semibold">
-              INNOVACIÓN EDUCATIVA
-            </div>
-            <h2 className="font-bebas text-[clamp(3rem,7vw,6rem)] tracking-[0.02em] leading-[1]">
-              METODOLOGÍA COMPROBADA
-            </h2>
+      {/* Methodology */}
+      <section className="py-24 px-6 lg:px-20">
+        <div className="max-w-6xl mx-auto space-y-12">
+          <div className="space-y-3">
+            <Badge variant="secondary" className="text-xs">Innovación Educativa</Badge>
+            <h2 className="text-4xl font-bold tracking-tight">Metodología comprobada</h2>
           </div>
 
-          <div className="grid grid-cols-2 gap-24 mt-20 max-lg:grid-cols-1 max-lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {[
               {
                 num: "01",
@@ -235,52 +142,39 @@ export default function LandingPage() {
                 title: "Certificación Reconocida",
                 desc: "Credenciales verificadas digitalmente y reconocidas por empresas líderes. Potencia tu LinkedIn y destacate en procesos de selección.",
               },
-            ].map((tech) => (
-              <div
-                key={tech.num}
-                className="border-l-[3px] border-accent-red pl-8 transition-all duration-300 hover:border-white hover:translate-x-[10px]"
-              >
-                <div className="font-bebas text-[5rem] text-accent-red leading-[1] mb-4 opacity-50">
-                  {tech.num}
-                </div>
-                <h3 className="font-antonio text-[1.8rem] mb-4 tracking-[0.05em] uppercase">
-                  {tech.title}
-                </h3>
-                <p className="leading-[1.8] opacity-80">{tech.desc}</p>
-              </div>
+            ].map((item) => (
+              <Card key={item.num} className="border transition-all duration-200 hover:shadow-md hover:-translate-y-0.5">
+                <CardContent className="p-6 space-y-3">
+                  <span className="text-4xl font-bold text-primary/20">{item.num}</span>
+                  <h3 className="font-semibold text-base">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Newsletter */}
-      <section className="bg-accent-red text-white py-32 px-16 text-center relative overflow-hidden max-md:py-24 max-md:px-8">
-        <div className="absolute top-0 left-0 w-full h-full [background:repeating-linear-gradient(0deg,transparent,transparent_50px,rgba(255,255,255,0.05)_50px,rgba(255,255,255,0.05)_100px)]" />
-
-        <div className="max-w-[800px] mx-auto relative z-[2]">
-          <h2 className="font-bebas text-[clamp(3rem,6vw,5rem)] mb-6">
-            COMIENZA TU TRANSFORMACIÓN
+      {/* Newsletter CTA */}
+      <section className="border-t bg-muted/30 py-20 px-6 lg:px-20">
+        <div className="max-w-2xl mx-auto text-center space-y-6">
+          <h2 className="text-4xl font-bold tracking-tight">
+            Comienza tu transformación
           </h2>
-          <p className="text-xl mb-12 opacity-90">
+          <p className="text-muted-foreground leading-relaxed">
             Recibe masterclasses gratuitas, guías de carrera y acceso anticipado
             a nuevos programas.
           </p>
-          <form className="flex gap-4 max-w-[600px] mx-auto max-sm:flex-col">
+          <form className="flex gap-3 max-w-md mx-auto flex-col sm:flex-row">
             <input
               type="email"
-              className="flex-1 px-8 py-[1.3rem] border-2 border-white bg-transparent text-white text-base outline-none transition-all duration-300 placeholder:text-white/60 focus:bg-white/10"
               placeholder="Tu email"
+              className="flex-1 px-4 py-2.5 rounded-md border border-input bg-background text-sm outline-none focus:ring-2 focus:ring-ring"
             />
-            <button
-              type="submit"
-              className="px-12 py-[1.3rem] bg-white text-accent-red border-none font-bold tracking-[0.1em] uppercase transition-all duration-300 hover:bg-primary-black hover:text-white hover:-translate-y-0.5"
-            >
-              Empezar Gratis
-            </button>
+            <Button type="submit">Empezar Gratis</Button>
           </form>
         </div>
       </section>
-
     </>
   );
 }
