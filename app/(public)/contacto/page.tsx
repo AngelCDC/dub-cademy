@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import styles from './page.module.css'
+import { Send, Mail, Phone, MapPin, Linkedin, Twitter, Youtube, MessageCircle, ChevronDown, ChevronUp } from 'lucide-react'
 
 export default function ContactoPage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null)
@@ -31,72 +31,184 @@ export default function ContactoPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    alert('¡Mensaje enviado! Te contactaremos pronto.')
+    // TODO: integrate real form submission
   }
 
   return (
-    <>
+    <div className="bg-primary-black min-h-screen">
+
       {/* Hero */}
-      <section className={styles.contactHero}>
-        <h1 className='font-semibold'>HABLEMOS</h1>
-        <p>¿Dudas sobre nuestros programas? ¿Quieres saber si un curso es para ti? Nuestro equipo está aquí para ayudarte a tomar la mejor decisión.</p>
+      <section className="relative py-32 px-6 lg:px-20 overflow-hidden border-b border-light-gray/10">
+        <div className="absolute inset-0 pattern-diagonal-lines opacity-20" />
+        <div className="absolute top-0 right-0 w-[50%] h-full [background:repeating-linear-gradient(45deg,transparent,transparent_20px,rgba(255,51,51,0.03)_20px,rgba(255,51,51,0.03)_40px)]" />
+
+        <div className="relative max-w-4xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 border border-accent-red/30 bg-accent-red/10 px-4 py-2 mb-8">
+            <Mail className="size-4 text-accent-red" />
+            <span className="text-xs font-bold text-accent-red uppercase tracking-widest">
+              Estamos aquí para ayudarte
+            </span>
+          </div>
+
+          <h1 className="font-bebas text-7xl md:text-9xl text-light-gray leading-none mb-6">
+            HABLEMOS
+          </h1>
+          <p className="text-light-gray/60 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+            ¿Dudas sobre nuestros programas? ¿Quieres saber si un curso es para ti?
+            Nuestro equipo está aquí para ayudarte a tomar la mejor decisión.
+          </p>
+        </div>
       </section>
 
-      {/* Main Contact */}
-      <section className={styles.contactMain}>
-        <div className={styles.contactGrid}>
-          <div className={styles.contactInfo}>
-            <h2>Conecta con VELOCITY</h2>
-            <p>Nuestro equipo de asesores académicos está listo para responder todas tus preguntas sobre programas, metodología y financiamiento.</p>
+      {/* Main contact section */}
+      <section className="px-6 lg:px-20 py-24">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12">
 
-            <div className={styles.infoBlock}>
-              <h3>Email</h3>
-              <a href="mailto:info@velocityacademy.com">info@velocityacademy.com</a><br />
-              <a href="mailto:admisiones@velocityacademy.com">admisiones@velocityacademy.com</a>
+          {/* Left: info */}
+          <div className="lg:col-span-2 space-y-10">
+            <div>
+              <div className="font-antonio text-[0.75rem] tracking-[0.3em] text-accent-red mb-3 uppercase">
+                Contacto directo
+              </div>
+              <h2 className="font-bebas text-4xl text-light-gray leading-tight">
+                CONECTA CON NOSOTROS
+              </h2>
+              <p className="text-light-gray/50 mt-4 leading-relaxed text-sm">
+                Nuestro equipo de asesores académicos está listo para responder todas
+                tus preguntas sobre programas, metodología y financiamiento.
+              </p>
             </div>
 
-            <div className={styles.infoBlock}>
-              <h3>WhatsApp</h3>
-              <p>+34 (612) 345-678</p>
-              <p>Lun - Vie: 9:00 - 20:00</p>
+            <div className="space-y-6">
+              {[
+                {
+                  icon: Mail,
+                  label: 'Email',
+                  lines: ['info@velocityacademy.com', 'admisiones@velocityacademy.com'],
+                  href: true,
+                },
+                {
+                  icon: Phone,
+                  label: 'WhatsApp',
+                  lines: ['+34 (612) 345-678', 'Lun - Vie: 9:00 - 20:00'],
+                  href: false,
+                },
+                {
+                  icon: MapPin,
+                  label: 'Oficina',
+                  lines: ['Calle Innovación 45, 3º', '28001 Madrid, España'],
+                  href: false,
+                },
+              ].map(({ icon: Icon, label, lines, href }) => (
+                <div key={label} className="flex gap-4">
+                  <div className="size-10 bg-accent-red/10 border border-accent-red/20 flex items-center justify-center shrink-0 mt-0.5">
+                    <Icon className="size-4 text-accent-red" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold uppercase tracking-widest text-light-gray/40 mb-1">
+                      {label}
+                    </div>
+                    {lines.map((line) =>
+                      href ? (
+                        <a
+                          key={line}
+                          href={`mailto:${line}`}
+                          className="block text-sm text-light-gray/70 hover:text-accent-red transition-colors"
+                        >
+                          {line}
+                        </a>
+                      ) : (
+                        <p key={line} className="text-sm text-light-gray/70">
+                          {line}
+                        </p>
+                      )
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
 
-            <div className={styles.infoBlock}>
-              <h3>Oficina</h3>
-              <p>Calle Innovación 45, 3º<br />
-              28001 Madrid<br />
-              España</p>
-            </div>
-
-            <div className={styles.socialIcons}>
-              <a href="#" className={styles.socialIcon}>💼</a>
-              <a href="#" className={styles.socialIcon}>🐦</a>
-              <a href="#" className={styles.socialIcon}>📺</a>
-              <a href="#" className={styles.socialIcon}>💬</a>
+            {/* Social */}
+            <div>
+              <div className="text-xs font-bold uppercase tracking-widest text-light-gray/40 mb-4">
+                Síguenos
+              </div>
+              <div className="flex gap-3">
+                {[
+                  { icon: Linkedin, label: 'LinkedIn' },
+                  { icon: Twitter, label: 'Twitter' },
+                  { icon: Youtube, label: 'YouTube' },
+                  { icon: MessageCircle, label: 'Discord' },
+                ].map(({ icon: Icon, label }) => (
+                  <a
+                    key={label}
+                    href="#"
+                    aria-label={label}
+                    className="size-10 border border-light-gray/10 flex items-center justify-center text-light-gray/40 hover:text-accent-red hover:border-accent-red/30 transition-all duration-200"
+                  >
+                    <Icon className="size-4" />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
-          <div className={styles.contactForm}>
-            <form onSubmit={handleSubmit}>
-              <div className={styles.formRow}>
-                <div className={styles.formGroup}>
-                  <label htmlFor="nombre">Nombre</label>
-                  <input type="text" id="nombre" required />
+          {/* Right: form */}
+          <div className="lg:col-span-3">
+            <form onSubmit={handleSubmit} className="bg-secondary-black border border-light-gray/10 p-8 space-y-6">
+              <div className="text-xs font-bold uppercase tracking-widest text-light-gray/40 mb-2">
+                Envíanos un mensaje
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label htmlFor="nombre" className="text-xs font-bold uppercase tracking-widest text-light-gray/50">
+                    Nombre
+                  </label>
+                  <input
+                    type="text"
+                    id="nombre"
+                    required
+                    placeholder="Juan"
+                    className="w-full bg-primary-black border border-light-gray/10 text-light-gray text-sm px-4 py-3 outline-none focus:border-accent-red/50 transition-colors placeholder:text-light-gray/20"
+                  />
                 </div>
-                <div className={styles.formGroup}>
-                  <label htmlFor="apellido">Apellido</label>
-                  <input type="text" id="apellido" required />
+                <div className="space-y-2">
+                  <label htmlFor="apellido" className="text-xs font-bold uppercase tracking-widest text-light-gray/50">
+                    Apellido
+                  </label>
+                  <input
+                    type="text"
+                    id="apellido"
+                    required
+                    placeholder="García"
+                    className="w-full bg-primary-black border border-light-gray/10 text-light-gray text-sm px-4 py-3 outline-none focus:border-accent-red/50 transition-colors placeholder:text-light-gray/20"
+                  />
                 </div>
               </div>
 
-              <div className={styles.formGroup}>
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" required />
+              <div className="space-y-2">
+                <label htmlFor="email" className="text-xs font-bold uppercase tracking-widest text-light-gray/50">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  required
+                  placeholder="juan@email.com"
+                  className="w-full bg-primary-black border border-light-gray/10 text-light-gray text-sm px-4 py-3 outline-none focus:border-accent-red/50 transition-colors placeholder:text-light-gray/20"
+                />
               </div>
 
-              <div className={styles.formGroup}>
-                <label htmlFor="asunto">Asunto</label>
-                <select id="asunto" required>
+              <div className="space-y-2">
+                <label htmlFor="asunto" className="text-xs font-bold uppercase tracking-widest text-light-gray/50">
+                  Asunto
+                </label>
+                <select
+                  id="asunto"
+                  required
+                  className="w-full bg-primary-black border border-light-gray/10 text-light-gray/70 text-sm px-4 py-3 outline-none focus:border-accent-red/50 transition-colors"
+                >
                   <option value="">Selecciona un asunto</option>
                   <option value="informacion">Información de Cursos</option>
                   <option value="admisiones">Proceso de Admisión</option>
@@ -107,13 +219,25 @@ export default function ContactoPage() {
                 </select>
               </div>
 
-              <div className={styles.formGroup}>
-                <label htmlFor="mensaje">Mensaje</label>
-                <textarea id="mensaje" required></textarea>
+              <div className="space-y-2">
+                <label htmlFor="mensaje" className="text-xs font-bold uppercase tracking-widest text-light-gray/50">
+                  Mensaje
+                </label>
+                <textarea
+                  id="mensaje"
+                  required
+                  rows={5}
+                  placeholder="Cuéntanos en qué podemos ayudarte…"
+                  className="w-full bg-primary-black border border-light-gray/10 text-light-gray text-sm px-4 py-3 outline-none focus:border-accent-red/50 transition-colors resize-none placeholder:text-light-gray/20"
+                />
               </div>
 
-              <button type="submit" className={styles.submitBtn}>
-                <span>Enviar Mensaje</span>
+              <button
+                type="submit"
+                className="flex items-center justify-center gap-2 w-full bg-accent-red hover:bg-accent-red/90 text-white py-4 font-bold text-sm tracking-widest uppercase transition-colors"
+              >
+                <Send className="size-4" />
+                Enviar Mensaje
               </button>
             </form>
           </div>
@@ -121,43 +245,46 @@ export default function ContactoPage() {
       </section>
 
       {/* FAQ */}
-      <section className={styles.faqSection}>
-        <div className={styles.faqContainer}>
-          <h2>PREGUNTAS FRECUENTES</h2>
-
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className={`${styles.faqItem} ${activeFaq === index ? styles.active : ''}`}
-              onClick={() => setActiveFaq(activeFaq === index ? null : index)}
-            >
-              <div className={styles.faqQuestion}>
-                <span>{faq.question}</span>
-                <span className={styles.faqToggle}>+</span>
-              </div>
-              <div className={styles.faqAnswer}>
-                {faq.answer}
-              </div>
+      <section className="px-6 lg:px-20 py-24 border-t border-light-gray/10">
+        <div className="max-w-3xl mx-auto">
+          <div className="mb-12 text-center">
+            <div className="font-antonio text-[0.75rem] tracking-[0.3em] text-accent-red mb-3 uppercase">
+              Respuestas rápidas
             </div>
-          ))}
-        </div>
-      </section>
+            <h2 className="font-bebas text-5xl text-light-gray">
+              PREGUNTAS FRECUENTES
+            </h2>
+          </div>
 
-      {/* Map 
-      <section className={styles.mapSection}>
-        <div className={styles.mapPlaceholder}>
-          <div style={{ textAlign: 'center', color: 'var(--text-gray)' }}>
-            <p style={{ fontSize: '3rem', marginBottom: '1rem' }}>📍</p>
-            <p style={{ fontWeight: 600, fontSize: '1.2rem' }}>NUESTRA UBICACIÓN</p>
+          <div className="space-y-px">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="bg-secondary-black border border-light-gray/10 cursor-pointer group"
+                onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+              >
+                <div className="flex items-center justify-between gap-4 p-6">
+                  <span className={`text-sm font-bold uppercase tracking-wider transition-colors duration-200 ${activeFaq === index ? 'text-accent-red' : 'text-light-gray group-hover:text-accent-red'}`}>
+                    {faq.question}
+                  </span>
+                  {activeFaq === index ? (
+                    <ChevronUp className="size-4 text-accent-red shrink-0" />
+                  ) : (
+                    <ChevronDown className="size-4 text-light-gray/40 shrink-0" />
+                  )}
+                </div>
+                {activeFaq === index && (
+                  <div className="px-6 pb-6 border-t border-light-gray/10 pt-4">
+                    <p className="text-sm text-light-gray/60 leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
-        <div className={styles.mapOverlay}>
-          <h3>Visítanos</h3>
-          <p>Calle Innovación 45, 3º<br />
-          28001 Madrid<br />
-          España</p>
-        </div>
-      </section>*/}
-    </>
+      </section>
+    </div>
   )
 }

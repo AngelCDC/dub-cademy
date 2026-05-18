@@ -4,9 +4,9 @@ import Footer from "./_components/footer";
 
 export default function LayoutPublic({ children }: { children: ReactNode }) {
   return (
-    <div>
+    <div className="bg-primary-black">
       <Navbar />
-      <main className="">{children}</main>
+      <main>{children}</main>
       <Footer />
     </div>
   );

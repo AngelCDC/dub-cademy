@@ -2,8 +2,6 @@
 
 import Link from 'next/link'
 
-import styles from './page.module.css'
-
 export default function MetodologiaPage() {
   const innovations = [
     {
@@ -53,52 +51,115 @@ export default function MetodologiaPage() {
     { name: 'Certificación Digital', desc: 'Credencial verificable en blockchain reconocida por empresas líderes de tech en LATAM y España.' }
   ]
 
+  const metrics = [
+    { value: '96%', label: 'Consigue empleo' },
+    { value: '3.2x', label: 'Aumento salarial' },
+    { value: '6 meses', label: 'Tiempo promedio' },
+    { value: '4.9/5', label: 'Satisfacción' },
+  ]
+
   return (
-    <>
+    <div className="bg-primary-black min-h-screen">
+
       {/* Hero */}
-      <section className={styles.techHero}>
-        <div className={styles.heroGrid}></div>
-        <div className={styles.heroContent}>
-          <h1>APRENDE DIFERENTE</h1>
-          <p>No más teoría sin aplicación. Nuestra metodología combina proyectos reales, mentoría personalizada y comunidad activa para acelerar tu aprendizaje.</p>
+      <section className="relative py-40 px-6 lg:px-20 overflow-hidden border-b border-light-gray/10">
+        <div className="absolute inset-0 pattern-diagonal-lines opacity-20" />
+        <div className="absolute top-0 right-0 w-[50%] h-full [background:repeating-linear-gradient(45deg,transparent,transparent_20px,rgba(255,51,51,0.03)_20px,rgba(255,51,51,0.03)_40px)]" />
+
+        {/* Grid overlay */}
+        <div className="absolute inset-0 opacity-5 [background-image:linear-gradient(rgba(248,248,248,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(248,248,248,0.1)_1px,transparent_1px)] [background-size:60px_60px]" />
+
+        <div className="relative max-w-5xl mx-auto">
+          <div className="inline-flex items-center gap-2 border border-accent-red/30 bg-accent-red/10 px-4 py-2 mb-8">
+            <span className="text-xs font-bold text-accent-red uppercase tracking-widest">
+              Innovación Educativa
+            </span>
+          </div>
+          <h1 className="font-bebas text-7xl md:text-[8rem] text-light-gray leading-none mb-6">
+            APRENDE
+            <span className="block text-accent-red italic">DIFERENTE</span>
+          </h1>
+          <p className="text-light-gray/60 text-lg md:text-xl max-w-2xl leading-relaxed">
+            No más teoría sin aplicación. Nuestra metodología combina proyectos reales,
+            mentoría personalizada y comunidad activa para acelerar tu aprendizaje.
+          </p>
         </div>
       </section>
 
-      {/* Innovation Cards */}
-      <section className={styles.innovations}>
-        <div className={styles.innovationsGrid}>
-          {innovations.map((innovation) => (
-            <div key={innovation.num} className={styles.innovationCard}>
-              <div className={styles.innovationNumber}>{innovation.num}</div>
-              <div className={styles.innovationIcon}></div>
-              <h3>{innovation.title}</h3>
-              <p>{innovation.desc}</p>
-              <div className={styles.innovationSpecs}>
-                {innovation.specs.map((spec, i) => (
-                  <div key={i} className={styles.spec}>
-                    <div className={styles.specValue}>{spec.value}</div>
-                    <div className={styles.specLabel}>{spec.label}</div>
-                  </div>
-                ))}
-              </div>
+      {/* Innovation cards */}
+      <section className="px-6 lg:px-20 py-24 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[60%] h-full [background:repeating-linear-gradient(45deg,transparent,transparent_20px,rgba(255,51,51,0.02)_20px,rgba(255,51,51,0.02)_40px)]" />
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="mb-16">
+            <div className="font-antonio text-[0.75rem] tracking-[0.3em] text-accent-red mb-3 uppercase">
+              Cómo aprendemos
             </div>
-          ))}
+            <h2 className="font-bebas text-5xl text-light-gray">
+              METODOLOGÍA COMPROBADA
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-light-gray/5">
+            {innovations.map((item) => (
+              <div
+                key={item.num}
+                className="group bg-secondary-black border-l-[3px] border-accent-red/20 pl-8 p-8 transition-all duration-300 hover:border-accent-red hover:translate-x-2 hover:bg-accent-red/5"
+              >
+                <div className="font-bebas text-[5rem] text-accent-red/15 leading-none mb-4 group-hover:text-accent-red/30 transition-colors duration-300">
+                  {item.num}
+                </div>
+                <h3 className="font-antonio text-xl mb-3 tracking-[0.05em] uppercase text-light-gray">
+                  {item.title}
+                </h3>
+                <p className="text-light-gray/50 leading-relaxed text-sm mb-6">
+                  {item.desc}
+                </p>
+                <div className="flex gap-6">
+                  {item.specs.map((spec) => (
+                    <div key={spec.label}>
+                      <div className="font-bebas text-2xl text-accent-red">{spec.value}</div>
+                      <div className="text-[10px] uppercase tracking-widest text-light-gray/40">
+                        {spec.label}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Materials */}
-      <section className={styles.materialsSection}>
-        <div className={styles.materialsPattern}></div>
-        <div className={styles.materialsContainer}>
-          <div className={styles.materialsHeader}>
-            <h2>TODO LO QUE INCLUYE</h2>
+      <section className="px-6 lg:px-20 py-24 bg-secondary-black border-t border-b border-light-gray/10 relative overflow-hidden">
+        <div className="absolute inset-0 [background:repeating-linear-gradient(0deg,transparent,transparent_50px,rgba(255,255,255,0.015)_50px,rgba(255,255,255,0.015)_100px)]" />
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="mb-16 text-center">
+            <div className="font-antonio text-[0.75rem] tracking-[0.3em] text-accent-red mb-3 uppercase">
+              Herramientas de aprendizaje
+            </div>
+            <h2 className="font-bebas text-5xl text-light-gray">
+              TODO LO QUE INCLUYE
+            </h2>
           </div>
-          <div className={styles.materialsGrid}>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-light-gray/5">
             {materials.map((material, i) => (
-              <div key={i} className={styles.materialCard}>
-                <div className={styles.materialVisual}></div>
-                <h4>{material.name}</h4>
-                <p>{material.desc}</p>
+              <div
+                key={i}
+                className="group bg-primary-black p-8 hover:bg-accent-red/5 transition-colors duration-300 border border-transparent hover:border-accent-red/20"
+              >
+                <div className="size-10 bg-accent-red/10 border border-accent-red/20 flex items-center justify-center mb-5 group-hover:bg-accent-red group-hover:border-accent-red transition-colors duration-300">
+                  <div className="size-2 bg-accent-red group-hover:bg-white transition-colors duration-300" />
+                </div>
+                <h4 className="font-antonio text-base uppercase tracking-wider text-light-gray mb-3">
+                  {material.name}
+                </h4>
+                <p className="text-sm text-light-gray/50 leading-relaxed">
+                  {material.desc}
+                </p>
               </div>
             ))}
           </div>
@@ -106,30 +167,44 @@ export default function MetodologiaPage() {
       </section>
 
       {/* Metrics */}
-      <section className={styles.metricsSection}>
-        <div className={styles.metricsContainer}>
-          <h2>RESULTADOS QUE HABLAN</h2>
-          <p className={styles.metricsSubtitle}>Datos reales de estudiantes que transformaron su carrera con VELOCITY</p>
-          <div className={styles.metricsGrid}>
-            <div className={styles.metric}>
-              <div className={styles.metricValue}>96%</div>
-              <div className={styles.metricLabel}>Consigue empleo</div>
+      <section className="px-6 lg:px-20 py-24">
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-16 text-center">
+            <div className="font-antonio text-[0.75rem] tracking-[0.3em] text-accent-red mb-3 uppercase">
+              Datos reales
             </div>
-            <div className={styles.metric}>
-              <div className={styles.metricValue}>3.2x</div>
-              <div className={styles.metricLabel}>Aumento salarial</div>
-            </div>
-            <div className={styles.metric}>
-              <div className={styles.metricValue}>6 meses</div>
-              <div className={styles.metricLabel}>Tiempo promedio</div>
-            </div>
-            <div className={styles.metric}>
-              <div className={styles.metricValue}>4.9/5</div>
-              <div className={styles.metricLabel}>Satisfacción</div>
-            </div>
+            <h2 className="font-bebas text-5xl text-light-gray">
+              RESULTADOS QUE HABLAN
+            </h2>
+            <p className="text-light-gray/50 mt-4 max-w-xl mx-auto text-sm">
+              Datos reales de estudiantes que transformaron su carrera con VELOCITY
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-light-gray/5">
+            {metrics.map((m) => (
+              <div key={m.label} className="bg-secondary-black p-10 text-center">
+                <div className="font-bebas text-5xl text-accent-red mb-2">
+                  {m.value}
+                </div>
+                <div className="text-xs font-bold uppercase tracking-widest text-light-gray/40">
+                  {m.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div className="text-center mt-16">
+            <Link
+              href="/courses"
+              className="inline-flex items-center gap-3 bg-accent-red hover:bg-accent-red/90 text-white px-12 py-4 font-bold text-sm tracking-widest uppercase transition-colors"
+            >
+              Explorar Programas
+            </Link>
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

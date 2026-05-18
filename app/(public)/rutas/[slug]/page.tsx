@@ -1,11 +1,10 @@
 import { getLearningPath } from "@/app/data/learning-path/get-learning-path";
+
+export const dynamic = "force-dynamic";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { CheckCircle2, Clock, BookOpen, GraduationCap, Lock } from "lucide-react";
+import { CheckCircle2, Clock, BookOpen, GraduationCap, Lock, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { EnrollPathButton } from "./_components/EnrollPathButton";
 
@@ -59,54 +58,66 @@ export default async function LearningPathPage({ params }: { params: Params }) {
   const isLoggedIn = !!session?.user;
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10 grid grid-cols-1 gap-8 lg:grid-cols-3">
-      {/* ── Left column: content ─────────────────────────────────────── */}
-      <div className="lg:col-span-2 space-y-8">
-        {/* Header */}
-        <div className="space-y-4">
-          <div className="flex flex-wrap gap-2">
-            <Badge className="bg-primary/10 text-primary border-0 ring-1 ring-primary/20 text-xs">
-              Ruta de Aprendizaje
-            </Badge>
-            <Badge variant="secondary" className="text-xs">
-              {courseStats.length} cursos · {totalHours}h
-            </Badge>
+    <div className="bg-primary-black min-h-screen">
+      {/* Hero strip */}
+      <div className="relative bg-secondary-black border-b border-light-gray/10 py-16 px-6 lg:px-20 overflow-hidden">
+        <div className="absolute top-0 right-0 w-[40%] h-full [background:repeating-linear-gradient(45deg,transparent,transparent_20px,rgba(255,51,51,0.03)_20px,rgba(255,51,51,0.03)_40px)]" />
+
+        <div className="relative max-w-5xl mx-auto">
+          <div className="inline-flex items-center gap-2 border border-accent-red/30 bg-accent-red/10 px-3 py-1.5 mb-6">
+            <span className="text-[10px] font-bold text-accent-red uppercase tracking-widest">
+              Ruta de Aprendizaje · {courseStats.length} cursos · {totalHours}h
+            </span>
           </div>
-
-          <h1 className="text-3xl font-bold tracking-tight">{path.title}</h1>
-
+          <h1 className="font-bebas text-5xl md:text-7xl text-light-gray leading-none">
+            {path.title}
+          </h1>
           {path.description && (
-            <p className="text-muted-foreground leading-relaxed">{path.description}</p>
+            <p className="text-light-gray/60 mt-4 max-w-2xl text-base leading-relaxed">
+              {path.description}
+            </p>
           )}
 
-          {/* Overall progress bar (for enrolled users) */}
+          {/* Overall progress bar */}
           {isLoggedIn && anyEnrolled && (
-            <div className="space-y-1.5">
+            <div className="mt-8 max-w-md space-y-2">
               <div className="flex items-center justify-between text-sm">
-                <span className="font-medium">Progreso total</span>
-                <span className="text-muted-foreground tabular-nums">
-                  {completedLessons}/{totalLessons} lecciones · {overallProgress}%
+                <span className="font-bold uppercase tracking-wider text-xs text-light-gray/60">
+                  Progreso total
+                </span>
+                <span className="text-accent-red font-bold tabular-nums">
+                  {completedLessons}/{totalLessons} · {overallProgress}%
                 </span>
               </div>
-              <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
+              <div className="h-1.5 w-full bg-light-gray/10">
                 <div
-                  className="h-full rounded-full bg-primary transition-all duration-700"
+                  className="h-full bg-accent-red transition-all duration-700"
                   style={{ width: `${overallProgress}%` }}
                 />
               </div>
             </div>
           )}
         </div>
+      </div>
 
-        {/* Course sequence */}
-        <div className="space-y-3">
-          <h2 className="text-lg font-semibold">Cursos de la ruta</h2>
+      {/* Main content */}
+      <div className="max-w-5xl mx-auto px-6 lg:px-20 py-16 grid grid-cols-1 gap-12 lg:grid-cols-3">
+        {/* ── Left: course sequence ──────────────────────────────────────── */}
+        <div className="lg:col-span-2 space-y-8">
+          <div>
+            <div className="font-antonio text-[0.75rem] tracking-[0.3em] text-accent-red mb-2 uppercase">
+              Secuencia de cursos
+            </div>
+            <h2 className="font-bebas text-3xl text-light-gray">
+              CURSOS DE LA RUTA
+            </h2>
+          </div>
 
           <div className="relative">
-            {/* Vertical connector line */}
-            <div className="absolute left-5 top-8 bottom-8 w-0.5 bg-border/60" aria-hidden />
+            {/* Vertical connector */}
+            <div className="absolute left-5 top-8 bottom-8 w-px bg-light-gray/10" aria-hidden />
 
-            <div className="space-y-3">
+            <div className="space-y-4">
               {courseStats.map((course, i) => {
                 const isComplete = course.completed === course.total && course.total > 0;
                 const inProgress = course.completed > 0 && !isComplete;
@@ -120,12 +131,12 @@ export default async function LearningPathPage({ params }: { params: Params }) {
                     {/* Step indicator */}
                     <div
                       className={cn(
-                        "relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-bold ring-2",
+                        "relative z-10 flex size-10 shrink-0 items-center justify-center text-sm font-bold",
                         isComplete
-                          ? "bg-emerald-500 text-white ring-emerald-500/30"
+                          ? "bg-accent-red text-white"
                           : inProgress
-                          ? "bg-primary text-white ring-primary/30"
-                          : "bg-background text-muted-foreground ring-border"
+                          ? "bg-accent-red/20 text-accent-red border border-accent-red/40"
+                          : "bg-secondary-black text-light-gray/40 border border-light-gray/10"
                       )}
                     >
                       {isComplete ? (
@@ -136,148 +147,140 @@ export default async function LearningPathPage({ params }: { params: Params }) {
                     </div>
 
                     {/* Course card */}
-                    <Card
+                    <div
                       className={cn(
-                        "flex-1 border-0 shadow-sm ring-1 transition-all duration-200",
+                        "flex-1 border transition-all duration-200 bg-secondary-black",
                         isComplete
-                          ? "ring-emerald-500/30 bg-emerald-500/5"
+                          ? "border-accent-red/30"
                           : inProgress
-                          ? "ring-primary/30"
-                          : "ring-border/50"
+                          ? "border-accent-red/20"
+                          : "border-light-gray/10"
                       )}
                     >
-                      <CardContent className="p-4 space-y-2">
+                      <div className="p-5 space-y-3">
                         <div className="flex items-start justify-between gap-3">
                           <div className="flex-1 min-w-0">
-                            <p className="font-semibold text-sm leading-snug">{course.title}</p>
-                            <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">
+                            <p className="font-bold text-sm text-light-gray leading-snug">
+                              {course.title}
+                            </p>
+                            <p className="text-xs text-light-gray/50 mt-1 line-clamp-2 leading-relaxed">
                               {course.smallDescription}
                             </p>
                           </div>
                           {isLoggedIn && course.enrolled ? (
                             <Link
                               href={`/dashboard/${course.slug}`}
-                              className={cn(
-                                buttonVariants({ size: "sm", variant: "outline" }),
-                                "shrink-0 text-xs h-7"
-                              )}
+                              className="shrink-0 text-xs font-bold uppercase tracking-widest bg-accent-red hover:bg-accent-red/90 text-white px-3 py-1.5 transition-colors"
                             >
                               {isComplete ? "Revisar" : "Continuar"}
                             </Link>
                           ) : !isLoggedIn ? (
-                            <Lock className="size-4 text-muted-foreground shrink-0 mt-0.5" />
+                            <Lock className="size-4 text-light-gray/30 shrink-0 mt-0.5" />
                           ) : null}
                         </div>
 
                         {/* Per-course stats */}
-                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                        <div className="flex items-center gap-4 text-xs text-light-gray/40">
                           <span className="flex items-center gap-1">
-                            <Clock className="size-3" />
+                            <Clock className="size-3 text-accent-red" />
                             {course.duration}h
                           </span>
                           <span className="flex items-center gap-1">
-                            <GraduationCap className="size-3" />
+                            <GraduationCap className="size-3 text-accent-red" />
                             {course.level}
                           </span>
-                          <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
+                          <span className="border border-light-gray/10 px-2 py-0.5 text-[10px] uppercase tracking-widest">
                             {course.category}
-                          </Badge>
+                          </span>
                         </div>
 
                         {/* Per-course progress bar */}
                         {isLoggedIn && course.enrolled && course.total > 0 && (
                           <div className="space-y-1">
-                            <div className="h-1 w-full rounded-full bg-muted overflow-hidden">
+                            <div className="h-1 w-full bg-light-gray/10">
                               <div
                                 className={cn(
-                                  "h-full rounded-full transition-all duration-500",
-                                  isComplete ? "bg-emerald-500" : "bg-primary"
+                                  "h-full transition-all duration-500",
+                                  isComplete ? "bg-accent-red" : "bg-accent-red/60"
                                 )}
                                 style={{ width: `${courseProgress}%` }}
                               />
                             </div>
-                            <p className="text-[10px] text-muted-foreground tabular-nums">
+                            <p className="text-[10px] text-light-gray/30 tabular-nums">
                               {course.completed}/{course.total} lecciones
                             </p>
                           </div>
                         )}
-                      </CardContent>
-                    </Card>
+                      </div>
+                    </div>
                   </div>
                 );
               })}
             </div>
           </div>
         </div>
-      </div>
 
-      {/* ── Right column: enrollment card ────────────────────────────── */}
-      <div className="lg:col-span-1">
-        <div className="sticky top-24">
-          <Card className="border-0 shadow-md ring-1 ring-border/50">
-            <CardContent className="p-6 space-y-5">
-              {/* Price */}
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Precio de la ruta</span>
-                <span className="text-2xl font-bold text-primary">
-                  {path.price === 0 ? "Gratis" : `€${path.price}`}
-                </span>
+        {/* ── Right: enrollment card ─────────────────────────────────────── */}
+        <div className="lg:col-span-1">
+          <div className="sticky top-24">
+            <div className="bg-secondary-black border border-light-gray/10">
+              {/* Price header */}
+              <div className="p-6 border-b border-light-gray/10">
+                <div className="text-xs font-bold uppercase tracking-widest text-light-gray/40 mb-2">
+                  Precio de la ruta
+                </div>
+                <div className="font-bebas text-5xl text-light-gray">
+                  {path.price === 0 ? "GRATIS" : `€${path.price}`}
+                </div>
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="p-6 grid grid-cols-2 gap-3 border-b border-light-gray/10">
                 {[
                   { icon: BookOpen, label: `${courseStats.length} cursos` },
                   { icon: Clock, label: `${totalHours}h total` },
-                  {
-                    icon: GraduationCap,
-                    label: `${totalLessons} lecciones`,
-                  },
-                  {
-                    icon: CheckCircle2,
-                    label: "Acceso de por vida",
-                  },
+                  { icon: GraduationCap, label: `${totalLessons} lecciones` },
+                  { icon: CheckCircle2, label: "Acceso de por vida" },
                 ].map(({ icon: Icon, label }) => (
                   <div
                     key={label}
-                    className="flex items-center gap-2 rounded-lg bg-muted/50 p-2.5"
+                    className="flex items-center gap-2 bg-light-gray/5 border border-light-gray/10 p-2.5"
                   >
-                    <Icon className="size-4 text-primary shrink-0" />
-                    <span className="text-xs font-medium">{label}</span>
+                    <Icon className="size-4 text-accent-red shrink-0" />
+                    <span className="text-xs font-medium text-light-gray/70">{label}</span>
                   </div>
                 ))}
               </div>
 
               {/* CTA */}
-              {!isLoggedIn ? (
-                <Link
-                  href="/login"
-                  className={cn(buttonVariants({ size: "lg" }), "w-full")}
-                >
-                  Iniciar sesión para inscribirte
-                </Link>
-              ) : allEnrolled ? (
-                <Link
-                  href="/dashboard"
-                  className={cn(
-                    buttonVariants({ size: "lg", variant: "outline" }),
-                    "w-full gap-2"
-                  )}
-                >
-                  <CheckCircle2 className="size-4 text-emerald-500" />
-                  Ya estás matriculado
-                </Link>
-              ) : (
-                <EnrollPathButton pathId={path.id} />
-              )}
+              <div className="p-6">
+                {!isLoggedIn ? (
+                  <Link
+                    href="/login"
+                    className="block w-full bg-accent-red hover:bg-accent-red/90 text-white text-center py-4 font-bold text-sm tracking-widest uppercase transition-colors"
+                  >
+                    Iniciar sesión para inscribirte
+                  </Link>
+                ) : allEnrolled ? (
+                  <Link
+                    href="/dashboard"
+                    className="flex items-center justify-center gap-2 w-full border border-accent-red/30 text-accent-red text-center py-4 font-bold text-sm tracking-widest uppercase transition-colors hover:bg-accent-red/10"
+                  >
+                    <CheckCircle2 className="size-4" />
+                    Ya estás matriculado
+                  </Link>
+                ) : (
+                  <EnrollPathButton pathId={path.id} />
+                )}
 
-              {!isLoggedIn && (
-                <p className="text-center text-xs text-muted-foreground">
-                  Necesitas una cuenta para acceder a los cursos
-                </p>
-              )}
-            </CardContent>
-          </Card>
+                {!isLoggedIn && (
+                  <p className="text-center text-xs text-light-gray/30 mt-4">
+                    Necesitas una cuenta para acceder a los cursos
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

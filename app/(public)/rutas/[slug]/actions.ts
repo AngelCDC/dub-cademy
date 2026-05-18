@@ -11,6 +11,7 @@ export async function enrollInPathAction(pathId: string): Promise<ApiResponse> {
   const path = await prisma.learningPath.findUnique({
     where: { id: pathId, status: "Published" },
     select: {
+      slug: true,
       courses: {
         select: { courseId: true, course: { select: { price: true } } },
       },
@@ -31,6 +32,7 @@ export async function enrollInPathAction(pathId: string): Promise<ApiResponse> {
     )
   );
 
-  revalidatePath(`/rutas`);
+  revalidatePath("/rutas");
+  revalidatePath(`/rutas/${path.slug}`);
   return { status: "success", message: "¡Matriculado en todos los cursos de la ruta!" };
 }

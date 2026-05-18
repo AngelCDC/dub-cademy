@@ -64,7 +64,7 @@ export function UserDropdown({ email, name, image }: iAppProps) {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/course">
+            <Link href="/courses">
               <BookOpen size={16} className="opacity-60" aria-hidden="true" />
               <span>Courses</span>
             </Link>

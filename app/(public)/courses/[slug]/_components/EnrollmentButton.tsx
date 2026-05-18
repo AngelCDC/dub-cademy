@@ -1,11 +1,10 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { tryCatch } from "@/hooks/try-catch";
 import { useTransition } from "react";
 import { enrollInCourseAction } from "../actions";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
+import { Loader2, Rocket } from "lucide-react";
 import { enrollInCourseAction2 } from "../actions2";
 
 export function EnrollmentButton({ courseId }: { courseId: string }) {
@@ -18,7 +17,7 @@ export function EnrollmentButton({ courseId }: { courseId: string }) {
       );
 
       if (error) {
-        toast.error("An unexpected error occurred. Please try again.");
+        toast.error("Error inesperado. Por favor intenta de nuevo.");
         return;
       }
 
@@ -31,15 +30,17 @@ export function EnrollmentButton({ courseId }: { courseId: string }) {
   }
 
   return (
-    <Button onClick={onSubmit} disabled={pending} className="w-full">
+    <button
+      onClick={onSubmit}
+      disabled={pending}
+      className="flex items-center justify-center gap-2 w-full bg-accent-red hover:bg-accent-red/90 disabled:opacity-50 text-white py-4 font-bold text-sm tracking-widest uppercase transition-colors"
+    >
       {pending ? (
-        <>
-          <Loader2 className="size-4 animate-spin" />
-          Loading...
-        </>
+        <Loader2 className="size-4 animate-spin" />
       ) : (
-        "Enroll Now!"
+        <Rocket className="size-4" />
       )}
-    </Button>
+      {pending ? "Procesando…" : "Inscribirme Ahora"}
+    </button>
   );
 }
