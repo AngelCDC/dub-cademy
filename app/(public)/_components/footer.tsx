@@ -1,25 +1,11 @@
 import React from "react";
+import Link from "next/link";
 
-interface FooterLink {
-  label: string;
-  href: string;
-}
-
-interface FooterColumn {
-  title: string;
-  links: FooterLink[];
-}
-
-interface SocialLink {
-  label: string;
-  href: string;
-}
-
+interface FooterLink { label: string; href: string }
+interface FooterColumn { title: string; links: FooterLink[] }
+interface SocialLink { label: string; href: string }
 interface FooterProps {
-  brand?: {
-    name: string;
-    description: string;
-  };
+  brand?: { name: string; description: string };
   columns?: FooterColumn[];
   socialLinks?: SocialLink[];
   copyright?: string;
@@ -35,26 +21,26 @@ const defaultColumns: FooterColumn[] = [
   {
     title: "Programas",
     links: [
-      { label: "Desarrollo Web", href: "#" },
-      { label: "Data Science", href: "#" },
-      { label: "Diseño UX/UI", href: "#" },
-      { label: "Marketing Digital", href: "#" },
+      { label: "Desarrollo Web", href: "/courses" },
+      { label: "Data Science", href: "/courses" },
+      { label: "Diseño UX/UI", href: "/courses" },
+      { label: "Marketing Digital", href: "/courses" },
     ],
   },
   {
     title: "Academia",
     links: [
       { label: "Sobre Nosotros", href: "#" },
-      { label: "Metodología", href: "#" },
-      { label: "Instructores", href: "#" },
+      { label: "Metodología", href: "/metodologia" },
+      { label: "Rutas de Aprendizaje", href: "/rutas" },
       { label: "Trabaja con Nosotros", href: "#" },
     ],
   },
   {
     title: "Soporte",
     links: [
-      { label: "Contacto", href: "#" },
-      { label: "Preguntas Frecuentes", href: "#" },
+      { label: "Contacto", href: "/contacto" },
+      { label: "Preguntas Frecuentes", href: "/contacto" },
       { label: "Becas", href: "#" },
       { label: "Empresas", href: "#" },
     ],
@@ -72,56 +58,59 @@ const Footer: React.FC<FooterProps> = ({
   brand = defaultBrand,
   columns = defaultColumns,
   socialLinks = defaultSocialLinks,
-  copyright = "© 2024 VELOCITY ACADEMY. Todos los derechos reservados.",
+  copyright = `© ${new Date().getFullYear()} VELOCITY ACADEMY. Todos los derechos reservados.`,
 }) => {
   return (
-    <footer className="bg-primary-black text-white py-24 px-16 pb-12 max-md:px-8">
-      <div className="max-w-[1600px] mx-auto grid grid-cols-[2fr_1fr_1fr_1fr] gap-16 mb-16 max-lg:grid-cols-2 max-md:grid-cols-1">
-        {/* Brand Section */}
-        <div>
-          <div className="font-antonio text-[2.5rem] font-bold tracking-[0.15em] mb-6">
-            {brand.name}
+    <footer className="border-t bg-muted/30 px-6 lg:px-16 xl:px-20 pt-16 pb-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Top grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-12 mb-12">
+          {/* Brand */}
+          <div className="space-y-4">
+            <div className="font-semibold text-xl tracking-widest uppercase text-foreground">
+              {brand.name}
+            </div>
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
+              {brand.description}
+            </p>
           </div>
-          <p className="opacity-60 leading-[1.6]">{brand.description}</p>
+
+          {/* Columns */}
+          {columns.map((column) => (
+            <div key={column.title}>
+              <h4 className="text-xs font-semibold uppercase tracking-widest text-foreground mb-5">
+                {column.title}
+              </h4>
+              <ul className="space-y-3">
+                {column.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        {/* Footer Columns */}
-        {columns.map((column, index) => (
-          <div key={index}>
-            <h4 className="font-antonio text-base tracking-[0.2em] uppercase mb-6">
-              {column.title}
-            </h4>
-            <ul className="list-none space-y-3">
-              {column.links.map((link, linkIndex) => (
-                <li key={linkIndex}>
-                  <a
-                    href={link.href}
-                    className="text-white no-underline opacity-60 transition-all duration-300 hover:opacity-100 hover:pl-[5px]"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+        {/* Bottom */}
+        <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-muted-foreground">{copyright}</p>
+          <div className="flex gap-6">
+            {socialLinks.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                className="text-xs text-muted-foreground hover:text-primary transition-colors"
+              >
+                {social.label}
+              </a>
+            ))}
           </div>
-        ))}
-      </div>
-
-      {/* Bottom Section */}
-      <div className="border-t border-white/10 pt-8 flex justify-between items-center opacity-60 text-[0.85rem] max-w-[1600px] mx-auto max-md:flex-col max-md:gap-4 max-md:text-center">
-        <div>{copyright}</div>
-
-        {/* Social Links */}
-        <div className="flex gap-6">
-          {socialLinks.map((social, index) => (
-            <a
-              key={index}
-              href={social.href}
-              className="text-white no-underline transition-colors duration-300 hover:text-accent-red"
-            >
-              {social.label}
-            </a>
-          ))}
         </div>
       </div>
     </footer>

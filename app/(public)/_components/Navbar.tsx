@@ -6,6 +6,9 @@ import { usePathname } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { UserDropdown } from "./UserDropdown";
 import { useSignOut } from "@/hooks/use-singout";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { X, Menu } from "lucide-react";
 
 const navigationItems = [
   { name: "Inicio", href: "/" },
@@ -23,108 +26,29 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 w-full px-16 max-xl:px-12 max-lg:px-8 py-6 max-xl:py-5 flex justify-between items-center z-[1000] bg-white/98 backdrop-blur-[20px] border-b border-black/5 animate-slide-down">
-        <Link
-          href="/"
-          className="font-antonio text-[2rem] max-xl:text-[1.7rem] font-bold tracking-[0.15em] text-primary-black relative after:content-[''] after:absolute after:bottom-[-3px] after:left-0 after:w-[30%] after:h-[3px] after:bg-accent-red"
-        >
-          VELOCITY
-        </Link>
-
-        {/* Desktop navigation */}
-        <ul className="hidden lg:flex gap-12 max-xl:gap-8 list-none items-center">
-          {navigationItems.map((item) => (
-            <li key={item.name}>
-              <Link
-                href={item.href}
-                className={`nav-link max-xl:text-[0.85rem] ${pathname === item.href ? "text-accent-red" : "text-primary-black hover:text-accent-red"}`}
-              >
-                {item.name}
-              </Link>
-            </li>
-          ))}
-
-          {/* Theme Toggle 
-          <li>
-            <ThemeToggle />
-          </li>*/}
-
-          <li>
-            {isPending ? null : session ? (
-              <UserDropdown
-                email={session.user.email}
-                image={
-                  session?.user.image ??
-                  `https://avatar.vercel.sh/${session?.user.email}`
-                }
-                name={
-                  session?.user.name && session.user.name.length > 0
-                    ? session.user.name
-                    : session?.user.email.split("@")[0]
-                }
-              />
-            ) : (
-              <div className="flex items-center gap-3">
-                <Link href="/login" className="login-button cta-primary">
-                  Login
-                </Link>
-              </div>
-            )}
-          </li>
-        </ul>
-
-        {/* Mobile menu button */}
-        <button
-          className="lg:hidden w-10 h-10 border-2 border-primary-black rounded-full flex items-center justify-center text-lg transition-all duration-300 hover:bg-primary-black hover:text-white"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileMenuOpen ? "✕" : "☰"}
-        </button>
-      </nav>
-
-      {/* Mobile Menu Overlay */}
-      <div
-        className={`fixed inset-0 bg-black/50 z-[999] transition-opacity duration-300 lg:hidden ${
-          mobileMenuOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
-        }`}
-        onClick={() => setMobileMenuOpen(false)}
-      />
-
-      {/* Mobile Menu */}
-      <div
-        className={`fixed top-0 right-0 h-full w-[280px] bg-white shadow-2xl z-[1001] transition-transform duration-300 lg:hidden ${
-          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <div className="p-8">
-          {/* Close button */}
-          <button
-            className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center text-2xl"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            ✕
-          </button>
-
+      <nav className="fixed top-0 w-full z-[1000] bg-background/95 backdrop-blur-md border-b border-border">
+        <div className="flex items-center justify-between px-6 lg:px-16 xl:px-20 h-16 md:h-20">
           {/* Logo */}
-          <div className="font-antonio text-2xl font-bold tracking-[0.15em] text-primary-black mb-12 mt-4">
+          <Link
+            href="/"
+            className="font-semibold text-xl tracking-widest uppercase text-foreground hover:text-primary transition-colors"
+          >
             VELOCITY
-          </div>
+          </Link>
 
-          {/* Navigation Links */}
-          <ul className="space-y-6">
+          {/* Desktop nav */}
+          <ul className="hidden lg:flex items-center gap-8 xl:gap-10 list-none">
             {navigationItems.map((item) => (
               <li key={item.name}>
                 <Link
                   href={item.href}
-                  className={`block text-lg font-medium tracking-wider uppercase transition-colors ${
+                  className={cn(
+                    "text-sm font-medium uppercase tracking-wider transition-colors relative",
+                    "after:absolute after:bottom-[-4px] after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full",
                     pathname === item.href
-                      ? "text-accent-red"
-                      : "text-primary-black hover:text-accent-red"
-                  }`}
-                  onClick={() => setMobileMenuOpen(false)}
+                      ? "text-primary after:w-full"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
                 >
                   {item.name}
                 </Link>
@@ -132,43 +56,104 @@ export function Navbar() {
             ))}
           </ul>
 
-          {/* Theme Toggle 
-          <div className="mt-8 pt-8 border-t border-mid-gray">
-            <ThemeToggle />
-          </div>*/}
-
-          {/* Auth Section */}
-          <div className="mt-8 pt-8 border-t border-mid-gray">
-            {isPending ? (
-              <div className="text-center text-text-gray">Cargando...</div>
-            ) : session ? (
-              <>
-                <div className="space-y-6">
-                  <Link
-                    href="/dashboard"
-                    className={`block text-lg font-medium tracking-wider uppercase transition-colors text-primary-black hover:text-accent-red`}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Dashboard
-                  </Link>
-                  <div
-                    className="login-button cta-primary"
-                    onClick={handleSignOut}
-                  >
-                    Logout
-                  </div>
-                </div>
-              </>
+          {/* Desktop auth */}
+          <div className="hidden lg:flex items-center gap-3">
+            {isPending ? null : session ? (
+              <UserDropdown
+                email={session.user.email}
+                image={session?.user.image ?? `https://avatar.vercel.sh/${session?.user.email}`}
+                name={
+                  session?.user.name && session.user.name.length > 0
+                    ? session.user.name
+                    : session?.user.email.split("@")[0]
+                }
+              />
             ) : (
-              <Link
-                href="/login"
-                className="block w-full py-3 px-6 bg-accent-red text-white text-center font-bold tracking-wider uppercase rounded-lg hover:bg-accent-orange transition-all"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Login
-              </Link>
+              <Button asChild size="sm">
+                <Link href="/login">Iniciar Sesión</Link>
+              </Button>
             )}
           </div>
+
+          {/* Mobile menu button */}
+          <button
+            className="lg:hidden p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile overlay */}
+      <div
+        className={cn(
+          "fixed inset-0 bg-black/50 z-[999] transition-opacity duration-300 lg:hidden",
+          mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        )}
+        onClick={() => setMobileMenuOpen(false)}
+      />
+
+      {/* Mobile drawer */}
+      <div
+        className={cn(
+          "fixed top-0 right-0 h-full w-72 bg-card border-l border-border shadow-2xl z-[1001] transition-transform duration-300 lg:hidden",
+          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        )}
+      >
+        <div className="flex items-center justify-between px-6 h-16 md:h-20 border-b border-border">
+          <span className="font-semibold text-lg tracking-widest uppercase">VELOCITY</span>
+          <button
+            className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <X className="size-5" />
+          </button>
+        </div>
+
+        <div className="p-6 space-y-1">
+          {navigationItems.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={cn(
+                "flex items-center px-3 py-2.5 rounded-md text-sm font-medium uppercase tracking-wider transition-colors",
+                pathname === item.href
+                  ? "bg-primary/10 text-primary"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted"
+              )}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </div>
+
+        <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-border">
+          {isPending ? null : session ? (
+            <div className="space-y-2">
+              <Link
+                href="/dashboard"
+                className="flex items-center px-3 py-2.5 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Dashboard
+              </Link>
+              <button
+                className="w-full text-left px-3 py-2.5 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                onClick={() => { handleSignOut(); setMobileMenuOpen(false); }}
+              >
+                Cerrar sesión
+              </button>
+            </div>
+          ) : (
+            <Button className="w-full" asChild>
+              <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                Iniciar Sesión
+              </Link>
+            </Button>
+          )}
         </div>
       </div>
     </>
