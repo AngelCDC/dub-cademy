@@ -3,14 +3,11 @@
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
 import { Loader2, Rocket } from "lucide-react";
 import { tryCatch } from "@/hooks/try-catch";
 import { enrollInPathAction } from "../actions";
 
-interface Props {
-  pathId: string;
-}
+interface Props { pathId: string }
 
 export function EnrollPathButton({ pathId }: Props) {
   const [pending, startTransition] = useTransition();
@@ -27,9 +24,13 @@ export function EnrollPathButton({ pathId }: Props) {
   }
 
   return (
-    <Button onClick={handleEnroll} disabled={pending} size="lg" className="w-full gap-2">
+    <button
+      onClick={handleEnroll}
+      disabled={pending}
+      className="flex items-center justify-center gap-2 w-full bg-primary hover:bg-primary/90 disabled:opacity-50 text-primary-foreground py-4 font-bold text-sm tracking-widest uppercase transition-colors"
+    >
       {pending ? <Loader2 className="size-4 animate-spin" /> : <Rocket className="size-4" />}
       {pending ? "Procesando…" : "Inscribirme en la Ruta"}
-    </Button>
+    </button>
   );
 }
