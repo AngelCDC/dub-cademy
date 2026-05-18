@@ -1,4 +1,17 @@
+import type { Metadata } from "next";
 import { getLearningPaths } from "@/app/data/learning-path/get-learning-paths";
+
+export const metadata: Metadata = {
+  title: "Rutas de Aprendizaje",
+  description:
+    "Itinerarios formativos completos para transformar tu carrera. Cada ruta agrupa cursos en secuencia lógica con mentoría y career support incluidos.",
+  openGraph: {
+    title: "Rutas de Aprendizaje | VELOCITY Academy",
+    description:
+      "Itinerarios formativos completos. Aprende en secuencia, con mentoría y career support.",
+    url: "/rutas",
+  },
+};
 import Link from "next/link";
 import { BookOpen, Clock, ArrowRight, Map } from "lucide-react";
 

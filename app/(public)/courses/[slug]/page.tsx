@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getIndividualCourse } from "@/app/data/course/get-course";
 import { RenderDescription } from "@/components/rich-text-editor/RenderDescription";
 import {
@@ -26,6 +27,30 @@ import { cn } from "@/lib/utils";
 
 type Params = Promise<{ slug: string }>;
 
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { slug } = await params;
+  const course = await getIndividualCourse(slug);
+  const imageUrl = `https://${process.env.NEXT_PUBLIC_S3_BUCKET_NAME_IMAGES}.fly.storage.tigris.dev/${course.fileKey}`;
+
+  return {
+    title: course.title,
+    description: course.smallDescription,
+    openGraph: {
+      title: `${course.title} | VELOCITY Academy`,
+      description: course.smallDescription,
+      url: `/courses/${slug}`,
+      type: "article",
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: course.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${course.title} | VELOCITY Academy`,
+      description: course.smallDescription,
+      images: [imageUrl],
+    },
+  };
+}
+
 export default async function SlugPage({ params }: { params: Params }) {
   const { slug } = await params;
   const course = await getIndividualCourse(slug);
@@ -33,8 +58,42 @@ export default async function SlugPage({ params }: { params: Params }) {
   const { average, count } = computeRating(course.reviews ?? []);
   const totalLessons = course.chapter.reduce((t, ch) => t + ch.lessons.length, 0);
 
+  const imageUrl = `https://${process.env.NEXT_PUBLIC_S3_BUCKET_NAME_IMAGES}.fly.storage.tigris.dev/${course.fileKey}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: course.title,
+    description: course.smallDescription,
+    provider: {
+      "@type": "Organization",
+      name: "VELOCITY Academy",
+      sameAs: "https://velocityacademy.com",
+    },
+    image: imageUrl,
+    offers: {
+      "@type": "Offer",
+      price: course.price,
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+    },
+    ...(average > 0 && {
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: average.toFixed(1),
+        reviewCount: count,
+        bestRating: 5,
+        worstRating: 1,
+      },
+    }),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* ── Hero strip ────────────────────────────────────────────────── */}
       <section className="relative bg-muted/40 border-b border-border overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full [background:repeating-linear-gradient(45deg,transparent,transparent_20px,rgba(0,0,0,0.02)_20px,rgba(0,0,0,0.02)_40px)]" />

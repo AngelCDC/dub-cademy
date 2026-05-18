@@ -1,6 +1,19 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+
+export const metadata: Metadata = {
+  title: "VELOCITY Academy — Transforma tu carrera tech",
+  description:
+    "No más teoría sin aplicación. Aprende desarrollo web, data science y diseño UX/UI con proyectos reales, mentoría 1-a-1 y una comunidad que te impulsa.",
+  openGraph: {
+    title: "VELOCITY Academy — Transforma tu carrera tech",
+    description:
+      "No más teoría sin aplicación. Aprende con proyectos reales, mentoría personalizada y comunidad activa.",
+    url: "/",
+  },
+};
 
 export default function LandingPage() {
   return (

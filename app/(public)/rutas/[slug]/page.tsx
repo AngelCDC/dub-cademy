@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import { getLearningPath } from "@/app/data/learning-path/get-learning-path";
+import { prisma } from "@/lib/db";
 export const dynamic = "force-dynamic";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
@@ -9,6 +11,26 @@ import { EnrollPathButton } from "./_components/EnrollPathButton";
 import { buttonVariants } from "@/components/ui/button";
 
 type Params = Promise<{ slug: string }>;
+
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { slug } = await params;
+  const path = await prisma.learningPath.findUnique({
+    where: { slug, status: "Published" },
+    select: { title: true, description: true },
+  });
+
+  if (!path) return { title: "Ruta no encontrada" };
+
+  return {
+    title: path.title,
+    description: path.description,
+    openGraph: {
+      title: `${path.title} | VELOCITY Academy`,
+      description: path.description,
+      url: `/rutas/${slug}`,
+    },
+  };
+}
 
 export default async function LearningPathPage({ params }: { params: Params }) {
   const { slug } = await params;

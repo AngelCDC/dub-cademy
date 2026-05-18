@@ -1,4 +1,17 @@
+import type { Metadata } from "next";
 import { getAllCourses } from "@/app/data/course/get-all-courses";
+
+export const metadata: Metadata = {
+  title: "Cursos",
+  description:
+    "Explora nuestro catálogo de cursos online: desarrollo web, data science, diseño UX/UI y marketing digital. Aprende con proyectos reales y mentoría personalizada.",
+  openGraph: {
+    title: "Cursos | VELOCITY Academy",
+    description:
+      "Explora nuestro catálogo de cursos online y transforma tu carrera tech.",
+    url: "/courses",
+  },
+};
 import { PublicCourseCard, PublicCourseCardSkeleton } from "../_components/PublicCourseCard";
 import { Suspense } from "react";
 import { Search, TrendingUp, Award } from "lucide-react";
