@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Check, Users, BarChart3, Shield, Zap, BookOpen, Settings } from "lucide-react";
+import { DemoForm } from "./_components/DemoForm";
 
 export const metadata: Metadata = {
   title: "Flow State Business",
@@ -162,39 +163,9 @@ export default function EmpresasPage() {
         </div>
       </div>
 
-      {/* Demo form */}
+      {/* Demo form — Client Component (event handlers) */}
       <div className="max-w-2xl mx-auto px-6 py-16 md:py-20">
-        <div className="bg-white border border-violet-100 rounded-2xl p-8 shadow-sm">
-          <h2 className="text-xl font-bold text-[#1a1535] mb-1">Agenda una demo gratuita</h2>
-          <p className="text-sm text-slate-400 mb-6">Te mostramos el dashboard en acción en 30 minutos.</p>
-          <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-            <div className="grid grid-cols-2 gap-4">
-              {[["nombre", "Nombre"], ["empresa", "Empresa"]].map(([id, label]) => (
-                <div key={id}>
-                  <label htmlFor={id} className="block text-xs font-semibold text-slate-500 mb-1.5">{label}</label>
-                  <input type="text" id={id} required className="w-full bg-[#F8F6FF] border border-violet-100 focus:border-primary/50 focus:bg-white rounded-xl px-4 py-3 text-sm text-[#1a1535] placeholder:text-slate-300 outline-none transition-colors" />
-                </div>
-              ))}
-            </div>
-            <div>
-              <label htmlFor="email-biz" className="block text-xs font-semibold text-slate-500 mb-1.5">Email corporativo</label>
-              <input type="email" id="email-biz" required className="w-full bg-[#F8F6FF] border border-violet-100 focus:border-primary/50 focus:bg-white rounded-xl px-4 py-3 text-sm text-[#1a1535] placeholder:text-slate-300 outline-none transition-colors" />
-            </div>
-            <div>
-              <label htmlFor="team-size" className="block text-xs font-semibold text-slate-500 mb-1.5">Tamaño del equipo</label>
-              <select id="team-size" className="w-full bg-[#F8F6FF] border border-violet-100 focus:border-primary/50 focus:bg-white rounded-xl px-4 py-3 text-sm text-[#1a1535] outline-none transition-colors appearance-none">
-                <option value="">Selecciona...</option>
-                <option>3–10 personas</option>
-                <option>11–50 personas</option>
-                <option>51–200 personas</option>
-                <option>+200 personas</option>
-              </select>
-            </div>
-            <button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white font-semibold text-sm py-3.5 rounded-full transition-all hover:-translate-y-0.5 shadow-md shadow-primary/25">
-              Solicitar demo
-            </button>
-          </form>
-        </div>
+        <DemoForm />
       </div>
     </div>
   );
