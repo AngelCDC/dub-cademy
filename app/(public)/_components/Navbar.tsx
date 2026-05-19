@@ -12,8 +12,9 @@ import { Search, X, Menu, Zap } from "lucide-react";
 const navItems = [
   { name: "Cursos", href: "/courses" },
   { name: "Rutas", href: "/rutas" },
-  { name: "Metodología", href: "/metodologia" },
-  { name: "Contacto", href: "/contacto" },
+  { name: "Empresas", href: "/empresas" },
+  { name: "Blog", href: "/blog" },
+  { name: "Precios", href: "/precios" },
 ];
 
 export function Navbar() {

@@ -2,9 +2,9 @@ import Link from "next/link";
 import { Zap, Twitter, Linkedin, Youtube, MessageCircle } from "lucide-react";
 
 const cols = [
-  { heading: "Aprender", items: [{ l: "Todos los cursos", h: "/courses" }, { l: "Rutas de aprendizaje", h: "/rutas" }, { l: "Metodología", h: "/metodologia" }] },
-  { heading: "Categorías", items: [{ l: "Desarrollo Web", h: "/courses" }, { l: "Data Science & IA", h: "/courses" }, { l: "Diseño UX/UI", h: "/courses" }, { l: "Marketing Digital", h: "/courses" }] },
-  { heading: "Compañía", items: [{ l: "Sobre nosotros", h: "#" }, { l: "Trabaja con nosotros", h: "#" }, { l: "Contacto", h: "/contacto" }, { l: "Becas", h: "#" }] },
+  { heading: "Producto", items: [{ l: "Todos los cursos", h: "/courses" }, { l: "Rutas de aprendizaje", h: "/rutas" }, { l: "Precios", h: "/precios" }, { l: "Flow State Business", h: "/empresas" }, { l: "Blog", h: "/blog" }] },
+  { heading: "Comunidad", items: [{ l: "Comunidad", h: "/comunidad" }, { l: "Metodología", h: "/metodologia" }, { l: "Buscar cursos", h: "/buscar" }, { l: "Contacto", h: "/contacto" }] },
+  { heading: "Legal", items: [{ l: "Sobre nosotros", h: "#" }, { l: "Trabaja con nosotros", h: "#" }, { l: "Términos y condiciones", h: "/terminos" }, { l: "Política de privacidad", h: "/privacidad" }] },
 ];
 
 export default function Footer() {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Star, Clock, BookOpen, Users, Zap, Shield, ChevronRight } from "lucide-react";
+import { ArrowRight, Star, Clock, BookOpen, Users, Zap, Shield, ChevronRight, Check, BarChart3 } from "lucide-react";
 import { getAllCourses } from "@/app/data/course/get-all-courses";
 import { getLearningPaths } from "@/app/data/learning-path/get-learning-paths";
 import { env } from "@/lib/env";
@@ -13,13 +13,17 @@ export const metadata: Metadata = {
   openGraph: { title: "Flow State", url: "/" },
 };
 
-const CATEGORIES = [
-  { emoji: "💻", label: "Desarrollo Web", courses: 8 },
-  { emoji: "📊", label: "Data Science & IA", courses: 5 },
-  { emoji: "🎨", label: "Diseño UX/UI", courses: 4 },
-  { emoji: "📱", label: "Marketing Digital", courses: 3 },
-  { emoji: "☁️", label: "Cloud & DevOps", courses: 6 },
-  { emoji: "🔐", label: "Ciberseguridad", courses: 3 },
+const AREAS = [
+  { emoji: "💻", label: "Desarrollo de Software", desc: "Frontend, backend y full stack", count: 8 },
+  { emoji: "🧠", label: "Inteligencia Artificial", desc: "Machine learning, LLMs y IA generativa", count: 5 },
+  { emoji: "🎨", label: "Diseño de Producto", desc: "UX, UI y design systems", count: 4 },
+  { emoji: "📱", label: "Marketing Digital", desc: "Growth, SEO y content marketing", count: 3 },
+  { emoji: "🔐", label: "Ciberseguridad", desc: "Ethical hacking y seguridad empresarial", count: 3 },
+  { emoji: "📊", label: "Data Science", desc: "SQL, Python y visualización", count: 6 },
+  { emoji: "☁️", label: "Cloud & DevOps", desc: "AWS, Docker y CI/CD", count: 5 },
+  { emoji: "💼", label: "Liderazgo & Negocio", desc: "Management y habilidades blandas", count: 4 },
+  { emoji: "💬", label: "Inglés Profesional", desc: "Business English y comunicación", count: 2 },
+  { emoji: "💰", label: "Finanzas & Startups", desc: "Inversión, startups y estrategia", count: 3 },
 ];
 
 const TESTIMONIALS = [
@@ -125,6 +129,29 @@ export default async function LandingPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── Areas / Schools ── */}
+      <section className="max-w-7xl mx-auto px-6 py-16 md:py-24">
+        <div className="text-center mb-12">
+          <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">Aprende lo que importa</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-[#1a1535] mb-3">Áreas de aprendizaje</h2>
+          <p className="text-slate-400 text-base max-w-lg mx-auto">10 áreas diseñadas para mantenerte en flow y acelerar tu carrera.</p>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+          {AREAS.map((area) => (
+            <Link
+              key={area.label}
+              href="/courses"
+              className="group bg-white border border-violet-100 hover:border-violet-300 rounded-2xl p-4 transition-all hover:shadow-md hover:shadow-violet-100/50 hover:-translate-y-1"
+            >
+              <div className="text-2xl mb-3">{area.emoji}</div>
+              <h3 className="text-xs font-bold text-[#1a1535] group-hover:text-primary transition-colors leading-snug mb-1">{area.label}</h3>
+              <p className="text-[11px] text-slate-400 leading-snug mb-2 hidden sm:block">{area.desc}</p>
+              <span className="text-[10px] font-semibold text-primary bg-primary/10 px-2 py-0.5 rounded-full">{area.count} rutas</span>
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -311,6 +338,100 @@ export default async function LandingPage() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* ── Business teaser ── */}
+      <section className="bg-white border-y border-violet-100 py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="inline-flex items-center gap-2 text-xs font-semibold text-primary uppercase tracking-widest mb-4">
+              <Users className="size-3.5" /> Para equipos y empresas
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1a1535] leading-tight mb-5">
+              Capacita a tu equipo{" "}
+              <span className="text-primary">en flow</span>
+            </h2>
+            <p className="text-slate-500 text-base leading-relaxed mb-6">
+              Rutas personalizadas por rol, métricas en tiempo real y acceso inmediato
+              a más de 2,000 cursos para toda tu organización.
+            </p>
+            <ul className="space-y-2 mb-8">
+              {["Dashboard centralizado con métricas por empleado", "Rutas de aprendizaje por rol y área", "SSO y facturación simplificada", "Flow Score™ para todo el equipo"].map((f) => (
+                <li key={f} className="flex items-center gap-2 text-sm text-slate-600">
+                  <Check className="size-4 text-primary shrink-0" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <Link href="/empresas" className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-all hover:-translate-y-0.5 shadow-md shadow-primary/25">
+              Ver Flow State Business <ArrowRight className="size-4" />
+            </Link>
+          </div>
+          {/* Mini dashboard mock */}
+          <div className="bg-[#F8F6FF] border border-violet-100 rounded-2xl p-5 shadow-lg shadow-violet-100/50 lg:rotate-1">
+            <div className="flex items-center gap-2 mb-4 pb-4 border-b border-violet-100">
+              <BarChart3 className="size-4 text-primary" />
+              <span className="text-xs font-semibold text-[#1a1535]">Team Dashboard</span>
+              <span className="ml-auto text-[10px] text-slate-400">12 miembros activos</span>
+            </div>
+            <div className="grid grid-cols-2 gap-3 mb-4">
+              {[{ v: "85%", l: "Completado" }, { v: "47h", l: "Esta semana" }, { v: "3", l: "Rutas activas" }, { v: "↑ 23%", l: "vs mes anterior" }].map((m) => (
+                <div key={m.l} className="bg-white border border-violet-100 rounded-xl p-3">
+                  <div className="text-lg font-extrabold text-primary">{m.v}</div>
+                  <div className="text-[11px] text-slate-400">{m.l}</div>
+                </div>
+              ))}
+            </div>
+            <div className="space-y-2">
+              {["María G. completó React Avanzado", "Carlos M. inició Python para IA", "Ana R. obtuvo certificado UX"].map((a, i) => (
+                <div key={i} className="flex items-center gap-2 text-xs text-slate-500 bg-white border border-violet-50 rounded-xl px-3 py-2">
+                  <div className="size-5 rounded-full bg-primary/10 flex items-center justify-center text-[9px] font-bold text-primary shrink-0">
+                    {a.charAt(0)}
+                  </div>
+                  {a}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Pricing preview ── */}
+      <section className="max-w-5xl mx-auto px-6 py-16 md:py-24">
+        <div className="text-center mb-12">
+          <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">Planes</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-[#1a1535] mb-3">Elige tu zona</h2>
+          <p className="text-slate-400 text-base">Empieza gratis, escala cuando estés listo.</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {[
+            { name: "Free", price: "$0", desc: "Para explorar", cta: "Empezar gratis", href: "/login", features: ["3 cursos gratuitos", "Acceso a comunidad", "Certificado básico"], highlight: false },
+            { name: "Pro", price: "$19", desc: "Para aprender sin límites", cta: "Empezar con Pro", href: "/precios", features: ["Todos los cursos", "Rutas de aprendizaje", "Certificados verificables", "Flow Score™ personalizado"], highlight: true, badge: "Más popular" },
+            { name: "Business", price: "$49", desc: "Por persona · Para equipos", cta: "Ver Business", href: "/empresas", features: ["Todo de Pro", "Dashboard empresa", "Métricas por empleado", "SSO y facturación"], highlight: false },
+          ].map((plan) => (
+            <div key={plan.name} className={`bg-white rounded-2xl overflow-hidden transition-all ${plan.highlight ? "border-2 border-primary shadow-xl shadow-primary/10 md:-translate-y-2" : "border border-violet-100 shadow-sm"}`}>
+              {plan.badge && <div className="bg-primary text-white text-xs font-bold px-4 py-1.5 text-center tracking-wider">{plan.badge}</div>}
+              <div className="p-6">
+                <h3 className="text-sm font-bold text-[#1a1535] mb-1">{plan.name}</h3>
+                <div className="text-3xl font-extrabold text-[#1a1535] mb-1">{plan.price}<span className="text-sm text-slate-400 font-normal">/mes</span></div>
+                <p className="text-xs text-slate-400 mb-5">{plan.desc}</p>
+                <Link href={plan.href} className={`flex items-center justify-center w-full py-2.5 rounded-full text-sm font-semibold transition-all mb-5 ${plan.highlight ? "bg-primary hover:bg-primary/90 text-white shadow-md shadow-primary/20" : "bg-violet-50 hover:bg-violet-100 text-primary border border-violet-200"}`}>
+                  {plan.cta}
+                </Link>
+                <div className="space-y-2">
+                  {plan.features.map((f) => (
+                    <div key={f} className="flex items-center gap-2 text-xs text-slate-600">
+                      <Check className="size-3 text-primary shrink-0" />{f}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="text-center text-xs text-slate-400 mt-6">
+          <Link href="/precios" className="text-primary hover:underline">Ver comparativa completa →</Link>
+        </p>
       </section>
 
       {/* ── Final CTA ── */}
