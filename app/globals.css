@@ -6,38 +6,38 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.984 0.003 247.858);
-  --foreground: oklch(0.24 0.022 255.0);
-  --card: oklch(0.984 0.003 247.858);
-  --card-foreground: oklch(0.18 0.015 255.0);
+  --background: oklch(0.988 0.006 293);
+  --foreground: oklch(0.20 0.040 293);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.20 0.040 293);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.24 0.022 255.0);
-  --primary: oklch(0.588 0.158 241.966);
+  --popover-foreground: oklch(0.20 0.040 293);
+  --primary: oklch(0.577 0.245 293.1);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.944 0.012 247.0);
-  --secondary-foreground: oklch(0.38 0.018 247.0);
-  --muted: oklch(0.952 0.010 247.0);
-  --muted-foreground: oklch(0.558 0.010 247.0);
-  --accent: oklch(0.944 0.012 247.0);
-  --accent-foreground: oklch(0.24 0.022 255.0);
+  --secondary: oklch(0.955 0.025 293);
+  --secondary-foreground: oklch(0.40 0.080 293);
+  --muted: oklch(0.960 0.015 293);
+  --muted-foreground: oklch(0.55 0.030 293);
+  --accent: oklch(0.955 0.025 293);
+  --accent-foreground: oklch(0.20 0.040 293);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.898 0.008 247.0);
-  --input: oklch(0.820 0.012 247.0);
-  --ring: oklch(0.588 0.158 241.966);
-  --chart-1: oklch(0.588 0.158 241.966);
-  --chart-2: oklch(0.620 0.175 213.0);
-  --chart-3: oklch(0.720 0.130 241.966);
-  --chart-4: oklch(0.760 0.100 241.966);
-  --chart-5: oklch(0.820 0.070 241.966);
-  --sidebar: oklch(0.972 0.008 247.858);
-  --sidebar-foreground: oklch(0.32 0.015 255.0);
-  --sidebar-primary: oklch(0.588 0.158 241.966);
+  --border: oklch(0.920 0.020 293);
+  --input: oklch(0.900 0.020 293);
+  --ring: oklch(0.577 0.245 293.1);
+  --chart-1: oklch(0.577 0.245 293.1);
+  --chart-2: oklch(0.650 0.200 260);
+  --chart-3: oklch(0.720 0.160 293.1);
+  --chart-4: oklch(0.760 0.120 293.1);
+  --chart-5: oklch(0.820 0.080 293.1);
+  --sidebar: oklch(0.975 0.010 293);
+  --sidebar-foreground: oklch(0.28 0.040 293);
+  --sidebar-primary: oklch(0.577 0.245 293.1);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.944 0.012 247.0);
-  --sidebar-accent-foreground: oklch(0.28 0.018 255.0);
-  --sidebar-border: oklch(0.910 0.006 247.0);
-  --sidebar-ring: oklch(0.588 0.158 241.966);
+  --sidebar-accent: oklch(0.955 0.025 293);
+  --sidebar-accent-foreground: oklch(0.28 0.040 293);
+  --sidebar-border: oklch(0.920 0.020 293);
+  --sidebar-ring: oklch(0.577 0.245 293.1);
   --font-sans:
     ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
@@ -548,5 +548,34 @@ body {
 }
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* ── Flow State gimmicks ─────────────────────────────────── */
+
+/* Pulsing live dot for "En estado de Flow" badge */
+@keyframes flow-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.75); }
+}
+.flow-dot {
+  animation: flow-pulse 1.8s ease-in-out infinite;
+}
+
+/* Drifting gradient blob */
+@keyframes blob-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(30px, -20px) scale(1.05); }
+  66%       { transform: translate(-20px, 15px) scale(0.97); }
+}
+.flow-blob {
+  animation: blob-drift 9s ease-in-out infinite;
+}
+.flow-blob-delay {
+  animation: blob-drift 12s ease-in-out infinite reverse;
+}
+
+/* Soft wave between sections */
+.flow-wave {
+  background: linear-gradient(135deg, transparent 30%, oklch(0.955 0.025 293 / 0.5) 100%);
 }
 

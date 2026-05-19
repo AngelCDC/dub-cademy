@@ -6,28 +6,30 @@ import { CourseCatalog } from "./_components/CourseCatalog";
 
 export const metadata: Metadata = {
   title: "Cursos",
-  description: "Explora nuestro catálogo de cursos con proyectos reales y mentoría.",
-  openGraph: { title: "Cursos | VELOCITY Academy", url: "/courses" },
+  description: "Explora nuestro catálogo de cursos con proyectos reales y mentoría personalizada.",
+  openGraph: { title: "Cursos | Flow State", url: "/courses" },
 };
 
 export const dynamic = "force-dynamic";
 
 export default function CoursesPage() {
   return (
-    <div className="bg-[#0f0f0f] min-h-screen">
+    <div className="bg-[#F8F6FF] min-h-screen">
       {/* Header */}
-      <div className="relative overflow-hidden border-b border-white/5">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-        <div className="max-w-7xl mx-auto px-6 py-16 md:py-20">
+      <div className="relative overflow-hidden bg-white border-b border-violet-100">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+        {/* Blob */}
+        <div className="absolute -top-20 right-0 w-80 h-80 rounded-full bg-primary/6 blur-[70px] pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-20 relative">
           <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-4">
             Catálogo completo
           </p>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-[#1a1535] tracking-tight mb-4">
             Todos los cursos
           </h1>
-          <p className="text-white/40 text-base max-w-lg leading-relaxed">
-            Todos incluyen proyectos reales, acceso de por vida y certificado
-            verificado. Filtra por categoría y encuentra el tuyo.
+          <p className="text-slate-400 text-base max-w-lg leading-relaxed">
+            Cada curso está calibrado para mantenerte en estado de flow.
+            Proyectos reales, acceso de por vida y certificado verificado.
           </p>
         </div>
       </div>
@@ -50,9 +52,10 @@ async function RenderCatalog() {
 function CatalogSkeleton() {
   return (
     <div>
+      <div className="h-10 max-w-lg w-full bg-white border border-violet-100 rounded-full mb-6 animate-pulse" />
       <div className="flex gap-2 mb-10 overflow-x-auto pb-2">
         {Array.from({ length: 5 }).map((_, i) => (
-          <div key={i} className="h-9 w-24 rounded-full bg-white/5 animate-pulse shrink-0" />
+          <div key={i} className="h-9 w-24 rounded-full bg-violet-100 animate-pulse shrink-0" />
         ))}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

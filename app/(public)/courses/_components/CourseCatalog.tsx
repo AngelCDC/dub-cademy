@@ -37,7 +37,6 @@ export function CourseCatalog({ courses }: { courses: PublicCourseType[] }) {
 
   function handleQueryChange(value: string) {
     setQuery(value);
-    // Keep URL in sync so browser back/share works
     const params = new URLSearchParams(searchParams.toString());
     if (value.trim()) {
       params.set("q", value.trim());
@@ -55,16 +54,16 @@ export function CourseCatalog({ courses }: { courses: PublicCourseType[] }) {
     <div>
       {/* Search bar */}
       <div className="mb-6">
-        <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2.5 focus-within:border-white/25 transition-colors max-w-lg">
-          <Search className="size-3.5 text-white/35 shrink-0" />
+        <div className="flex items-center gap-2 bg-white border border-violet-100 rounded-full px-4 py-2.5 focus-within:border-violet-300 focus-within:shadow-sm focus-within:shadow-violet-100 transition-all max-w-lg">
+          <Search className="size-3.5 text-violet-300 shrink-0" />
           <input
             value={query}
             onChange={(e) => handleQueryChange(e.target.value)}
-            placeholder="Buscar cursos por nombre, categoría o nivel…"
-            className="flex-1 bg-transparent text-sm text-white placeholder:text-white/30 outline-none"
+            placeholder="Buscar por nombre, categoría o nivel…"
+            className="flex-1 bg-transparent text-sm text-[#1a1535] placeholder:text-slate-300 outline-none"
           />
           {query && (
-            <button onClick={clearQuery} className="text-white/30 hover:text-white transition-colors">
+            <button onClick={clearQuery} className="text-slate-300 hover:text-primary transition-colors">
               <X className="size-3.5" />
             </button>
           )}
@@ -80,8 +79,8 @@ export function CourseCatalog({ courses }: { courses: PublicCourseType[] }) {
             className={cn(
               "shrink-0 text-sm px-5 py-2 rounded-full border transition-all duration-150 whitespace-nowrap",
               active === cat
-                ? "bg-primary border-primary text-white font-semibold"
-                : "bg-transparent border-white/10 text-white/45 hover:text-white hover:border-white/25"
+                ? "bg-primary border-primary text-white font-semibold shadow-md shadow-primary/20"
+                : "bg-white border-violet-100 text-slate-500 hover:text-primary hover:border-violet-300 hover:bg-violet-50/50"
             )}
           >
             {cat}
@@ -92,17 +91,17 @@ export function CourseCatalog({ courses }: { courses: PublicCourseType[] }) {
       {/* Grid */}
       {filtered.length === 0 ? (
         <div className="flex flex-col items-center py-32 text-center">
-          <div className="size-14 rounded-xl bg-white/5 flex items-center justify-center mb-4">
-            <BookOpen className="size-6 text-white/25" />
+          <div className="size-14 rounded-2xl bg-violet-50 flex items-center justify-center mb-4">
+            <BookOpen className="size-6 text-violet-300" />
           </div>
-          <p className="text-white/50 font-semibold">
+          <p className="text-[#1a1535] font-semibold">
             {query ? `Sin resultados para "${query}"` : "Sin cursos en esta categoría"}
           </p>
-          <p className="text-sm text-white/25 mt-1">
+          <p className="text-sm text-slate-400 mt-1">
             {query ? "Prueba con otra búsqueda o cambia la categoría." : "Próximamente habrá más contenido."}
           </p>
           {query && (
-            <button onClick={clearQuery} className="mt-4 text-xs text-primary hover:text-primary/80 transition-colors">
+            <button onClick={clearQuery} className="mt-4 text-xs text-primary hover:text-primary/80 transition-colors font-medium">
               Limpiar búsqueda
             </button>
           )}
@@ -114,7 +113,7 @@ export function CourseCatalog({ courses }: { courses: PublicCourseType[] }) {
       )}
 
       {filtered.length > 0 && (
-        <p className="text-center text-xs text-white/25 mt-10">
+        <p className="text-center text-xs text-slate-400 mt-10">
           {filtered.length} curso{filtered.length !== 1 ? "s" : ""}
           {query ? ` para "${query}"` : active !== "Todos" ? ` en ${active}` : " disponibles"}
         </p>

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "¿Tienes dudas sobre nuestros programas? Nuestro equipo de asesores académicos está listo para ayudarte a elegir el camino correcto para tu carrera.",
   openGraph: {
-    title: "Contacto | VELOCITY Academy",
+    title: "Contacto | Flow State",
     description:
       "Habla con nuestro equipo y descubre el programa ideal para transformar tu carrera tech.",
     url: "/contacto",

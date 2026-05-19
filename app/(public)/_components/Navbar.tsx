@@ -7,7 +7,7 @@ import { authClient } from "@/lib/auth-client";
 import { UserDropdown } from "./UserDropdown";
 import { useSignOut } from "@/hooks/use-singout";
 import { cn } from "@/lib/utils";
-import { Search, X, Menu, GraduationCap } from "lucide-react";
+import { Search, X, Menu, Zap } from "lucide-react";
 
 const navItems = [
   { name: "Cursos", href: "/courses" },
@@ -31,28 +31,28 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 inset-x-0 z-50 border-b border-white/8 bg-[#0f0f0f]">
+      <nav className="fixed top-0 inset-x-0 z-50 border-b border-violet-100 bg-white/90 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center gap-6">
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0 mr-2">
-            <div className="size-8 rounded-lg bg-primary flex items-center justify-center shrink-0">
-              <GraduationCap className="size-4 text-white" />
+            <div className="size-8 rounded-xl bg-primary flex items-center justify-center shrink-0">
+              <Zap className="size-4 text-white fill-white" />
             </div>
-            <span className="font-bold text-white text-[17px] tracking-tight hidden sm:block">
-              Velocity
+            <span className="font-bold text-[#1a1535] text-[17px] tracking-tight hidden sm:block">
+              Flow State
             </span>
           </Link>
 
           {/* Search */}
           <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-md">
-            <div className="flex items-center gap-2 w-full bg-white/6 border border-white/10 rounded-full px-4 py-2 focus-within:border-white/25 transition-colors">
-              <Search className="size-3.5 text-white/40 shrink-0" />
+            <div className="flex items-center gap-2 w-full bg-violet-50 border border-violet-100 rounded-full px-4 py-2 focus-within:border-violet-300 focus-within:bg-white transition-colors">
+              <Search className="size-3.5 text-violet-400 shrink-0" />
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="¿Qué quieres aprender?"
-                className="flex-1 bg-transparent text-sm text-white placeholder:text-white/35 outline-none"
+                placeholder="¿Qué quieres aprender hoy?"
+                className="flex-1 bg-transparent text-sm text-[#1a1535] placeholder:text-violet-300 outline-none"
               />
             </div>
           </form>
@@ -64,10 +64,10 @@ export function Navbar() {
                 <Link
                   href={item.href}
                   className={cn(
-                    "px-3 py-1.5 text-sm rounded-md transition-colors",
+                    "px-3 py-1.5 text-sm rounded-lg transition-colors",
                     pathname === item.href
-                      ? "text-white font-medium"
-                      : "text-white/50 hover:text-white"
+                      ? "text-primary font-semibold bg-violet-50"
+                      : "text-slate-500 hover:text-[#1a1535] hover:bg-violet-50/60"
                   )}
                 >
                   {item.name}
@@ -87,14 +87,14 @@ export function Navbar() {
                 />
               ) : (
                 <>
-                  <Link href="/login" className="text-sm text-white/50 hover:text-white transition-colors px-3 py-1.5">
+                  <Link href="/login" className="text-sm text-slate-500 hover:text-[#1a1535] transition-colors px-3 py-1.5">
                     Ingresar
                   </Link>
                   <Link
                     href="/login"
-                    className="text-sm font-semibold bg-primary hover:bg-primary/85 text-white px-5 py-2 rounded-full transition-colors"
+                    className="text-sm font-semibold bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full transition-all hover:-translate-y-0.5"
                   >
-                    Empezar gratis
+                    Entrar en la zona →
                   </Link>
                 </>
               )
@@ -103,7 +103,7 @@ export function Navbar() {
 
           {/* Mobile toggle */}
           <button
-            className="lg:hidden ml-auto p-1.5 text-white/50 hover:text-white transition-colors"
+            className="lg:hidden ml-auto p-1.5 text-slate-500 hover:text-[#1a1535] transition-colors"
             onClick={() => setOpen(!open)}
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -113,22 +113,22 @@ export function Navbar() {
 
       {/* Mobile overlay */}
       {open && (
-        <div className="fixed inset-0 bg-black/70 z-40 lg:hidden" onClick={() => setOpen(false)} />
+        <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 lg:hidden" onClick={() => setOpen(false)} />
       )}
 
       {/* Mobile drawer */}
       <div className={cn(
-        "fixed top-0 right-0 h-full w-72 bg-[#141414] border-l border-white/8 z-50 flex flex-col transition-transform duration-300 lg:hidden",
+        "fixed top-0 right-0 h-full w-72 bg-white border-l border-violet-100 z-50 flex flex-col transition-transform duration-300 lg:hidden",
         open ? "translate-x-0" : "translate-x-full"
       )}>
-        <div className="flex items-center justify-between px-5 h-16 border-b border-white/8">
+        <div className="flex items-center justify-between px-5 h-16 border-b border-violet-100">
           <div className="flex items-center gap-2">
-            <div className="size-7 rounded-lg bg-primary flex items-center justify-center">
-              <GraduationCap className="size-3.5 text-white" />
+            <div className="size-7 rounded-xl bg-primary flex items-center justify-center">
+              <Zap className="size-3.5 text-white fill-white" />
             </div>
-            <span className="font-bold text-white">Velocity</span>
+            <span className="font-bold text-[#1a1535]">Flow State</span>
           </div>
-          <button className="p-1 text-white/40 hover:text-white" onClick={() => setOpen(false)}>
+          <button className="p-1 text-slate-400 hover:text-[#1a1535]" onClick={() => setOpen(false)}>
             <X className="size-5" />
           </button>
         </div>
@@ -140,10 +140,10 @@ export function Navbar() {
               href={item.href}
               onClick={() => setOpen(false)}
               className={cn(
-                "flex items-center px-4 py-2.5 rounded-lg text-sm transition-colors",
+                "flex items-center px-4 py-2.5 rounded-xl text-sm transition-colors",
                 pathname === item.href
-                  ? "bg-white/10 text-white font-medium"
-                  : "text-white/50 hover:text-white hover:bg-white/5"
+                  ? "bg-violet-50 text-primary font-semibold"
+                  : "text-slate-500 hover:text-[#1a1535] hover:bg-violet-50/60"
               )}
             >
               {item.name}
@@ -151,17 +151,17 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="p-4 border-t border-white/8 space-y-2">
+        <div className="p-4 border-t border-violet-100 space-y-2">
           {!isPending && (
             session ? (
               <>
-                <Link href="/dashboard" onClick={() => setOpen(false)} className="flex items-center px-4 py-2.5 rounded-lg text-sm text-white/50 hover:text-white hover:bg-white/5 transition-colors">Dashboard</Link>
-                <button onClick={() => { handleSignOut(); setOpen(false); }} className="w-full text-left px-4 py-2.5 rounded-lg text-sm text-white/50 hover:text-white hover:bg-white/5 transition-colors">Cerrar sesión</button>
+                <Link href="/dashboard" onClick={() => setOpen(false)} className="flex items-center px-4 py-2.5 rounded-xl text-sm text-slate-500 hover:text-[#1a1535] hover:bg-violet-50 transition-colors">Dashboard</Link>
+                <button onClick={() => { handleSignOut(); setOpen(false); }} className="w-full text-left px-4 py-2.5 rounded-xl text-sm text-slate-500 hover:text-[#1a1535] hover:bg-violet-50 transition-colors">Cerrar sesión</button>
               </>
             ) : (
               <>
-                <Link href="/login" onClick={() => setOpen(false)} className="flex items-center justify-center w-full py-2.5 rounded-lg text-sm text-white/70 bg-white/5 hover:bg-white/10 transition-colors">Ingresar</Link>
-                <Link href="/login" onClick={() => setOpen(false)} className="flex items-center justify-center w-full py-2.5 rounded-lg text-sm font-semibold bg-primary hover:bg-primary/85 text-white transition-colors">Empezar gratis</Link>
+                <Link href="/login" onClick={() => setOpen(false)} className="flex items-center justify-center w-full py-2.5 rounded-xl text-sm text-slate-600 bg-violet-50 hover:bg-violet-100 transition-colors">Ingresar</Link>
+                <Link href="/login" onClick={() => setOpen(false)} className="flex items-center justify-center w-full py-2.5 rounded-full text-sm font-semibold bg-primary hover:bg-primary/90 text-white transition-colors">Entrar en la zona →</Link>
               </>
             )
           )}

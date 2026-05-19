@@ -15,49 +15,49 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://velocityacademy.com"),
+  metadataBase: new URL("https://flowstate.academy"),
   title: {
-    template: "%s | VELOCITY Academy",
-    default: "VELOCITY Academy — Transforma tu carrera tech",
+    template: "%s | Flow State",
+    default: "Flow State — Aprende en tu zona",
   },
   description:
-    "Academia online de alto impacto. Programas de desarrollo web, data science, diseño UX/UI y marketing digital con mentoría personalizada y comunidad activa.",
+    "La academia que te lleva al estado de flow. Aprendizaje personalizado, proyectos reales y mentoría 1-a-1 para que entres en la zona y no salgas.",
   keywords: [
+    "flow state",
     "academia online",
+    "aprendizaje personalizado",
     "programación",
     "desarrollo web",
     "data science",
     "diseño UX UI",
-    "marketing digital",
     "cursos online",
     "mentoría",
-    "bootcamp",
     "LATAM",
     "España",
   ],
-  authors: [{ name: "VELOCITY Academy" }],
-  creator: "VELOCITY Academy",
+  authors: [{ name: "Flow State" }],
+  creator: "Flow State",
   openGraph: {
     type: "website",
     locale: "es_ES",
-    siteName: "VELOCITY Academy",
-    title: "VELOCITY Academy — Transforma tu carrera tech",
+    siteName: "Flow State",
+    title: "Flow State — Aprende en tu zona",
     description:
-      "Academia online de alto impacto. Aprende con proyectos reales, mentoría personalizada y comunidad activa.",
+      "La academia que te lleva al estado de flow. Aprendizaje personalizado y proyectos reales para acelerar tu carrera tech.",
     images: [
       {
         url: "/og-default.png",
         width: 1200,
         height: 630,
-        alt: "VELOCITY Academy",
+        alt: "Flow State Academy",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "VELOCITY Academy — Transforma tu carrera tech",
+    title: "Flow State — Aprende en tu zona",
     description:
-      "Academia online de alto impacto. Aprende con proyectos reales, mentoría personalizada y comunidad activa.",
+      "La academia que te lleva al estado de flow. Aprendizaje personalizado y proyectos reales.",
     images: ["/og-default.png"],
   },
   robots: {
