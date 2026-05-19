@@ -191,7 +191,7 @@ export default async function LandingPage() {
               );
             })}
 
-            {CATEGORIES.slice(0, Math.max(0, 6 - allPaths.length)).map((cat) => (
+            {AREAS.slice(0, Math.max(0, 6 - allPaths.length)).map((cat) => (
               <Link
                 key={cat.label}
                 href="/courses"
@@ -202,7 +202,7 @@ export default async function LandingPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="text-sm font-semibold text-[#1a1535]">{cat.label}</div>
-                  <div className="text-xs text-violet-400 mt-0.5">{cat.courses} cursos</div>
+                  <div className="text-xs text-violet-400 mt-0.5">{cat.count} cursos</div>
                 </div>
                 <ChevronRight className="size-4 text-violet-300 shrink-0 group-hover:text-primary transition-colors" />
               </Link>
