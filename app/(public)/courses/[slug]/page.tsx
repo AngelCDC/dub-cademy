@@ -94,43 +94,40 @@ export default async function SlugPage({ params }: { params: Params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* ── Hero strip ────────────────────────────────────────────────── */}
-      <section className="relative bg-muted/40 border-b border-border overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full [background:repeating-linear-gradient(45deg,transparent,transparent_20px,rgba(0,0,0,0.02)_20px,rgba(0,0,0,0.02)_40px)]" />
 
-        <div className="relative mx-auto px-6 lg:px-20 py-14 md:py-20">
-          <div className="flex flex-wrap gap-2 mb-6">
-            <span className="border border-primary/20 bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest px-3 py-1">
+      {/* Hero */}
+      <div className="bg-slate-950 text-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-14 md:py-20">
+          <div className="flex flex-wrap gap-2 mb-5">
+            <span className="bg-primary/20 text-primary border border-primary/30 text-xs font-semibold px-3 py-1 rounded-full">
               {course.level}
             </span>
-            <span className="border border-border text-muted-foreground text-[10px] font-bold uppercase tracking-widest px-3 py-1">
+            <span className="bg-white/10 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full">
               {course.category}
             </span>
-            <span className="border border-border text-muted-foreground text-[10px] font-bold uppercase tracking-widest px-3 py-1">
+            <span className="bg-white/10 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full">
               {course.duration}h de contenido
             </span>
           </div>
-          <h1 className="font-bebas text-5xl md:text-7xl text-foreground leading-none mb-4 max-w-4xl">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight max-w-3xl mb-4">
             {course.title}
           </h1>
-          <p className="text-muted-foreground text-base md:text-lg max-w-2xl leading-relaxed">
-            {course.smallDescription}
-          </p>
+          <p className="text-slate-400 text-base max-w-2xl leading-relaxed">{course.smallDescription}</p>
           {average > 0 && (
             <div className="mt-4">
               <StarDisplay rating={average} count={count} size="md" />
             </div>
           )}
         </div>
-      </section>
+      </div>
 
-      {/* ── Main layout ───────────────────────────────────────────────── */}
-      <div className="max-w-5xl mx-auto px-6 lg:px-20 py-12 md:py-16 grid grid-cols-1 gap-12 lg:grid-cols-3">
+      {/* Main layout */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-10 md:py-14 grid grid-cols-1 gap-10 lg:grid-cols-3">
 
         {/* Left */}
-        <div className="order-1 lg:col-span-2 space-y-12">
+        <div className="order-2 lg:order-1 lg:col-span-2 space-y-10">
           {/* Thumbnail */}
-          <div className="relative aspect-video w-full overflow-hidden shadow-lg">
+          <div className="relative aspect-video w-full overflow-hidden rounded-2xl shadow-lg">
             <Image
               src={`https://${env.NEXT_PUBLIC_S3_BUCKET_NAME_IMAGES}.fly.storage.tigris.dev/${course.fileKey}`}
               alt={course.title}
@@ -138,31 +135,20 @@ export default async function SlugPage({ params }: { params: Params }) {
               className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
           </div>
 
           {/* Description */}
-          <div className="space-y-6">
-            <div>
-              <div className="font-antonio text-[0.7rem] tracking-[0.3em] text-primary mb-2 uppercase font-semibold">
-                Acerca del curso
-              </div>
-              <h2 className="font-bebas text-4xl text-foreground">DESCRIPCIÓN</h2>
-            </div>
+          <div>
+            <h2 className="text-xl font-bold text-foreground mb-4">Descripción del curso</h2>
             <div className="text-muted-foreground leading-relaxed prose prose-sm max-w-none">
               <RenderDescription json={JSON.parse(course.description)} />
             </div>
           </div>
 
           {/* Chapters */}
-          <div className="space-y-6">
-            <div className="flex items-end justify-between">
-              <div>
-                <div className="font-antonio text-[0.7rem] tracking-[0.3em] text-primary mb-2 uppercase font-semibold">
-                  Contenido del curso
-                </div>
-                <h2 className="font-bebas text-4xl text-foreground">TEMARIO</h2>
-              </div>
+          <div>
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="text-xl font-bold text-foreground">Contenido del curso</h2>
               <span className="text-sm text-muted-foreground">
                 {course.chapter.length} módulos · {totalLessons} lecciones
               </span>
@@ -171,45 +157,37 @@ export default async function SlugPage({ params }: { params: Params }) {
             <div className="space-y-2">
               {course.chapter.map((chapter, index) => (
                 <Collapsible key={chapter.id} defaultOpen={index === 0}>
-                  <div className="border border-border overflow-hidden">
+                  <div className="border border-border rounded-xl overflow-hidden">
                     <CollapsibleTrigger className="w-full">
-                      <div className="p-5 hover:bg-muted/50 transition-colors">
-                        <div className="flex items-center justify-between gap-4">
-                          <div className="flex items-center gap-4">
-                            <span className="font-bebas text-3xl text-primary/30 leading-none w-10 text-left">
-                              {String(index + 1).padStart(2, "0")}
-                            </span>
-                            <div className="text-left">
-                              <h3 className="text-sm font-bold text-foreground uppercase tracking-wide">
-                                {chapter.title}
-                              </h3>
-                              <p className="text-xs text-muted-foreground mt-0.5">
-                                {chapter.lessons.length} lección{chapter.lessons.length !== 1 ? "es" : ""}
-                              </p>
-                            </div>
+                      <div className="flex items-center justify-between gap-4 px-5 py-4 hover:bg-muted/50 transition-colors">
+                        <div className="flex items-center gap-3 text-left">
+                          <span className="size-7 rounded-lg bg-primary/10 text-primary text-xs font-bold flex items-center justify-center shrink-0">
+                            {index + 1}
+                          </span>
+                          <div>
+                            <h3 className="text-sm font-semibold text-foreground">{chapter.title}</h3>
+                            <p className="text-xs text-muted-foreground">
+                              {chapter.lessons.length} lección{chapter.lessons.length !== 1 ? "es" : ""}
+                            </p>
                           </div>
-                          <IconChevronDown className="size-4 text-muted-foreground shrink-0" />
                         </div>
+                        <IconChevronDown className="size-4 text-muted-foreground shrink-0" />
                       </div>
                     </CollapsibleTrigger>
                     <CollapsibleContent>
-                      <div className="border-t border-border bg-muted/20">
-                        <div className="p-4 space-y-1">
-                          {chapter.lessons.map((lesson, li) => (
-                            <div
-                              key={lesson.id}
-                              className="flex items-center gap-4 p-3 hover:bg-muted/50 transition-colors"
-                            >
-                              <div className="flex size-7 items-center justify-center border border-border shrink-0">
-                                <IconPlayerPlay className="size-3.5 text-primary" />
-                              </div>
-                              <div className="flex-1">
-                                <p className="text-sm text-foreground">{lesson.title}</p>
-                                <p className="text-xs text-muted-foreground mt-0.5">Lección {li + 1}</p>
-                              </div>
+                      <div className="border-t border-border bg-muted/20 divide-y divide-border">
+                        {chapter.lessons.map((lesson, li) => (
+                          <div
+                            key={lesson.id}
+                            className="flex items-center gap-3 px-5 py-3"
+                          >
+                            <div className="size-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                              <IconPlayerPlay className="size-3 text-primary" />
                             </div>
-                          ))}
-                        </div>
+                            <p className="text-sm text-foreground flex-1">{lesson.title}</p>
+                            <span className="text-xs text-muted-foreground">Lección {li + 1}</span>
+                          </div>
+                        ))}
                       </div>
                     </CollapsibleContent>
                   </div>
@@ -220,41 +198,52 @@ export default async function SlugPage({ params }: { params: Params }) {
 
           {/* Reviews */}
           {course.reviews.length > 0 && (
-            <div className="space-y-6">
-              <div className="flex items-end gap-4">
-                <div>
-                  <div className="font-antonio text-[0.7rem] tracking-[0.3em] text-primary mb-2 uppercase font-semibold">
-                    Opiniones
-                  </div>
-                  <h2 className="font-bebas text-4xl text-foreground">RESEÑAS</h2>
-                </div>
-                <div className="mb-1">
-                  <StarDisplay rating={average} count={count} size="md" />
-                </div>
+            <div>
+              <div className="flex items-center gap-4 mb-5">
+                <h2 className="text-xl font-bold text-foreground">Reseñas</h2>
+                <StarDisplay rating={average} count={count} size="md" />
               </div>
 
               <div className="space-y-3">
                 {course.reviews.map((review) => (
-                  <div key={review.id} className="bg-card border border-border p-5 space-y-3">
-                    <div className="flex items-center justify-between">
+                  <div key={review.id} className="bg-card border border-border rounded-2xl p-5">
+                    <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
                         {review.user.image ? (
-                          <Image src={review.user.image} alt={review.user.name} width={36} height={36} className="object-cover size-9" />
+                          <Image
+                            src={review.user.image}
+                            alt={review.user.name}
+                            width={36}
+                            height={36}
+                            className="object-cover rounded-full size-9"
+                          />
                         ) : (
-                          <div className="size-9 bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold text-sm">
+                          <div className="size-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">
                             {review.user.name.charAt(0).toUpperCase()}
                           </div>
                         )}
                         <div>
-                          <p className="text-sm font-bold text-foreground">{review.user.name}</p>
+                          <p className="text-sm font-semibold text-foreground">{review.user.name}</p>
                           <p className="text-xs text-muted-foreground">
-                            {new Date(review.createdAt).toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })}
+                            {new Date(review.createdAt).toLocaleDateString("es-ES", {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            })}
                           </p>
                         </div>
                       </div>
                       <div className="flex items-center gap-0.5">
                         {[1, 2, 3, 4, 5].map((s) => (
-                          <Star key={s} className={cn("size-4", s <= review.rating ? "fill-amber-400 text-amber-400" : "fill-muted text-muted-foreground/30")} />
+                          <Star
+                            key={s}
+                            className={cn(
+                              "size-3.5",
+                              s <= review.rating
+                                ? "fill-amber-400 text-amber-400"
+                                : "fill-muted text-muted-foreground/30"
+                            )}
+                          />
                         ))}
                       </div>
                     </div>
@@ -269,28 +258,32 @@ export default async function SlugPage({ params }: { params: Params }) {
         </div>
 
         {/* Right: enrollment card */}
-        <div className="order-2 lg:col-span-1">
+        <div className="order-1 lg:order-2 lg:col-span-1">
           <div className="sticky top-24">
-            <div className="bg-card border border-border">
+            <div className="bg-card border border-border rounded-2xl overflow-hidden shadow-sm">
               {/* Price */}
               <div className="p-6 border-b border-border">
-                <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">Precio</div>
-                <div className="font-bebas text-5xl text-foreground">
-                  {new Intl.NumberFormat("es-ES", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(course.price)}
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">Precio</p>
+                <div className="text-4xl font-extrabold text-foreground">
+                  {new Intl.NumberFormat("es-ES", {
+                    style: "currency",
+                    currency: "USD",
+                    minimumFractionDigits: 0,
+                  }).format(course.price)}
                 </div>
               </div>
 
               {/* Rating */}
               {average > 0 && (
                 <div className="px-6 py-4 border-b border-border flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Valoración</span>
+                  <span className="text-xs font-semibold text-muted-foreground">Valoración</span>
                   <StarDisplay rating={average} count={count} size="sm" />
                 </div>
               )}
 
               {/* Details */}
               <div className="p-6 space-y-3 border-b border-border">
-                <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Lo que obtienes</div>
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">Incluye</p>
                 {[
                   { icon: IconClock, label: "Duración", value: `${course.duration} horas` },
                   { icon: IconChartBar, label: "Nivel", value: course.level },
@@ -298,25 +291,22 @@ export default async function SlugPage({ params }: { params: Params }) {
                   { icon: IconBook, label: "Lecciones", value: `${totalLessons} lecciones` },
                 ].map(({ icon: Icon, label, value }) => (
                   <div key={label} className="flex items-center gap-3">
-                    <div className="flex size-8 items-center justify-center bg-primary/10 border border-primary/20 shrink-0">
+                    <div className="size-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                       <Icon className="size-4 text-primary" />
                     </div>
                     <div>
-                      <p className="text-xs text-muted-foreground uppercase tracking-wider">{label}</p>
+                      <p className="text-xs text-muted-foreground">{label}</p>
                       <p className="text-sm font-semibold text-foreground">{value}</p>
                     </div>
                   </div>
                 ))}
               </div>
 
-              {/* Includes */}
-              <div className="px-6 py-5 space-y-2 border-b border-border">
-                <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Incluye</div>
+              {/* Perks */}
+              <div className="px-6 py-5 border-b border-border space-y-2">
                 {["Acceso de por vida", "Acceso en móvil y escritorio", "Certificado de finalización"].map((item) => (
                   <div key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <div className="size-4 bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
-                      <CheckIcon className="size-2.5 text-primary" />
-                    </div>
+                    <CheckIcon className="size-4 text-primary shrink-0" />
                     {item}
                   </div>
                 ))}
@@ -327,14 +317,16 @@ export default async function SlugPage({ params }: { params: Params }) {
                 {isEnrolled ? (
                   <Link
                     href="/dashboard"
-                    className="block w-full bg-primary hover:bg-primary/90 text-primary-foreground text-center py-4 font-bold text-sm tracking-widest uppercase transition-colors"
+                    className="flex items-center justify-center w-full bg-primary hover:bg-primary/90 text-white font-semibold text-sm py-3.5 rounded-full transition-colors"
                   >
-                    Ver Curso
+                    Ir al curso
                   </Link>
                 ) : (
                   <EnrollmentButton courseId={course.id} />
                 )}
-                <p className="text-center text-xs text-muted-foreground">Garantía de devolución 30 días</p>
+                <p className="text-center text-xs text-muted-foreground">
+                  Garantía de devolución 30 días
+                </p>
               </div>
             </div>
           </div>

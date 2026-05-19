@@ -1,94 +1,88 @@
-import React from "react";
 import Link from "next/link";
+import { GraduationCap, Twitter, Linkedin, Youtube, MessageCircle } from "lucide-react";
 
-interface FooterLink { label: string; href: string }
-interface FooterColumn { title: string; links: FooterLink[] }
-interface SocialLink { label: string; href: string }
-interface FooterProps {
-  brand?: { name: string; description: string };
-  columns?: FooterColumn[];
-  socialLinks?: SocialLink[];
-  copyright?: string;
-}
-
-const defaultBrand = {
-  name: "VELOCITY",
-  description:
-    "Academia online de alto impacto. Transformamos talento en profesionales de élite a través de educación práctica, mentoría personalizada y conexión directa con la industria.",
-};
-
-const defaultColumns: FooterColumn[] = [
+const links = [
   {
-    title: "Programas",
-    links: [
+    heading: "Aprender",
+    items: [
+      { label: "Todos los cursos", href: "/courses" },
+      { label: "Rutas de aprendizaje", href: "/rutas" },
+      { label: "Nuestra metodología", href: "/metodologia" },
+    ],
+  },
+  {
+    heading: "Categorías",
+    items: [
       { label: "Desarrollo Web", href: "/courses" },
-      { label: "Data Science", href: "/courses" },
+      { label: "Data Science & IA", href: "/courses" },
       { label: "Diseño UX/UI", href: "/courses" },
       { label: "Marketing Digital", href: "/courses" },
     ],
   },
   {
-    title: "Academia",
-    links: [
-      { label: "Sobre Nosotros", href: "#" },
-      { label: "Metodología", href: "/metodologia" },
-      { label: "Rutas de Aprendizaje", href: "/rutas" },
-      { label: "Trabaja con Nosotros", href: "#" },
-    ],
-  },
-  {
-    title: "Soporte",
-    links: [
+    heading: "Compañía",
+    items: [
+      { label: "Sobre nosotros", href: "#" },
+      { label: "Trabaja con nosotros", href: "#" },
       { label: "Contacto", href: "/contacto" },
-      { label: "Preguntas Frecuentes", href: "/contacto" },
       { label: "Becas", href: "#" },
-      { label: "Empresas", href: "#" },
     ],
   },
 ];
 
-const defaultSocialLinks: SocialLink[] = [
-  { label: "LinkedIn", href: "#" },
-  { label: "Twitter", href: "#" },
-  { label: "YouTube", href: "#" },
-  { label: "Discord", href: "#" },
+const socials = [
+  { label: "Twitter", href: "#", icon: Twitter },
+  { label: "LinkedIn", href: "#", icon: Linkedin },
+  { label: "YouTube", href: "#", icon: Youtube },
+  { label: "Discord", href: "#", icon: MessageCircle },
 ];
 
-const Footer: React.FC<FooterProps> = ({
-  brand = defaultBrand,
-  columns = defaultColumns,
-  socialLinks = defaultSocialLinks,
-  copyright = `© ${new Date().getFullYear()} VELOCITY ACADEMY. Todos los derechos reservados.`,
-}) => {
+export default function Footer() {
   return (
-    <footer className="border-t bg-muted/30 px-6 lg:px-16 xl:px-20 pt-16 pb-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Top grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-12 mb-12">
+    <footer className="bg-slate-950 border-t border-white/5 text-slate-400">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-12">
+
           {/* Brand */}
-          <div className="space-y-4">
-            <div className="font-semibold text-xl tracking-widest uppercase text-foreground">
-              {brand.name}
-            </div>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-              {brand.description}
+          <div className="space-y-5">
+            <Link href="/" className="flex items-center gap-2.5 w-fit">
+              <div className="size-9 rounded-xl bg-primary flex items-center justify-center">
+                <GraduationCap className="size-5 text-white" />
+              </div>
+              <span className="font-bold text-white text-xl tracking-tight">Velocity</span>
+            </Link>
+            <p className="text-sm leading-relaxed max-w-xs">
+              Academia tech de alto impacto. Aprende con proyectos reales,
+              mentoría personalizada y una comunidad que te impulsa.
             </p>
+            <div className="flex items-center gap-3">
+              {socials.map(({ label, href, icon: Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  className="size-9 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
+                >
+                  <Icon className="size-4" />
+                </a>
+              ))}
+            </div>
           </div>
 
-          {/* Columns */}
-          {columns.map((column) => (
-            <div key={column.title}>
-              <h4 className="text-xs font-semibold uppercase tracking-widest text-foreground mb-5">
-                {column.title}
+          {/* Link columns */}
+          {links.map((col) => (
+            <div key={col.heading}>
+              <h4 className="text-xs font-semibold uppercase tracking-widest text-white mb-5">
+                {col.heading}
               </h4>
               <ul className="space-y-3">
-                {column.links.map((link) => (
-                  <li key={link.label}>
+                {col.items.map((item) => (
+                  <li key={item.label}>
                     <Link
-                      href={link.href}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      href={item.href}
+                      className="text-sm hover:text-white transition-colors"
                     >
-                      {link.label}
+                      {item.label}
                     </Link>
                   </li>
                 ))}
@@ -97,17 +91,14 @@ const Footer: React.FC<FooterProps> = ({
           ))}
         </div>
 
-        {/* Bottom */}
-        <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-muted-foreground">{copyright}</p>
-          <div className="flex gap-6">
-            {socialLinks.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                className="text-xs text-muted-foreground hover:text-primary transition-colors"
-              >
-                {social.label}
+        <div className="mt-16 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs">
+            © {new Date().getFullYear()} Velocity Academy. Todos los derechos reservados.
+          </p>
+          <div className="flex items-center gap-6">
+            {["Privacidad", "Términos", "Cookies"].map((l) => (
+              <a key={l} href="#" className="text-xs hover:text-white transition-colors">
+                {l}
               </a>
             ))}
           </div>
@@ -115,6 +106,4 @@ const Footer: React.FC<FooterProps> = ({
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

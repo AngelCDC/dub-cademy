@@ -1,169 +1,189 @@
-"use client"
+"use client";
 
-import Link from 'next/link'
+import Link from "next/link";
+import {
+  BookOpen,
+  Users,
+  RefreshCw,
+  Briefcase,
+  Video,
+  Code2,
+  Radio,
+  FileDown,
+  MessageSquare,
+  Award,
+  ArrowRight,
+  CheckCircle,
+} from "lucide-react";
+
+const PILLARS = [
+  {
+    icon: BookOpen,
+    title: "Aprendizaje basado en proyectos",
+    desc: "Cada módulo culmina con un entregable real que entra directo a tu portafolio. Nada de ejercicios de relleno: todo lo que construyes tiene valor profesional.",
+    highlights: ["8+ proyectos por curso", "Portfolio desde el día 1", "Feedback de expertos"],
+  },
+  {
+    icon: Users,
+    title: "Mentoría personalizada 1-a-1",
+    desc: "Sesiones con profesionales activos en empresas líderes. Revisan tu código, te dan feedback sobre tu estrategia de carrera y te conectan con su red.",
+    highlights: ["4h de mentoría mensual", "Expertos en activo", "Soporte comunidad 24/7"],
+  },
+  {
+    icon: RefreshCw,
+    title: "Contenido siempre actualizado",
+    desc: "El currículo se revisa trimestralmente junto con empresas del sector. Aprendes el stack que están usando ahora, no el de hace dos años.",
+    highlights: ["Actualización trimestral", "Stack 2025", "Validado por la industria"],
+  },
+  {
+    icon: Briefcase,
+    title: "Career support completo",
+    desc: "No te dejamos solo al terminar. Preparación para entrevistas técnicas, revisión de CV, LinkedIn optimizado y conexión directa con empresas que contratan.",
+    highlights: ["96% consigue empleo", "500+ empresas aliadas", "Bolsa de trabajo exclusiva"],
+  },
+];
+
+const TOOLS = [
+  { icon: Video, name: "Clases HD bajo demanda", desc: "Acceso de por vida a todo el contenido en alta calidad." },
+  { icon: Code2, name: "Code challenges", desc: "Ejercicios prácticos con auto-corrección y hints inteligentes." },
+  { icon: Radio, name: "Sesiones en vivo", desc: "Code reviews semanales y clases colaborativas en tiempo real." },
+  { icon: FileDown, name: "Recursos descargables", desc: "Cheat sheets, templates y guías curadas por expertos." },
+  { icon: MessageSquare, name: "Comunidad privada", desc: "Discord exclusivo con estudiantes activos y alumni en empresas top." },
+  { icon: Award, name: "Certificación verificable", desc: "Credencial reconocida por empresas líderes en LATAM y España." },
+];
+
+const METRICS = [
+  { value: "96%", label: "Consigue empleo" },
+  { value: "3.2×", label: "Aumento salarial" },
+  { value: "6 meses", label: "Tiempo promedio" },
+  { value: "4.9/5", label: "Satisfacción" },
+];
 
 export default function MetodologiaPage() {
-  const innovations = [
-    {
-      num: '01', title: 'Proyecto-Based Learning',
-      desc: 'Aprende construyendo proyectos reales que van a tu portafolio. Cada módulo culmina con un entregable profesional que puedes mostrar a empleadores.',
-      specs: [{ value: '8+', label: 'Proyectos por curso' }, { value: '100%', label: 'Práctico' }]
-    },
-    {
-      num: '02', title: 'Mentoría Personalizada',
-      desc: 'Sesiones 1-a-1 con profesionales trabajando en empresas top. Feedback sobre código, estrategia de carrera y networking directo con la industria.',
-      specs: [{ value: '4hrs', label: 'Mentoría mensual' }, { value: '24/7', label: 'Soporte comunidad' }]
-    },
-    {
-      num: '03', title: 'Contenido Actualizado',
-      desc: 'Currículo revisado trimestralmente con las últimas tecnologías y tendencias del mercado. Aprende lo que las empresas están buscando ahora.',
-      specs: [{ value: 'Q3', label: 'Actualizaciones' }, { value: '2024', label: 'Stack moderno' }]
-    },
-    {
-      num: '04', title: 'Career Support',
-      desc: 'Preparación para entrevistas técnicas, revisión de CV, optimización de LinkedIn y conexión directa con empresas que contratan graduates.',
-      specs: [{ value: '96%', label: 'Tasa de empleo' }, { value: '500+', label: 'Empresas aliadas' }]
-    }
-  ]
-
-  const materials = [
-    { name: 'Video Clases HD', desc: 'Lecciones grabadas en alta calidad que puedes ver a tu ritmo. Acceso de por vida a todo el material del curso.' },
-    { name: 'Code Challenges', desc: 'Ejercicios prácticos con auto-corrección y hints inteligentes. Aprende resolviendo problemas reales del día a día.' },
-    { name: 'Live Sessions', desc: 'Clases en vivo semanales para resolver dudas, hacer code reviews y trabajar en proyectos colaborativos.' },
-    { name: 'Recursos Descargables', desc: 'Cheat sheets, templates, guías de estudio y material complementario curado por expertos.' },
-    { name: 'Comunidad Privada', desc: 'Acceso a Discord exclusivo con estudiantes activos, alumni en empresas top y networking constante.' },
-    { name: 'Certificación Digital', desc: 'Credencial verificable en blockchain reconocida por empresas líderes de tech en LATAM y España.' }
-  ]
-
-  const metrics = [
-    { value: '96%', label: 'Consigue empleo' },
-    { value: '3.2x', label: 'Aumento salarial' },
-    { value: '6 meses', label: 'Tiempo promedio' },
-    { value: '4.9/5', label: 'Satisfacción' },
-  ]
-
   return (
-    <>
-      {/* ── Hero ──────────────────────────────────────────────────────── */}
-      <section className="relative bg-muted/40 border-b border-border overflow-hidden">
-        <div className="absolute inset-0 pattern-diagonal-lines opacity-30" />
-        <div className="absolute inset-0 [background-image:linear-gradient(var(--border)_1px,transparent_1px),linear-gradient(90deg,var(--border)_1px,transparent_1px)] [background-size:60px_60px] opacity-30" />
-
-        <div className="relative mx-auto px-6 lg:px-20 py-24 md:py-40">
-          <div className="inline-flex items-center gap-2 border border-primary/20 bg-primary/10 text-primary px-4 py-2 mb-8 animate-fade-in-up">
-            <span className="text-xs font-bold uppercase tracking-widest">Innovación Educativa</span>
-          </div>
-          <h1 className="font-bebas text-7xl md:text-9xl text-foreground leading-none mb-6 animate-fade-in-up animation-delay-200">
-            APRENDE
-            <span className="block text-primary italic">DIFERENTE</span>
+    <div className="min-h-screen">
+      {/* Header */}
+      <div className="bg-slate-950 text-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-20">
+          <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-4">
+            Nuestra metodología
+          </p>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight max-w-2xl">
+            Aprender diferente
+            <span className="block text-primary mt-1">da resultados diferentes</span>
           </h1>
-          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl leading-relaxed animate-fade-in-up animation-delay-400">
-            No más teoría sin aplicación. Nuestra metodología combina proyectos reales,
-            mentoría personalizada y comunidad activa para acelerar tu aprendizaje.
+          <p className="text-slate-400 mt-4 text-base max-w-xl leading-relaxed">
+            No más teoría sin aplicación. Combinamos proyectos reales, mentoría
+            personalizada y comunidad activa para acelerar tu aprendizaje y tu carrera.
           </p>
         </div>
-      </section>
+      </div>
 
-      {/* ── Innovation cards ──────────────────────────────────────────── */}
-      <section className="py-20 md:py-32 px-6 lg:px-20 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[60%] h-full pattern-diagonal-lines opacity-15" />
+      {/* Pillars */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-24">
+        <div className="text-center mb-14">
+          <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">
+            Los 4 pilares
+          </p>
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+            Por qué funciona nuestra metodología
+          </h2>
+        </div>
 
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="mb-16">
-            <div className="font-antonio text-[0.7rem] tracking-[0.3em] text-primary mb-3 uppercase font-semibold">
-              Cómo aprendemos
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {PILLARS.map(({ icon: Icon, title, desc, highlights }) => (
+            <div
+              key={title}
+              className="bg-card border border-border rounded-2xl p-7 hover:border-primary/30 hover:shadow-md transition-all duration-300"
+            >
+              <div className="size-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-5">
+                <Icon className="size-5 text-primary" />
+              </div>
+              <h3 className="font-bold text-lg text-foreground mb-3 leading-snug">{title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-5">{desc}</p>
+              <ul className="space-y-2">
+                {highlights.map((h) => (
+                  <li key={h} className="flex items-center gap-2 text-sm text-foreground">
+                    <CheckCircle className="size-4 text-primary shrink-0" />
+                    {h}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <h2 className="font-bebas text-5xl md:text-6xl text-foreground">METODOLOGÍA COMPROBADA</h2>
+          ))}
+        </div>
+      </div>
+
+      {/* Tools */}
+      <div className="bg-muted/40 border-y border-border py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">
+              Tu kit de aprendizaje
+            </p>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+              Todo lo que incluye
+            </h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16">
-            {innovations.map((item) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {TOOLS.map(({ icon: Icon, name, desc }) => (
               <div
-                key={item.num}
-                className="group border-l-[3px] border-primary/25 pl-8 transition-all duration-300 hover:border-primary hover:translate-x-2"
+                key={name}
+                className="group bg-card border border-border rounded-2xl p-6 hover:border-primary/30 hover:shadow-sm transition-all duration-300"
               >
-                <div className="font-bebas text-8xl text-primary/10 leading-none mb-4 group-hover:text-primary/20 transition-colors duration-300">
-                  {item.num}
+                <div className="size-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary group-hover:border-primary transition-all duration-300">
+                  <Icon className="size-4 text-primary group-hover:text-white transition-colors" />
                 </div>
-                <h3 className="font-antonio text-2xl mb-3 tracking-wider uppercase text-foreground">
-                  {item.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed text-sm mb-6">{item.desc}</p>
-                <div className="flex gap-8">
-                  {item.specs.map((spec) => (
-                    <div key={spec.label}>
-                      <div className="font-bebas text-3xl text-primary">{spec.value}</div>
-                      <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{spec.label}</div>
-                    </div>
-                  ))}
-                </div>
+                <h4 className="font-semibold text-foreground mb-2">{name}</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* ── Materials ─────────────────────────────────────────────────── */}
-      <section className="bg-muted/40 border-y border-border py-20 md:py-28 px-6 lg:px-20 relative overflow-hidden">
-        <div className="absolute inset-0 [background:repeating-linear-gradient(0deg,transparent,transparent_50px,rgba(0,0,0,0.03)_50px,rgba(0,0,0,0.03)_100px)]" />
-
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="mb-16 text-center">
-            <div className="font-antonio text-[0.7rem] tracking-[0.3em] text-primary mb-3 uppercase font-semibold">
-              Herramientas de aprendizaje
-            </div>
-            <h2 className="font-bebas text-5xl md:text-6xl text-foreground">TODO LO QUE INCLUYE</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {materials.map((material, i) => (
-              <div
-                key={i}
-                className="group bg-card border border-border p-8 hover:border-primary/40 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5"
-              >
-                <div className="size-10 bg-primary/10 border border-primary/20 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:border-primary transition-all duration-300">
-                  <div className="size-2 bg-primary group-hover:bg-primary-foreground transition-colors duration-300" />
-                </div>
-                <h4 className="font-antonio text-base uppercase tracking-wider text-foreground mb-3">{material.name}</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">{material.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Metrics ───────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 px-6 lg:px-20">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-16 text-center">
-            <div className="font-antonio text-[0.7rem] tracking-[0.3em] text-primary mb-3 uppercase font-semibold">
+      {/* Metrics */}
+      <div className="py-16 md:py-24">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">
               Datos reales
-            </div>
-            <h2 className="font-bebas text-5xl md:text-6xl text-foreground">RESULTADOS QUE HABLAN</h2>
-            <p className="text-muted-foreground mt-4 max-w-xl mx-auto text-sm">
-              Datos reales de estudiantes que transformaron su carrera con VELOCITY
+            </p>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+              Resultados que hablan
+            </h2>
+            <p className="text-muted-foreground mt-3 text-sm max-w-md mx-auto">
+              De estudiantes que transformaron su carrera con Velocity.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-border">
-            {metrics.map((m) => (
-              <div key={m.label} className="bg-card p-10 md:p-12 text-center">
-                <div className="font-bebas text-5xl md:text-6xl text-primary mb-2">{m.value}</div>
-                <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{m.label}</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+            {METRICS.map((m) => (
+              <div
+                key={m.label}
+                className="bg-card border border-border rounded-2xl p-8 text-center hover:border-primary/30 hover:shadow-sm transition-all"
+              >
+                <div className="text-4xl md:text-5xl font-extrabold text-primary mb-2">
+                  {m.value}
+                </div>
+                <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                  {m.label}
+                </div>
               </div>
             ))}
           </div>
 
-          <div className="text-center mt-16">
+          <div className="text-center mt-14">
             <Link
               href="/courses"
-              className="inline-flex items-center gap-3 bg-primary hover:bg-primary/90 text-primary-foreground px-12 py-4 font-bold text-sm tracking-widest uppercase transition-colors"
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold text-sm px-10 py-3.5 rounded-full transition-colors"
             >
-              Explorar Programas
+              Explorar programas <ArrowRight className="size-4" />
             </Link>
           </div>
         </div>
-      </section>
-    </>
-  )
+      </div>
+    </div>
+  );
 }
