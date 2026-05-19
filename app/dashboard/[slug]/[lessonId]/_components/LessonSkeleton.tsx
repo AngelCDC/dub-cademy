@@ -4,7 +4,7 @@ export function LessonSkeleton() {
   return (
     <div className="flex flex-col h-full">
       {/* Top bar skeleton */}
-      <div className="flex items-center gap-3 px-4 py-2.5 border-b shrink-0">
+      <div className="flex items-center gap-3 px-4 py-2.5 border-b border-violet-100 shrink-0">
         <Skeleton className="h-8 w-8 rounded-md" />
         <Skeleton className="h-4 w-12 rounded" />
         <Skeleton className="h-4 flex-1 max-w-xs rounded hidden sm:block" />

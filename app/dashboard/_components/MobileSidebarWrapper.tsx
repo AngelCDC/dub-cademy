@@ -68,7 +68,7 @@ export function MobileSidebarWrapper({
         <div className="flex-1 min-w-0 overflow-y-auto">{children}</div>
 
         {/* Desktop sidebar — right column */}
-        <aside className="hidden lg:flex flex-col w-80 xl:w-96 border-l bg-sidebar shrink-0 overflow-hidden">
+        <aside className="hidden lg:flex flex-col w-80 xl:w-96 border-l border-violet-100 bg-white shrink-0 overflow-hidden">
           <CourseSidebar course={course} />
         </aside>
       </div>

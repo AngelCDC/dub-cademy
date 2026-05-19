@@ -23,8 +23,8 @@ export function LessonItem({ lesson, slug, isActive, completed }: iAppProps) {
         isActive
           ? "bg-primary/10 text-primary"
           : completed
-            ? "text-muted-foreground hover:text-foreground hover:bg-accent/50"
-            : "text-foreground/80 hover:text-foreground hover:bg-accent/50"
+            ? "text-muted-foreground hover:text-foreground hover:bg-violet-50"
+            : "text-foreground/80 hover:text-foreground hover:bg-violet-50"
       )}
     >
       {/* Status icon */}

@@ -137,7 +137,7 @@ export function QuizPlayer({ quiz, lessonId, slug }: iAppProps) {
           </Button>
         )}
         {lastAttempt?.passed && (
-          <div className="flex items-center justify-center gap-2 rounded-lg bg-emerald-500/10 px-4 py-3 text-sm font-medium text-emerald-700 dark:text-emerald-400 ring-1 ring-emerald-500/20">
+          <div className="flex items-center justify-center gap-2 rounded-lg bg-emerald-500/10 px-4 py-3 text-sm font-medium text-emerald-700 ring-1 ring-emerald-500/20">
             <Trophy className="size-4" />
             ¡Quiz aprobado!
           </div>
@@ -207,7 +207,7 @@ export function QuizPlayer({ quiz, lessonId, slug }: iAppProps) {
                     "w-full text-left rounded-lg border px-4 py-2.5 text-sm transition-all",
                     isSelected
                       ? "border-primary bg-primary/10 text-primary font-medium"
-                      : "border-border hover:border-primary/40 hover:bg-muted/50"
+                      : "border-violet-100 hover:border-primary/40 hover:bg-violet-50"
                   )}
                 >
                   {opt.text}
@@ -242,7 +242,7 @@ function ResultSummary({
   const hasAnswerDetails = result.answers.some((a) => a.correctOptionId);
 
   return (
-    <div className="rounded-lg border bg-muted/30 p-4 space-y-4">
+    <div className="rounded-xl border border-violet-100 bg-violet-50/50 p-4 space-y-4">
       {/* Score header */}
       <div className="flex items-center justify-between">
         <div className="space-y-0.5">
@@ -256,7 +256,7 @@ function ResultSummary({
           className={cn(
             "flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold",
             result.passed
-              ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400"
+              ? "bg-emerald-500/15 text-emerald-700 text-emerald-600"
               : "bg-destructive/15 text-destructive"
           )}
         >
@@ -278,12 +278,12 @@ function ResultSummary({
                 <p className="font-medium text-xs text-muted-foreground">
                   {idx + 1}. {q.text}
                 </p>
-                <p className={cn("flex items-center gap-1", ans.isCorrect ? "text-emerald-600 dark:text-emerald-400" : "text-destructive")}>
+                <p className={cn("flex items-center gap-1", ans.isCorrect ? "text-emerald-600 text-emerald-600" : "text-destructive")}>
                   {ans.isCorrect ? <CheckCircle2 className="size-3.5" /> : <XCircle className="size-3.5" />}
                   Tu respuesta: {selectedOpt?.text ?? "—"}
                 </p>
                 {!ans.isCorrect && correctOpt && (
-                  <p className="text-xs text-emerald-600 dark:text-emerald-400 pl-4">
+                  <p className="text-xs text-emerald-600 text-emerald-600 pl-4">
                     Correcta: {correctOpt.text}
                   </p>
                 )}

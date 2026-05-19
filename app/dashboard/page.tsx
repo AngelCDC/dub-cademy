@@ -26,7 +26,7 @@ export default async function DashboardPage() {
   return (
     <div className="flex flex-col gap-8 py-6 px-4 lg:px-6">
       {/* Welcome banner */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-primary/90 to-primary/70 p-6 md:p-8 text-white shadow-lg">
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-primary/90 to-fuchsia-600/70 p-6 md:p-8 text-white shadow-lg shadow-primary/20">
         <div className="absolute -top-8 -right-8 h-40 w-40 rounded-full bg-white/10 blur-3xl" />
         <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full bg-white/10 blur-2xl" />
         <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -62,13 +62,13 @@ export default async function DashboardPage() {
       <section className="space-y-4">
         <div className="flex items-end justify-between">
           <div className="space-y-1">
-            <h2 className="text-xl font-bold tracking-tight">Mis Cursos</h2>
-            <p className="text-sm text-muted-foreground">
+            <h2 className="text-xl font-bold tracking-tight text-[#1a1535]">Mis Cursos</h2>
+            <p className="text-sm text-slate-400">
               Cursos a los que tienes acceso
             </p>
           </div>
           {enrolledCourses.length > 0 && (
-            <span className="text-xs text-muted-foreground font-medium bg-muted rounded-full px-2.5 py-1">
+            <span className="text-xs text-primary font-semibold bg-violet-50 border border-violet-100 rounded-full px-2.5 py-1">
               {enrolledCourses.length} curso{enrolledCourses.length !== 1 && "s"}
             </span>
           )}
@@ -95,14 +95,14 @@ export default async function DashboardPage() {
         <section className="space-y-4">
           <div className="flex items-end justify-between">
             <div className="space-y-1">
-              <h2 className="text-xl font-bold tracking-tight">
+              <h2 className="text-xl font-bold tracking-tight text-[#1a1535]">
                 Cursos Disponibles
               </h2>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-slate-400">
                 Amplía tu conocimiento con nuevos cursos
               </p>
             </div>
-            <span className="text-xs text-muted-foreground font-medium bg-muted rounded-full px-2.5 py-1">
+            <span className="text-xs text-primary font-semibold bg-violet-50 border border-violet-100 rounded-full px-2.5 py-1">
               {availableCourses.length} curso{availableCourses.length !== 1 && "s"}
             </span>
           </div>

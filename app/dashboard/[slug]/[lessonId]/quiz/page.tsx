@@ -14,7 +14,7 @@ export default async function QuizPage({ params }: { params: Params }) {
   return (
     <div className="flex flex-col h-full overflow-y-auto">
       {/* Header bar */}
-      <div className="flex items-center gap-3 px-4 py-2.5 border-b bg-background/95 backdrop-blur shrink-0">
+      <div className="flex items-center gap-3 px-4 py-2.5 border-b border-violet-100 bg-white/95 backdrop-blur shrink-0">
         <ClipboardList className="size-4 text-primary shrink-0" />
         <p className="text-xs font-medium text-muted-foreground truncate flex-1">
           Quiz — {lesson.title}

@@ -31,20 +31,20 @@ interface iAppProps {
 function getLevelBadge(level: string) {
   switch (level?.toLowerCase()) {
     case "beginner":
-      return "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 ring-1 ring-emerald-500/30 border-0";
+      return "bg-emerald-500/15 text-emerald-700 ring-1 ring-emerald-500/30 border-0";
     case "intermediate":
       return "bg-primary/15 text-primary ring-1 ring-primary/30 border-0";
     case "advanced":
-      return "bg-cyan-500/15 text-cyan-700 dark:text-cyan-400 ring-1 ring-cyan-500/30 border-0";
+      return "bg-cyan-500/15 text-cyan-700 ring-1 ring-cyan-500/30 border-0";
     default:
-      return "bg-muted text-muted-foreground border-0";
+      return "bg-violet-50 text-slate-500 border-0";
   }
 }
 
 export function AdminCourseCard({ data }: iAppProps) {
   const thumbnailUrl = useConstructUrl(data.fileKey);
   return (
-    <Card className="group relative overflow-hidden border-0 py-0 gap-0 shadow-md ring-1 ring-border/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+    <Card className="group relative overflow-hidden border border-violet-100 py-0 gap-0 shadow-sm hover:shadow-lg hover:shadow-violet-100/60 transition-all duration-300 hover:-translate-y-1">
       {/* Actions dropdown */}
       <div className="absolute top-3 right-3 z-10">
         <DropdownMenu>
@@ -122,11 +122,11 @@ export function AdminCourseCard({ data }: iAppProps) {
 
         {/* Metadata pills */}
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5 rounded-lg bg-muted px-3 py-1.5">
+          <div className="flex items-center gap-1.5 rounded-lg bg-violet-50 border border-violet-100 px-3 py-1.5">
             <TimerIcon className="size-3.5 text-primary" />
             <span className="text-xs font-medium">{data.duration}h</span>
           </div>
-          <div className="flex items-center gap-1.5 rounded-lg bg-muted px-3 py-1.5">
+          <div className="flex items-center gap-1.5 rounded-lg bg-violet-50 border border-violet-100 px-3 py-1.5">
             <School className="size-3.5 text-primary" />
             <span className="text-xs font-medium">{data.level}</span>
           </div>
@@ -147,7 +147,7 @@ export function AdminCourseCard({ data }: iAppProps) {
 
 export function AdminCourseCardSkeleton() {
   return (
-    <Card className="relative overflow-hidden border-0 py-0 gap-0 shadow-md ring-1 ring-border/50">
+    <Card className="relative overflow-hidden border border-violet-100 py-0 gap-0 shadow-sm">
       <div className="absolute top-3 right-3 z-10">
         <Skeleton className="size-8 rounded-lg" />
       </div>

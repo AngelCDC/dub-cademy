@@ -30,13 +30,13 @@ function getProgressColor(percentage: number) {
 function getLevelColor(level: string) {
   switch (level?.toLowerCase()) {
     case "beginner":
-      return "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 ring-emerald-500/30";
+      return "bg-emerald-500/15 text-emerald-700 ring-emerald-500/30";
     case "intermediate":
       return "bg-primary/15 text-primary ring-primary/30";
     case "advanced":
-      return "bg-cyan-500/15 text-cyan-700 dark:text-cyan-400 ring-cyan-500/30";
+      return "bg-cyan-500/15 text-cyan-700 ring-cyan-500/30";
     default:
-      return "bg-muted text-muted-foreground";
+      return "bg-violet-50 text-slate-500";
   }
 }
 
@@ -49,7 +49,7 @@ export function CourseProgressCard({ data, userId }: iAppProps) {
   const userReview = data.Course.reviews.find((r) => r.userId === userId) ?? null;
 
   return (
-    <Card className="group relative overflow-hidden border-0 py-0 gap-0 shadow-md ring-1 ring-border/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+    <Card className="group relative overflow-hidden border border-violet-100 py-0 gap-0 shadow-sm hover:shadow-lg hover:shadow-violet-100/60 transition-all duration-300 hover:-translate-y-1">
       {/* Thumbnail */}
       <div className="relative overflow-hidden">
         <Image
@@ -113,8 +113,8 @@ export function CourseProgressCard({ data, userId }: iAppProps) {
               className={cn(
                 "font-bold tabular-nums",
                 isCompleted
-                  ? "text-emerald-600 dark:text-emerald-400"
-                  : "text-foreground"
+                  ? "text-emerald-600"
+                  : "text-[#1a1535]"
               )}
             >
               {progressPercentage}%
@@ -122,7 +122,7 @@ export function CourseProgressCard({ data, userId }: iAppProps) {
           </div>
 
           {/* Custom colored progress bar */}
-          <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
+          <div className="h-2 w-full rounded-full bg-violet-50 overflow-hidden">
             <div
               className={cn(
                 "h-full rounded-full transition-all duration-700",

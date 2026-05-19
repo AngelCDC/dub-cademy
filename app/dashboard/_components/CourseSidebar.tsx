@@ -51,7 +51,7 @@ export function CourseSidebar({ course }: iAppProps) {
   return (
     <div className="flex flex-col h-full overflow-hidden">
       {/* Header */}
-      <div className="flex-shrink-0 px-4 pt-4 pb-3 border-b space-y-3">
+      <div className="flex-shrink-0 px-4 pt-4 pb-3 border-b border-violet-100 space-y-3">
         <Link
           href="/dashboard"
           className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors font-medium"
@@ -98,7 +98,7 @@ export function CourseSidebar({ course }: iAppProps) {
               {/* Chapter trigger */}
               <button
                 onClick={() => toggleChapter(chapter.id)}
-                className="w-full flex items-center gap-2 px-2 py-2 rounded-lg text-left hover:bg-accent/60 transition-colors group"
+                className="w-full flex items-center gap-2 px-2 py-2 rounded-lg text-left hover:bg-violet-50 transition-colors group"
               >
                 <span className="shrink-0 text-muted-foreground group-hover:text-foreground transition-colors">
                   {isOpen ? (
@@ -122,7 +122,7 @@ export function CourseSidebar({ course }: iAppProps) {
 
               {/* Lessons + Quiz items */}
               {isOpen && (
-                <div className="mt-1 ml-3 pl-3 border-l border-border/60 space-y-0.5 pb-2">
+                <div className="mt-1 ml-3 pl-3 border-l border-violet-100 space-y-0.5 pb-2">
                   {chapter.lessons.map((lesson) => {
                     const lessonActive = currentLessonId === lesson.id && !isQuizPage;
                     const quizActive = currentLessonId === lesson.id && isQuizPage;
@@ -146,8 +146,8 @@ export function CourseSidebar({ course }: iAppProps) {
                               quizActive
                                 ? "bg-primary/10 text-primary"
                                 : quizPassed
-                                  ? "text-muted-foreground hover:text-foreground hover:bg-accent/50"
-                                  : "text-foreground/80 hover:text-foreground hover:bg-accent/50"
+                                  ? "text-muted-foreground hover:text-foreground hover:bg-violet-50"
+                                  : "text-foreground/80 hover:text-foreground hover:bg-violet-50"
                             )}
                           >
                             <span className="shrink-0">

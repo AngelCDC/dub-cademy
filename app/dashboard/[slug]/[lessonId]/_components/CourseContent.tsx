@@ -67,7 +67,7 @@ export function CourseContent({ data }: iAppProps) {
   return (
     <div className="flex flex-col h-full">
       {/* Top bar */}
-      <div className="flex items-center gap-3 px-4 py-2.5 border-b bg-background/95 backdrop-blur shrink-0">
+      <div className="flex items-center gap-3 px-4 py-2.5 border-b border-violet-100 bg-white/95 backdrop-blur shrink-0">
         {/* Mobile: open sidebar sheet */}
         <Button
           variant="ghost"
@@ -132,7 +132,7 @@ export function CourseContent({ data }: iAppProps) {
           <div className="flex items-center justify-between gap-3 flex-wrap">
             <div className="flex items-center gap-2">
               {isCompleted ? (
-                <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-3 py-1.5 text-sm font-medium text-emerald-700 dark:text-emerald-400 ring-1 ring-emerald-500/30">
+                <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-3 py-1.5 text-sm font-medium text-emerald-700 ring-1 ring-emerald-500/30">
                   <CheckCircle2 className="size-4" />
                   Completada
                 </div>
@@ -176,7 +176,7 @@ export function CourseContent({ data }: iAppProps) {
           </div>
 
           {/* Divider */}
-          <div className="h-px bg-border" />
+          <div className="h-px bg-violet-100" />
 
           {/* Lesson title */}
           <div>
@@ -214,7 +214,7 @@ function VideoPlayer({
 
   if (!videoKey) {
     return (
-      <div className="w-full aspect-video bg-muted flex flex-col items-center justify-center gap-3">
+      <div className="w-full aspect-video bg-violet-50 flex flex-col items-center justify-center gap-3">
         <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-muted-foreground/10">
           <BookOpen className="size-8 text-muted-foreground" />
         </div>
