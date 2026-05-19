@@ -1,402 +1,264 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  ArrowRight,
-  BookOpen,
-  Clock,
-  Star,
-  Users,
-  CheckCircle,
-  Zap,
-  Target,
-  Trophy,
-  ChevronRight,
-} from "lucide-react";
+import { ArrowRight, Star, Clock, ChevronDown, BookOpen, Users, Zap, Shield } from "lucide-react";
 import { getAllCourses } from "@/app/data/course/get-all-courses";
 import { getLearningPaths } from "@/app/data/learning-path/get-learning-paths";
 import { env } from "@/lib/env";
 import { computeRating } from "@/lib/rating";
 
 export const metadata: Metadata = {
-  title: "VELOCITY Academy — Transforma tu carrera tech",
-  description:
-    "Aprende desarrollo web, data science y diseño UX/UI con proyectos reales, mentoría 1-a-1 y comunidad activa.",
-  openGraph: {
-    title: "VELOCITY Academy — Transforma tu carrera tech",
-    url: "/",
-  },
+  title: "VELOCITY Academy — La academia tech de Latinoamérica",
+  description: "Aprende desarrollo web, data science y diseño UX/UI con proyectos reales, mentoría 1-a-1 y comunidad activa.",
+  openGraph: { title: "VELOCITY Academy", url: "/" },
 };
 
 const CATEGORIES = [
-  { emoji: "💻", label: "Desarrollo Web" },
-  { emoji: "📊", label: "Data Science & IA" },
-  { emoji: "🎨", label: "Diseño UX/UI" },
-  { emoji: "📱", label: "Marketing Digital" },
-  { emoji: "☁️", label: "Cloud & DevOps" },
-];
-
-const HOW_IT_WORKS = [
-  {
-    icon: Target,
-    step: "1",
-    title: "Elige tu camino",
-    desc: "Explora cursos sueltos o rutas completas. Si no sabes por dónde empezar, te orientamos según tus metas.",
-  },
-  {
-    icon: Zap,
-    step: "2",
-    title: "Aprende haciendo",
-    desc: "Clases HD a tu ritmo, proyectos reales desde el día uno, sesiones en vivo semanales y mentoría 1-a-1.",
-  },
-  {
-    icon: Trophy,
-    step: "3",
-    title: "Consigue el trabajo",
-    desc: "Preparación para entrevistas, revisión de CV y conexión directa con más de 500 empresas aliadas.",
-  },
+  { emoji: "💻", label: "Desarrollo Web", courses: 8 },
+  { emoji: "📊", label: "Data Science & IA", courses: 5 },
+  { emoji: "🎨", label: "Diseño UX/UI", courses: 4 },
+  { emoji: "📱", label: "Marketing Digital", courses: 3 },
+  { emoji: "☁️", label: "Cloud & DevOps", courses: 6 },
+  { emoji: "🔐", label: "Ciberseguridad", courses: 3 },
 ];
 
 const TESTIMONIALS = [
-  {
-    name: "María González",
-    role: "Frontend Developer",
-    company: "Nubank",
-    quote:
-      "En 6 meses pasé de cero a conseguir mi primer trabajo tech. La mentoría fue clave.",
-    rating: 5,
-    initials: "MG",
-    color: "bg-violet-500",
-  },
-  {
-    name: "Carlos Mendoza",
-    role: "Data Analyst",
-    company: "Mercado Libre",
-    quote:
-      "Intenté aprender solo durante dos años. Con Velocity tardé 5 meses. Los proyectos reales hacen la diferencia.",
-    rating: 5,
-    initials: "CM",
-    color: "bg-blue-500",
-  },
-  {
-    name: "Ana Rodríguez",
-    role: "UX Designer",
-    company: "Rappi",
-    quote:
-      "La comunidad es lo mejor. Compañeros que me ayudaron a practicar y hoy son mis colegas.",
-    rating: 5,
-    initials: "AR",
-    color: "bg-emerald-500",
-  },
+  { name: "María González", role: "Frontend Dev @ Nubank", quote: "En 6 meses pasé de cero a mi primer trabajo tech. La mentoría fue clave.", rating: 5, color: "#7c3aed" },
+  { name: "Carlos Mendoza", role: "Data Analyst @ Mercado Libre", quote: "Con Velocity tardé 5 meses. Los proyectos reales hacen la diferencia en entrevistas.", rating: 5, color: "#2563eb" },
+  { name: "Ana Rodríguez", role: "UX Designer @ Rappi", quote: "La comunidad es lo mejor. Hoy trabajo con compañeros que conocí aquí.", rating: 5, color: "#059669" },
 ];
 
 export default async function LandingPage() {
-  const [allCourses, allPaths] = await Promise.all([
-    getAllCourses(),
-    getLearningPaths(),
-  ]);
-  const featuredCourses = allCourses.slice(0, 3);
-  const featuredPaths = allPaths.slice(0, 3);
+  const [allCourses, allPaths] = await Promise.all([getAllCourses(), getLearningPaths()]);
+  const featuredCourses = allCourses.slice(0, 4);
 
   return (
-    <>
-      {/* ── Hero ──────────────────────────────────────────────────────── */}
-      <section className="bg-slate-950 text-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-16 md:pt-28 md:pb-20">
+    <div className="bg-[#0f0f0f]">
 
-          {/* Tag */}
-          <div className="flex justify-center mb-8">
-            <span className="inline-flex items-center gap-2 bg-primary/20 text-primary border border-primary/30 text-xs font-semibold px-4 py-1.5 rounded-full">
-              <span className="size-1.5 rounded-full bg-primary animate-pulse" />
-              +500 estudiantes activos este mes
+      {/* ── Hero ── */}
+      <section className="relative overflow-hidden">
+        {/* Radial glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full bg-primary/8 blur-[120px] pointer-events-none" />
+
+        <div className="relative max-w-4xl mx-auto px-6 pt-24 pb-16 md:pt-32 md:pb-24 text-center">
+          <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-xs text-white/60 mb-8">
+            <span className="size-1.5 rounded-full bg-primary animate-pulse" />
+            +500 estudiantes activos · 96% consigue empleo
+          </div>
+
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.06] text-white mb-6">
+            La academia tech
+            <span className="block" style={{ color: "var(--color-primary, #3b82f6)" }}>
+              de Latinoamérica
             </span>
-          </div>
+          </h1>
 
-          {/* Headline */}
-          <div className="text-center max-w-4xl mx-auto space-y-6">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08]">
-              Aprende las habilidades
-              <span className="block text-primary"> que el mercado demanda</span>
-            </h1>
-            <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-              Proyectos reales, mentoría 1-a-1 con expertos de la industria y una
-              comunidad que te acompaña hasta conseguir —o mejorar— tu trabajo tech.
-            </p>
-          </div>
+          <p className="text-lg text-white/50 max-w-xl mx-auto leading-relaxed mb-10">
+            Proyectos reales, mentoría 1-a-1 con expertos y una comunidad que te
+            acompaña hasta conseguir —o mejorar— tu trabajo tech.
+          </p>
 
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-10">
-            <Link
-              href="/courses"
-              className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold text-sm px-8 py-3.5 rounded-full transition-colors"
-            >
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-14">
+            <Link href="/courses" className="flex items-center gap-2 bg-primary hover:bg-primary/85 text-white font-semibold text-sm px-8 py-3.5 rounded-full transition-all hover:-translate-y-0.5">
               Explorar cursos <ArrowRight className="size-4" />
             </Link>
-            <Link
-              href="/rutas"
-              className="flex items-center gap-2 bg-white/10 hover:bg-white/15 text-white font-semibold text-sm px-8 py-3.5 rounded-full transition-colors border border-white/10"
-            >
-              Ver rutas de aprendizaje
+            <Link href="/rutas" className="text-sm font-medium text-white/50 hover:text-white transition-colors px-4 py-3.5">
+              Ver rutas de aprendizaje →
             </Link>
           </div>
 
-          {/* Trust bar */}
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 mt-14 pt-10 border-t border-white/10">
+          {/* Stats */}
+          <div className="flex items-center justify-center gap-10 sm:gap-16 border-t border-white/8 pt-10">
             {[
-              { value: "500+", label: "Estudiantes activos" },
-              { value: "96%", label: "Consigue empleo" },
-              { value: "4.9★", label: "Satisfacción media" },
-              { value: "500+", label: "Empresas aliadas" },
+              { val: "500+", label: "Estudiantes" },
+              { val: "96%", label: "Tasa de empleo" },
+              { val: "4.9★", label: "Satisfacción" },
+              { val: "500+", label: "Empresas aliadas" },
             ].map((s) => (
               <div key={s.label} className="text-center">
-                <div className="text-2xl font-bold text-white">{s.value}</div>
-                <div className="text-xs text-slate-500 mt-0.5">{s.label}</div>
+                <div className="text-2xl sm:text-3xl font-bold text-white">{s.val}</div>
+                <div className="text-xs text-white/35 mt-1">{s.label}</div>
               </div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Category strip */}
-        <div className="border-t border-white/5 bg-white/[0.02]">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5 flex items-center gap-3 overflow-x-auto no-scrollbar">
-            <span className="text-xs font-medium text-slate-500 whitespace-nowrap">
-              Explora por área:
-            </span>
-            {CATEGORIES.map((cat) => (
+      {/* ── Paths (Platzi-style school grid) ── */}
+      {allPaths.length > 0 && (
+        <section className="max-w-7xl mx-auto px-6 py-16 md:py-24">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+              Todas las rutas de aprendizaje que necesitas
+            </h2>
+            <p className="text-white/40 text-base">
+              en {allPaths.length} programas especializados
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {allPaths.map((path) => {
+              const totalHours = path.courses.reduce((t, lpc) => t + (lpc.course.duration ?? 0), 0);
+              return (
+                <Link
+                  key={path.id}
+                  href={`/rutas/${path.slug}`}
+                  className="group flex items-center gap-4 bg-[#191919] hover:bg-[#212121] border border-white/6 hover:border-white/12 rounded-xl px-5 py-4 transition-all duration-200"
+                >
+                  <div className="size-10 rounded-lg bg-primary/15 flex items-center justify-center shrink-0">
+                    <BookOpen className="size-4 text-primary" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-semibold text-white truncate">{path.title}</div>
+                    <div className="text-xs text-primary/80 mt-0.5">
+                      {path.courses.length} cursos · {totalHours}h
+                    </div>
+                  </div>
+                  <ChevronDown className="size-4 text-white/25 shrink-0 -rotate-90 group-hover:text-white/50 transition-colors" />
+                </Link>
+              );
+            })}
+
+            {/* Categories fill-in */}
+            {CATEGORIES.slice(0, Math.max(0, 6 - allPaths.length)).map((cat) => (
               <Link
                 key={cat.label}
                 href="/courses"
-                className="flex items-center gap-2 whitespace-nowrap bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs font-medium px-4 py-2 rounded-full border border-white/10 transition-colors"
+                className="group flex items-center gap-4 bg-[#191919] hover:bg-[#212121] border border-white/6 hover:border-white/12 rounded-xl px-5 py-4 transition-all duration-200"
               >
-                <span>{cat.emoji}</span>
-                {cat.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Featured Courses ──────────────────────────────────────────── */}
-      {featuredCourses.length > 0 && (
-        <section className="py-20 md:py-28">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="flex items-end justify-between mb-10">
-              <div>
-                <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-2">
-                  Empieza hoy
-                </p>
-                <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
-                  Cursos destacados
-                </h2>
-              </div>
-              <Link
-                href="/courses"
-                className="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
-              >
-                Ver todos <ChevronRight className="size-4" />
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredCourses.map((course) => {
-                const { average, count } = computeRating(course.reviews ?? []);
-                const imageUrl = `https://${env.NEXT_PUBLIC_S3_BUCKET_NAME_IMAGES}.fly.storage.tigris.dev/${course.fileKey}`;
-                return (
-                  <Link
-                    key={course.id}
-                    href={`/courses/${course.slug}`}
-                    className="group flex flex-col rounded-2xl overflow-hidden bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300"
-                  >
-                    <div className="relative aspect-video bg-muted overflow-hidden">
-                      <Image
-                        src={imageUrl}
-                        alt={course.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                      />
-                      <div className="absolute top-3 left-3 bg-black/60 backdrop-blur-sm text-white text-[10px] font-semibold uppercase tracking-wide px-2.5 py-1 rounded-full">
-                        {course.level}
-                      </div>
-                    </div>
-                    <div className="flex flex-col flex-1 p-5 gap-3">
-                      <span className="text-xs font-semibold text-primary">{course.category}</span>
-                      <h3 className="font-semibold text-sm leading-snug group-hover:text-primary transition-colors line-clamp-2">
-                        {course.title}
-                      </h3>
-                      <p className="text-xs text-muted-foreground line-clamp-2 flex-1">
-                        {course.smallDescription}
-                      </p>
-                      <div className="flex items-center justify-between pt-3 border-t border-border">
-                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                          <span className="flex items-center gap-1">
-                            <Clock className="size-3" />{course.duration}h
-                          </span>
-                          {average > 0 && (
-                            <span className="flex items-center gap-1">
-                              <Star className="size-3 fill-amber-400 text-amber-400" />
-                              {average.toFixed(1)} ({count})
-                            </span>
-                          )}
-                        </div>
-                        <span className="text-sm font-bold">
-                          {new Intl.NumberFormat("es-ES", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(course.price)}
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-
-            <div className="mt-8 sm:hidden text-center">
-              <Link
-                href="/courses"
-                className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
-              >
-                Ver todos los cursos →
-              </Link>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ── How it works ──────────────────────────────────────────────── */}
-      <section className="bg-muted/40 border-y border-border py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">
-              Sin complicaciones
-            </p>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
-              ¿Cómo funciona?
-            </h2>
-            <p className="text-muted-foreground mt-3 max-w-lg mx-auto text-sm leading-relaxed">
-              Empieza a aprender en minutos. Sin requisitos previos para la mayoría de cursos.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {HOW_IT_WORKS.map(({ icon: Icon, step, title, desc }) => (
-              <div key={step} className="flex flex-col items-center text-center gap-4">
-                <div className="relative">
-                  <div className="size-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
-                    <Icon className="size-7 text-primary" />
-                  </div>
-                  <div className="absolute -top-2 -right-2 size-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center">
-                    {step}
-                  </div>
+                <div className="size-10 rounded-lg bg-white/5 flex items-center justify-center text-xl shrink-0">
+                  {cat.emoji}
                 </div>
-                <h3 className="font-semibold text-foreground">{title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+                <div className="flex-1 min-w-0">
+                  <div className="text-sm font-semibold text-white">{cat.label}</div>
+                  <div className="text-xs text-primary/80 mt-0.5">{cat.courses} cursos</div>
+                </div>
+                <ChevronDown className="size-4 text-white/25 shrink-0 -rotate-90 group-hover:text-white/50 transition-colors" />
+              </Link>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <Link href="/rutas" className="text-sm text-white/40 hover:text-white transition-colors">
+              Ver todos los programas →
+            </Link>
+          </div>
+        </section>
+      )}
+
+      {/* ── Featured Courses ── */}
+      {featuredCourses.length > 0 && (
+        <section className="max-w-7xl mx-auto px-6 py-16 md:py-20 border-t border-white/5">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-2">Empieza hoy</p>
+              <h2 className="text-2xl md:text-3xl font-bold text-white">Cursos destacados</h2>
+            </div>
+            <Link href="/courses" className="text-sm text-white/40 hover:text-white transition-colors hidden sm:block">
+              Ver todos →
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {featuredCourses.map((course) => {
+              const { average, count } = computeRating(course.reviews ?? []);
+              const img = `https://${env.NEXT_PUBLIC_S3_BUCKET_NAME_IMAGES}.fly.storage.tigris.dev/${course.fileKey}`;
+              return (
+                <Link
+                  key={course.id}
+                  href={`/courses/${course.slug}`}
+                  className="group bg-[#191919] border border-white/6 hover:border-white/14 rounded-xl overflow-hidden transition-all duration-200 hover:-translate-y-0.5"
+                >
+                  <div className="relative aspect-video overflow-hidden bg-[#262626]">
+                    <Image src={img} alt={course.title} fill className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" sizes="(max-width:640px)100vw,(max-width:1024px)50vw,25vw" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute top-2.5 left-2.5 bg-black/50 backdrop-blur-sm text-white/80 text-[10px] font-semibold px-2 py-0.5 rounded-full">
+                      {course.level}
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <p className="text-[11px] font-semibold text-primary mb-1.5">{course.category}</p>
+                    <h3 className="text-sm font-semibold text-white leading-snug line-clamp-2 mb-3">{course.title}</h3>
+                    <div className="flex items-center justify-between text-xs text-white/35">
+                      <div className="flex items-center gap-2.5">
+                        <span className="flex items-center gap-1"><Clock className="size-3" />{course.duration}h</span>
+                        {average > 0 && (
+                          <span className="flex items-center gap-1">
+                            <Star className="size-3 fill-amber-400 text-amber-400" />
+                            {average.toFixed(1)}
+                          </span>
+                        )}
+                      </div>
+                      <span className="font-bold text-white/70">
+                        {new Intl.NumberFormat("es-ES", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(course.price)}
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* ── Why Velocity ── */}
+      <section className="border-t border-white/5 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">¿Por qué Velocity?</h2>
+            <p className="text-white/40 max-w-lg mx-auto text-base leading-relaxed">
+              No somos otro curso en YouTube. Somos un sistema completo de aprendizaje
+              diseñado para que consigas resultados reales.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { icon: Zap, title: "Proyectos reales", desc: "Construyes desde el día 1. Todo lo que haces entra a tu portafolio." },
+              { icon: Users, title: "Mentoría 1-a-1", desc: "4h mensuales con expertos en empresas top que revisan tu trabajo." },
+              { icon: BookOpen, title: "Rutas estructuradas", desc: "Aprende en secuencia lógica. Sin perderte ni saltar pasos." },
+              { icon: Shield, title: "Career support", desc: "96% consigue empleo. Te acompañamos hasta el último paso." },
+            ].map(({ icon: Icon, title, desc }) => (
+              <div key={title} className="bg-[#191919] border border-white/6 rounded-xl p-6">
+                <div className="size-10 rounded-lg bg-primary/15 flex items-center justify-center mb-4">
+                  <Icon className="size-4 text-primary" />
+                </div>
+                <h3 className="text-sm font-bold text-white mb-2">{title}</h3>
+                <p className="text-sm text-white/40 leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Learning Paths ────────────────────────────────────────────── */}
-      {featuredPaths.length > 0 && (
-        <section className="py-20 md:py-28">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="flex items-end justify-between mb-10">
-              <div>
-                <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-2">
-                  Programas completos
-                </p>
-                <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
-                  Rutas de aprendizaje
-                </h2>
-                <p className="text-muted-foreground mt-2 text-sm max-w-md">
-                  Itinerarios estructurados que te llevan de cero a empleable.
-                </p>
-              </div>
-              <Link
-                href="/rutas"
-                className="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
-              >
-                Ver todas <ChevronRight className="size-4" />
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredPaths.map((path) => {
-                const totalHours = path.courses.reduce(
-                  (t, lpc) => t + (lpc.course.duration ?? 0),
-                  0
-                );
-                return (
-                  <Link
-                    key={path.id}
-                    href={`/rutas/${path.slug}`}
-                    className="group flex flex-col bg-card border border-border rounded-2xl p-6 hover:border-primary/30 hover:shadow-lg transition-all duration-300"
-                  >
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="size-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
-                        <BookOpen className="size-5 text-primary" />
-                      </div>
-                      <span className="text-xs font-semibold text-muted-foreground bg-muted px-2.5 py-1 rounded-full">
-                        {path.courses.length} cursos
-                      </span>
-                    </div>
-                    <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors leading-snug mb-2">
-                      {path.title}
-                    </h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3 flex-1">
-                      {path.description}
-                    </p>
-                    <div className="flex items-center justify-between mt-5 pt-4 border-t border-border">
-                      <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                        <Clock className="size-3.5 text-primary" />
-                        {totalHours}h de contenido
-                      </span>
-                      <span className="text-xs font-semibold text-primary group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1">
-                        Ver ruta <ChevronRight className="size-3.5" />
-                      </span>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ── Testimonials ──────────────────────────────────────────────── */}
-      <section className="bg-muted/40 border-y border-border py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      {/* ── Testimonials ── */}
+      <section className="border-t border-white/5 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-14">
-            <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">
-              Historias reales
-            </p>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
-              Lo que dicen nuestros estudiantes
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+              Estudiantes que lo lograron
             </h2>
+            <p className="text-white/40 text-base">Historias reales, no casos de estudio fabricados.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {TESTIMONIALS.map((t) => (
-              <div
-                key={t.name}
-                className="bg-card border border-border rounded-2xl p-6 flex flex-col gap-4"
-              >
-                <div className="flex items-center gap-0.5">
+              <div key={t.name} className="bg-[#191919] border border-white/6 rounded-xl p-6 flex flex-col gap-4">
+                <div className="flex gap-0.5">
                   {Array.from({ length: t.rating }).map((_, i) => (
-                    <Star key={i} className="size-4 fill-amber-400 text-amber-400" />
+                    <Star key={i} className="size-3.5 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+                <p className="text-sm text-white/60 leading-relaxed flex-1">
                   &ldquo;{t.quote}&rdquo;
                 </p>
-                <div className="flex items-center gap-3 pt-3 border-t border-border">
-                  <div className={`size-9 rounded-full ${t.color} flex items-center justify-center text-white text-xs font-bold`}>
-                    {t.initials}
+                <div className="flex items-center gap-3 pt-4 border-t border-white/6">
+                  <div className="size-9 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0" style={{ background: t.color }}>
+                    {t.name.split(" ").map(w => w[0]).join("")}
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-foreground">{t.name}</div>
-                    <div className="text-xs text-muted-foreground">
-                      {t.role} · {t.company}
-                    </div>
+                    <div className="text-sm font-semibold text-white">{t.name}</div>
+                    <div className="text-xs text-white/35">{t.role}</div>
                   </div>
                 </div>
               </div>
@@ -405,49 +267,28 @@ export default async function LandingPage() {
         </div>
       </section>
 
-      {/* ── Final CTA ─────────────────────────────────────────────────── */}
-      <section className="bg-slate-950 text-white py-24 md:py-32">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center space-y-8">
-          <div className="inline-flex items-center gap-2 bg-primary/20 text-primary border border-primary/30 text-xs font-semibold px-4 py-1.5 rounded-full">
-            <Users className="size-3.5" />
-            Únete a +500 estudiantes
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-            Tu próximo trabajo tech
-            <span className="block text-primary mt-1">empieza hoy</span>
+      {/* ── Final CTA ── */}
+      <section className="border-t border-white/5 py-24 md:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
+        <div className="relative max-w-2xl mx-auto px-6 text-center">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-5">
+            Tu carrera tech empieza
+            <span className="text-primary block">hoy, no mañana</span>
           </h2>
-
-          <p className="text-slate-400 text-base md:text-lg leading-relaxed max-w-xl mx-auto">
-            El mejor momento para empezar fue ayer. El segundo mejor es ahora.
-            Elige tu ruta, construye tu portafolio y transforma tu carrera.
+          <p className="text-white/40 text-base mb-10 leading-relaxed">
+            Elige un curso, empieza a construir y únete a los cientos de estudiantes
+            que ya transformaron su carrera con Velocity.
           </p>
-
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link
-              href="/courses"
-              className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold text-sm px-10 py-3.5 rounded-full transition-colors"
-            >
-              Explorar programas <ArrowRight className="size-4" />
+            <Link href="/courses" className="flex items-center gap-2 bg-primary hover:bg-primary/85 text-white font-semibold text-sm px-10 py-4 rounded-full transition-all hover:-translate-y-0.5">
+              Ver todos los cursos <ArrowRight className="size-4" />
             </Link>
-            <Link
-              href="/contacto"
-              className="flex items-center gap-2 bg-white/10 hover:bg-white/15 text-white font-semibold text-sm px-8 py-3.5 rounded-full border border-white/10 transition-colors"
-            >
-              Hablar con un asesor
+            <Link href="/contacto" className="text-sm text-white/40 hover:text-white transition-colors px-4 py-4">
+              Hablar con un asesor →
             </Link>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 pt-4">
-            {["Acceso inmediato", "Garantía 30 días", "Cancelación flexible"].map((pill) => (
-              <span key={pill} className="flex items-center gap-1.5 text-xs text-slate-500">
-                <CheckCircle className="size-3.5 text-primary" />
-                {pill}
-              </span>
-            ))}
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

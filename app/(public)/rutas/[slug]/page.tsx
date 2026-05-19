@@ -4,11 +4,10 @@ import { prisma } from "@/lib/db";
 export const dynamic = "force-dynamic";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { CheckCircle2, Clock, BookOpen, GraduationCap, Lock } from "lucide-react";
+import { CheckCircle2, Clock, BookOpen, GraduationCap, Lock, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { EnrollPathButton } from "./_components/EnrollPathButton";
-import { buttonVariants } from "@/components/ui/button";
 
 type Params = Promise<{ slug: string }>;
 
@@ -56,7 +55,19 @@ export default async function LearningPathPage({ params }: { params: Params }) {
     if (!enrolled) allEnrolled = false;
     if (enrolled) anyEnrolled = true;
 
-    return { id: c.id, title: c.title, smallDescription: c.smallDescription, slug: c.slug, duration: c.duration, level: c.level, category: c.category, position: lpc.position, total, completed, enrolled };
+    return {
+      id: c.id,
+      title: c.title,
+      smallDescription: c.smallDescription,
+      slug: c.slug,
+      duration: c.duration,
+      level: c.level,
+      category: c.category,
+      position: lpc.position,
+      total,
+      completed,
+      enrolled,
+    };
   });
 
   const overallProgress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
@@ -65,62 +76,54 @@ export default async function LearningPathPage({ params }: { params: Params }) {
 
   return (
     <>
-      {/* ── Hero strip ────────────────────────────────────────────────── */}
-      <section className="relative bg-muted/40 border-b border-border overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full [background:repeating-linear-gradient(45deg,transparent,transparent_20px,rgba(0,0,0,0.02)_20px,rgba(0,0,0,0.02)_40px)]" />
-
-        <div className="relative mx-auto px-6 lg:px-20 py-16 md:py-24">
-          <div className="inline-flex items-center gap-2 border border-primary/20 bg-primary/10 text-primary px-3 py-1.5 mb-6">
-            <span className="text-[10px] font-bold uppercase tracking-widest">
-              Ruta · {courseStats.length} cursos · {totalHours}h
-            </span>
+      {/* Hero */}
+      <div className="bg-[#0f0f0f] border-b border-white/5 relative">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+        <div className="max-w-7xl mx-auto px-6 py-14 md:py-20">
+          <div className="flex flex-wrap items-center gap-2 mb-5">
+            <span className="bg-primary/15 text-primary text-xs font-semibold px-3 py-1 rounded-full">Ruta de aprendizaje</span>
+            <span className="bg-white/6 text-white/50 text-xs font-semibold px-3 py-1 rounded-full">{courseStats.length} cursos</span>
+            <span className="bg-white/6 text-white/50 text-xs font-semibold px-3 py-1 rounded-full">{totalHours}h de contenido</span>
+            <span className="bg-white/6 text-white/50 text-xs font-semibold px-3 py-1 rounded-full">{totalLessons} lecciones</span>
           </div>
-          <h1 className="font-bebas text-5xl md:text-7xl text-foreground leading-none mb-4">
+
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight max-w-3xl mb-4">
             {path.title}
           </h1>
           {path.description && (
-            <p className="text-muted-foreground max-w-2xl text-base leading-relaxed">
-              {path.description}
-            </p>
+            <p className="text-white/40 text-base max-w-2xl leading-relaxed">{path.description}</p>
           )}
 
           {/* Overall progress */}
           {isLoggedIn && anyEnrolled && (
             <div className="mt-8 max-w-md space-y-2">
-              <div className="flex items-center justify-between text-sm">
-                <span className="font-bold uppercase tracking-wider text-xs text-muted-foreground">
-                  Progreso total
-                </span>
-                <span className="text-primary font-bold tabular-nums">
-                  {completedLessons}/{totalLessons} · {overallProgress}%
-                </span>
+              <div className="flex items-center justify-between text-xs">
+                <span className="text-white/30 font-semibold uppercase tracking-wider">Progreso total</span>
+                <span className="text-primary font-bold tabular-nums">{completedLessons}/{totalLessons} · {overallProgress}%</span>
               </div>
-              <div className="h-1.5 w-full bg-border">
+              <div className="h-1.5 w-full bg-white/8 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-primary transition-all duration-700"
+                  className="h-full bg-primary rounded-full transition-all duration-700"
                   style={{ width: `${overallProgress}%` }}
                 />
               </div>
             </div>
           )}
         </div>
-      </section>
+      </div>
 
-      {/* ── Main content ──────────────────────────────────────────────── */}
-      <div className="max-w-5xl mx-auto px-6 lg:px-20 py-12 md:py-16 grid grid-cols-1 gap-12 lg:grid-cols-3">
+      {/* Main layout */}
+      <div className="bg-[#0f0f0f] max-w-7xl mx-auto px-6 py-10 md:py-14 grid grid-cols-1 gap-8 lg:grid-cols-3">
+
         {/* Left: course sequence */}
-        <div className="lg:col-span-2 space-y-8">
-          <div>
-            <div className="font-antonio text-[0.7rem] tracking-[0.3em] text-primary mb-2 uppercase font-semibold">
-              Secuencia de cursos
-            </div>
-            <h2 className="font-bebas text-3xl md:text-4xl text-foreground">CURSOS DE LA RUTA</h2>
-          </div>
+        <div className="order-2 lg:order-1 lg:col-span-2 space-y-8">
+          <h2 className="text-lg font-bold text-white">Secuencia de cursos</h2>
 
           <div className="relative">
-            <div className="absolute left-5 top-8 bottom-8 w-px bg-border" aria-hidden />
+            {/* Vertical line */}
+            <div className="absolute left-5 top-5 bottom-5 w-px bg-white/6" aria-hidden />
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               {courseStats.map((course, i) => {
                 const isComplete = course.completed === course.total && course.total > 0;
                 const inProgress = course.completed > 0 && !isComplete;
@@ -130,57 +133,70 @@ export default async function LearningPathPage({ params }: { params: Params }) {
                   <div key={course.id} className="flex gap-4">
                     {/* Step indicator */}
                     <div className={cn(
-                      "relative z-10 flex size-10 shrink-0 items-center justify-center text-sm font-bold ring-2",
-                      isComplete ? "bg-primary text-primary-foreground ring-primary/30"
-                        : inProgress ? "bg-primary/20 text-primary ring-primary/20"
-                        : "bg-background text-muted-foreground ring-border"
+                      "relative z-10 size-10 shrink-0 flex items-center justify-center rounded-xl text-sm font-bold ring-1",
+                      isComplete
+                        ? "bg-primary/20 text-primary ring-primary/30"
+                        : inProgress
+                        ? "bg-primary/10 text-primary ring-primary/20"
+                        : "bg-white/5 text-white/30 ring-white/10"
                     )}>
-                      {isComplete ? <CheckCircle2 className="size-5" /> : i + 1}
+                      {isComplete ? <CheckCircle2 className="size-4.5" /> : i + 1}
                     </div>
 
                     {/* Card */}
                     <div className={cn(
-                      "flex-1 border bg-card transition-all duration-200",
-                      isComplete ? "border-primary/30 bg-primary/5"
-                        : inProgress ? "border-primary/20"
-                        : "border-border"
+                      "flex-1 bg-[#191919] border rounded-xl overflow-hidden transition-all duration-200",
+                      isComplete
+                        ? "border-primary/25"
+                        : inProgress
+                        ? "border-primary/15"
+                        : "border-white/6"
                     )}>
                       <div className="p-5 space-y-3">
                         <div className="flex items-start justify-between gap-3">
                           <div className="flex-1 min-w-0">
-                            <p className="font-semibold text-sm text-foreground leading-snug">{course.title}</p>
-                            <p className="text-xs text-muted-foreground mt-1 line-clamp-2 leading-relaxed">
+                            <p className="font-semibold text-sm text-white leading-snug">{course.title}</p>
+                            <p className="text-xs text-white/35 mt-1 line-clamp-2 leading-relaxed">
                               {course.smallDescription}
                             </p>
                           </div>
                           {isLoggedIn && course.enrolled ? (
                             <Link
                               href={`/dashboard/${course.slug}`}
-                              className={cn(buttonVariants({ size: "sm", variant: "outline" }), "shrink-0 text-xs h-7")}
+                              className="shrink-0 flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary/80 transition-colors"
                             >
                               {isComplete ? "Revisar" : "Continuar"}
+                              <ChevronRight className="size-3.5" />
                             </Link>
                           ) : !isLoggedIn ? (
-                            <Lock className="size-4 text-muted-foreground shrink-0 mt-0.5" />
+                            <Lock className="size-4 text-white/20 shrink-0 mt-0.5" />
                           ) : null}
                         </div>
 
-                        <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                          <span className="flex items-center gap-1"><Clock className="size-3 text-primary" />{course.duration}h</span>
-                          <span className="flex items-center gap-1"><GraduationCap className="size-3 text-primary" />{course.level}</span>
-                          <span className="border border-border px-2 py-0.5 text-[10px] uppercase tracking-wider">{course.category}</span>
+                        <div className="flex items-center gap-3 text-xs text-white/30">
+                          <span className="flex items-center gap-1.5">
+                            <Clock className="size-3 text-primary/60" />
+                            {course.duration}h
+                          </span>
+                          <span className="flex items-center gap-1.5">
+                            <GraduationCap className="size-3 text-primary/60" />
+                            {course.level}
+                          </span>
+                          <span className="bg-white/5 px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider">
+                            {course.category}
+                          </span>
                         </div>
 
                         {isLoggedIn && course.enrolled && course.total > 0 && (
                           <div className="space-y-1">
-                            <div className="h-1 w-full bg-muted">
+                            <div className="h-1 w-full bg-white/8 rounded-full overflow-hidden">
                               <div
-                                className={cn("h-full transition-all duration-500", isComplete ? "bg-primary" : "bg-primary/60")}
+                                className={cn("h-full rounded-full transition-all duration-500", isComplete ? "bg-primary" : "bg-primary/60")}
                                 style={{ width: `${courseProgress}%` }}
                               />
                             </div>
-                            <p className="text-[10px] text-muted-foreground tabular-nums">
-                              {course.completed}/{course.total} lecciones
+                            <p className="text-[10px] text-white/25 tabular-nums">
+                              {course.completed}/{course.total} lecciones completadas
                             </p>
                           </div>
                         )}
@@ -194,30 +210,37 @@ export default async function LearningPathPage({ params }: { params: Params }) {
         </div>
 
         {/* Right: enrollment card */}
-        <div className="lg:col-span-1">
+        <div className="order-1 lg:order-2 lg:col-span-1">
           <div className="sticky top-24">
-            <div className="bg-card border border-border">
+            <div className="bg-[#191919] border border-white/6 rounded-xl overflow-hidden">
+
               {/* Price */}
-              <div className="p-6 border-b border-border">
-                <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">
-                  Precio de la ruta
-                </div>
-                <div className="font-bebas text-5xl text-foreground">
-                  {path.price === 0 ? "GRATIS" : `€${path.price}`}
+              <div className="p-6 border-b border-white/6">
+                <p className="text-[11px] font-semibold text-white/30 uppercase tracking-widest mb-1">Precio de la ruta</p>
+                <div className="text-4xl font-extrabold text-white">
+                  {path.price === 0
+                    ? "Gratis"
+                    : new Intl.NumberFormat("es-ES", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(path.price)}
                 </div>
               </div>
 
               {/* Stats */}
-              <div className="p-6 grid grid-cols-2 gap-3 border-b border-border">
+              <div className="p-6 space-y-3 border-b border-white/6">
+                <p className="text-[11px] font-semibold text-white/30 uppercase tracking-widest mb-3">Incluye</p>
                 {[
-                  { icon: BookOpen, label: `${courseStats.length} cursos` },
-                  { icon: Clock, label: `${totalHours}h total` },
-                  { icon: GraduationCap, label: `${totalLessons} lecciones` },
-                  { icon: CheckCircle2, label: "Acceso de por vida" },
-                ].map(({ icon: Icon, label }) => (
-                  <div key={label} className="flex items-center gap-2 bg-muted/50 border border-border p-2.5">
-                    <Icon className="size-4 text-primary shrink-0" />
-                    <span className="text-xs font-medium text-muted-foreground">{label}</span>
+                  { icon: BookOpen, label: "Cursos", value: `${courseStats.length} cursos` },
+                  { icon: Clock, label: "Duración total", value: `${totalHours} horas` },
+                  { icon: GraduationCap, label: "Lecciones", value: `${totalLessons} lecciones` },
+                  { icon: CheckCircle2, label: "Acceso", value: "De por vida" },
+                ].map(({ icon: Icon, label, value }) => (
+                  <div key={label} className="flex items-center gap-3">
+                    <div className="size-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <Icon className="size-4 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-white/30">{label}</p>
+                      <p className="text-sm font-semibold text-white">{value}</p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -227,26 +250,26 @@ export default async function LearningPathPage({ params }: { params: Params }) {
                 {!isLoggedIn ? (
                   <Link
                     href="/login"
-                    className="block w-full bg-primary hover:bg-primary/90 text-primary-foreground text-center py-4 font-bold text-sm tracking-widest uppercase transition-colors"
+                    className="flex items-center justify-center w-full bg-primary hover:bg-primary/90 text-white font-semibold text-sm py-3.5 rounded-full transition-colors"
                   >
                     Iniciar sesión para inscribirte
                   </Link>
                 ) : allEnrolled ? (
                   <Link
                     href="/dashboard"
-                    className="flex items-center justify-center gap-2 w-full border-2 border-primary text-primary text-center py-4 font-bold text-sm tracking-widest uppercase transition-colors hover:bg-primary/10"
+                    className="flex items-center justify-center gap-2 w-full bg-primary/15 hover:bg-primary/20 text-primary font-semibold text-sm py-3.5 rounded-full transition-colors"
                   >
                     <CheckCircle2 className="size-4" />
-                    Ya estás matriculado
+                    Ir al dashboard
                   </Link>
                 ) : (
                   <EnrollPathButton pathId={path.id} />
                 )}
-                {!isLoggedIn && (
-                  <p className="text-center text-xs text-muted-foreground">
-                    Necesitas una cuenta para acceder a los cursos
-                  </p>
-                )}
+                <p className="text-center text-xs text-white/25">
+                  {!isLoggedIn
+                    ? "Necesitas una cuenta para acceder"
+                    : "Garantía de devolución 30 días"}
+                </p>
               </div>
             </div>
           </div>
