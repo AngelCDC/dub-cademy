@@ -6,6 +6,7 @@ import {
   IconDashboard,
   IconFolder,
   IconHelp,
+  IconListCheck,
   IconListDetails,
   IconSettings,
   IconUsers,
@@ -47,6 +48,11 @@ const data = {
       title: "Rutas de Aprendizaje",
       url: "/admin/learning-paths",
       icon: IconFolder,
+    },
+    {
+      title: "Inscripciones",
+      url: "/admin/enrollments",
+      icon: IconListCheck,
     },
     {
       title: "Equipo",

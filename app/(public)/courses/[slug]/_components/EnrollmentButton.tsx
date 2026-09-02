@@ -4,17 +4,23 @@ import { tryCatch } from "@/hooks/try-catch";
 import { useTransition } from "react";
 import { toast } from "sonner";
 import { Loader2, Rocket } from "lucide-react";
-import { enrollInCourseAction2 } from "../actions2";
+import { purchaseCourseAction } from "../actions2";
 
 export function EnrollmentButton({ courseId }: { courseId: string }) {
   const [pending, startTransition] = useTransition();
 
   function onSubmit() {
     startTransition(async () => {
-      const { data: result, error } = await tryCatch(enrollInCourseAction2(courseId));
-      if (error) { toast.error("Error inesperado. Por favor intenta de nuevo."); return; }
-      if (result.status === "success") toast.success(result.message);
-      else if (result.status === "error") toast.error(result.message);
+      const { data: result, error } = await tryCatch(purchaseCourseAction(courseId));
+      if (error) {
+        // The action always ends in a redirect (Next throws NEXT_REDIRECT) — ignore it
+        const digest = (error as { digest?: string })?.digest;
+        if (!digest?.startsWith("NEXT_REDIRECT")) {
+          toast.error("Error inesperado. Por favor intenta de nuevo.");
+        }
+        return;
+      }
+      if (result.status === "error") toast.error(result.message);
     });
   }
 

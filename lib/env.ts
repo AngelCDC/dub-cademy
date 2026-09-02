@@ -56,6 +56,36 @@ export const env = createEnv({
       z.string().min(1).default("")
     ),
 
+    // BCV rate + manual payment (QR / Pago Móvil) — all optional
+    BCV_API_URL: z.preprocess(
+      (v) => (v === "" ? undefined : v),
+      z.string().min(1).default("https://ve.dolarapi.com/v1/dolares/oficial")
+    ),
+    BCV_FALLBACK_RATE: z.preprocess(
+      (v) => (v === "" ? undefined : v),
+      z.string().min(1).optional()
+    ),
+    PAYMENT_QR_PATH: z.preprocess(
+      (v) => (v === "" ? undefined : v),
+      z.string().min(1).default("/payment-qr.png")
+    ),
+    PAYMENT_BANK: z.preprocess(
+      (v) => (v === "" ? undefined : v),
+      z.string().min(1).optional()
+    ),
+    PAYMENT_PHONE: z.preprocess(
+      (v) => (v === "" ? undefined : v),
+      z.string().min(1).optional()
+    ),
+    PAYMENT_HOLDER: z.preprocess(
+      (v) => (v === "" ? undefined : v),
+      z.string().min(1).optional()
+    ),
+    PAYMENT_ID: z.preprocess(
+      (v) => (v === "" ? undefined : v),
+      z.string().min(1).optional()
+    ),
+
   },
 
   client: {

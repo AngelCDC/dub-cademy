@@ -43,11 +43,44 @@ export const config = {
 
 // Combine Arcjet with your existing middleware
 export default createMiddleware(aj, async (request: NextRequest) => {
+  const { pathname } = request.nextUrl;
+  const res = NextResponse.next();
+
+  // /login?redirect=... → store the return path so we can bounce back after login
+  if (pathname === "/login") {
+    const redirectTo = request.nextUrl.searchParams.get("redirect");
+    if (isValidReturnPath(redirectTo)) {
+      res.cookies.set("auth_return_to", redirectTo!, {
+        httpOnly: true,
+        sameSite: "lax",
+        maxAge: 1800, // 30 min
+        path: "/",
+      });
+    } else {
+      res.cookies.delete("auth_return_to");
+    }
+  }
+
+  // /auth-redirect → if the login flow started from a return path, go back there
+  if (pathname === "/auth-redirect") {
+    const returnTo = request.cookies.get("auth_return_to")?.value;
+    if (isValidReturnPath(returnTo)) {
+      const response = NextResponse.redirect(new URL(returnTo!, request.url));
+      response.cookies.delete("auth_return_to");
+      return response;
+    }
+  }
+
   // Only apply auth middleware to admin routes
-  if (request.nextUrl.pathname.startsWith("/admin")) {
+  if (pathname.startsWith("/admin")) {
     return authMiddleware(request);
   }
 
   // For non-admin routes, just continue
-  return NextResponse.next();
+  return res;
 });
+
+// Allow only internal absolute paths (prevents open redirects via ?redirect=/cookie)
+function isValidReturnPath(value: string | null | undefined): value is string {
+  return !!value && value.length < 200 && /^\/[^/\\]/.test(value);
+}
