@@ -67,7 +67,7 @@ export const env = createEnv({
     ),
     PAYMENT_QR_PATH: z.preprocess(
       (v) => (v === "" ? undefined : v),
-      z.string().min(1).default("/payment-qr.png")
+      z.string().min(1).default("/QR.jpeg")
     ),
     PAYMENT_BANK: z.preprocess(
       (v) => (v === "" ? undefined : v),

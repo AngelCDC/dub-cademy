@@ -38,7 +38,6 @@ interface Props {
   course: CheckoutCourseInfo;
   bcv: { rate: number; date: string } | null;
   totalBs: number | null;
-  reference: string;
   qrPath: string | null;
   paymentInfo: CheckoutPaymentInfo;
 }
@@ -66,7 +65,7 @@ function formatRateDate(iso: string): string {
   });
 }
 
-export function CheckoutClient({ course, bcv, totalBs, reference, qrPath, paymentInfo }: Props) {
+export function CheckoutClient({ course, bcv, totalBs, qrPath, paymentInfo }: Props) {
   const hasPaymentInfo = !!paymentInfo.bank || !!paymentInfo.phone || !!paymentInfo.holder || !!paymentInfo.id;
 
   return (
@@ -87,10 +86,62 @@ export function CheckoutClient({ course, bcv, totalBs, reference, qrPath, paymen
         </div>
       </div>
 
-      {/* Main layout: QR/pago a la izquierda, info del curso a la derecha */}
+      {/* Main layout: info del curso a la izquierda, pago a la derecha */}
       <div className="max-w-5xl mx-auto px-6 py-10 grid grid-cols-1 gap-8 lg:grid-cols-2 items-start">
-        {/* ── Left: payment ── */}
-        <div className="bg-white border border-violet-100 rounded-2xl shadow-lg shadow-violet-100/50 overflow-hidden">
+        {/* ── Course info (left on desktop) ── */}
+        <div className="order-2 lg:order-1 bg-white border border-violet-100 rounded-2xl overflow-hidden shadow-sm">
+          <div className="relative aspect-video w-full">
+            <Image
+              src={course.imageUrl}
+              alt={course.title}
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="p-6">
+            <h2 className="text-xl font-bold text-[#1a1535] leading-snug mb-2">
+              {course.title}
+            </h2>
+            <p className="text-sm text-slate-400 leading-relaxed mb-5">
+              {course.smallDescription}
+            </p>
+
+            <div className="border-t border-violet-50 pt-5 space-y-3">
+              <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest">
+                Detalles
+              </p>
+              {[
+                { icon: Banknote, label: "Precio", value: formatUsd(course.price) },
+                { icon: Clock, label: "Duración", value: `${course.duration} horas` },
+                { icon: ChartBar, label: "Nivel", value: course.level },
+                { icon: IconCategory, label: "Categoría", value: course.category },
+                { icon: Book, label: "Lecciones", value: `${course.totalLessons} lecciones` },
+              ].map(({ icon: Icon, label, value }) => (
+                <div key={label} className="flex items-center gap-3">
+                  <div className="size-8 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                    <Icon className="size-4 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-400">{label}</p>
+                    <p className="text-sm font-semibold text-[#1a1535]">{value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="border-t border-violet-50 mt-5 pt-5 space-y-2">
+              {["Acceso de por vida", "Acceso en móvil y escritorio", "Certificado de finalización"].map((item) => (
+                <div key={item} className="flex items-center gap-2 text-sm text-slate-500">
+                  <Check className="size-4 text-primary shrink-0" />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Payment (right on desktop, first on mobile) ── */}
+        <div className="order-1 lg:order-2 bg-white border border-violet-100 rounded-2xl shadow-lg shadow-violet-100/50 overflow-hidden">
           <div className="p-6 border-b border-violet-50">
             <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-2">
               Total a pagar
@@ -144,7 +195,7 @@ export function CheckoutClient({ course, bcv, totalBs, reference, qrPath, paymen
             )}
           </div>
 
-          {/* Pago Móvil data */}
+          {/* Pago Móvil data — debajo del QR */}
           {hasPaymentInfo && (
             <div className="p-6 border-b border-violet-50 space-y-3">
               <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-3">
@@ -152,9 +203,9 @@ export function CheckoutClient({ course, bcv, totalBs, reference, qrPath, paymen
               </p>
               {[
                 { icon: Building2, label: "Banco", value: paymentInfo.bank },
+                { icon: CreditCard, label: "Cédula", value: paymentInfo.id },
                 { icon: Phone, label: "Teléfono", value: paymentInfo.phone },
                 { icon: User, label: "Titular", value: paymentInfo.holder },
-                { icon: CreditCard, label: "Cédula", value: paymentInfo.id },
               ]
                 .filter((item) => item.value)
                 .map(({ icon: Icon, label, value }) => (
@@ -171,16 +222,18 @@ export function CheckoutClient({ course, bcv, totalBs, reference, qrPath, paymen
             </div>
           )}
 
-          {/* Reference + CTA */}
+          {/* Reference (user fills it in) + CTA */}
           <div className="p-6 space-y-4">
-            <div className="flex items-center gap-3 rounded-xl bg-violet-50 border border-violet-100 px-4 py-3">
-              <Banknote className="size-5 text-primary shrink-0" />
-              <div className="min-w-0">
-                <p className="text-xs text-slate-400">Referencia del pago</p>
-                <p className="text-sm font-bold text-[#1a1535] break-all leading-tight">
-                  {reference}
-                </p>
-              </div>
+            <div className="space-y-1.5">
+              <label htmlFor="payment-reference" className="text-xs text-slate-400">
+                Referencia del pago
+              </label>
+              <input
+                id="payment-reference"
+                type="text"
+                placeholder="Escribe tu nombre o referencia"
+                className="w-full rounded-xl border border-violet-200 bg-white px-4 py-2.5 text-sm text-[#1a1535] placeholder:text-slate-300 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+              />
             </div>
 
             <Link
@@ -193,58 +246,6 @@ export function CheckoutClient({ course, bcv, totalBs, reference, qrPath, paymen
               Enviaremos un email de confirmación cuando aprobemos tu pago.
               Suele tardar menos de 24 horas.
             </p>
-          </div>
-        </div>
-
-        {/* ── Right: course info ── */}
-        <div className="bg-white border border-violet-100 rounded-2xl overflow-hidden shadow-sm">
-          <div className="relative aspect-video w-full">
-            <Image
-              src={course.imageUrl}
-              alt={course.title}
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="p-6">
-            <h2 className="text-xl font-bold text-[#1a1535] leading-snug mb-2">
-              {course.title}
-            </h2>
-            <p className="text-sm text-slate-400 leading-relaxed mb-5">
-              {course.smallDescription}
-            </p>
-
-            <div className="border-t border-violet-50 pt-5 space-y-3">
-              <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest">
-                Detalles
-              </p>
-              {[
-                { icon: Banknote, label: "Precio", value: formatUsd(course.price) },
-                { icon: Clock, label: "Duración", value: `${course.duration} horas` },
-                { icon: ChartBar, label: "Nivel", value: course.level },
-                { icon: IconCategory, label: "Categoría", value: course.category },
-                { icon: Book, label: "Lecciones", value: `${course.totalLessons} lecciones` },
-              ].map(({ icon: Icon, label, value }) => (
-                <div key={label} className="flex items-center gap-3">
-                  <div className="size-8 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                    <Icon className="size-4 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-slate-400">{label}</p>
-                    <p className="text-sm font-semibold text-[#1a1535]">{value}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="border-t border-violet-50 mt-5 pt-5 space-y-2">
-              {["Acceso de por vida", "Acceso en móvil y escritorio", "Certificado de finalización"].map((item) => (
-                <div key={item} className="flex items-center gap-2 text-sm text-slate-500">
-                  <Check className="size-4 text-primary shrink-0" />
-                  {item}
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>

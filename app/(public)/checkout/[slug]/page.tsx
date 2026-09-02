@@ -67,7 +67,6 @@ export default async function CheckoutPage({ params }: { params: Params }) {
       }}
       bcv={bcv}
       totalBs={totalBs}
-      reference={enrollment.id}
       qrPath={qrPath}
       paymentInfo={{
         bank: env.PAYMENT_BANK || null,
