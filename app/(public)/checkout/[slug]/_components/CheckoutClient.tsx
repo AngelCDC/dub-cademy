@@ -240,7 +240,7 @@ export function CheckoutClient({ course, bcv, totalBs, qrPath, paymentInfo }: Pr
             </div>
 
             <Link
-              href="/dashboard"
+              href={`/payment/success?course=${encodeURIComponent(course.title)}`}
               className="flex items-center justify-center w-full bg-primary hover:bg-primary/90 text-white font-semibold text-sm py-3.5 rounded-full transition-all hover:-translate-y-0.5 shadow-md shadow-primary/25"
             >
               Ya realicé mi pago
