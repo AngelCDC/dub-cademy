@@ -91,10 +91,11 @@ export function CheckoutClient({ course, bcv, totalBs, qrPath, paymentInfo }: Pr
         </div>
       </div>
 
-      {/* Main layout: info del curso a la izquierda, pago a la derecha */}
-      <div className="max-w-5xl mx-auto px-6 py-10 grid grid-cols-1 gap-8 lg:grid-cols-2 items-start">
+      {/* Main layout: apilado hasta xl (laptops pequeñas ven lo mismo que mobile);
+          a partir de 1280px, info del curso a la izquierda y pago a la derecha */}
+      <div className="max-w-3xl xl:max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 gap-8 xl:grid-cols-2 items-start">
         {/* ── Course info (left on desktop) ── */}
-        <div className="order-2 lg:order-1 bg-white border border-violet-100 rounded-2xl overflow-hidden shadow-sm">
+        <div className="order-2 xl:order-1 bg-white border border-violet-100 rounded-2xl overflow-hidden shadow-sm">
           <div className="relative aspect-video w-full">
             <Image
               src={course.imageUrl}
@@ -146,7 +147,7 @@ export function CheckoutClient({ course, bcv, totalBs, qrPath, paymentInfo }: Pr
         </div>
 
         {/* ── Payment (right on desktop, first on mobile) ── */}
-        <div className="order-1 lg:order-2 bg-white border border-violet-100 rounded-2xl shadow-lg shadow-violet-100/50 overflow-hidden">
+        <div className="order-1 xl:order-2 bg-white border border-violet-100 rounded-2xl shadow-lg shadow-violet-100/50 overflow-hidden">
           <div className="p-6 border-b border-violet-50">
             <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-2">
               Total a pagar
