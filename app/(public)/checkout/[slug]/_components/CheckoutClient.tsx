@@ -65,9 +65,14 @@ function formatRateDate(iso: string): string {
   });
 }
 
-export function CheckoutClient({ course, bcv, totalBs, qrPath, paymentInfo }: Props) {
-  const hasPaymentInfo = !!paymentInfo.bank || !!paymentInfo.phone || !!paymentInfo.holder || !!paymentInfo.id;
+// Datos de Pago Móvil por defecto — se pueden sobreescribir con PAYMENT_* en .env
+const DEFAULT_PAYMENT_INFO = {
+  bank: "Mercantil (0105)",
+  id: "27.701.088",
+  phone: "04148726893",
+} as const;
 
+export function CheckoutClient({ course, bcv, totalBs, qrPath, paymentInfo }: Props) {
   return (
     <div className="bg-[#F8F6FF] min-h-screen">
       {/* Header */}
@@ -168,7 +173,7 @@ export function CheckoutClient({ course, bcv, totalBs, qrPath, paymentInfo }: Pr
             )}
           </div>
 
-          {/* QR */}
+          {/* QR + datos Pago Móvil debajo */}
           <div className="p-6 border-b border-violet-50">
             {qrPath ? (
               <div className="flex flex-col items-center gap-3">
@@ -193,18 +198,16 @@ export function CheckoutClient({ course, bcv, totalBs, qrPath, paymentInfo }: Pr
                 </p>
               </div>
             )}
-          </div>
 
-          {/* Pago Móvil data — debajo del QR */}
-          {hasPaymentInfo && (
-            <div className="p-6 border-b border-violet-50 space-y-3">
-              <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-3">
+            {/* Datos para Pago Móvil — siempre visibles, justo debajo del QR */}
+            <div className="mt-5 pt-5 border-t border-violet-100 space-y-3">
+              <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest">
                 Datos para Pago Móvil
               </p>
               {[
-                { icon: Building2, label: "Banco", value: paymentInfo.bank },
-                { icon: CreditCard, label: "Cédula", value: paymentInfo.id },
-                { icon: Phone, label: "Teléfono", value: paymentInfo.phone },
+                { icon: Building2, label: "Banco", value: paymentInfo.bank ?? DEFAULT_PAYMENT_INFO.bank },
+                { icon: CreditCard, label: "Cédula", value: paymentInfo.id ?? DEFAULT_PAYMENT_INFO.id },
+                { icon: Phone, label: "Teléfono", value: paymentInfo.phone ?? DEFAULT_PAYMENT_INFO.phone },
                 { icon: User, label: "Titular", value: paymentInfo.holder },
               ]
                 .filter((item) => item.value)
@@ -220,7 +223,7 @@ export function CheckoutClient({ course, bcv, totalBs, qrPath, paymentInfo }: Pr
                   </div>
                 ))}
             </div>
-          )}
+          </div>
 
           {/* Reference (user fills it in) + CTA */}
           <div className="p-6 space-y-4">
