@@ -73,6 +73,7 @@ export default async function LearningPathPage({ params }: { params: Params }) {
   const overallProgress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
   const totalHours = courseStats.reduce((s, c) => s + c.duration, 0);
   const isLoggedIn = !!session?.user;
+  const pathEnrollment = path.enrollments[0];
 
   return (
     <>
@@ -255,6 +256,22 @@ export default async function LearningPathPage({ params }: { params: Params }) {
                   >
                     Iniciar sesión para inscribirte
                   </Link>
+                ) : pathEnrollment?.status === "Pending" ? (
+                  <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-center space-y-3">
+                    <Clock className="size-5 text-amber-600 mx-auto" />
+                    <div>
+                      <p className="text-sm font-semibold text-amber-700">Pago en verificación</p>
+                      <p className="text-xs text-amber-600 leading-relaxed mt-0.5">
+                        Estamos verificando tu pago. Activarás tu acceso en cuanto lo aprobemos.
+                      </p>
+                    </div>
+                    <Link
+                      href={`/checkout/ruta/${path.slug}`}
+                      className="flex items-center justify-center w-full bg-amber-100 hover:bg-amber-200 text-amber-800 font-semibold text-sm py-2.5 rounded-full transition-colors"
+                    >
+                      Volver al checkout
+                    </Link>
+                  </div>
                 ) : allEnrolled ? (
                   <Link
                     href="/dashboard"

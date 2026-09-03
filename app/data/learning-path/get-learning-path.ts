@@ -16,6 +16,10 @@ export async function getLearningPath(slug: string) {
       description: true,
       slug: true,
       price: true,
+      enrollments: {
+        where: { userId: userId ?? "__none__" },
+        select: { status: true },
+      },
       courses: {
         orderBy: { position: "asc" },
         select: {

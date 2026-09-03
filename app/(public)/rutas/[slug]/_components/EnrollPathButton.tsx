@@ -16,7 +16,14 @@ export function EnrollPathButton({ pathId }: Props) {
   function handleEnroll() {
     startTransition(async () => {
       const { data, error } = await tryCatch(enrollInPathAction(pathId));
-      if (error) { toast.error("Error inesperado"); return; }
+      if (error) {
+        // La acción puede terminar en redirect (NEXT_REDIRECT) — ignorarlo
+        const digest = (error as { digest?: string })?.digest;
+        if (!digest?.startsWith("NEXT_REDIRECT")) {
+          toast.error("Error inesperado");
+        }
+        return;
+      }
       if (data.status === "error") { toast.error(data.message); return; }
       toast.success(data.message);
       router.push("/dashboard");

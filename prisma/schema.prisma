@@ -20,6 +20,7 @@ model User {
   accounts       Account[]
   courses        Course[]
   enrollment     Enrollment[]
+  pathEnrollment PathEnrollment[]
   lessonProgress LessonProgress[]
   quizAttempts   QuizAttempt[]
   reviews        Review[]
@@ -301,6 +302,7 @@ model LearningPath {
   updatedAt   DateTime           @updatedAt
 
   courses LearningPathCourse[]
+  enrollments PathEnrollment[]
 }
 
 enum LearningPathStatus {
@@ -317,6 +319,24 @@ model LearningPathCourse {
   course         Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   @@unique([learningPathId, courseId])
+}
+
+model PathEnrollment {
+  id        String           @id @default(uuid())
+  amount    Int
+  status    EnrollmentStatus @default(Pending)
+  reference String?
+  amountBs  Float?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  learningPath   LearningPath @relation(fields: [learningPathId], references: [id], onDelete: Cascade)
+  learningPathId String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String
+
+  @@unique([userId, learningPathId])
 }
 
 model Review {
