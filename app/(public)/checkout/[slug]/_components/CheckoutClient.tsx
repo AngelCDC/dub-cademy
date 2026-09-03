@@ -89,7 +89,7 @@ export function CheckoutClient({ slug, course, bcv, totalBs, qrPath, paymentInfo
     }
     startTransition(async () => {
       const { data: result, error } = await tryCatch(
-        savePaymentReferenceAction(slug, reference)
+        savePaymentReferenceAction(slug, reference, totalBs)
       );
       if (error || result.status === "error") {
         toast.error(

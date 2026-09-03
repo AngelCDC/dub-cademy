@@ -13,6 +13,7 @@ export default async function AdminEnrollmentsPage() {
       id: true,
       amount: true,
       reference: true,
+      amountBs: true,
       createdAt: true,
       User: { select: { name: true, email: true } },
       Course: { select: { title: true, slug: true } },
@@ -48,6 +49,7 @@ export default async function AdminEnrollmentsPage() {
                   <th className="px-4 py-3 font-medium">Curso</th>
                   <th className="px-4 py-3 font-medium">Monto (USD)</th>
                   <th className="px-4 py-3 font-medium">Referencia</th>
+                  <th className="px-4 py-3 font-medium">Monto (Bs)</th>
                   <th className="px-4 py-3 font-medium">Fecha</th>
                   <th className="px-4 py-3 font-medium text-right">Acciones</th>
                 </tr>
@@ -66,6 +68,13 @@ export default async function AdminEnrollmentsPage() {
                       title={e.id}
                     >
                       {e.reference ?? "—"}
+                    </td>
+                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">
+                      {e.amountBs !== null
+                        ? `Bs. ${e.amountBs.toLocaleString("es-VE", {
+                            minimumFractionDigits: 2,
+                          })}`
+                        : "—"}
                     </td>
                     <td className="px-4 py-3 text-muted-foreground">
                       {e.createdAt.toLocaleDateString("es-ES", {
