@@ -12,6 +12,7 @@ export default async function AdminEnrollmentsPage() {
     select: {
       id: true,
       amount: true,
+      reference: true,
       createdAt: true,
       User: { select: { name: true, email: true } },
       Course: { select: { title: true, slug: true } },
@@ -60,8 +61,11 @@ export default async function AdminEnrollmentsPage() {
                     </td>
                     <td className="px-4 py-3">{e.Course.title}</td>
                     <td className="px-4 py-3 font-semibold">${e.amount}</td>
-                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">
-                      {e.id.slice(0, 8).toUpperCase()}
+                    <td
+                      className="px-4 py-3 font-mono text-xs text-muted-foreground"
+                      title={e.id}
+                    >
+                      {e.reference ?? "—"}
                     </td>
                     <td className="px-4 py-3 text-muted-foreground">
                       {e.createdAt.toLocaleDateString("es-ES", {

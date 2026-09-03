@@ -1,8 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { IconCategory } from "@tabler/icons-react";
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
+import { toast } from "sonner";
+import { tryCatch } from "@/hooks/try-catch";
+import { savePaymentReferenceAction } from "../actions";
 import {
   Banknote,
   Book,
@@ -35,6 +39,7 @@ export type CheckoutPaymentInfo = {
 };
 
 interface Props {
+  slug: string;
   course: CheckoutCourseInfo;
   bcv: { rate: number; date: string } | null;
   totalBs: number | null;
@@ -72,7 +77,30 @@ const DEFAULT_PAYMENT_INFO = {
   phone: "04148726893",
 } as const;
 
-export function CheckoutClient({ course, bcv, totalBs, qrPath, paymentInfo }: Props) {
+export function CheckoutClient({ slug, course, bcv, totalBs, qrPath, paymentInfo }: Props) {
+  const router = useRouter();
+  const [reference, setReference] = useState("");
+  const [pending, startTransition] = useTransition();
+
+  function onSubmit() {
+    if (!reference.trim()) {
+      toast.error("Escribe la referencia de tu pago");
+      return;
+    }
+    startTransition(async () => {
+      const { data: result, error } = await tryCatch(
+        savePaymentReferenceAction(slug, reference)
+      );
+      if (error || result.status === "error") {
+        toast.error(
+          result?.message ?? "Error al registrar tu pago. Intenta de nuevo."
+        );
+        return;
+      }
+      router.push(`/payment/success?course=${encodeURIComponent(course.title)}`);
+    });
+  }
+
   return (
     <div className="bg-[#F8F6FF] min-h-screen">
       {/* Header */}
@@ -235,17 +263,24 @@ export function CheckoutClient({ course, bcv, totalBs, qrPath, paymentInfo }: Pr
               <input
                 id="payment-reference"
                 type="text"
-                placeholder="Escribe tu nombre o referencia"
+                value={reference}
+                onChange={(e) => setReference(e.target.value)}
+                placeholder="Ej: 04521 — la referencia de tu Pago Móvil"
                 className="w-full rounded-xl border border-violet-200 bg-white px-4 py-2.5 text-sm text-[#1a1535] placeholder:text-slate-300 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
               />
+              <p className="text-[11px] text-slate-400">
+                Es el número que te da tu banco al pagar; con él verificamos tu pago.
+              </p>
             </div>
 
-            <Link
-              href={`/payment/success?course=${encodeURIComponent(course.title)}`}
-              className="flex items-center justify-center w-full bg-primary hover:bg-primary/90 text-white font-semibold text-sm py-3.5 rounded-full transition-all hover:-translate-y-0.5 shadow-md shadow-primary/25"
+            <button
+              type="button"
+              onClick={onSubmit}
+              disabled={pending}
+              className="flex items-center justify-center w-full bg-primary hover:bg-primary/90 text-white font-semibold text-sm py-3.5 rounded-full transition-all hover:-translate-y-0.5 shadow-md shadow-primary/25 disabled:opacity-50 disabled:hover:translate-y-0"
             >
-              Ya realicé mi pago
-            </Link>
+              {pending ? "Registrando..." : "Ya realicé mi pago"}
+            </button>
             <p className="text-center text-xs text-slate-400 leading-relaxed">
               Enviaremos un email de confirmación cuando aprobemos tu pago.
               Suele tardar menos de 24 horas.

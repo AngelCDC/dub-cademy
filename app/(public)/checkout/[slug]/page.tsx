@@ -55,6 +55,7 @@ export default async function CheckoutPage({ params }: { params: Params }) {
 
   return (
     <CheckoutClient
+      slug={slug}
       course={{
         title: course.title,
         smallDescription: course.smallDescription,
