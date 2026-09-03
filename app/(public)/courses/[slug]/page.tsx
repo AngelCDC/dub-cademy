@@ -220,27 +220,27 @@ export default async function SlugPage({ params }: { params: Params }) {
 
         {/* Right: enrollment card */}
         <div className="order-1 lg:order-2 lg:col-span-1">
-          <div className="sticky top-24 [@media(max-height:860px)]:top-16">
+          <div className="sticky top-20">
             <div className="bg-white border border-violet-100 rounded-2xl overflow-hidden shadow-lg shadow-violet-100/50">
               {/* Price */}
-              <div className="p-6 border-b border-violet-50 [@media(max-height:860px)]:p-4">
+              <div className="p-5 border-b border-violet-50">
                 <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-1">Precio</p>
-                <div className="text-4xl font-extrabold text-[#1a1535] [@media(max-height:860px)]:text-3xl">
+                <div className="text-3xl font-extrabold text-[#1a1535]">
                   {new Intl.NumberFormat("es-ES", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(course.price)}
                 </div>
               </div>
 
               {/* Rating */}
               {average > 0 && (
-                <div className="px-6 py-4 border-b border-violet-50 flex items-center justify-between [@media(max-height:860px)]:py-3">
+                <div className="px-5 py-3 border-b border-violet-50 flex items-center justify-between">
                   <span className="text-xs text-slate-400">Valoración</span>
                   <StarDisplay rating={average} count={count} size="sm" />
                 </div>
               )}
 
               {/* Details */}
-              <div className="p-6 space-y-3 border-b border-violet-50 [@media(max-height:860px)]:p-4 [@media(max-height:860px)]:space-y-2">
-                <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-3 [@media(max-height:860px)]:mb-2">Detalles</p>
+              <div className="p-5 space-y-2.5 border-b border-violet-50">
+                <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-2">Detalles</p>
                 {[
                   { icon: IconClock, label: "Duración", value: `${course.duration} horas` },
                   { icon: IconChartBar, label: "Nivel", value: course.level },
@@ -248,7 +248,7 @@ export default async function SlugPage({ params }: { params: Params }) {
                   { icon: IconBook, label: "Lecciones", value: `${totalLessons} lecciones` },
                 ].map(({ icon: Icon, label, value }) => (
                   <div key={label} className="flex items-center gap-3">
-                    <div className="size-8 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 [@media(max-height:860px)]:size-7">
+                    <div className="size-7 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                       <Icon className="size-4 text-primary" />
                     </div>
                     <div>
@@ -260,7 +260,7 @@ export default async function SlugPage({ params }: { params: Params }) {
               </div>
 
               {/* Perks */}
-              <div className="px-6 py-5 border-b border-violet-50 space-y-2 [@media(max-height:860px)]:py-3 [@media(max-height:860px)]:space-y-1.5">
+              <div className="px-5 py-4 border-b border-violet-50 space-y-2">
                 {["Acceso de por vida", "Acceso en móvil y escritorio", "Certificado de finalización"].map((item) => (
                   <div key={item} className="flex items-center gap-2 text-sm text-slate-500">
                     <CheckIcon className="size-4 text-primary shrink-0" />
@@ -270,11 +270,11 @@ export default async function SlugPage({ params }: { params: Params }) {
               </div>
 
               {/* CTA */}
-              <div className="p-6 space-y-3 [@media(max-height:860px)]:p-4 [@media(max-height:860px)]:space-y-2">
+              <div className="p-5 space-y-2.5">
                 {isEnrolled ? (
                   <Link
                     href="/dashboard"
-                    className="flex items-center justify-center w-full bg-primary hover:bg-primary/90 text-white font-semibold text-sm py-3.5 [@media(max-height:860px)]:py-2.5 rounded-full transition-all hover:-translate-y-0.5 shadow-md shadow-primary/25"
+                    className="flex items-center justify-center w-full bg-primary hover:bg-primary/90 text-white font-semibold text-sm py-3 rounded-full transition-all hover:-translate-y-0.5 shadow-md shadow-primary/25"
                   >
                     Ir al curso
                   </Link>
