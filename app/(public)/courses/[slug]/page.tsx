@@ -303,15 +303,15 @@ export default async function SlugPage({ params }: { params: Params }) {
         </div>
 
         {/* Right: enrollment card */}
-        <div className="order-1 lg:order-2 lg:col-span-1 self-start">
-          <div className="sticky top-20">
+        <div className="order-1 lg:order-2 lg:col-span-1">
+          <div className="sticky top-[clamp(0.5rem,2vh,5rem)]">
             <div className="bg-white border border-violet-100 rounded-2xl overflow-hidden shadow-lg shadow-violet-100/50">
               {/* Price */}
-              <div className="p-[clamp(0.85rem,2.2vh,1.25rem)] border-b border-violet-50">
+              <div className="p-[clamp(0.75rem,2vh,1.25rem)] border-b border-violet-50">
                 <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-1">
                   Precio
                 </p>
-                <div className="text-[clamp(1.5rem,3.2vh,1.875rem)] font-extrabold text-[#1a1535] leading-none">
+                <div className="text-[clamp(1.25rem,3vh,1.875rem)] font-extrabold text-[#1a1535]">
                   {new Intl.NumberFormat("es-ES", {
                     style: "currency",
                     currency: "USD",
@@ -322,14 +322,14 @@ export default async function SlugPage({ params }: { params: Params }) {
 
               {/* Rating */}
               {average > 0 && (
-                <div className="px-[clamp(0.85rem,2.2vh,1.25rem)] py-[clamp(0.45rem,1.3vh,0.75rem)] border-b border-violet-50 flex items-center justify-between">
+                <div className="px-[clamp(0.75rem,2vh,1.25rem)] py-[clamp(0.4rem,1.2vh,0.75rem)] border-b border-violet-50 flex items-center justify-between">
                   <span className="text-xs text-slate-400">Valoración</span>
                   <StarDisplay rating={average} count={count} size="sm" />
                 </div>
               )}
 
               {/* Details */}
-              <div className="p-[clamp(0.85rem,2.2vh,1.25rem)] space-y-[clamp(0.4rem,1.1vh,0.625rem)] border-b border-violet-50">
+              <div className="p-[clamp(0.75rem,2vh,1.25rem)] space-y-[clamp(0.35rem,1vh,0.625rem)] border-b border-violet-50">
                 <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-1.5">
                   Detalles
                 </p>
@@ -353,10 +353,10 @@ export default async function SlugPage({ params }: { params: Params }) {
                 ].map(({ icon: Icon, label, value }) => (
                   <div
                     key={label}
-                    className="flex items-center gap-[clamp(0.55rem,1.4vh,0.75rem)]"
+                    className="flex items-center gap-[clamp(0.5rem,1.5vh,0.75rem)]"
                   >
-                    <div className="size-[clamp(1.5rem,3.6vh,1.75rem)] rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                      <Icon className="size-[clamp(0.85rem,2vh,1rem)] text-primary" />
+                    <div className="size-[clamp(1.4rem,3.5vh,1.75rem)] rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                      <Icon className="size-[clamp(0.8rem,2vh,1rem)] text-primary" />
                     </div>
                     <div>
                       <p className="text-xs text-slate-400 leading-tight">
@@ -371,7 +371,7 @@ export default async function SlugPage({ params }: { params: Params }) {
               </div>
 
               {/* Perks */}
-              <div className="px-[clamp(0.85rem,2.2vh,1.25rem)] py-[clamp(0.65rem,1.7vh,1rem)] border-b border-violet-50 space-y-[clamp(0.3rem,0.9vh,0.5rem)]">
+              <div className="px-[clamp(0.75rem,2vh,1.25rem)] py-[clamp(0.6rem,1.6vh,1rem)] border-b border-violet-50 space-y-[clamp(0.25rem,0.8vh,0.5rem)]">
                 {[
                   "Acceso de por vida",
                   "Acceso en móvil y escritorio",
@@ -388,11 +388,11 @@ export default async function SlugPage({ params }: { params: Params }) {
               </div>
 
               {/* CTA */}
-              <div className="p-[clamp(0.85rem,2.2vh,1.25rem)] space-y-[clamp(0.4rem,1vh,0.625rem)]">
+              <div className="p-[clamp(0.75rem,2vh,1.25rem)] space-y-[clamp(0.4rem,1vh,0.625rem)]">
                 {isEnrolled ? (
                   <Link
                     href="/dashboard"
-                    className="flex items-center justify-center w-full bg-primary hover:bg-primary/90 text-white font-semibold text-sm py-[clamp(0.55rem,1.6vh,0.75rem)] rounded-full transition-all hover:-translate-y-0.5 shadow-md shadow-primary/25"
+                    className="flex items-center justify-center w-full bg-primary hover:bg-primary/90 text-white font-semibold text-sm py-[clamp(0.5rem,1.6vh,0.75rem)] rounded-full transition-all hover:-translate-y-0.5 shadow-md shadow-primary/25"
                   >
                     Ir al curso
                   </Link>
