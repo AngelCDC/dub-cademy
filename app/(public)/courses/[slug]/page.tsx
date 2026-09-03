@@ -304,14 +304,14 @@ export default async function SlugPage({ params }: { params: Params }) {
 
         {/* Right: enrollment card */}
         <div className="order-1 lg:order-2 lg:col-span-1">
-          <div className="sticky top-4 lg:top-20 max-h-[calc(100vh-2rem)] lg:max-h-[calc(100vh-6rem)] overflow-y-auto">
+          <div className="sticky top-[clamp(0.5rem,2vh,5rem)]">
             <div className="bg-white border border-violet-100 rounded-2xl overflow-hidden shadow-lg shadow-violet-100/50">
               {/* Price */}
-              <div className="p-4 lg:p-5 border-b border-violet-50">
+              <div className="p-[clamp(0.75rem,2vh,1.25rem)] border-b border-violet-50">
                 <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-1">
                   Precio
                 </p>
-                <div className="text-2xl lg:text-3xl font-extrabold text-[#1a1535]">
+                <div className="text-[clamp(1.25rem,3vh,1.875rem)] font-extrabold text-[#1a1535]">
                   {new Intl.NumberFormat("es-ES", {
                     style: "currency",
                     currency: "USD",
@@ -322,15 +322,15 @@ export default async function SlugPage({ params }: { params: Params }) {
 
               {/* Rating */}
               {average > 0 && (
-                <div className="px-4 lg:px-5 py-2.5 lg:py-3 border-b border-violet-50 flex items-center justify-between">
+                <div className="px-[clamp(0.75rem,2vh,1.25rem)] py-[clamp(0.4rem,1.2vh,0.75rem)] border-b border-violet-50 flex items-center justify-between">
                   <span className="text-xs text-slate-400">Valoración</span>
                   <StarDisplay rating={average} count={count} size="sm" />
                 </div>
               )}
 
               {/* Details */}
-              <div className="p-4 lg:p-5 space-y-2 lg:space-y-2.5 border-b border-violet-50">
-                <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-1.5 lg:mb-2">
+              <div className="p-[clamp(0.75rem,2vh,1.25rem)] space-y-[clamp(0.35rem,1vh,0.625rem)] border-b border-violet-50">
+                <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-1.5">
                   Detalles
                 </p>
                 {[
@@ -353,14 +353,16 @@ export default async function SlugPage({ params }: { params: Params }) {
                 ].map(({ icon: Icon, label, value }) => (
                   <div
                     key={label}
-                    className="flex items-center gap-2.5 lg:gap-3"
+                    className="flex items-center gap-[clamp(0.5rem,1.5vh,0.75rem)]"
                   >
-                    <div className="size-6 lg:size-7 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                      <Icon className="size-3.5 lg:size-4 text-primary" />
+                    <div className="size-[clamp(1.4rem,3.5vh,1.75rem)] rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                      <Icon className="size-[clamp(0.8rem,2vh,1rem)] text-primary" />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-400">{label}</p>
-                      <p className="text-sm font-semibold text-[#1a1535]">
+                      <p className="text-xs text-slate-400 leading-tight">
+                        {label}
+                      </p>
+                      <p className="text-sm font-semibold text-[#1a1535] leading-tight">
                         {value}
                       </p>
                     </div>
@@ -369,7 +371,7 @@ export default async function SlugPage({ params }: { params: Params }) {
               </div>
 
               {/* Perks */}
-              <div className="px-4 lg:px-5 py-3 lg:py-4 border-b border-violet-50 space-y-1.5 lg:space-y-2">
+              <div className="px-[clamp(0.75rem,2vh,1.25rem)] py-[clamp(0.6rem,1.6vh,1rem)] border-b border-violet-50 space-y-[clamp(0.25rem,0.8vh,0.5rem)]">
                 {[
                   "Acceso de por vida",
                   "Acceso en móvil y escritorio",
@@ -377,7 +379,7 @@ export default async function SlugPage({ params }: { params: Params }) {
                 ].map((item) => (
                   <div
                     key={item}
-                    className="flex items-center gap-2 text-sm text-slate-500"
+                    className="flex items-center gap-2 text-sm text-slate-500 leading-tight"
                   >
                     <CheckIcon className="size-4 text-primary shrink-0" />
                     {item}
@@ -386,11 +388,11 @@ export default async function SlugPage({ params }: { params: Params }) {
               </div>
 
               {/* CTA */}
-              <div className="p-4 lg:p-5 space-y-2 lg:space-y-2.5">
+              <div className="p-[clamp(0.75rem,2vh,1.25rem)] space-y-[clamp(0.4rem,1vh,0.625rem)]">
                 {isEnrolled ? (
                   <Link
                     href="/dashboard"
-                    className="flex items-center justify-center w-full bg-primary hover:bg-primary/90 text-white font-semibold text-sm py-2.5 lg:py-3 rounded-full transition-all hover:-translate-y-0.5 shadow-md shadow-primary/25"
+                    className="flex items-center justify-center w-full bg-primary hover:bg-primary/90 text-white font-semibold text-sm py-[clamp(0.5rem,1.6vh,0.75rem)] rounded-full transition-all hover:-translate-y-0.5 shadow-md shadow-primary/25"
                   >
                     Ir al curso
                   </Link>
