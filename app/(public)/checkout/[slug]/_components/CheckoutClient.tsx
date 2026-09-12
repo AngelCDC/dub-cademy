@@ -149,14 +149,14 @@ export function CheckoutClient({ slug, course, bcv, totalBs, qrPath, paymentInfo
   }
 
   return (
-    <div className="bg-[#F8F6FF] min-h-screen">
+    <div className="bg-surface min-h-screen">
       {/* Header */}
-      <div className="bg-white border-b border-violet-100">
+      <div className="bg-white dark:bg-card border-b border-violet-100">
         <div className="max-w-5xl mx-auto px-6 py-10 md:py-12 text-center">
           <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">
             Finalizar inscripción
           </p>
-          <h1 className="text-3xl md:text-4xl font-extrabold text-[#1a1535] tracking-tight">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-ink tracking-tight">
             Paga en Bolívares
           </h1>
           <p className="text-slate-400 text-sm mt-3">
@@ -170,7 +170,7 @@ export function CheckoutClient({ slug, course, bcv, totalBs, qrPath, paymentInfo
           a partir de 1280px, info del curso a la izquierda y pago a la derecha */}
       <div className="max-w-3xl xl:max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 gap-8 xl:grid-cols-2 items-start">
         {/* ── Course info (left on desktop) ── */}
-        <div className="order-2 xl:order-1 bg-white border border-violet-100 rounded-2xl overflow-hidden shadow-sm">
+        <div className="order-2 xl:order-1 bg-white dark:bg-card border border-violet-100 rounded-2xl overflow-hidden shadow-sm">
           <div className="relative aspect-video w-full">
             <Image
               src={course.imageUrl}
@@ -180,7 +180,7 @@ export function CheckoutClient({ slug, course, bcv, totalBs, qrPath, paymentInfo
             />
           </div>
           <div className="p-6">
-            <h2 className="text-xl font-bold text-[#1a1535] leading-snug mb-2">
+            <h2 className="text-xl font-bold text-ink leading-snug mb-2">
               {course.title}
             </h2>
             <p className="text-sm text-slate-400 leading-relaxed mb-5">
@@ -204,7 +204,7 @@ export function CheckoutClient({ slug, course, bcv, totalBs, qrPath, paymentInfo
                   </div>
                   <div>
                     <p className="text-xs text-slate-400">{label}</p>
-                    <p className="text-sm font-semibold text-[#1a1535]">{value}</p>
+                    <p className="text-sm font-semibold text-ink">{value}</p>
                   </div>
                 </div>
               ))}
@@ -222,14 +222,14 @@ export function CheckoutClient({ slug, course, bcv, totalBs, qrPath, paymentInfo
         </div>
 
         {/* ── Payment (right on desktop, first on mobile) ── */}
-        <div className="order-1 xl:order-2 bg-white border border-violet-100 rounded-2xl shadow-lg shadow-violet-100/50 overflow-hidden">
+        <div className="order-1 xl:order-2 bg-white dark:bg-card border border-violet-100 rounded-2xl shadow-lg shadow-violet-100/50 overflow-hidden">
           <div className="p-6 border-b border-violet-50">
             <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-2">
               Total a pagar
             </p>
             {displayTotalBs !== null ? (
               <div>
-                <div className="text-4xl font-extrabold text-[#1a1535] tracking-tight">
+                <div className="text-4xl font-extrabold text-ink tracking-tight">
                   {formatBs(displayTotalBs)}
                 </div>
                 {applied && applied.totalBs !== totalBs && totalBs !== null && (
@@ -292,7 +292,7 @@ export function CheckoutClient({ slug, course, bcv, totalBs, qrPath, paymentInfo
                       onChange={(e) => setCouponInput(e.target.value.toUpperCase())}
                       onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), applyCoupon())}
                       placeholder="Código de cupón"
-                      className="w-full rounded-xl border border-violet-200 bg-white pl-9 pr-3 py-2.5 text-sm text-[#1a1535] placeholder:text-slate-300 uppercase outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                      className="w-full rounded-xl border border-violet-200 bg-white dark:bg-card pl-9 pr-3 py-2.5 text-sm text-ink placeholder:text-slate-300 uppercase outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
                     />
                   </div>
                   <button
@@ -319,7 +319,7 @@ export function CheckoutClient({ slug, course, bcv, totalBs, qrPath, paymentInfo
                     width={240}
                     height={240}
                     unoptimized
-                    className="size-60 object-contain rounded-xl border border-violet-100"
+                    className="size-60 object-contain rounded-xl border border-violet-100 bg-white"
                   />
                   <p className="text-xs text-slate-400">
                     Escanea con tu banco (Pago Móvil) y paga el monto exacto
@@ -354,7 +354,7 @@ export function CheckoutClient({ slug, course, bcv, totalBs, qrPath, paymentInfo
                       </div>
                       <div>
                         <p className="text-xs text-slate-400">{label}</p>
-                        <p className="text-sm font-semibold text-[#1a1535]">{value}</p>
+                        <p className="text-sm font-semibold text-ink">{value}</p>
                       </div>
                     </div>
                   ))}
@@ -375,7 +375,7 @@ export function CheckoutClient({ slug, course, bcv, totalBs, qrPath, paymentInfo
                   value={reference}
                   onChange={(e) => setReference(e.target.value)}
                   placeholder="Ej: 04521 — la referencia de tu Pago Móvil"
-                  className="w-full rounded-xl border border-violet-200 bg-white px-4 py-2.5 text-sm text-[#1a1535] placeholder:text-slate-300 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                  className="w-full rounded-xl border border-violet-200 bg-white dark:bg-card px-4 py-2.5 text-sm text-ink placeholder:text-slate-300 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
                 />
                 <p className="text-[11px] text-slate-400">
                   Es el número que te da tu banco al pagar; con él verificamos tu pago.

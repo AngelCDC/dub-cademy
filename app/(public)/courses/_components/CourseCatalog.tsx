@@ -54,13 +54,13 @@ export function CourseCatalog({ courses }: { courses: PublicCourseType[] }) {
     <div>
       {/* Search bar */}
       <div className="mb-6">
-        <div className="flex items-center gap-2 bg-white border border-violet-100 rounded-full px-4 py-2.5 focus-within:border-violet-300 focus-within:shadow-sm focus-within:shadow-violet-100 transition-all max-w-lg">
+        <div className="flex items-center gap-2 bg-white dark:bg-card border border-violet-100 rounded-full px-4 py-2.5 focus-within:border-violet-300 focus-within:shadow-sm focus-within:shadow-violet-100 transition-all max-w-lg">
           <Search className="size-3.5 text-violet-300 shrink-0" />
           <input
             value={query}
             onChange={(e) => handleQueryChange(e.target.value)}
             placeholder="Buscar por nombre, categoría o nivel…"
-            className="flex-1 bg-transparent text-sm text-[#1a1535] placeholder:text-slate-300 outline-none"
+            className="flex-1 bg-transparent text-sm text-ink placeholder:text-slate-300 outline-none"
           />
           {query && (
             <button onClick={clearQuery} className="text-slate-300 hover:text-primary transition-colors">
@@ -80,7 +80,7 @@ export function CourseCatalog({ courses }: { courses: PublicCourseType[] }) {
               "shrink-0 text-sm px-5 py-2 rounded-full border transition-all duration-150 whitespace-nowrap",
               active === cat
                 ? "bg-primary border-primary text-white font-semibold shadow-md shadow-primary/20"
-                : "bg-white border-violet-100 text-slate-500 hover:text-primary hover:border-violet-300 hover:bg-violet-50/50"
+                : "bg-white dark:bg-card border-violet-100 text-slate-500 hover:text-primary hover:border-violet-300 hover:bg-violet-50/50"
             )}
           >
             {cat}
@@ -94,7 +94,7 @@ export function CourseCatalog({ courses }: { courses: PublicCourseType[] }) {
           <div className="size-14 rounded-2xl bg-violet-50 flex items-center justify-center mb-4">
             <BookOpen className="size-6 text-violet-300" />
           </div>
-          <p className="text-[#1a1535] font-semibold">
+          <p className="text-ink font-semibold">
             {query ? `Sin resultados para "${query}"` : "Sin cursos en esta categoría"}
           </p>
           <p className="text-sm text-slate-400 mt-1">

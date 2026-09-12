@@ -78,7 +78,7 @@ export default async function LearningPathPage({ params }: { params: Params }) {
   return (
     <>
       {/* Hero */}
-      <div className="bg-white border-b border-violet-100 relative overflow-hidden">
+      <div className="bg-white dark:bg-card border-b border-violet-100 relative overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
         <div className="absolute -top-20 right-0 w-80 h-80 rounded-full bg-primary/6 blur-[70px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 py-14 md:py-20 relative">
@@ -89,7 +89,7 @@ export default async function LearningPathPage({ params }: { params: Params }) {
             <span className="bg-violet-50 text-violet-500 text-xs font-semibold px-3 py-1 rounded-full">{totalLessons} lecciones</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#1a1535] leading-tight max-w-3xl mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-ink leading-tight max-w-3xl mb-4">
             {path.title}
           </h1>
           {path.description && (
@@ -115,11 +115,11 @@ export default async function LearningPathPage({ params }: { params: Params }) {
       </div>
 
       {/* Main layout */}
-      <div className="bg-[#F8F6FF] max-w-7xl mx-auto px-6 py-10 md:py-14 grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <div className="bg-surface max-w-7xl mx-auto px-6 py-10 md:py-14 grid grid-cols-1 gap-8 lg:grid-cols-3">
 
         {/* Left: course sequence */}
         <div className="order-2 lg:order-1 lg:col-span-2 space-y-8">
-          <h2 className="text-lg font-bold text-[#1a1535]">Secuencia de cursos</h2>
+          <h2 className="text-lg font-bold text-ink">Secuencia de cursos</h2>
 
           <div className="relative">
             {/* Vertical connector */}
@@ -140,14 +140,14 @@ export default async function LearningPathPage({ params }: { params: Params }) {
                         ? "bg-primary/10 text-primary border-primary/20"
                         : inProgress
                         ? "bg-primary/5 text-primary border-primary/10"
-                        : "bg-white text-slate-400 border-violet-100"
+                        : "bg-white dark:bg-card text-slate-400 border-violet-100"
                     )}>
                       {isComplete ? <CheckCircle2 className="size-4.5" /> : i + 1}
                     </div>
 
                     {/* Card */}
                     <div className={cn(
-                      "flex-1 bg-white border rounded-2xl overflow-hidden transition-all duration-200",
+                      "flex-1 bg-white dark:bg-card border rounded-2xl overflow-hidden transition-all duration-200",
                       isComplete
                         ? "border-primary/20"
                         : inProgress
@@ -157,7 +157,7 @@ export default async function LearningPathPage({ params }: { params: Params }) {
                       <div className="p-5 space-y-3">
                         <div className="flex items-start justify-between gap-3">
                           <div className="flex-1 min-w-0">
-                            <p className="font-semibold text-sm text-[#1a1535] leading-snug">{course.title}</p>
+                            <p className="font-semibold text-sm text-ink leading-snug">{course.title}</p>
                             <p className="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed">
                               {course.smallDescription}
                             </p>
@@ -214,12 +214,12 @@ export default async function LearningPathPage({ params }: { params: Params }) {
         {/* Right: enrollment card */}
         <div className="order-1 lg:order-2 lg:col-span-1">
           <div className="sticky top-24">
-            <div className="bg-white border border-violet-100 rounded-2xl overflow-hidden shadow-lg shadow-violet-100/50">
+            <div className="bg-white dark:bg-card border border-violet-100 rounded-2xl overflow-hidden shadow-lg shadow-violet-100/50">
 
               {/* Price */}
               <div className="p-6 border-b border-violet-50">
                 <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-1">Precio de la ruta</p>
-                <div className="text-4xl font-extrabold text-[#1a1535]">
+                <div className="text-4xl font-extrabold text-ink">
                   {path.price === 0
                     ? "Gratis"
                     : new Intl.NumberFormat("es-ES", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(path.price)}
@@ -241,7 +241,7 @@ export default async function LearningPathPage({ params }: { params: Params }) {
                     </div>
                     <div>
                       <p className="text-xs text-slate-400">{label}</p>
-                      <p className="text-sm font-semibold text-[#1a1535]">{value}</p>
+                      <p className="text-sm font-semibold text-ink">{value}</p>
                     </div>
                   </div>
                 ))}

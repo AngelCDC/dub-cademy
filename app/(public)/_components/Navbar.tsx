@@ -8,6 +8,7 @@ import { UserDropdown } from "./UserDropdown";
 import { useSignOut } from "@/hooks/use-singout";
 import { cn } from "@/lib/utils";
 import { Search, X, Menu, Zap } from "lucide-react";
+import { ThemeToggle } from "@/components/ui/themeToggle";
 
 const navItems = [
   { name: "Cursos", href: "/courses" },
@@ -32,7 +33,7 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 inset-x-0 z-50 border-b border-violet-100 bg-white/90 backdrop-blur-md">
+      <nav className="fixed top-0 inset-x-0 z-50 border-b border-violet-100 bg-white/90 dark:bg-background/90 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center gap-6">
 
           {/* Logo */}
@@ -40,20 +41,20 @@ export function Navbar() {
             <div className="size-8 rounded-xl bg-primary flex items-center justify-center shrink-0">
               <Zap className="size-4 text-white fill-white" />
             </div>
-            <span className="font-bold text-[#1a1535] text-[17px] tracking-tight hidden sm:block">
+            <span className="font-bold text-ink text-[17px] tracking-tight hidden sm:block">
               IFIVEN
             </span>
           </Link>
 
           {/* Search */}
           <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-md">
-            <div className="flex items-center gap-2 w-full bg-violet-50 border border-violet-100 rounded-full px-4 py-2 focus-within:border-violet-300 focus-within:bg-white transition-colors">
+            <div className="flex items-center gap-2 w-full bg-violet-50 border border-violet-100 rounded-full px-4 py-2 focus-within:border-violet-300 focus-within:bg-white dark:focus-within:bg-muted transition-colors">
               <Search className="size-3.5 text-violet-400 shrink-0" />
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="¿Qué quieres aprender hoy?"
-                className="flex-1 bg-transparent text-sm text-[#1a1535] placeholder:text-violet-300 outline-none"
+                className="flex-1 bg-transparent text-sm text-ink placeholder:text-violet-300 outline-none"
               />
             </div>
           </form>
@@ -68,7 +69,7 @@ export function Navbar() {
                     "px-3 py-1.5 text-sm rounded-lg transition-colors",
                     pathname === item.href
                       ? "text-primary font-semibold bg-violet-50"
-                      : "text-slate-500 hover:text-[#1a1535] hover:bg-violet-50/60"
+                      : "text-slate-500 hover:text-ink hover:bg-violet-50/60"
                   )}
                 >
                   {item.name}
@@ -88,7 +89,7 @@ export function Navbar() {
                 />
               ) : (
                 <>
-                  <Link href="/login" className="text-sm text-slate-500 hover:text-[#1a1535] transition-colors px-3 py-1.5">
+                  <Link href="/login" className="text-sm text-slate-500 hover:text-ink transition-colors px-3 py-1.5">
                     Ingresar
                   </Link>
                   <Link
@@ -102,9 +103,14 @@ export function Navbar() {
             )}
           </div>
 
+          {/* Theme */}
+          <div className="hidden lg:flex items-center border-l border-violet-100 pl-2">
+            <ThemeToggle />
+          </div>
+
           {/* Mobile toggle */}
           <button
-            className="lg:hidden ml-auto p-1.5 text-slate-500 hover:text-[#1a1535] transition-colors"
+            className="lg:hidden ml-auto p-1.5 text-slate-500 hover:text-ink transition-colors"
             onClick={() => setOpen(!open)}
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -119,7 +125,7 @@ export function Navbar() {
 
       {/* Mobile drawer */}
       <div className={cn(
-        "fixed top-0 right-0 h-full w-72 bg-white border-l border-violet-100 z-50 flex flex-col transition-transform duration-300 lg:hidden",
+        "fixed top-0 right-0 h-full w-72 bg-white dark:bg-card border-l border-violet-100 z-50 flex flex-col transition-transform duration-300 lg:hidden",
         open ? "translate-x-0" : "translate-x-full"
       )}>
         <div className="flex items-center justify-between px-5 h-16 border-b border-violet-100">
@@ -127,9 +133,9 @@ export function Navbar() {
             <div className="size-7 rounded-xl bg-primary flex items-center justify-center">
               <Zap className="size-3.5 text-white fill-white" />
             </div>
-            <span className="font-bold text-[#1a1535]">IFIVEN</span>
+            <span className="font-bold text-ink">IFIVEN</span>
           </div>
-          <button className="p-1 text-slate-400 hover:text-[#1a1535]" onClick={() => setOpen(false)}>
+          <button className="p-1 text-slate-400 hover:text-ink" onClick={() => setOpen(false)}>
             <X className="size-5" />
           </button>
         </div>
@@ -144,7 +150,7 @@ export function Navbar() {
                 "flex items-center px-4 py-2.5 rounded-xl text-sm transition-colors",
                 pathname === item.href
                   ? "bg-violet-50 text-primary font-semibold"
-                  : "text-slate-500 hover:text-[#1a1535] hover:bg-violet-50/60"
+                  : "text-slate-500 hover:text-ink hover:bg-violet-50/60"
               )}
             >
               {item.name}
@@ -153,11 +159,15 @@ export function Navbar() {
         </div>
 
         <div className="p-4 border-t border-violet-100 space-y-2">
+          <div className="flex items-center justify-between px-4 py-2.5 rounded-xl text-sm text-slate-500">
+            <span>Tema</span>
+            <ThemeToggle />
+          </div>
           {!isPending && (
             session ? (
               <>
-                <Link href="/dashboard" onClick={() => setOpen(false)} className="flex items-center px-4 py-2.5 rounded-xl text-sm text-slate-500 hover:text-[#1a1535] hover:bg-violet-50 transition-colors">Dashboard</Link>
-                <button onClick={() => { handleSignOut(); setOpen(false); }} className="w-full text-left px-4 py-2.5 rounded-xl text-sm text-slate-500 hover:text-[#1a1535] hover:bg-violet-50 transition-colors">Cerrar sesión</button>
+                <Link href="/dashboard" onClick={() => setOpen(false)} className="flex items-center px-4 py-2.5 rounded-xl text-sm text-slate-500 hover:text-ink hover:bg-violet-50 transition-colors">Dashboard</Link>
+                <button onClick={() => { handleSignOut(); setOpen(false); }} className="w-full text-left px-4 py-2.5 rounded-xl text-sm text-slate-500 hover:text-ink hover:bg-violet-50 transition-colors">Cerrar sesión</button>
               </>
             ) : (
               <>

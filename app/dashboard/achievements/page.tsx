@@ -29,7 +29,7 @@ export default async function AchievementsPage() {
     <div className="flex flex-col gap-8 py-6 px-4 lg:px-6 max-w-5xl">
       {/* Header */}
       <div className="space-y-1">
-        <h1 className="text-2xl font-bold tracking-tight text-[#1a1535]">Mis Logros</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-ink">Mis Logros</h1>
         <p className="text-sm text-slate-400">
           {earnedCount} de {totalCount} badges desbloqueados
         </p>
@@ -48,7 +48,7 @@ export default async function AchievementsPage() {
                 {icon}
               </div>
               <div>
-                <p className="text-3xl font-bold tabular-nums text-[#1a1535]">{value}</p>
+                <p className="text-3xl font-bold tabular-nums text-ink">{value}</p>
                 <p className="text-sm text-slate-400">{label}</p>
               </div>
             </CardContent>
@@ -59,7 +59,7 @@ export default async function AchievementsPage() {
       {/* Progress bar */}
       <div className="space-y-2">
         <div className="flex items-center justify-between text-sm">
-          <span className="font-semibold text-[#1a1535]">Progreso total</span>
+          <span className="font-semibold text-ink">Progreso total</span>
           <span className="text-primary font-semibold tabular-nums">
             {earnedCount}/{totalCount}
           </span>
@@ -78,7 +78,7 @@ export default async function AchievementsPage() {
         return (
           <section key={dim} className="space-y-3">
             <div className="flex items-center justify-between">
-              <h2 className="flex items-center gap-2 text-base font-semibold text-[#1a1535]">
+              <h2 className="flex items-center gap-2 text-base font-semibold text-ink">
                 <span>{DIMENSION_ICONS[dim]}</span>
                 {DIMENSION_LABELS[dim]}
               </h2>

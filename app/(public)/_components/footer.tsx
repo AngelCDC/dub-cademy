@@ -9,7 +9,7 @@ const cols = [
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-violet-100 text-slate-400">
+    <footer className="bg-white dark:bg-card border-t border-violet-100 text-slate-400">
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-12 mb-14">
           <div className="space-y-5">
@@ -17,7 +17,7 @@ export default function Footer() {
               <div className="size-9 rounded-xl bg-primary flex items-center justify-center">
                 <Zap className="size-4 text-white fill-white" />
               </div>
-              <span className="font-bold text-[#1a1535] text-lg">IFIVEN</span>
+              <span className="font-bold text-ink text-lg">IFIVEN</span>
             </Link>
             <p className="text-sm leading-relaxed max-w-xs">
               La academia que te lleva al estado de flow. Aprendizaje personalizado,
@@ -34,7 +34,7 @@ export default function Footer() {
 
           {cols.map((col) => (
             <div key={col.heading}>
-              <h4 className="text-xs font-semibold uppercase tracking-widest text-[#1a1535] mb-5">{col.heading}</h4>
+              <h4 className="text-xs font-semibold uppercase tracking-widest text-ink mb-5">{col.heading}</h4>
               <ul className="space-y-3">
                 {col.items.map((item) => (
                   <li key={item.l}>

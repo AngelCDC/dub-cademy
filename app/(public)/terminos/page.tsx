@@ -60,12 +60,12 @@ Ofrecemos una garantía de devolución de 30 días para el plan Pro. Si no está
 
 export default function TerminosPage() {
   return (
-    <div className="bg-[#F8F6FF] min-h-screen">
-      <div className="relative bg-white border-b border-violet-100">
+    <div className="bg-surface min-h-screen">
+      <div className="relative bg-white dark:bg-card border-b border-violet-100">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
         <div className="max-w-7xl mx-auto px-6 py-12">
           <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">Legal</p>
-          <h1 className="text-3xl md:text-4xl font-extrabold text-[#1a1535] mb-2">Términos y Condiciones</h1>
+          <h1 className="text-3xl md:text-4xl font-extrabold text-ink mb-2">Términos y Condiciones</h1>
           <p className="text-sm text-slate-400">Última actualización: 1 de mayo de 2025</p>
         </div>
       </div>
@@ -73,7 +73,7 @@ export default function TerminosPage() {
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-4 gap-10">
         {/* Sticky index */}
         <aside className="lg:col-span-1">
-          <div className="sticky top-24 bg-white border border-violet-100 rounded-2xl p-5">
+          <div className="sticky top-24 bg-white dark:bg-card border border-violet-100 rounded-2xl p-5">
             <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4">Índice</p>
             <nav className="space-y-2">
               {SECTIONS.map((s) => (
@@ -88,8 +88,8 @@ export default function TerminosPage() {
         {/* Content */}
         <main className="lg:col-span-3 space-y-8">
           {SECTIONS.map((s) => (
-            <div key={s.id} id={s.id} className="bg-white border border-violet-100 rounded-2xl p-7">
-              <h2 className="text-base font-bold text-[#1a1535] mb-4">{s.title}</h2>
+            <div key={s.id} id={s.id} className="bg-white dark:bg-card border border-violet-100 rounded-2xl p-7">
+              <h2 className="text-base font-bold text-ink mb-4">{s.title}</h2>
               <div className="text-sm text-slate-500 leading-relaxed whitespace-pre-line">{s.content}</div>
             </div>
           ))}

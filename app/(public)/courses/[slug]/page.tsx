@@ -102,7 +102,7 @@ export default async function SlugPage({ params }: { params: Params }) {
       />
 
       {/* Hero */}
-      <div className="bg-white border-b border-violet-100 relative overflow-hidden">
+      <div className="bg-white dark:bg-card border-b border-violet-100 relative overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
         <div className="absolute -top-20 right-0 w-80 h-80 rounded-full bg-primary/6 blur-[70px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 py-14 md:py-20 relative">
@@ -117,7 +117,7 @@ export default async function SlugPage({ params }: { params: Params }) {
               {course.duration}h de contenido
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#1a1535] leading-tight max-w-3xl mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-ink leading-tight max-w-3xl mb-4">
             {course.title}
           </h1>
           <p className="text-slate-400 text-base max-w-2xl leading-relaxed">
@@ -132,7 +132,7 @@ export default async function SlugPage({ params }: { params: Params }) {
       </div>
 
       {/* Main layout */}
-      <div className="bg-[#F8F6FF] max-w-7xl mx-auto px-6 py-10 md:py-14 grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <div className="bg-surface max-w-7xl mx-auto px-6 py-10 md:py-14 grid grid-cols-1 gap-8 lg:grid-cols-3">
         {/* Left */}
         <div className="order-2 lg:order-1 lg:col-span-2 space-y-10">
           {/* Thumbnail */}
@@ -148,21 +148,21 @@ export default async function SlugPage({ params }: { params: Params }) {
 
           {/* Description */}
           <div>
-            <h2 className="text-lg font-bold text-[#1a1535] mb-4">
+            <h2 className="text-lg font-bold text-ink mb-4">
               Descripción del curso
             </h2>
-            <div className="text-slate-500 leading-relaxed prose prose-sm max-w-none prose-headings:text-[#1a1535] prose-a:text-primary">
+            <div className="text-slate-500 leading-relaxed prose prose-sm dark:prose-invert max-w-none prose-headings:text-ink prose-a:text-primary">
               <RenderDescription json={JSON.parse(course.description)} />
             </div>
           </div>
 
           {/* Flow Score explanation */}
-          <div className="bg-white border border-violet-100 rounded-2xl p-5 flex items-start gap-4">
+          <div className="bg-white dark:bg-card border border-violet-100 rounded-2xl p-5 flex items-start gap-4">
             <div className="size-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
               <Zap className="size-5 text-primary fill-primary" />
             </div>
             <div>
-              <p className="text-sm font-bold text-[#1a1535] mb-1">
+              <p className="text-sm font-bold text-ink mb-1">
                 Flow Score™
               </p>
               <p className="text-xs text-slate-400 leading-relaxed">
@@ -176,7 +176,7 @@ export default async function SlugPage({ params }: { params: Params }) {
           {/* Chapters */}
           <div>
             <div className="flex items-center justify-between mb-5">
-              <h2 className="text-lg font-bold text-[#1a1535]">
+              <h2 className="text-lg font-bold text-ink">
                 Contenido del curso
               </h2>
               <span className="text-xs text-slate-400">
@@ -186,7 +186,7 @@ export default async function SlugPage({ params }: { params: Params }) {
             <div className="space-y-2">
               {course.chapter.map((chapter, index) => (
                 <Collapsible key={chapter.id} defaultOpen={index === 0}>
-                  <div className="bg-white border border-violet-100 rounded-2xl overflow-hidden">
+                  <div className="bg-white dark:bg-card border border-violet-100 rounded-2xl overflow-hidden">
                     <CollapsibleTrigger className="w-full">
                       <div className="flex items-center justify-between gap-4 px-5 py-4 hover:bg-violet-50/50 transition-colors">
                         <div className="flex items-center gap-3 text-left">
@@ -194,7 +194,7 @@ export default async function SlugPage({ params }: { params: Params }) {
                             {index + 1}
                           </span>
                           <div>
-                            <h3 className="text-sm font-semibold text-[#1a1535]">
+                            <h3 className="text-sm font-semibold text-ink">
                               {chapter.title}
                             </h3>
                             <p className="text-xs text-slate-400">
@@ -236,14 +236,14 @@ export default async function SlugPage({ params }: { params: Params }) {
           {course.reviews.length > 0 && (
             <div>
               <div className="flex items-center gap-4 mb-5">
-                <h2 className="text-lg font-bold text-[#1a1535]">Reseñas</h2>
+                <h2 className="text-lg font-bold text-ink">Reseñas</h2>
                 <StarDisplay rating={average} count={count} size="md" />
               </div>
               <div className="space-y-3">
                 {course.reviews.map((review) => (
                   <div
                     key={review.id}
-                    className="bg-white border border-violet-100 rounded-2xl p-5"
+                    className="bg-white dark:bg-card border border-violet-100 rounded-2xl p-5"
                   >
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
@@ -261,7 +261,7 @@ export default async function SlugPage({ params }: { params: Params }) {
                           </div>
                         )}
                         <div>
-                          <p className="text-sm font-semibold text-[#1a1535]">
+                          <p className="text-sm font-semibold text-ink">
                             {review.user.name}
                           </p>
                           <p className="text-xs text-slate-400">
@@ -305,13 +305,13 @@ export default async function SlugPage({ params }: { params: Params }) {
         {/* Right: enrollment card */}
         <div className="order-1 lg:order-2 lg:col-span-1">
           <div className="sticky top-[clamp(0.5rem,2vh,5rem)]">
-            <div className="bg-white border border-violet-100 rounded-2xl overflow-hidden shadow-lg shadow-violet-100/50">
+            <div className="bg-white dark:bg-card border border-violet-100 rounded-2xl overflow-hidden shadow-lg shadow-violet-100/50">
               {/* Price */}
               <div className="p-[clamp(0.75rem,2vh,1.25rem)] border-b border-violet-50">
                 <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-1">
                   Precio
                 </p>
-                <div className="text-[clamp(1.25rem,3vh,1.875rem)] font-extrabold text-[#1a1535]">
+                <div className="text-[clamp(1.25rem,3vh,1.875rem)] font-extrabold text-ink">
                   {new Intl.NumberFormat("es-ES", {
                     style: "currency",
                     currency: "USD",
@@ -362,7 +362,7 @@ export default async function SlugPage({ params }: { params: Params }) {
                       <p className="text-xs text-slate-400 leading-tight">
                         {label}
                       </p>
-                      <p className="text-sm font-semibold text-[#1a1535] leading-tight">
+                      <p className="text-sm font-semibold text-ink leading-tight">
                         {value}
                       </p>
                     </div>

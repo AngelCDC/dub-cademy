@@ -16,20 +16,20 @@ export default async function PaymentSuccessPage({
   const { course } = await searchParams;
 
   return (
-    <div className="bg-[#F8F6FF] min-h-screen">
+    <div className="bg-surface min-h-screen">
       <div className="max-w-xl mx-auto px-6 py-20 md:py-28 text-center">
         <div className="flex size-24 mx-auto items-center justify-center rounded-full bg-primary/10 mb-8">
           <CheckCircle2 className="size-12 text-primary" />
         </div>
 
-        <h1 className="text-3xl md:text-4xl font-extrabold text-[#1a1535] tracking-tight mb-4">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-ink tracking-tight mb-4">
           ¡Tu pago ha sido registrado!
         </h1>
 
         <p className="text-slate-500 leading-relaxed mb-2">
           {course ? (
             <>
-              Pronto verás <span className="font-semibold text-[#1a1535]">{course}</span> en tu
+              Pronto verás <span className="font-semibold text-ink">{course}</span> en tu
               perfil.
             </>
           ) : (
@@ -40,13 +40,13 @@ export default async function PaymentSuccessPage({
           Estamos verificando tu pago y activaremos tu acceso a la mayor brevedad.
         </p>
 
-        <div className="bg-white border border-violet-100 rounded-2xl p-6 mb-8 text-left space-y-4">
+        <div className="bg-white dark:bg-card border border-violet-100 rounded-2xl p-6 mb-8 text-left space-y-4">
           <div className="flex items-start gap-3">
             <div className="size-9 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
               <Clock className="size-4 text-primary" />
             </div>
             <div>
-              <p className="text-sm font-semibold text-[#1a1535]">Tiempo de validación</p>
+              <p className="text-sm font-semibold text-ink">Tiempo de validación</p>
               <p className="text-xs text-slate-400 leading-relaxed">
                 Suele tardar menos de 24 horas en días hábiles.
               </p>
@@ -57,7 +57,7 @@ export default async function PaymentSuccessPage({
               <Mail className="size-4 text-primary" />
             </div>
             <div>
-              <p className="text-sm font-semibold text-[#1a1535]">Confirmación por email</p>
+              <p className="text-sm font-semibold text-ink">Confirmación por email</p>
               <p className="text-xs text-slate-400 leading-relaxed">
                 Te enviaremos un email cuando tu inscripción esté aprobada.
               </p>

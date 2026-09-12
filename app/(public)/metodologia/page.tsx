@@ -27,14 +27,14 @@ const FLOW_ZONES = [
 
 export default function MetodologiaPage() {
   return (
-    <div className="bg-[#F8F6FF] min-h-screen">
+    <div className="bg-surface min-h-screen">
       {/* Header */}
-      <div className="relative bg-white border-b border-violet-100 overflow-hidden">
+      <div className="relative bg-white dark:bg-card border-b border-violet-100 overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
         <div className="absolute -top-20 right-0 w-80 h-80 rounded-full bg-primary/6 blur-[70px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 py-16 md:py-20 relative">
           <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-4">Nuestra metodología</p>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-[#1a1535] tracking-tight mb-4">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-ink tracking-tight mb-4">
             Aprender diferente{" "}
             <span className="text-primary block">da resultados diferentes</span>
           </h1>
@@ -47,14 +47,14 @@ export default function MetodologiaPage() {
       </div>
 
       {/* The Flow Zone visualization */}
-      <div className="bg-white border-b border-violet-100 py-16 md:py-20">
+      <div className="bg-white dark:bg-card border-b border-violet-100 py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <span className="inline-flex items-center gap-2 text-xs font-semibold text-primary uppercase tracking-widest mb-4">
                 <Zap className="size-3.5 fill-primary" /> La ciencia detrás del flow
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1535] mb-5">
+              <h2 className="text-3xl md:text-4xl font-bold text-ink mb-5">
                 El estado de flow no es magia.{" "}
                 <span className="text-primary">Es calibración.</span>
               </h2>
@@ -89,14 +89,14 @@ export default function MetodologiaPage() {
 
       {/* Pillars */}
       <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
-        <h2 className="text-2xl md:text-3xl font-bold text-[#1a1535] mb-10">Los 4 pilares del IFIVEN</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-ink mb-10">Los 4 pilares del IFIVEN</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {PILLARS.map(({ icon: Icon, title, desc, stats }) => (
-            <div key={title} className="bg-white border border-violet-100 rounded-2xl p-7 hover:shadow-md hover:shadow-violet-50 transition-all">
+            <div key={title} className="bg-white dark:bg-card border border-violet-100 rounded-2xl p-7 hover:shadow-md hover:shadow-violet-50 transition-all">
               <div className="size-11 rounded-2xl bg-primary/10 flex items-center justify-center mb-5">
                 <Icon className="size-5 text-primary" />
               </div>
-              <h3 className="text-base font-bold text-[#1a1535] mb-2">{title}</h3>
+              <h3 className="text-base font-bold text-ink mb-2">{title}</h3>
               <p className="text-sm text-slate-400 leading-relaxed mb-6">{desc}</p>
               <div className="flex gap-8 pt-5 border-t border-violet-50">
                 {stats.map((s) => (
@@ -112,18 +112,18 @@ export default function MetodologiaPage() {
       </div>
 
       {/* Tools */}
-      <div className="bg-white border-y border-violet-100 py-16 md:py-24">
+      <div className="bg-white dark:bg-card border-y border-violet-100 py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#1a1535] mb-3">Todo lo que incluye</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-ink mb-3">Todo lo que incluye</h2>
           <p className="text-slate-400 text-sm mb-10">Tu kit completo para entrar en la zona desde el día 1.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {TOOLS.map(({ icon: Icon, name, desc }) => (
-              <div key={name} className="group bg-[#F8F6FF] hover:bg-violet-50/60 border border-violet-100 hover:border-violet-200 rounded-2xl p-5 flex gap-4 transition-all duration-150">
+              <div key={name} className="group bg-surface hover:bg-violet-50/60 border border-violet-100 hover:border-violet-200 rounded-2xl p-5 flex gap-4 transition-all duration-150">
                 <div className="size-9 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/15 transition-colors">
                   <Icon className="size-4 text-primary" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-[#1a1535] mb-1">{name}</h4>
+                  <h4 className="text-sm font-semibold text-ink mb-1">{name}</h4>
                   <p className="text-xs text-slate-400 leading-relaxed">{desc}</p>
                 </div>
               </div>
@@ -135,7 +135,7 @@ export default function MetodologiaPage() {
       {/* Metrics */}
       <div className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#1a1535] mb-10">Resultados en la zona</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-ink mb-10">Resultados en la zona</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14">
             {[
               { v: "96%", l: "Consigue empleo" },
@@ -143,7 +143,7 @@ export default function MetodologiaPage() {
               { v: "6 meses", l: "Tiempo promedio" },
               { v: "4.9/5", l: "Satisfacción" },
             ].map((m) => (
-              <div key={m.l} className="bg-white border border-violet-100 rounded-2xl p-7 text-center hover:shadow-md hover:shadow-violet-50 transition-all">
+              <div key={m.l} className="bg-white dark:bg-card border border-violet-100 rounded-2xl p-7 text-center hover:shadow-md hover:shadow-violet-50 transition-all">
                 <div className="text-4xl font-extrabold text-primary mb-1">{m.v}</div>
                 <div className="text-xs text-slate-400 uppercase tracking-wider">{m.l}</div>
               </div>

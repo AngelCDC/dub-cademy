@@ -95,7 +95,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <Zap className="size-4" />
                 </div>
                 <div className="flex flex-col leading-none">
-                  <span className="font-bold text-sm text-[#1a1535]">IFIVEN</span>
+                  <span className="font-bold text-sm text-ink">IFIVEN</span>
                   <span className="text-[10px] text-muted-foreground font-medium tracking-wide">Admin Panel</span>
                 </div>
               </Link>

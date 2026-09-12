@@ -82,14 +82,14 @@ export default function PreciosPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <div className="bg-[#F8F6FF] min-h-screen">
+    <div className="bg-surface min-h-screen">
       {/* Header */}
-      <div className="relative bg-white border-b border-violet-100 overflow-hidden">
+      <div className="relative bg-white dark:bg-card border-b border-violet-100 overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
         <div className="absolute -top-20 right-0 w-80 h-80 rounded-full bg-primary/6 blur-[70px] pointer-events-none" />
         <div className="max-w-3xl mx-auto px-6 py-16 md:py-20 relative text-center">
           <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-4">Planes y precios</p>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-[#1a1535] tracking-tight mb-4">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-ink tracking-tight mb-4">
             Elige tu zona de flow
           </h1>
           <p className="text-slate-400 text-base max-w-lg mx-auto leading-relaxed mb-8">
@@ -102,7 +102,7 @@ export default function PreciosPage() {
               onClick={() => setAnnual(false)}
               className={cn(
                 "px-5 py-2 rounded-full text-sm font-semibold transition-all",
-                !annual ? "bg-white text-[#1a1535] shadow-sm" : "text-slate-500 hover:text-[#1a1535]"
+                !annual ? "bg-white dark:bg-card text-ink shadow-sm" : "text-slate-500 hover:text-ink"
               )}
             >
               Mensual
@@ -111,7 +111,7 @@ export default function PreciosPage() {
               onClick={() => setAnnual(true)}
               className={cn(
                 "px-5 py-2 rounded-full text-sm font-semibold transition-all flex items-center gap-2",
-                annual ? "bg-white text-[#1a1535] shadow-sm" : "text-slate-500 hover:text-[#1a1535]"
+                annual ? "bg-white dark:bg-card text-ink shadow-sm" : "text-slate-500 hover:text-ink"
               )}
             >
               Anual
@@ -128,7 +128,7 @@ export default function PreciosPage() {
             <div
               key={plan.id}
               className={cn(
-                "bg-white rounded-2xl overflow-hidden transition-all",
+                "bg-white dark:bg-card rounded-2xl overflow-hidden transition-all",
                 plan.highlight
                   ? "border-2 border-primary shadow-xl shadow-primary/10 md:-translate-y-2"
                   : "border border-violet-100 shadow-sm"
@@ -140,12 +140,12 @@ export default function PreciosPage() {
                 </div>
               )}
               <div className="p-6">
-                <h3 className="text-base font-bold text-[#1a1535] mb-1">{plan.name}</h3>
+                <h3 className="text-base font-bold text-ink mb-1">{plan.name}</h3>
                 <p className="text-xs text-slate-400 mb-5">{plan.desc}</p>
 
                 <div className="mb-6">
                   <div className="flex items-end gap-1">
-                    <span className="text-4xl font-extrabold text-[#1a1535]">
+                    <span className="text-4xl font-extrabold text-ink">
                       ${annual ? plan.annual : plan.monthly}
                     </span>
                     {(plan.monthly > 0 || plan.annual > 0) && (
@@ -194,16 +194,16 @@ export default function PreciosPage() {
       </div>
 
       {/* Feature comparison table */}
-      <div className="bg-white border-y border-violet-100 py-16">
+      <div className="bg-white dark:bg-card border-y border-violet-100 py-16">
         <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-2xl font-bold text-[#1a1535] mb-10 text-center">Comparativa completa</h2>
+          <h2 className="text-2xl font-bold text-ink mb-10 text-center">Comparativa completa</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-violet-100">
                   <th className="text-left py-3 text-slate-500 font-semibold w-1/2">Característica</th>
                   {["Free", "Pro", "Business"].map((p) => (
-                    <th key={p} className="text-center py-3 font-bold text-[#1a1535]">{p}</th>
+                    <th key={p} className="text-center py-3 font-bold text-ink">{p}</th>
                   ))}
                 </tr>
               </thead>
@@ -235,16 +235,16 @@ export default function PreciosPage() {
 
       {/* FAQ */}
       <div className="max-w-3xl mx-auto px-6 py-16 md:py-20">
-        <h2 className="text-2xl font-bold text-[#1a1535] mb-10 text-center">Preguntas frecuentes</h2>
+        <h2 className="text-2xl font-bold text-ink mb-10 text-center">Preguntas frecuentes</h2>
         <div className="space-y-2">
           {FAQS.map((faq, i) => (
             <div
               key={i}
-              className="bg-white border border-violet-100 hover:border-violet-200 rounded-2xl overflow-hidden cursor-pointer transition-colors"
+              className="bg-white dark:bg-card border border-violet-100 hover:border-violet-200 rounded-2xl overflow-hidden cursor-pointer transition-colors"
               onClick={() => setOpenFaq(openFaq === i ? null : i)}
             >
               <div className="flex items-center justify-between gap-4 px-6 py-4">
-                <span className={cn("text-sm font-semibold transition-colors", openFaq === i ? "text-primary" : "text-[#1a1535]")}>
+                <span className={cn("text-sm font-semibold transition-colors", openFaq === i ? "text-primary" : "text-ink")}>
                   {faq.q}
                 </span>
                 <ChevronDown className={cn("size-4 text-violet-300 shrink-0 transition-transform duration-200", openFaq === i && "rotate-180 text-primary")} />

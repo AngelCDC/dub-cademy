@@ -4,7 +4,7 @@ import Footer from "./_components/footer";
 
 export default function LayoutPublic({ children }: { children: ReactNode }) {
   return (
-    <div className="bg-[#F8F6FF] min-h-screen text-[#1a1535]">
+    <div className="bg-surface min-h-screen text-ink">
       <Navbar />
       <main className="pt-16">{children}</main>
       <Footer />

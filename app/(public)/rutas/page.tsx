@@ -15,16 +15,16 @@ export default async function RutasPage() {
   const paths = await getLearningPaths();
 
   return (
-    <div className="bg-[#F8F6FF] min-h-screen">
+    <div className="bg-surface min-h-screen">
       {/* Header */}
-      <div className="relative bg-white border-b border-violet-100 overflow-hidden">
+      <div className="relative bg-white dark:bg-card border-b border-violet-100 overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
         <div className="absolute -top-20 right-0 w-80 h-80 rounded-full bg-primary/6 blur-[70px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 py-16 md:py-20 relative">
           <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-4">
             Programas completos
           </p>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-[#1a1535] tracking-tight mb-4">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-ink tracking-tight mb-4">
             Rutas de aprendizaje
           </h1>
           <p className="text-slate-400 text-base max-w-lg leading-relaxed">
@@ -41,7 +41,7 @@ export default async function RutasPage() {
             <div className="size-14 rounded-2xl bg-violet-50 flex items-center justify-center mb-4">
               <Map className="size-6 text-violet-300" />
             </div>
-            <p className="text-[#1a1535] font-semibold">Próximamente</p>
+            <p className="text-ink font-semibold">Próximamente</p>
             <p className="text-sm text-slate-400 mt-1">Estamos calibrando las rutas.</p>
           </div>
         ) : (
@@ -54,7 +54,7 @@ export default async function RutasPage() {
                 <Link
                   key={path.id}
                   href={`/rutas/${path.slug}`}
-                  className="group bg-white hover:bg-violet-50/40 border border-violet-100 hover:border-violet-300 rounded-2xl p-6 transition-all duration-200 hover:shadow-lg hover:shadow-violet-100/50"
+                  className="group bg-white dark:bg-card hover:bg-violet-50/40 border border-violet-100 hover:border-violet-300 rounded-2xl p-6 transition-all duration-200 hover:shadow-lg hover:shadow-violet-100/50"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="size-12 rounded-2xl bg-primary/10 flex items-center justify-center">
@@ -69,7 +69,7 @@ export default async function RutasPage() {
                     </div>
                   </div>
 
-                  <h2 className="text-lg font-bold text-[#1a1535] group-hover:text-primary transition-colors mb-2">
+                  <h2 className="text-lg font-bold text-ink group-hover:text-primary transition-colors mb-2">
                     {path.title}
                   </h2>
                   <p className="text-sm text-slate-400 leading-relaxed line-clamp-2 mb-5">

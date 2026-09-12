@@ -2,7 +2,17 @@
   "permissions": {
     "allow": [
       "PowerShell(npx prisma migrate dev --name add_coupons)",
-      "PowerShell(npx next build)"
+      "PowerShell(npx next build)",
+      "Bash(grep -rhoE '\\(bg|text|border|divide|placeholder|ring|from|to|via\\)-\\(slate|gray|violet|fuchsia\\)-[0-9]{2,3}\\(/[0-9]+\\)?' --include='*.tsx' app components)",
+      "Bash(grep -rhoE '\\(bg|text|border|ring\\)-\\(emerald|amber|rose|red|green|orange|blue|indigo|purple|pink|cyan|teal|yellow|lime|sky\\)-[0-9]{2,3}\\(/[0-9]+\\)?' --include='*.tsx' app components)",
+      "Bash(grep -viE \"className|^\\\\+.*text-ink|^-.*text-\\\\[#1a1535\\\\]|^\\\\+.*bg-white dark:bg-card|^-.*bg-white$|^\\\\+.*bg-surface|^-.*bg-\\\\[#F8F6FF\\\\]\")",
+      "Bash(git -c core.autocrlf=false diff -U0 -- 'app/\\(public\\)/payment/success/page.tsx' 'app/\\(public\\)/courses/page.tsx' 'app/\\(public\\)/courses/_components/CourseCatalog.tsx' 'app/\\(public\\)/buscar/page.tsx' 'app/\\(public\\)/buscar/_components/BuscarClient.tsx' 'app/\\(public\\)/rutas/page.tsx')",
+      "Bash(git -c core.autocrlf=false diff -U0 -- 'app/\\(public\\)/courses/[slug]/page.tsx' 'app/\\(public\\)/rutas/[slug]/page.tsx')",
+      "Bash(git -c core.autocrlf=false diff -U0 -- 'app/\\(public\\)/page.tsx')",
+      "Bash(grep -c 'dark\\\\\\\\:bg-card' .next/static/chunks/*.css)",
+      "Bash(grep -o '--color-violet-50:oklch[^;]*' .next/static/chunks/9310d01ef326ec31.css)",
+      "Bash(grep -o '--ink:oklch[^;]*' .next/static/chunks/9310d01ef326ec31.css)",
+      "Bash(grep -o 'dark{[^}]\\\\{0,200\\\\}' .next/static/chunks/9310d01ef326ec31.css)"
     ]
   }
 }

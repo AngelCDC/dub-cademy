@@ -25,9 +25,9 @@ const TESTIMONIALS = [
 
 export default function EmpresasPage() {
   return (
-    <div className="bg-[#F8F6FF] min-h-screen">
+    <div className="bg-surface min-h-screen">
       {/* Hero B2B */}
-      <div className="relative bg-white border-b border-violet-100 overflow-hidden">
+      <div className="relative bg-white dark:bg-card border-b border-violet-100 overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
         <div className="absolute -top-20 right-0 w-96 h-96 rounded-full bg-primary/6 blur-[80px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 relative grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -35,7 +35,7 @@ export default function EmpresasPage() {
             <span className="inline-flex items-center gap-2 text-xs font-semibold text-primary uppercase tracking-widest mb-5">
               <Users className="size-3.5" /> Para equipos y empresas
             </span>
-            <h1 className="text-4xl md:text-5xl font-extrabold text-[#1a1535] tracking-tight leading-tight mb-5">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-ink tracking-tight leading-tight mb-5">
               Lleva a tu equipo{" "}
               <span className="text-primary">al estado de flow</span>
             </h1>
@@ -64,7 +64,7 @@ export default function EmpresasPage() {
 
           {/* Mock dashboard */}
           <div className="lg:translate-x-4 lg:rotate-1">
-            <div className="bg-white border border-violet-100 rounded-2xl shadow-xl shadow-violet-100/50 overflow-hidden">
+            <div className="bg-white dark:bg-card border border-violet-100 rounded-2xl shadow-xl shadow-violet-100/50 overflow-hidden">
               <div className="bg-gradient-to-r from-primary to-fuchsia-600 px-5 py-3 flex items-center gap-2">
                 <div className="flex gap-1.5">
                   <div className="size-2.5 rounded-full bg-white/30" />
@@ -81,7 +81,7 @@ export default function EmpresasPage() {
                     { v: "3", l: "Rutas en progreso" },
                     { v: "47h", l: "Horas de aprendizaje" },
                   ].map((m) => (
-                    <div key={m.l} className="bg-[#F8F6FF] border border-violet-100 rounded-xl p-3">
+                    <div key={m.l} className="bg-surface border border-violet-100 rounded-xl p-3">
                       <div className="text-xl font-extrabold text-primary">{m.v}</div>
                       <div className="text-[11px] text-slate-400 mt-0.5">{m.l}</div>
                     </div>
@@ -100,7 +100,7 @@ export default function EmpresasPage() {
                           {a.name.split(" ").map(w => w[0]).join("")}
                         </div>
                         <p className="text-xs text-slate-500 flex-1 truncate">
-                          <span className="font-semibold text-[#1a1535]">{a.name}</span> completó {a.course}
+                          <span className="font-semibold text-ink">{a.name}</span> completó {a.course}
                         </p>
                         <span className="text-[10px] text-slate-300 shrink-0">{a.time}</span>
                       </div>
@@ -126,16 +126,16 @@ export default function EmpresasPage() {
       <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
         <div className="text-center mb-12">
           <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">Funcionalidades</p>
-          <h2 className="text-3xl font-bold text-[#1a1535] mb-3">Todo lo que necesita tu empresa</h2>
+          <h2 className="text-3xl font-bold text-ink mb-3">Todo lo que necesita tu empresa</h2>
           <p className="text-slate-400 text-base max-w-lg mx-auto">Diseñado para que los equipos de People y los managers tengan visibilidad total.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {FEATURES.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="bg-white border border-violet-100 rounded-2xl p-6 hover:shadow-md hover:shadow-violet-50 transition-all">
+            <div key={title} className="bg-white dark:bg-card border border-violet-100 rounded-2xl p-6 hover:shadow-md hover:shadow-violet-50 transition-all">
               <div className="size-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                 <Icon className="size-5 text-primary" />
               </div>
-              <h3 className="text-sm font-bold text-[#1a1535] mb-2">{title}</h3>
+              <h3 className="text-sm font-bold text-ink mb-2">{title}</h3>
               <p className="text-sm text-slate-400 leading-relaxed">{desc}</p>
             </div>
           ))}
@@ -143,17 +143,17 @@ export default function EmpresasPage() {
       </div>
 
       {/* Testimonials */}
-      <div className="bg-white border-y border-violet-100 py-16">
+      <div className="bg-white dark:bg-card border-y border-violet-100 py-16">
         <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-2xl font-bold text-[#1a1535] mb-8 text-center">Lo que dicen nuestros clientes</h2>
+          <h2 className="text-2xl font-bold text-ink mb-8 text-center">Lo que dicen nuestros clientes</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {TESTIMONIALS.map((t) => (
-              <div key={t.name} className="bg-[#F8F6FF] border border-violet-100 rounded-2xl p-6">
+              <div key={t.name} className="bg-surface border border-violet-100 rounded-2xl p-6">
                 <p className="text-sm text-slate-500 leading-relaxed mb-5">&ldquo;{t.text}&rdquo;</p>
                 <div className="flex items-center gap-3">
                   <div className="size-9 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0" style={{ background: t.color }}>{t.avatar}</div>
                   <div>
-                    <p className="text-sm font-semibold text-[#1a1535]">{t.name}</p>
+                    <p className="text-sm font-semibold text-ink">{t.name}</p>
                     <p className="text-xs text-slate-400">{t.role} · {t.company}</p>
                   </div>
                 </div>

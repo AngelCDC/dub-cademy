@@ -24,7 +24,7 @@ export function PublicCourseCard({ data }: { data: PublicCourseType }) {
   return (
     <Link
       href={`/courses/${data.slug}`}
-      className="group bg-white border border-violet-100 hover:border-violet-300 rounded-2xl overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-violet-100/60 flex flex-col"
+      className="group bg-white dark:bg-card border border-violet-100 hover:border-violet-300 rounded-2xl overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-violet-100/60 flex flex-col"
     >
       <div className="relative aspect-video overflow-hidden bg-violet-50 shrink-0">
         <Image
@@ -35,7 +35,7 @@ export function PublicCourseCard({ data }: { data: PublicCourseType }) {
           sizes="(max-width:640px)100vw,(max-width:1024px)50vw,33vw"
         />
         {/* Level badge */}
-        <div className="absolute top-2.5 left-2.5 bg-white/90 backdrop-blur-sm text-[#1a1535] text-[10px] font-semibold px-2.5 py-1 rounded-full shadow-sm">
+        <div className="absolute top-2.5 left-2.5 bg-white/90 backdrop-blur-sm text-ink text-[10px] font-semibold px-2.5 py-1 rounded-full shadow-sm">
           {data.level}
         </div>
         {/* Flow score badge */}
@@ -47,7 +47,7 @@ export function PublicCourseCard({ data }: { data: PublicCourseType }) {
 
       <div className="p-4 flex flex-col flex-1">
         <p className="text-[11px] font-semibold text-primary mb-1.5 uppercase tracking-wider">{data.category}</p>
-        <h3 className="text-sm font-semibold text-[#1a1535] leading-snug line-clamp-2 mb-2 flex-1">
+        <h3 className="text-sm font-semibold text-ink leading-snug line-clamp-2 mb-2 flex-1">
           {data.title}
         </h3>
         <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed mb-3">
@@ -64,7 +64,7 @@ export function PublicCourseCard({ data }: { data: PublicCourseType }) {
               </span>
             )}
           </div>
-          <span className="font-bold text-[#1a1535]">
+          <span className="font-bold text-ink">
             {new Intl.NumberFormat("es-ES", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(data.price)}
           </span>
         </div>
@@ -75,7 +75,7 @@ export function PublicCourseCard({ data }: { data: PublicCourseType }) {
 
 export function PublicCourseCardSkeleton() {
   return (
-    <div className="bg-white border border-violet-100 rounded-2xl overflow-hidden animate-pulse">
+    <div className="bg-white dark:bg-card border border-violet-100 rounded-2xl overflow-hidden animate-pulse">
       <div className="aspect-video bg-violet-50" />
       <div className="p-4 space-y-3">
         <div className="h-2.5 w-16 bg-violet-100 rounded-full" />

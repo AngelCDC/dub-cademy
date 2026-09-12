@@ -14,7 +14,7 @@ export const dynamic = "force-dynamic";
 export default async function BuscarPage() {
   const courses = await getAllCourses();
   return (
-    <div className="bg-[#F8F6FF] min-h-screen">
+    <div className="bg-surface min-h-screen">
       <Suspense fallback={<BuscarSkeleton />}>
         <BuscarClient courses={courses} />
       </Suspense>
@@ -25,10 +25,10 @@ export default async function BuscarPage() {
 function BuscarSkeleton() {
   return (
     <div className="max-w-4xl mx-auto px-6 pt-20 pb-16">
-      <div className="h-14 bg-white border border-violet-100 rounded-2xl animate-pulse mb-10" />
+      <div className="h-14 bg-white dark:bg-card border border-violet-100 rounded-2xl animate-pulse mb-10" />
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="h-32 bg-white border border-violet-100 rounded-2xl animate-pulse" />
+          <div key={i} className="h-32 bg-white dark:bg-card border border-violet-100 rounded-2xl animate-pulse" />
         ))}
       </div>
     </div>

@@ -22,14 +22,14 @@ const CATEGORIES = ["Todos", "Desarrollo", "IA", "Diseño", "Carrera", "Marketin
 
 export default function BlogPage() {
   return (
-    <div className="bg-[#F8F6FF] min-h-screen">
+    <div className="bg-surface min-h-screen">
       {/* Header */}
-      <div className="relative bg-white border-b border-violet-100 overflow-hidden">
+      <div className="relative bg-white dark:bg-card border-b border-violet-100 overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
         <div className="absolute -top-20 right-0 w-80 h-80 rounded-full bg-primary/6 blur-[70px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 py-16 md:py-20 relative">
           <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-4">Artículos</p>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-[#1a1535] tracking-tight mb-4">Blog de IFIVEN</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-ink tracking-tight mb-4">Blog de IFIVEN</h1>
           <p className="text-slate-400 text-base max-w-lg leading-relaxed">
             Desarrollo, IA, diseño, carrera y todo lo que necesitas para mantenerte en la zona.
           </p>
@@ -43,7 +43,7 @@ export default function BlogPage() {
             <span
               key={cat}
               className={`shrink-0 text-sm px-5 py-2 rounded-full border whitespace-nowrap cursor-default
-                ${i === 0 ? "bg-primary border-primary text-white font-semibold" : "bg-white border-violet-100 text-slate-500"}`}
+                ${i === 0 ? "bg-primary border-primary text-white font-semibold" : "bg-white dark:bg-card border-violet-100 text-slate-500"}`}
             >
               {cat}
             </span>
@@ -51,7 +51,7 @@ export default function BlogPage() {
         </div>
 
         {/* Featured article */}
-        <div className="bg-white border border-violet-100 rounded-2xl overflow-hidden mb-6 hover:border-violet-300 hover:shadow-lg hover:shadow-violet-100/50 transition-all group">
+        <div className="bg-white dark:bg-card border border-violet-100 rounded-2xl overflow-hidden mb-6 hover:border-violet-300 hover:shadow-lg hover:shadow-violet-100/50 transition-all group">
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="aspect-video md:aspect-auto" style={{ background: `linear-gradient(135deg, ${ARTICLES[0].color}20, ${ARTICLES[0].color}40)`, minHeight: "240px" }}>
               <div className="w-full h-full flex items-center justify-center">
@@ -65,14 +65,14 @@ export default function BlogPage() {
                 <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">{ARTICLES[0].category}</span>
                 <span className="text-xs text-slate-400">{ARTICLES[0].readTime} lectura</span>
               </div>
-              <h2 className="text-xl font-bold text-[#1a1535] group-hover:text-primary transition-colors leading-snug mb-3">{ARTICLES[0].title}</h2>
+              <h2 className="text-xl font-bold text-ink group-hover:text-primary transition-colors leading-snug mb-3">{ARTICLES[0].title}</h2>
               <p className="text-sm text-slate-500 leading-relaxed mb-5">{ARTICLES[0].excerpt}</p>
               <div className="flex items-center gap-2">
                 <div className="size-7 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary">
                   {ARTICLES[0].author.split(" ").map(w => w[0]).join("").slice(0, 2)}
                 </div>
                 <div>
-                  <p className="text-xs font-semibold text-[#1a1535]">{ARTICLES[0].author}</p>
+                  <p className="text-xs font-semibold text-ink">{ARTICLES[0].author}</p>
                   <p className="text-xs text-slate-400">{ARTICLES[0].date}</p>
                 </div>
               </div>
@@ -86,7 +86,7 @@ export default function BlogPage() {
             <Link
               key={article.id}
               href={`/blog/${article.id}`}
-              className="group bg-white border border-violet-100 hover:border-violet-300 rounded-2xl overflow-hidden transition-all hover:shadow-md hover:shadow-violet-100/50 hover:-translate-y-0.5 flex flex-col"
+              className="group bg-white dark:bg-card border border-violet-100 hover:border-violet-300 rounded-2xl overflow-hidden transition-all hover:shadow-md hover:shadow-violet-100/50 hover:-translate-y-0.5 flex flex-col"
             >
               <div
                 className="aspect-video flex items-center justify-center"
@@ -99,14 +99,14 @@ export default function BlogPage() {
                   <span className="text-[11px] font-semibold text-primary bg-primary/10 px-2.5 py-0.5 rounded-full">{article.category}</span>
                   <span className="text-[11px] text-slate-400">{article.readTime}</span>
                 </div>
-                <h3 className="text-sm font-bold text-[#1a1535] group-hover:text-primary transition-colors leading-snug line-clamp-2 mb-2 flex-1">{article.title}</h3>
+                <h3 className="text-sm font-bold text-ink group-hover:text-primary transition-colors leading-snug line-clamp-2 mb-2 flex-1">{article.title}</h3>
                 <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed mb-4">{article.excerpt}</p>
                 <div className="flex items-center gap-2 pt-3 border-t border-violet-50">
                   <div className="size-6 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary shrink-0">
                     {article.author.split(" ").map(w => w[0]).join("").slice(0, 2)}
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-[#1a1535]">{article.author}</p>
+                    <p className="text-xs font-semibold text-ink">{article.author}</p>
                     <p className="text-[11px] text-slate-400">{article.date}</p>
                   </div>
                 </div>

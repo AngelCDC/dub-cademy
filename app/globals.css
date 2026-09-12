@@ -38,6 +38,9 @@
   --sidebar-accent-foreground: oklch(0.28 0.040 293);
   --sidebar-border: oklch(0.920 0.020 293);
   --sidebar-ring: oklch(0.577 0.245 293.1);
+  /* Colores del diseño público (violeta "zona de flow") */
+  --ink: #1a1535;
+  --surface: #f8f6ff;
   --font-sans:
     ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
@@ -95,6 +98,43 @@
   --sidebar-accent-foreground: oklch(0.882 0.018 293);
   --sidebar-border: oklch(0.260 0.028 293);
   --sidebar-ring: oklch(0.720 0.200 293.1);
+  /* Colores del diseño público en modo oscuro */
+  --ink: oklch(0.882 0.018 293);
+  --surface: oklch(0.180 0.024 293);
+  /* Paleta violeta/slate remapeada para fondo oscuro: los tonos claros de
+     fondo pasan a oscuros y los textos medios pasan a claros. Así TODAS las
+     páginas públicas (incluidas hover: y border-) se adaptan solas. */
+  --color-slate-100: oklch(0.200 0.020 257);
+  --color-slate-300: oklch(0.550 0.025 257);
+  --color-slate-500: oklch(0.660 0.028 257);
+  --color-slate-600: oklch(0.720 0.025 257);
+  --color-violet-50: oklch(0.200 0.025 293);
+  --color-violet-100: oklch(0.280 0.030 293);
+  --color-violet-200: oklch(0.350 0.045 293);
+  --color-violet-300: oklch(0.550 0.150 293);
+  --color-violet-500: oklch(0.680 0.170 293);
+  --color-violet-600: oklch(0.780 0.140 293);
+  --color-violet-700: oklch(0.780 0.140 293);
+  /* Colores de estado (badges, banners de cupón, precios): los tonos 600/700
+     de texto quedaban ilegibles sobre fondo oscuro y los fondos 50/100 claros
+     se ven blancos. */
+  --color-emerald-50: oklch(0.230 0.035 164);
+  --color-emerald-200: oklch(0.350 0.050 164);
+  --color-emerald-600: oklch(0.720 0.140 164);
+  --color-emerald-700: oklch(0.800 0.120 164);
+  --color-amber-50: oklch(0.230 0.030 80);
+  --color-amber-200: oklch(0.350 0.050 80);
+  --color-amber-600: oklch(0.780 0.100 80);
+  --color-amber-700: oklch(0.830 0.090 80);
+  --color-red-50: oklch(0.230 0.030 25);
+  --color-red-100: oklch(0.320 0.055 20);
+  --color-red-200: oklch(0.350 0.050 25);
+  --color-red-600: oklch(0.740 0.110 25);
+  --color-red-700: oklch(0.790 0.100 25);
+  --color-orange-700: oklch(0.790 0.100 50);
+  --color-lime-700: oklch(0.800 0.110 120);
+  --color-cyan-700: oklch(0.800 0.080 200);
+  --color-sky-700: oklch(0.800 0.080 230);
   --font-sans:
     ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
@@ -151,6 +191,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-ink: var(--ink);
+  --color-surface: var(--surface);
 
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);

@@ -14,9 +14,9 @@ export const dynamic = "force-dynamic";
 
 export default function CoursesPage() {
   return (
-    <div className="bg-[#F8F6FF] min-h-screen">
+    <div className="bg-surface min-h-screen">
       {/* Header */}
-      <div className="relative overflow-hidden bg-white border-b border-violet-100">
+      <div className="relative overflow-hidden bg-white dark:bg-card border-b border-violet-100">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
         {/* Blob */}
         <div className="absolute -top-20 right-0 w-80 h-80 rounded-full bg-primary/6 blur-[70px] pointer-events-none" />
@@ -24,7 +24,7 @@ export default function CoursesPage() {
           <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-4">
             Catálogo completo
           </p>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-[#1a1535] tracking-tight mb-4">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-ink tracking-tight mb-4">
             Todos los cursos
           </h1>
           <p className="text-slate-400 text-base max-w-lg leading-relaxed">
@@ -52,7 +52,7 @@ async function RenderCatalog() {
 function CatalogSkeleton() {
   return (
     <div>
-      <div className="h-10 max-w-lg w-full bg-white border border-violet-100 rounded-full mb-6 animate-pulse" />
+      <div className="h-10 max-w-lg w-full bg-white dark:bg-card border border-violet-100 rounded-full mb-6 animate-pulse" />
       <div className="flex gap-2 mb-10 overflow-x-auto pb-2">
         {Array.from({ length: 5 }).map((_, i) => (
           <div key={i} className="h-9 w-24 rounded-full bg-violet-100 animate-pulse shrink-0" />

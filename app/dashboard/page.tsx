@@ -62,7 +62,7 @@ export default async function DashboardPage() {
       <section className="space-y-4">
         <div className="flex items-end justify-between">
           <div className="space-y-1">
-            <h2 className="text-xl font-bold tracking-tight text-[#1a1535]">Mis Cursos</h2>
+            <h2 className="text-xl font-bold tracking-tight text-ink">Mis Cursos</h2>
             <p className="text-sm text-slate-400">
               Cursos a los que tienes acceso
             </p>
@@ -95,7 +95,7 @@ export default async function DashboardPage() {
         <section className="space-y-4">
           <div className="flex items-end justify-between">
             <div className="space-y-1">
-              <h2 className="text-xl font-bold tracking-tight text-[#1a1535]">
+              <h2 className="text-xl font-bold tracking-tight text-ink">
                 Cursos Disponibles
               </h2>
               <p className="text-sm text-slate-400">

@@ -67,7 +67,7 @@ export function CourseContent({ data }: iAppProps) {
   return (
     <div className="flex flex-col h-full">
       {/* Top bar */}
-      <div className="flex items-center gap-3 px-4 py-2.5 border-b border-violet-100 bg-white/95 backdrop-blur shrink-0">
+      <div className="flex items-center gap-3 px-4 py-2.5 border-b border-violet-100 bg-white/95 dark:bg-background/95 backdrop-blur shrink-0">
         {/* Mobile: open sidebar sheet */}
         <Button
           variant="ghost"

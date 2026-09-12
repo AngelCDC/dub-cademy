@@ -114,7 +114,7 @@ export function CourseProgressCard({ data, userId }: iAppProps) {
                 "font-bold tabular-nums",
                 isCompleted
                   ? "text-emerald-600"
-                  : "text-[#1a1535]"
+                  : "text-ink"
               )}
             >
               {progressPercentage}%
