@@ -7,7 +7,7 @@ import { CourseCatalog } from "./_components/CourseCatalog";
 export const metadata: Metadata = {
   title: "Cursos",
   description: "Explora nuestro catálogo de cursos con proyectos reales y mentoría personalizada.",
-  openGraph: { title: "Cursos | Flow State", url: "/courses" },
+  openGraph: { title: "Cursos | IFIVEN", url: "/courses" },
 };
 
 export const dynamic = "force-dynamic";

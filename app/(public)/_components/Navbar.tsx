@@ -41,7 +41,7 @@ export function Navbar() {
               <Zap className="size-4 text-white fill-white" />
             </div>
             <span className="font-bold text-[#1a1535] text-[17px] tracking-tight hidden sm:block">
-              Flow State
+              IFIVEN
             </span>
           </Link>
 
@@ -127,7 +127,7 @@ export function Navbar() {
             <div className="size-7 rounded-xl bg-primary flex items-center justify-center">
               <Zap className="size-3.5 text-white fill-white" />
             </div>
-            <span className="font-bold text-[#1a1535]">Flow State</span>
+            <span className="font-bold text-[#1a1535]">IFIVEN</span>
           </div>
           <button className="p-1 text-slate-400 hover:text-[#1a1535]" onClick={() => setOpen(false)}>
             <X className="size-5" />

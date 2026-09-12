@@ -5,8 +5,8 @@ import { BuscarClient } from "./_components/BuscarClient";
 
 export const metadata: Metadata = {
   title: "Buscar",
-  description: "Encuentra cursos, rutas y contenido en Flow State.",
-  openGraph: { title: "Buscar | Flow State", url: "/buscar" },
+  description: "Encuentra cursos, rutas y contenido en IFIVEN.",
+  openGraph: { title: "Buscar | IFIVEN", url: "/buscar" },
 };
 
 export const dynamic = "force-dynamic";

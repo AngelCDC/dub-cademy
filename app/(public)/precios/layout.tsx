@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 export const metadata: Metadata = {
   title: "Precios",
   description: "Planes para estudiantes y equipos. Empieza gratis y escala cuando quieras.",
-  openGraph: { title: "Precios | Flow State", url: "/precios" },
+  openGraph: { title: "Precios | IFIVEN", url: "/precios" },
 };
 
 export default function PreciosLayout({ children }: { children: ReactNode }) {

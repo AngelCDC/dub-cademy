@@ -4,8 +4,8 @@ import { MessageCircle, Users, Zap, BookOpen, ArrowRight, Hash } from "lucide-re
 
 export const metadata: Metadata = {
   title: "Comunidad",
-  description: "Únete a la comunidad de Flow State. Aprende con otros, comparte proyectos y crece juntos.",
-  openGraph: { title: "Comunidad | Flow State", url: "/comunidad" },
+  description: "Únete a la comunidad de IFIVEN. Aprende con otros, comparte proyectos y crece juntos.",
+  openGraph: { title: "Comunidad | IFIVEN", url: "/comunidad" },
 };
 
 const CATEGORIES = [

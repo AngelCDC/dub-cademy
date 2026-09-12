@@ -2,31 +2,31 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Términos y Condiciones",
-  description: "Términos y condiciones de uso de la plataforma Flow State.",
-  openGraph: { title: "Términos | Flow State", url: "/terminos" },
+  description: "Términos y condiciones de uso de la plataforma IFIVEN.",
+  openGraph: { title: "Términos | IFIVEN", url: "/terminos" },
 };
 
 const SECTIONS = [
   {
     id: "aceptacion",
     title: "1. Aceptación de los términos",
-    content: `Al acceder y utilizar la plataforma Flow State ("la Plataforma"), aceptas quedar vinculado por estos Términos y Condiciones. Si no estás de acuerdo con alguno de estos términos, no debes utilizar la Plataforma.
+    content: `Al acceder y utilizar la plataforma IFIVEN ("la Plataforma"), aceptas quedar vinculado por estos Términos y Condiciones. Si no estás de acuerdo con alguno de estos términos, no debes utilizar la Plataforma.
 
-Flow State se reserva el derecho de modificar estos términos en cualquier momento. Los cambios entrarán en vigor inmediatamente después de su publicación. El uso continuado de la Plataforma constituye la aceptación de los términos modificados.`,
+IFIVEN se reserva el derecho de modificar estos términos en cualquier momento. Los cambios entrarán en vigor inmediatamente después de su publicación. El uso continuado de la Plataforma constituye la aceptación de los términos modificados.`,
   },
   {
     id: "cuenta",
     title: "2. Cuenta de usuario",
     content: `Para acceder a determinados servicios de la Plataforma, debes crear una cuenta. Eres responsable de mantener la confidencialidad de tus credenciales de acceso y de todas las actividades realizadas bajo tu cuenta.
 
-Debes proporcionar información precisa y completa al crear tu cuenta. Flow State se reserva el derecho de suspender o cancelar cuentas que incumplan estos términos o que proporcionen información falsa.`,
+Debes proporcionar información precisa y completa al crear tu cuenta. IFIVEN se reserva el derecho de suspender o cancelar cuentas que incumplan estos términos o que proporcionen información falsa.`,
   },
   {
     id: "contenido",
     title: "3. Contenido y propiedad intelectual",
-    content: `Todo el contenido disponible en la Plataforma, incluyendo cursos, vídeos, textos, gráficos y software, está protegido por derechos de autor y otras leyes de propiedad intelectual. Flow State o sus licenciantes son los propietarios de todos los derechos de propiedad intelectual.
+    content: `Todo el contenido disponible en la Plataforma, incluyendo cursos, vídeos, textos, gráficos y software, está protegido por derechos de autor y otras leyes de propiedad intelectual. IFIVEN o sus licenciantes son los propietarios de todos los derechos de propiedad intelectual.
 
-Queda prohibida la reproducción, distribución o modificación del contenido sin autorización expresa por escrito de Flow State.`,
+Queda prohibida la reproducción, distribución o modificación del contenido sin autorización expresa por escrito de IFIVEN.`,
   },
   {
     id: "uso-aceptable",
@@ -42,14 +42,14 @@ Queda prohibida la reproducción, distribución o modificación del contenido si
   {
     id: "pagos",
     title: "5. Pagos y reembolsos",
-    content: `Los precios de los planes de suscripción se muestran en la Plataforma e incluyen los impuestos aplicables. Flow State se reserva el derecho de modificar los precios con un preaviso de 30 días.
+    content: `Los precios de los planes de suscripción se muestran en la Plataforma e incluyen los impuestos aplicables. IFIVEN se reserva el derecho de modificar los precios con un preaviso de 30 días.
 
 Ofrecemos una garantía de devolución de 30 días para el plan Pro. Si no estás satisfecho con el servicio, puedes solicitar un reembolso completo dentro de los primeros 30 días desde tu primera suscripción de pago.`,
   },
   {
     id: "limitacion",
     title: "6. Limitación de responsabilidad",
-    content: `Flow State proporciona la Plataforma "tal como está" y no garantiza que el servicio sea ininterrumpido, libre de errores o que cumpla con tus requisitos específicos. En ningún caso Flow State será responsable por daños indirectos, incidentales, especiales o consecuentes.`,
+    content: `IFIVEN proporciona la Plataforma "tal como está" y no garantiza que el servicio sea ininterrumpido, libre de errores o que cumpla con tus requisitos específicos. En ningún caso IFIVEN será responsable por daños indirectos, incidentales, especiales o consecuentes.`,
   },
   {
     id: "contacto",

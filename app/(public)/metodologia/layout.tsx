@@ -6,9 +6,9 @@ export const metadata: Metadata = {
   description:
     "Conoce nuestra metodología de aprendizaje basada en proyectos reales, mentoría personalizada y comunidad activa. Aprende diferente y transforma tu carrera.",
   openGraph: {
-    title: "Metodología | Flow State",
+    title: "Metodología | IFIVEN",
     description:
-      "Aprende diferente: proyectos reales, mentoría 1-a-1 y comunidad activa. Descubre cómo funciona Flow State.",
+      "Aprende diferente: proyectos reales, mentoría 1-a-1 y comunidad activa. Descubre cómo funciona IFIVEN.",
     url: "/metodologia",
   },
 };

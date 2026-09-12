@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CheckCircle2, Clock, Mail } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Pago registrado | Flow State",
+  title: "Pago registrado | IFIVEN",
 };
 
 interface PaymentSuccessPageProps {

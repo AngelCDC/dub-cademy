@@ -89,7 +89,7 @@ export default function MetodologiaPage() {
 
       {/* Pillars */}
       <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
-        <h2 className="text-2xl md:text-3xl font-bold text-[#1a1535] mb-10">Los 4 pilares del Flow State</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-[#1a1535] mb-10">Los 4 pilares del IFIVEN</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {PILLARS.map(({ icon: Icon, title, desc, stats }) => (
             <div key={title} className="bg-white border border-violet-100 rounded-2xl p-7 hover:shadow-md hover:shadow-violet-50 transition-all">

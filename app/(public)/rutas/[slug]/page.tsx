@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     title: path.title,
     description: path.description,
     openGraph: {
-      title: `${path.title} | Flow State`,
+      title: `${path.title} | IFIVEN`,
       description: path.description,
       url: `/rutas/${slug}`,
     },

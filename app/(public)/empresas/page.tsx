@@ -4,9 +4,9 @@ import { Check, Users, BarChart3, Shield, Zap, BookOpen, Settings } from "lucide
 import { DemoForm } from "./_components/DemoForm";
 
 export const metadata: Metadata = {
-  title: "Flow State Business",
+  title: "IFIVEN Business",
   description: "Capacita a tu equipo con rutas personalizadas, métricas en tiempo real y acceso a todo el catálogo.",
-  openGraph: { title: "Empresas | Flow State", url: "/empresas" },
+  openGraph: { title: "Empresas | IFIVEN", url: "/empresas" },
 };
 
 const FEATURES = [
@@ -19,7 +19,7 @@ const FEATURES = [
 ];
 
 const TESTIMONIALS = [
-  { name: "Sofía Ramírez", role: "Head of People", company: "Fintech startup", text: "En 3 meses, el 85% de nuestro equipo de ingeniería completó su ruta de Flow State. La mejora en productividad fue visible.", avatar: "SR", color: "#7c3aed" },
+  { name: "Sofía Ramírez", role: "Head of People", company: "Fintech startup", text: "En 3 meses, el 85% de nuestro equipo de ingeniería completó su ruta de IFIVEN. La mejora en productividad fue visible.", avatar: "SR", color: "#7c3aed" },
   { name: "Diego Morales", role: "CTO", company: "E-commerce líder", text: "El dashboard de empresa nos permite ver exactamente en qué está cada persona del equipo. Nunca habíamos tenido esa visibilidad.", avatar: "DM", color: "#2563eb" },
 ];
 
@@ -71,7 +71,7 @@ export default function EmpresasPage() {
                   <div className="size-2.5 rounded-full bg-white/30" />
                   <div className="size-2.5 rounded-full bg-white/30" />
                 </div>
-                <p className="text-xs text-white/80 font-medium ml-2">Team Dashboard · Flow State Business</p>
+                <p className="text-xs text-white/80 font-medium ml-2">Team Dashboard · IFIVEN Business</p>
               </div>
               <div className="p-5">
                 <div className="grid grid-cols-2 gap-3 mb-5">

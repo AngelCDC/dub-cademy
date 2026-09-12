@@ -13,6 +13,8 @@ export default async function AdminEnrollmentsPage() {
     select: {
       id: true,
       amount: true,
+      discountUsd: true,
+      couponCode: true,
       reference: true,
       amountBs: true,
       createdAt: true,
@@ -27,6 +29,8 @@ export default async function AdminEnrollmentsPage() {
     select: {
       id: true,
       amount: true,
+      discountUsd: true,
+      couponCode: true,
       reference: true,
       amountBs: true,
       createdAt: true,
@@ -76,6 +80,7 @@ export default async function AdminEnrollmentsPage() {
                         <th className="px-4 py-3 font-medium">Usuario</th>
                         <th className="px-4 py-3 font-medium">Curso</th>
                         <th className="px-4 py-3 font-medium">Monto (USD)</th>
+                        <th className="px-4 py-3 font-medium">Cupón</th>
                         <th className="px-4 py-3 font-medium">Referencia</th>
                         <th className="px-4 py-3 font-medium">Monto (Bs)</th>
                         <th className="px-4 py-3 font-medium">Fecha</th>
@@ -90,7 +95,27 @@ export default async function AdminEnrollmentsPage() {
                             <p className="text-xs text-muted-foreground">{e.User.email}</p>
                           </td>
                           <td className="px-4 py-3">{e.Course.title}</td>
-                          <td className="px-4 py-3 font-semibold">${e.amount}</td>
+                          <td className="px-4 py-3">
+                            {e.discountUsd > 0 ? (
+                              <>
+                                <span className="font-semibold">${e.amount - e.discountUsd}</span>{" "}
+                                <span className="text-xs text-muted-foreground line-through">
+                                  ${e.amount}
+                                </span>
+                              </>
+                            ) : (
+                              <span className="font-semibold">${e.amount}</span>
+                            )}
+                          </td>
+                          <td className="px-4 py-3">
+                            {e.couponCode ? (
+                              <span className="font-mono text-xs font-semibold text-emerald-700 bg-emerald-500/10 ring-1 ring-emerald-500/30 rounded-full px-2 py-0.5">
+                                {e.couponCode}
+                              </span>
+                            ) : (
+                              <span className="text-xs text-muted-foreground">—</span>
+                            )}
+                          </td>
                           <td
                             className="px-4 py-3 font-mono text-xs text-muted-foreground"
                             title={e.id}
@@ -140,6 +165,7 @@ export default async function AdminEnrollmentsPage() {
                         <th className="px-4 py-3 font-medium">Ruta</th>
                         <th className="px-4 py-3 font-medium">Cursos</th>
                         <th className="px-4 py-3 font-medium">Monto (USD)</th>
+                        <th className="px-4 py-3 font-medium">Cupón</th>
                         <th className="px-4 py-3 font-medium">Referencia</th>
                         <th className="px-4 py-3 font-medium">Monto (Bs)</th>
                         <th className="px-4 py-3 font-medium">Fecha</th>
@@ -155,7 +181,27 @@ export default async function AdminEnrollmentsPage() {
                           </td>
                           <td className="px-4 py-3">{pe.learningPath.title}</td>
                           <td className="px-4 py-3">{pe.learningPath._count.courses}</td>
-                          <td className="px-4 py-3 font-semibold">${pe.amount}</td>
+                          <td className="px-4 py-3">
+                            {pe.discountUsd > 0 ? (
+                              <>
+                                <span className="font-semibold">${pe.amount - pe.discountUsd}</span>{" "}
+                                <span className="text-xs text-muted-foreground line-through">
+                                  ${pe.amount}
+                                </span>
+                              </>
+                            ) : (
+                              <span className="font-semibold">${pe.amount}</span>
+                            )}
+                          </td>
+                          <td className="px-4 py-3">
+                            {pe.couponCode ? (
+                              <span className="font-mono text-xs font-semibold text-emerald-700 bg-emerald-500/10 ring-1 ring-emerald-500/30 rounded-full px-2 py-0.5">
+                                {pe.couponCode}
+                              </span>
+                            ) : (
+                              <span className="text-xs text-muted-foreground">—</span>
+                            )}
+                          </td>
                           <td
                             className="px-4 py-3 font-mono text-xs text-muted-foreground"
                             title={pe.id}

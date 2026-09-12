@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Zap, Twitter, Linkedin, Youtube, MessageCircle } from "lucide-react";
 
 const cols = [
-  { heading: "Producto", items: [{ l: "Todos los cursos", h: "/courses" }, { l: "Rutas de aprendizaje", h: "/rutas" }, { l: "Precios", h: "/precios" }, { l: "Flow State Business", h: "/empresas" }, { l: "Blog", h: "/blog" }] },
+  { heading: "Producto", items: [{ l: "Todos los cursos", h: "/courses" }, { l: "Rutas de aprendizaje", h: "/rutas" }, { l: "Precios", h: "/precios" }, { l: "IFIVEN Business", h: "/empresas" }, { l: "Blog", h: "/blog" }] },
   { heading: "Comunidad", items: [{ l: "Comunidad", h: "/comunidad" }, { l: "Metodología", h: "/metodologia" }, { l: "Buscar cursos", h: "/buscar" }, { l: "Contacto", h: "/contacto" }] },
   { heading: "Legal", items: [{ l: "Sobre nosotros", h: "#" }, { l: "Trabaja con nosotros", h: "#" }, { l: "Términos y condiciones", h: "/terminos" }, { l: "Política de privacidad", h: "/privacidad" }] },
 ];
@@ -17,7 +17,7 @@ export default function Footer() {
               <div className="size-9 rounded-xl bg-primary flex items-center justify-center">
                 <Zap className="size-4 text-white fill-white" />
               </div>
-              <span className="font-bold text-[#1a1535] text-lg">Flow State</span>
+              <span className="font-bold text-[#1a1535] text-lg">IFIVEN</span>
             </Link>
             <p className="text-sm leading-relaxed max-w-xs">
               La academia que te lleva al estado de flow. Aprendizaje personalizado,
@@ -47,7 +47,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-violet-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs">© {new Date().getFullYear()} Flow State. Todos los derechos reservados.</p>
+          <p className="text-xs">© {new Date().getFullYear()} IFIVEN. Todos los derechos reservados.</p>
           <div className="flex gap-6">
             {["Privacidad", "Términos", "Cookies"].map((l) => (
               <a key={l} href="#" className="text-xs hover:text-primary transition-colors">{l}</a>

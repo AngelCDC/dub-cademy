@@ -9,6 +9,7 @@ import {
   IconListCheck,
   IconListDetails,
   IconSettings,
+  IconTicket,
   IconUsers,
 } from "@tabler/icons-react";
 import { Zap } from "lucide-react";
@@ -55,6 +56,11 @@ const data = {
       icon: IconListCheck,
     },
     {
+      title: "Cupones",
+      url: "/admin/coupons",
+      icon: IconTicket,
+    },
+    {
       title: "Equipo",
       url: "#",
       icon: IconUsers,
@@ -89,7 +95,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <Zap className="size-4" />
                 </div>
                 <div className="flex flex-col leading-none">
-                  <span className="font-bold text-sm text-[#1a1535]">Flow State</span>
+                  <span className="font-bold text-sm text-[#1a1535]">IFIVEN</span>
                   <span className="text-[10px] text-muted-foreground font-medium tracking-wide">Admin Panel</span>
                 </div>
               </Link>

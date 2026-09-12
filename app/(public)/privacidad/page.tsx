@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Política de Privacidad",
-  description: "Cómo Flow State recopila, usa y protege tu información personal.",
-  openGraph: { title: "Privacidad | Flow State", url: "/privacidad" },
+  description: "Cómo IFIVEN recopila, usa y protege tu información personal.",
+  openGraph: { title: "Privacidad | IFIVEN", url: "/privacidad" },
 };
 
 const SECTIONS = [
   {
     id: "introduccion",
     title: "1. Introducción",
-    content: `Flow State ("nosotros", "nuestro") se compromete a proteger tu privacidad. Esta Política de Privacidad explica cómo recopilamos, usamos, divulgamos y protegemos tu información personal cuando utilizas nuestra plataforma.
+    content: `IFIVEN ("nosotros", "nuestro") se compromete a proteger tu privacidad. Esta Política de Privacidad explica cómo recopilamos, usamos, divulgamos y protegemos tu información personal cuando utilizas nuestra plataforma.
 
 Al utilizar la Plataforma, consientes la recopilación y el uso de información de acuerdo con esta política.`,
   },
@@ -50,7 +50,7 @@ Información recopilada automáticamente:
     content: `No vendemos, alquilamos ni compartimos tu información personal con terceros, excepto en los siguientes casos:
 
 • Proveedores de servicios: empresas que nos ayudan a operar la Plataforma (pagos, hosting, analytics) bajo estrictos acuerdos de confidencialidad
-• Requisitos legales: cuando sea necesario para cumplir con una obligación legal o proteger los derechos de Flow State
+• Requisitos legales: cuando sea necesario para cumplir con una obligación legal o proteger los derechos de IFIVEN
 • Con tu consentimiento: en cualquier otro caso, solo compartiremos tu información con tu autorización explícita`,
   },
   {

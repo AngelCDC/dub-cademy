@@ -24,7 +24,7 @@ export default function ContactoPage() {
           <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-4">Estamos aquí</p>
           <h1 className="text-4xl md:text-5xl font-extrabold text-[#1a1535] tracking-tight mb-4">Hablemos</h1>
           <p className="text-slate-400 text-base max-w-xl leading-relaxed">
-            ¿Dudas sobre nuestros programas o la metodología Flow State?
+            ¿Dudas sobre nuestros programas o la metodología IFIVEN?
             Nuestro equipo responde en menos de 24 horas.
           </p>
         </div>

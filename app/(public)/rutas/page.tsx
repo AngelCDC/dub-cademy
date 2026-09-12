@@ -6,7 +6,7 @@ import { BookOpen, Clock, ChevronRight, Map } from "lucide-react";
 export const metadata: Metadata = {
   title: "Rutas de Aprendizaje",
   description: "Itinerarios calibrados para llevarte al estado de flow y transformar tu carrera tech.",
-  openGraph: { title: "Rutas | Flow State", url: "/rutas" },
+  openGraph: { title: "Rutas | IFIVEN", url: "/rutas" },
 };
 
 export const dynamic = "force-dynamic";

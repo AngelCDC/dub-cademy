@@ -8,9 +8,9 @@ import { env } from "@/lib/env";
 import { computeRating } from "@/lib/rating";
 
 export const metadata: Metadata = {
-  title: "Flow State — Aprende en tu zona",
+  title: "IFIVEN — Aprende en tu zona",
   description: "La academia que te lleva al estado de flow. Aprendizaje personalizado, proyectos reales y mentoría 1-a-1.",
-  openGraph: { title: "Flow State", url: "/" },
+  openGraph: { title: "IFIVEN", url: "/" },
 };
 
 const AREAS = [
@@ -47,7 +47,7 @@ export default async function LandingPage() {
         <div className="absolute bottom-0 left-0 w-[350px] h-[350px] rounded-full bg-fuchsia-200/20 blur-[80px] pointer-events-none flow-blob" />
 
         <div className="relative max-w-4xl mx-auto px-6 pt-24 pb-16 md:pt-32 md:pb-24 text-center">
-          {/* Flow State live badge */}
+          {/* IFIVEN live badge */}
           <div className="inline-flex items-center gap-2 bg-white border border-violet-200 rounded-full px-4 py-1.5 text-xs text-violet-600 font-semibold mb-8 shadow-sm shadow-violet-100">
             <span className="size-1.5 rounded-full bg-primary flow-dot" />
             En estado de flow · 500+ estudiantes activos
@@ -61,7 +61,7 @@ export default async function LandingPage() {
           </h1>
 
           <p className="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed mb-10">
-            Flow State adapta el aprendizaje a ti — no al revés. Proyectos reales,
+            IFIVEN adapta el aprendizaje a ti — no al revés. Proyectos reales,
             mentoría personalizada y una comunidad que te mantiene en el ritmo.
           </p>
 
@@ -96,7 +96,7 @@ export default async function LandingPage() {
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <span className="inline-flex items-center gap-2 text-xs font-semibold text-primary uppercase tracking-widest mb-4">
-              <Zap className="size-3.5 fill-primary" /> El método Flow State
+              <Zap className="size-3.5 fill-primary" /> El método IFIVEN
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-[#1a1535] leading-tight mb-5">
               El flow no es suerte.{" "}
@@ -273,11 +273,11 @@ export default async function LandingPage() {
         </section>
       )}
 
-      {/* ── Why Flow State ── */}
+      {/* ── Why IFIVEN ── */}
       <section className="py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1a1535] mb-3">¿Por qué Flow State?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1a1535] mb-3">¿Por qué IFIVEN?</h2>
             <p className="text-slate-400 max-w-lg mx-auto text-base leading-relaxed">
               No somos otro curso en video. Somos un sistema diseñado para que
               entres en la zona y no salgas hasta conseguir tus resultados.
@@ -364,7 +364,7 @@ export default async function LandingPage() {
               ))}
             </ul>
             <Link href="/empresas" className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-all hover:-translate-y-0.5 shadow-md shadow-primary/25">
-              Ver Flow State Business <ArrowRight className="size-4" />
+              Ver IFIVEN Business <ArrowRight className="size-4" />
             </Link>
           </div>
           {/* Mini dashboard mock */}

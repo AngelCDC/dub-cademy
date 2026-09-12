@@ -21,7 +21,7 @@ export function SiteHeader() {
               Plataforma
             </span>
             <h1 className="text-sm font-semibold leading-tight text-[#1a1535]">
-              Flow State
+              IFIVEN
             </h1>
           </div>
         </div>

@@ -39,7 +39,7 @@ export async function generateMetadata({
     title: course.title,
     description: course.smallDescription,
     openGraph: {
-      title: `${course.title} | Flow State`,
+      title: `${course.title} | IFIVEN`,
       description: course.smallDescription,
       url: `/courses/${slug}`,
       type: "article",
@@ -47,7 +47,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${course.title} | Flow State`,
+      title: `${course.title} | IFIVEN`,
       description: course.smallDescription,
       images: [imageUrl],
     },
@@ -73,7 +73,7 @@ export default async function SlugPage({ params }: { params: Params }) {
     description: course.smallDescription,
     provider: {
       "@type": "Organization",
-      name: "Flow State",
+      name: "IFIVEN",
       sameAs: "https://flowstate.academy",
     },
     image: imageUrl,

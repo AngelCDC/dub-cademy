@@ -17,13 +17,13 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://flowstate.academy"),
   title: {
-    template: "%s | Flow State",
-    default: "Flow State — Aprende en tu zona",
+    template: "%s | IFIVEN",
+    default: "IFIVEN — Aprende en tu zona",
   },
   description:
     "La academia que te lleva al estado de flow. Aprendizaje personalizado, proyectos reales y mentoría 1-a-1 para que entres en la zona y no salgas.",
   keywords: [
-    "flow state",
+    "ifiven",
     "academia online",
     "aprendizaje personalizado",
     "programación",
@@ -35,13 +35,13 @@ export const metadata: Metadata = {
     "LATAM",
     "España",
   ],
-  authors: [{ name: "Flow State" }],
-  creator: "Flow State",
+  authors: [{ name: "IFIVEN" }],
+  creator: "IFIVEN",
   openGraph: {
     type: "website",
     locale: "es_ES",
-    siteName: "Flow State",
-    title: "Flow State — Aprende en tu zona",
+    siteName: "IFIVEN",
+    title: "IFIVEN — Aprende en tu zona",
     description:
       "La academia que te lleva al estado de flow. Aprendizaje personalizado y proyectos reales para acelerar tu carrera tech.",
     images: [
@@ -49,13 +49,13 @@ export const metadata: Metadata = {
         url: "/og-default.png",
         width: 1200,
         height: 630,
-        alt: "Flow State Academy",
+        alt: "IFIVEN Academy",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Flow State — Aprende en tu zona",
+    title: "IFIVEN — Aprende en tu zona",
     description:
       "La academia que te lleva al estado de flow. Aprendizaje personalizado y proyectos reales.",
     images: ["/og-default.png"],

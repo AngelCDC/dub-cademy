@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Blog",
   description: "Artículos sobre desarrollo, IA, diseño, carrera y el estado de flow.",
-  openGraph: { title: "Blog | Flow State", url: "/blog" },
+  openGraph: { title: "Blog | IFIVEN", url: "/blog" },
 };
 
 const ARTICLES = [
@@ -15,7 +15,7 @@ const ARTICLES = [
   { id: "5", title: "Diseño de componentes con Figma Variables", category: "Diseño", author: "Sofía Ramírez", date: "5 mayo 2025", excerpt: "Las Variables de Figma cambiaron el juego del design system. Tutorial completo para implementarlas en tu librería de componentes.", color: "#0891b2", readTime: "9 min" },
   { id: "6", title: "Python para ML: ecosistema 2025", category: "IA", author: "Roberto Silva", date: "2 mayo 2025", excerpt: "PyTorch vs JAX, nuevas librerías de hugging face y cómo estructurar un proyecto de ML production-ready desde cero.", color: "#dc2626", readTime: "12 min" },
   { id: "7", title: "SEO técnico: guía definitiva para developers", category: "Marketing", author: "Valentina Cruz", date: "29 abril 2025", excerpt: "Core Web Vitals, structured data, sitemaps dinámicos en Next.js y todo lo que necesitas para rankear en 2025.", color: "#7c3aed", readTime: "11 min" },
-  { id: "8", title: "El método de aprendizaje que usamos en Flow State", category: "Educación", author: "Equipo Flow State", date: "25 abril 2025", excerpt: "Csikszentmihalyi, el modelo de reto-habilidad y cómo diseñamos cada curso para mantenerte en la zona óptima de aprendizaje.", color: "#2563eb", readTime: "5 min" },
+  { id: "8", title: "El método de aprendizaje que usamos en IFIVEN", category: "Educación", author: "Equipo IFIVEN", date: "25 abril 2025", excerpt: "Csikszentmihalyi, el modelo de reto-habilidad y cómo diseñamos cada curso para mantenerte en la zona óptima de aprendizaje.", color: "#2563eb", readTime: "5 min" },
 ];
 
 const CATEGORIES = ["Todos", "Desarrollo", "IA", "Diseño", "Carrera", "Marketing", "Educación"];
@@ -29,7 +29,7 @@ export default function BlogPage() {
         <div className="absolute -top-20 right-0 w-80 h-80 rounded-full bg-primary/6 blur-[70px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 py-16 md:py-20 relative">
           <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-4">Artículos</p>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-[#1a1535] tracking-tight mb-4">Blog de Flow State</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-[#1a1535] tracking-tight mb-4">Blog de IFIVEN</h1>
           <p className="text-slate-400 text-base max-w-lg leading-relaxed">
             Desarrollo, IA, diseño, carrera y todo lo que necesitas para mantenerte en la zona.
           </p>
